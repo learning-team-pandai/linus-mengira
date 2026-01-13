@@ -1,0 +1,94 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Masa dan Waktu (Asas)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}#scene-container{background-size:cover;background-position:center;border:4px solid #475569;border-radius:1.5rem;transition:background-image .5s ease;cursor:zoom-in}.grid-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;border:1px solid #e2e8f0;border-radius:.5rem;transition:all .1s}.grid-cell:hover{background-color:#f1f5f9}.grid-cell.selected{background-color:#fcd34d;color:#78350f;transform:scale(1.1);border-color:#f59e0b}.grid-cell.found{background-color:#4ade80;color:#064e3b;border-color:#16a34a}.month-item{transition:all .3s}.month-item.highlight{background-color:#fcd34d;transform:scale(1.05);border-color:#f59e0b;font-weight:700}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">⏰</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Masa & Waktu</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⏳</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Mari Belajar Masa</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Kenali waktu, hari, dan bulan.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🏞️<br>Pemandangan</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🖼️<br>Waktu</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">➡️<br>Hari Apa?</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🗣️<br>Bulan</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔍<br>Cari Hari</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti!";function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function openModal(e){document.getElementById("modal-img").src=e,document.getElementById("image-modal").classList.remove("hidden")}function closeModal(){document.getElementById("image-modal").classList.add("hidden")}function loadActivity(e){currentActivity=e,window.calTimer&&clearTimeout(window.calTimer);let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⏳</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Mari Belajar Masa</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Klik butang waktu untuk lihat pemandangan.");const t="https://iili.io/KZCrkYB.md.png",a="https://iili.io/KZCy3s2.md.png",n="https://iili.io/KZn9YCl.md.png",l="https://iili.io/KZnJn5X.md.png";e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full">
+                <h3 class="text-2xl font-bold text-blue-600 mb-2">🏞️ Tukar Pemandangan</h3>
+                
+                <div id="scene-container" class="w-full flex-1 mb-4 bg-cover bg-center rounded-2xl shadow-lg relative group min-h-0"
+                     style="background-image: url('${t}')" onclick="openModal(this.style.backgroundImage.slice(5, -2))">
+                     <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                        <span class="text-white font-bold text-xl bg-black/50 px-4 py-2 rounded-full">🔍 Klik untuk Zoom</span>
+                     </div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="changeScene('pagi', '${t}')" class="btn-3d bg-blue-100 text-blue-800 font-bold py-2 rounded-xl text-sm md:text-base">☀️ Pagi</button>
+                    <button onclick="changeScene('tengahari', '${a}')" class="btn-3d bg-yellow-100 text-yellow-800 font-bold py-2 rounded-xl text-sm md:text-base">🌞 Tengah Hari</button>
+                    <button onclick="changeScene('petang', '${n}')" class="btn-3d bg-orange-100 text-orange-800 font-bold py-2 rounded-xl text-sm md:text-base">🌇 Petang</button>
+                    <button onclick="changeScene('malam', '${l}')" class="btn-3d bg-indigo-100 text-indigo-800 font-bold py-2 rounded-xl text-sm md:text-base">🌙 Malam</button>
+                </div>
+            </div>
+        `}window.changeScene=function(e,t){document.getElementById("scene-container").style.backgroundImage=`url('${t}')`;t=`Ini waktu ${e}.`;setInfo(t),speak(t)};let quizState={qIdx:0},quizData=[{img:"https://iili.io/KZCrkYB.md.png",ans:"Pagi"},{img:"https://iili.io/KZnJn5X.md.png",ans:"Malam"},{img:"https://iili.io/KZCy3s2.md.png",ans:"Tengah Hari"}];function setupAct2(e){quizState.qIdx=0,renderQuiz(e)}function renderQuiz(e){let t=quizData[quizState.qIdx];var a=["Pagi","Tengah Hari","Petang","Malam"].sort(()=>Math.random()-.5);setInfo("Gambar ini waktu apa?"),e.innerHTML=`
+            <div class="w-full max-w-3xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-green-600 mb-2">🖼️ Namakan Waktu</h3>
+                
+                <div class="relative mb-4 group flex-1 min-h-0">
+                    <img src="${t.img}" class="w-full h-full object-contain rounded-2xl border-4 border-slate-200 shadow-md cursor-zoom-in" onclick="openModal('${t.img}')">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 flex-none">
+                    ${a.map(e=>`
+                        <button onclick="checkQuiz('${e}', '${t.ans}', this)" class="btn-3d bg-white text-slate-700 border-slate-200 font-bold py-3 rounded-xl text-lg">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.checkQuiz=function(e,t,a){e===t?(a.classList.remove("bg-white","text-slate-700"),a.classList.add("bg-green-500","text-white","border-green-600"),speak("Betul!"),triggerWin(),setTimeout(()=>{quizState.qIdx=(quizState.qIdx+1)%quizData.length,renderQuiz(document.getElementById("activity-content"))},1500)):(a.classList.add("bg-red-100","shake"),speak("Salah."),setTimeout(()=>a.classList.remove("bg-red-100","shake"),500))};let dayState={qIdx:0},dayData=[{q:"Isnin",a:"Selasa",opts:["Selasa","Rabu","Ahad"]},{q:"Jumaat",a:"Sabtu",opts:["Sabtu","Ahad","Khamis"]},{q:"Rabu",a:"Khamis",opts:["Khamis","Selasa","Isnin"]}];function setupAct3(e){dayState.qIdx=0,renderDayQuiz(e)}function renderDayQuiz(e){let t=dayData[dayState.qIdx];setInfo(`Selepas hari ${t.q}, hari apa?`),e.innerHTML=`
+            <div class="w-full max-w-3xl text-center flex flex-col justify-center h-full">
+                <h3 class="text-2xl font-bold text-purple-600 mb-6">➡️ Esok Hari Apa?</h3>
+                
+                <div class="bg-purple-100 rounded-3xl p-6 mb-6 inline-block border-4 border-purple-200 mx-auto w-fit">
+                    <p class="text-slate-500 text-lg mb-1">Hari Ini:</p>
+                    <div class="text-5xl font-black text-purple-800">${t.q}</div>
+                </div>
+                
+                <div class="text-lg font-bold text-slate-600 mb-3">Esok ialah...</div>
+                
+                <div class="flex justify-center gap-3">
+                    ${t.opts.sort(()=>Math.random()-.5).map(e=>`
+                        <button onclick="checkDay('${e}', '${t.a}', this)" class="btn-3d bg-white text-purple-800 border-purple-200 font-bold py-3 px-6 rounded-xl text-xl">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct4(e){setInfo("Tekan Main untuk dengar nama bulan.");e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-orange-600 mb-2 flex-none">🗣️ Mari Sebut Bulan</h3>
+                
+                <button id="play-months" onclick="playMonths()" class="btn-3d bg-orange-500 text-white px-8 py-2 rounded-full font-bold text-xl mb-4 flex-none mx-auto">
+                    ▶️ Main
+                </button>
+                
+                <div class="grid grid-cols-3 md:grid-cols-4 gap-2 overflow-y-auto px-2 pb-2 flex-1 min-h-0">
+                    ${["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"].map((e,t)=>`
+                        <div id="m-${t}" class="month-item bg-white border-2 border-slate-200 p-2 rounded-xl text-base font-bold text-slate-600 shadow-sm flex flex-col justify-center items-center h-full">
+                            <span class="text-[0.6rem] text-slate-400 block mb-0.5">${t+1}</span>
+                            ${e}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.checkDay=function(e,t,a){e===t?(a.classList.add("bg-green-500","text-white"),speak(`Betul! Selepas ${dayData[dayState.qIdx].q} ialah ${t}.`),triggerWin(),setTimeout(()=>{dayState.qIdx=(dayState.qIdx+1)%dayData.length,renderDayQuiz(document.getElementById("activity-content"))},2e3)):(a.classList.add("bg-red-100","shake"),setTimeout(()=>a.classList.remove("bg-red-100","shake"),500),speak("Salah."))},window.calTimer=null,window.playMonths=function(){let t=document.getElementById("play-months"),a=(t.disabled=!0,t.classList.add("opacity-50"),["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"]),n=0;!function e(){0<n&&document.getElementById("m-"+(n-1)).classList.remove("highlight"),n<a.length?(document.getElementById("m-"+n).classList.add("highlight"),speak(a[n]),n++,window.calTimer=setTimeout(e,1200)):(t.disabled=!1,t.classList.remove("opacity-50"),setInfo("Tamat! Tekan Main untuk ulang."))}()};let wsState={found:[],selected:[]};function setupAct5(e){setInfo("Cari nama hari: AHAD, ISNIN, RABU..."),wsState={found:[],selected:[]};e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-red-600 mb-2 flex-none">🔍 Cari Nama Hari</h3>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center flex-1 min-h-0 overflow-hidden">
+                    <div class="w-full md:w-1/4 flex-none flex flex-col max-h-[150px] md:max-h-full">
+                        <div class="bg-red-50 p-2 rounded-2xl border-2 border-red-200 overflow-y-auto flex-1">
+                            <h4 class="font-bold text-red-800 mb-2 text-sm">Senarai:</h4>
+                            <div class="flex flex-wrap gap-1 justify-center">
+                                ${["ISNIN","SELASA","RABU","KHAMIS","JUMAAT","SABTU","AHAD"].map(e=>`<div id="word-${e}" class="px-2 py-0.5 bg-white rounded-lg text-xs font-bold shadow-sm text-slate-600 border">${e}</div>`).join("")}
+                            </div>
+                        </div>
+                        <div id="current-sel" class="mt-2 h-10 bg-white border-2 border-slate-300 rounded-xl flex items-center justify-center text-lg font-black tracking-widest shrink-0"></div>
+                        <button onclick="resetSel()" class="mt-1 text-slate-400 text-xs underline shrink-0">Padam Pilihan</button>
+                    </div>
+                    
+                    <div class="w-full md:w-2/3 flex-1 min-h-0 flex flex-col">
+                        <div class="grid grid-cols-10 gap-0.5 select-none bg-slate-100 p-2 rounded-xl h-full w-full aspect-square md:aspect-auto">
+                            ${[["S","E","L","A","S","A","X","Y","Z","Q"],["A","H","A","D","K","B","C","D","E","F"],["G","H","J","K","H","L","M","N","O","P"],["I","S","N","I","N","R","S","T","U","V"],["W","X","Y","Z","I","A","B","C","D","E"],["F","G","R","A","B","U","H","I","J","K"],["L","M","N","O","L","P","Q","R","S","T"],["U","V","W","J","U","M","A","A","T","X"],["Y","Z","A","B","C","D","E","F","G","H"],["I","J","S","A","B","T","U","K","L","M"]].flat().map((e,t)=>`<div class="grid-cell bg-white text-xs md:text-base lg:text-lg" onclick="clickCell(this, ${Math.floor(t/10)}, ${t%10}, '${e}')">${e}</div>`).join("")}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `}window.clickCell=function(e,t,a,n){e.classList.contains("found")||(e.classList.contains("selected")?(e.classList.remove("selected"),wsState.selected=wsState.selected.filter(e=>!(e.r===t&&e.c===a))):(e.classList.add("selected"),wsState.selected.push({r:t,c:a,char:n,el:e})),wsState.selected.sort((e,t)=>10*e.r+e.c-(10*t.r+t.c)),n=wsState.selected.map(e=>e.char).join(""),document.getElementById("current-sel").innerText=n,["ISNIN","SELASA","RABU","KHAMIS","JUMAAT","SABTU","AHAD"].includes(n)&&(wsState.selected.forEach(e=>{e.el.classList.remove("selected"),e.el.classList.add("found")}),document.getElementById("word-"+n).classList.add("bg-green-500","text-white","line-through"),speak(`Jumpa ${n}!`),triggerWin(),wsState.selected=[],document.getElementById("current-sel").innerText=""))},window.resetSel=function(){wsState.selected.forEach(e=>e.el.classList.remove("selected")),wsState.selected=[],document.getElementById("current-sel").innerText=""}</script>

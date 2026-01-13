@@ -1,0 +1,90 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kemahiran Turutan: Susun & Atur</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.draggable{cursor:grab;touch-action:none;transition:transform .2s}.draggable:active{cursor:grabbing;opacity:.8;transform:scale(1.1) rotate(3deg)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">📏</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Kemahiran Turutan</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Mula Belajar</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-3 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🔵 Susun Saiz</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🚗 Kereta Beratur</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🪜 Tangga Nombor</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!";function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e&&setupAct3(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Kemahiran Turutan</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=3<e?1:e)}function setupAct1(e){setInfo("Seret bulatan dari KECIL ke BESAR."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-blue-600 mb-4">🔵 Susun Saiz</h3>
+                <p class="text-slate-500 mb-4 font-bold">Susun dari Paling Kecil ➜ Paling Besar</p>
+
+                <div id="pool" class="flex flex-wrap justify-center gap-4 mb-4 min-h-[100px] items-center">
+                    <div id="d1" draggable="true" ondragstart="dragStart(event)" data-size="1"
+                         class="draggable bg-blue-400 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg border-2 border-blue-600">1</div>
+                    <div id="d2" draggable="true" ondragstart="dragStart(event)" data-size="2"
+                         class="draggable bg-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center font-bold shadow-lg border-2 border-blue-700">2</div>
+                    <div id="d3" draggable="true" ondragstart="dragStart(event)" data-size="3"
+                         class="draggable bg-blue-600 text-white rounded-full w-20 h-20 flex items-center justify-center font-bold shadow-lg border-2 border-blue-800">3</div>
+                    <div id="d4" draggable="true" ondragstart="dragStart(event)" data-size="4"
+                         class="draggable bg-blue-700 text-white rounded-full w-24 h-24 flex items-center justify-center font-bold shadow-lg border-2 border-blue-900">4</div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-2">
+                    ${[1,2,3,4].map(e=>`
+                        <div class="drop-zone rounded-xl p-1 min-h-[120px] flex flex-col items-center justify-end"
+                             ondragover="allowDrop(event)" ondrop="dropSize(event)">
+                            <div class="target-slot flex-grow flex items-center justify-center w-full"></div>
+                            <span class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wide">
+                                ${1===e?"Paling Kecil":4===e?"Paling Besar":2===e?"Kecil":"Besar"}
+                            </span>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function readSizeOrder(){var e=document.querySelectorAll(".drop-zone .target-slot"),e=Array.from(e).map(e=>0<e.children.length?e.children[0].dataset.size:null),a=e.filter(e=>null!==e);if(0!==a.length){let t={1:"paling kecil",2:"kecil",3:"besar",4:"paling besar"};var n=`Turutan: ${a.map(e=>t[e]).join(" ke ")}.`;setInfo(n),speak(n),4===a.length&&"1"===e[0]&&"2"===e[1]&&"3"===e[2]&&"4"===e[3]&&setTimeout(()=>{triggerWin(),speak("Tahniah! Susunan betul.")},500)}}function setupAct2(e){setInfo("Seret kereta: PENDEK ke PANJANG."),e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-green-600 mb-4">🚗 Kereta Beratur</h3>
+                
+                <div id="car-pool" class="flex flex-wrap justify-center items-end gap-2 mb-6 min-h-[80px]">
+                     ${[{w:"60px",c:"bg-red-500",t:"Sangat Pendek",v:1},{w:"80px",c:"bg-orange-500",t:"Pendek",v:2},{w:"100px",c:"bg-yellow-500",t:"Sederhana",v:3},{w:"120px",c:"bg-emerald-500",t:"Panjang",v:4},{w:"140px",c:"bg-blue-600",t:"Sangat Panjang",v:5}].map(e=>`
+                        <div id="car-${e.v}" draggable="true" ondragstart="dragStart(event)" data-label="${e.t}" data-val="${e.v}"
+                             class="draggable ${e.c} text-white rounded-xl h-12 shadow-lg border-b-4 border-black/20 flex items-center justify-center gap-1"
+                             style="width:${e.w}">
+                             <span class="text-xl">🚗</span>
+                        </div>
+                      `).join("")}
+                </div>
+
+                <div class="bg-slate-200 rounded-2xl p-4 border-4 border-slate-300">
+                    <div class="flex justify-between text-slate-500 font-bold mb-1 px-2 text-sm">
+                        <span>Mula (Pendek)</span>
+                        <span>Akhir (Panjang)</span>
+                    </div>
+                    <div id="lane" class="grid grid-cols-5 gap-1">
+                        ${[1,2,3,4,5].map(e=>`
+                            <div class="drop-zone bg-white/50 rounded-lg h-16 flex items-center justify-center border-2 border-dashed border-slate-400"
+                                 ondragover="allowDrop(event)" ondrop="dropCar(event)">
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button onclick="setupAct2(document.getElementById('activity-content'))" class="btn-3d bg-slate-400 text-white px-4 py-1 rounded-lg font-bold text-sm">Reset 🔄</button>
+                </div>
+            </div>
+        `}window.dragStart=function(e){e.dataTransfer.setData("text",e.target.id)},window.allowDrop=function(e){e.preventDefault(),e.target.closest(".drop-zone").classList.add("drag-over")},window.dropSize=function(e){e.preventDefault();var t=e.target.closest(".drop-zone"),t=(t.classList.remove("drag-over"),t.querySelector(".target-slot"));0<t.children.length||(e=e.dataTransfer.getData("text"),(e=document.getElementById(e))&&(t.appendChild(e),readSizeOrder()))},window.dropCar=function(e){e.preventDefault();var t=e.target.closest(".drop-zone");if(t.classList.remove("drag-over"),!(0<t.children.length)){e=e.dataTransfer.getData("text"),e=document.getElementById(e);if(e){t.appendChild(e);t=document.querySelectorAll("#lane .drop-zone");let a=[],n=0;t.forEach((e,t)=>{0<e.children.length&&(e=e.children[0],a.push(e.dataset.label),parseInt(e.dataset.val)===t+1)&&n++}),0<a.length&&(setInfo(e=`Turutan: ${a.join(", ")}.`),speak(e)),5===n&&setTimeout(()=>{triggerWin(),speak("Hebat! Kereta tersusun rapi.")},500)}}};let ladderMode="up",ladderSeq=[];function setupAct3(e){ladderMode="up",ladderSeq=[],setInfo("Pilih mod, kemudian klik tangga."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-purple-600 mb-4">🪜 Tangga Nombor</h3>
+                
+                <div class="flex justify-center gap-2 mb-4">
+                    <button onclick="setLadderMode('up')" id="btn-up" class="btn-3d bg-emerald-500 text-white px-4 py-2 rounded-xl font-bold border-emerald-700 text-sm">
+                        Naik (1 ➜ 5) 📈
+                    </button>
+                    <button onclick="setLadderMode('down')" id="btn-down" class="btn-3d bg-slate-200 text-slate-600 px-4 py-2 rounded-xl font-bold border-slate-300 text-sm">
+                        Turun (5 ➜ 1) 📉
+                    </button>
+                </div>
+
+                <div class="flex justify-center items-end gap-1 h-48 mb-4 px-2">
+                    ${[1,2,3,4,5].map(e=>`
+                        <button onclick="clickStep(this, ${e})" id="step-${e}"
+                            class="step-btn btn-3d bg-white border-indigo-200 text-indigo-600 w-full rounded-t-xl font-black text-2xl shadow-sm hover:bg-indigo-50 flex items-end justify-center pb-2 transition-all"
+                            style="height: ${18*e}%">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+                
+                <div class="bg-indigo-50 p-2 rounded-xl border-2 border-indigo-100 min-h-[40px]">
+                    <span id="seq-display" class="text-lg font-bold text-indigo-800">...</span>
+                </div>
+                
+                <button onclick="setupAct3(document.getElementById('activity-content'))" class="mt-2 text-slate-400 font-bold hover:text-slate-600 text-sm">Mula Semula</button>
+            </div>
+        `}window.setLadderMode=function(e){ladderMode=e,ladderSeq=[],document.getElementById("seq-display").textContent="...";var t=document.getElementById("btn-up"),a=document.getElementById("btn-down");"up"===e?(t.className="btn-3d bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold border-emerald-700",a.className="btn-3d bg-slate-200 text-slate-600 px-6 py-3 rounded-xl font-bold border-slate-300",speak("Mod Naik. Tekan 1, 2, 3, 4, 5.")):(a.className="btn-3d bg-rose-500 text-white px-6 py-3 rounded-xl font-bold border-rose-700",t.className="btn-3d bg-slate-200 text-slate-600 px-6 py-3 rounded-xl font-bold border-slate-300",speak("Mod Turun. Tekan 5, 4, 3, 2, 1.")),document.querySelectorAll(".step-btn").forEach(e=>{e.classList.remove("bg-indigo-500","text-white","border-indigo-700"),e.classList.add("bg-white","text-indigo-600")})},window.clickStep=function(e,t){t===("up"===ladderMode?ladderSeq.length+1:5-ladderSeq.length)?(ladderSeq.push(t),e.classList.remove("bg-white","text-indigo-600"),e.classList.add("bg-indigo-500","text-white","border-indigo-700"),speak(t),document.getElementById("seq-display").textContent=ladderSeq.join(" ➜ "),5===ladderSeq.length&&setTimeout(()=>{triggerWin(),speak("Syabas! Tangga berjaya disiapkan.")},500)):(speak("Salah. Ikut turutan."),e.classList.add("animate-bounce"),setTimeout(()=>e.classList.remove("animate-bounce"),500))}</script>

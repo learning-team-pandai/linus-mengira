@@ -1,0 +1,121 @@
+<!doctypehtml><html lang="ms-MY"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kemahiran Pemulihan: Masa & Waktu (Darab & Bahagi)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;transition:transform .2s;flex:1;display:flex;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.drag-item{cursor:grab;user-select:none;transition:transform .1s}.drag-item:active{cursor:grabbing;transform:scale(.95)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:1rem;min-height:100px}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.02)}.drop-zone-filled{border:3px solid #22c55e;background-color:#dcfce7}.time-block{background:#d8b4fe;color:#6b21a8;padding:4px 12px;border-radius:20px;font-weight:700;display:inline-block;margin:2px;border:2px solid #a855f7}#timeline-bar{width:100%;max-width:500px;height:60px;background:#fecaca;border:4px solid #ef4444;display:flex;font-weight:700;font-size:1.2rem;margin:0 auto 1.5rem auto;border-radius:1rem;overflow:hidden}#part-1,#part-2{transition:width .5s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;justify-content:center;height:100%}#part-1{width:100%;background:#fecaca;color:#b91c1c}#part-2{width:0%;background:#fee2e2;color:#991b1b;border-left:4px dashed #ef4444}.cutter-btn{background-color:#fff;border-color:#cbd5e1;color:#334155;font-weight:700;padding:.5rem 1rem;border-radius:.75rem;transition:all .1s;border-bottom-width:6px;transform:translateY(0);cursor:pointer;display:inline-block}.cutter-btn:active{transform:translateY(4px);border-bottom-width:2px}.cutter-btn:hover{background-color:#f8fafc}.cutter-btn.correct{background-color:#dcfce7;border-color:#4ade80;color:#166534}.cutter-btn.wrong{background-color:#fee2e2;border-color:#f87171;color:#991b1b}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="fixed top-2 left-0 right-0 z-50 px-4 pointer-events-none"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-1.5 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-2"><span class="text-2xl animate-bounce">🕰️</span> <span id="info-text"class="text-base font-bold text-green-900 leading-none mt-0.5">Masa: Darab & Bahagi</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-1 transition-colors shadow-sm text-sm">🔊</button></div></div><div class="h-16 flex-none"></div><div class="max-w-6xl mx-auto p-2 w-full flex-1 flex flex-col overflow-hidden min-h-0"><div class="game-card p-4 mb-2 flex items-center justify-center relative w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col"><div class="py-4 text-center"><div class="text-6xl mb-2 animate-pulse">➗</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Masa</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Darab, Bahagi & Pecahan Masa<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 border-2 border-white flex-none"><h3 class="text-sm font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">🎮 Pilih Aktiviti</h3><div class="flex flex-wrap justify-center gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🧱 Bina 1 Jam</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🗓️ Darab Jam</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🏃‍♂️ Darab Minit</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-3 rounded-lg text-xs">📚 Bahagi Jam</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-3 rounded-lg text-xs">✂️ Potong Minit</button></div><div class="flex justify-center gap-2 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-xs">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-sm">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",draggedElement=null;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.1,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadUnitConverterActivity(t),2===e&&loadDarabJamActivity(t),3===e&&loadDarabMinitActivity(t),4===e&&loadBahagiJamActivity(t),5===e&&loadTimelineCutActivity(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="h-full flex flex-col justify-center items-center py-4 text-center"><div class="text-6xl mb-4 animate-bounce">➗</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Masa</h2><p class="text-lg text-slate-500 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadUnitConverterActivity(e){setInfo("Kumpul 60 minit untuk jadi 1 Jam."),window.converterState={current:0,target:60};var t=Array(6).fill(0).map(()=>`
+        <div class="drag-item bg-white border-b-4 border-blue-300 text-blue-700 font-bold p-3 rounded-xl text-center w-24 cursor-grab active:cursor-grabbing shadow-sm"
+             draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-time="10">
+             10 Minit
+        </div>
+      `).join("");e.innerHTML=`
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🧱 Bina 1 Jam</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="max-w-3xl w-full text-center">
+                    <p class="text-sm font-bold text-slate-500 mb-4">Kita perlukan <span class="text-blue-600">60 minit</span> untuk membina <span class="text-blue-600">1 Jam</span>.</p>
+                    
+                    <div class="bg-blue-50 rounded-2xl p-4 border-2 border-blue-200 mb-4">
+                        <h4 class="font-bold text-blue-800 mb-2 text-xs">Bank Masa</h4>
+                        <div class="flex flex-wrap justify-center gap-2">${t}</div>
+                    </div>
+                    
+                    <div id="time-converter" 
+                         class="drop-zone bg-white rounded-2xl p-4 border-4 border-dashed border-blue-300 flex flex-col items-center justify-center min-h-[120px]"
+                         ondrop="dropOnConverter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                         <span class="text-slate-300 font-bold text-sm pointer-events-none">Letak blok di sini</span>
+                         <div id="converter-text" class="text-3xl font-black text-blue-600 mt-2">0 / 60 minit</div>
+                    </div>
+                </div>
+            </div>
+        `}function loadDarabJamActivity(e){setInfo("Seret blok 6 Jam ke dalam setiap Hari."),e.innerHTML=`
+            <h3 class="text-xl font-bold text-emerald-500 mb-2 text-center flex-none">🗓️ Penjadual (Darab Jam)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center w-full">
+                <div class="text-center w-full max-w-2xl mb-4 flex-none">
+                    <p class="text-sm text-slate-600 font-bold">Gotong-royong 2 Hari. Setiap hari 6 Jam.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start w-full max-w-4xl flex-1 min-h-0 overflow-y-auto">
+                    <div class="bg-emerald-50 p-2 rounded-2xl border-2 border-emerald-200 text-center flex-none">
+                        <h4 class="font-bold text-emerald-800 mb-2 text-xs">Pilihan Masa</h4>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="drag-item bg-white border-b-2 border-emerald-400 text-emerald-800 font-black text-lg p-2 rounded-lg w-24 text-center cursor-grab"
+                                 draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-time="6">6 Jam</div>
+                            <div class="drag-item bg-white border-b-2 border-emerald-400 text-emerald-800 font-black text-lg p-2 rounded-lg w-24 text-center cursor-grab"
+                                 draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-time="6">6 Jam</div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-2 bg-white p-2 rounded-2xl border-2 border-slate-200 flex-none">
+                        <div id="day-line" class="flex justify-center gap-4">
+                            <div class="drop-zone w-32 h-32 rounded-xl bg-slate-50 flex flex-col items-center justify-center border-dashed border-2 border-slate-300"
+                                 ondrop="dropOnDay(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-correct="6">
+                                 <span class="text-slate-400 font-bold text-xs">HARI 1</span>
+                            </div>
+                            <div class="drop-zone w-32 h-32 rounded-xl bg-slate-50 flex flex-col items-center justify-center border-dashed border-2 border-slate-300"
+                                 ondrop="dropOnDay(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-correct="6">
+                                 <span class="text-slate-400 font-bold text-xs">HARI 2</span>
+                            </div>
+                        </div>
+                        <div id="total-res" class="text-center mt-4 text-lg font-black text-emerald-700 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        `}function loadDarabMinitActivity(e){setInfo("Klik butang untuk lari 5 pusingan."),window.darabMinitState={count:0,target:5,timePer:4},e.innerHTML=`
+            <h3 class="text-xl font-bold text-violet-500 mb-2 text-center flex-none">🏃‍♂️ Larian (Darab Minit)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="max-w-2xl w-full text-center">
+                    <p class="text-sm font-bold text-slate-500 mb-4">1 Pusingan = <span class="text-violet-600">4 Minit</span>. Lari 5 Pusingan!</p>
+                    
+                    <button id="run-btn" onclick="runLap()" class="btn-3d bg-violet-500 text-white font-bold py-3 px-8 rounded-full text-lg mb-4">
+                        Lari Pusingan 1 🏁
+                    </button>
+    
+                    <div id="lap-track" class="bg-violet-50 rounded-2xl p-4 border-2 border-violet-200 min-h-[80px] flex flex-wrap justify-center items-center gap-2 mb-4">
+                        <span class="text-slate-400 italic text-sm">Belum mula...</span>
+                    </div>
+                    
+                    <div id="total-time" class="text-2xl font-black text-violet-800"></div>
+                </div>
+            </div>
+        `}function loadBahagiJamActivity(e){setInfo("Agihkan 9 Jam ke dalam 3 Hari."),window.bahagiJamState={total:9,boxes:[0,0,0],placed:0},e.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-500 mb-2 text-center flex-none">📚 Agihan Masa (Bahagi)</h3>
+            <div class="flex-1 overflow-y-auto px-4 w-full flex flex-col items-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full max-w-4xl flex-none">
+                    <div class="bg-orange-50 p-2 rounded-2xl border-2 border-orange-200 text-center">
+                        <h4 class="font-bold text-orange-800 mb-2 text-xs">Bank Masa (9 Jam)</h4>
+                        <div class="flex flex-wrap justify-center gap-1">
+                            ${Array(9).fill(0).map(()=>`
+                                <div class="drag-item bg-white border-b-2 border-orange-300 text-orange-700 font-bold p-1 rounded-lg w-12 text-center cursor-grab text-xs"
+                                     draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-time="1">1J</div>
+                            `).join("")}
+                        </div>
+                    </div>
+    
+                    <div class="md:col-span-2 grid grid-cols-3 gap-2">
+                        ${[0,1,2].map(e=>`
+                            <div class="bg-white p-2 rounded-xl border-2 border-slate-200 flex flex-col h-48">
+                                <div class="text-center font-bold text-slate-500 mb-1 text-xs">Hari ${e+1}</div>
+                                <div class="drop-zone flex-grow bg-slate-50 rounded-lg p-1 flex flex-col gap-1 overflow-y-auto"
+                                     ondrop="dropBox(event, ${e})" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                                <div class="text-center font-black text-orange-600 text-base mt-1" id="cnt-${e}">0 Jam</div>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}function loadTimelineCutActivity(e){setInfo("Potong 10 minit jadi 2 bahagian sama besar."),e.innerHTML=`
+            <h3 class="text-xl font-bold text-rose-500 mb-2 text-center flex-none">✂️ Potong Minit (Pecahan)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="max-w-2xl w-full text-center">
+                    <p class="text-sm font-bold text-slate-500 mb-4">Potong <span class="text-rose-600">10 Minit</span> kepada 2 bahagian sama besar.</p>
+                    
+                    <div id="timeline-bar" class="w-full max-w-sm h-12 border-2 text-lg mb-4">
+                        <div id="part-1" class="text-sm">10 Minit</div>
+                        <div id="part-2" class="text-sm"></div>
+                    </div>
+    
+                    <div class="flex flex-wrap justify-center gap-2 mt-4">
+                        ${[3,4,5,6].map(e=>`
+                            <button class="cutter-btn text-sm py-2 px-4" onclick="cutLine(${e})">✂️ Potong ${e}m</button>
+                        `).join("")}
+                    </div>
+                    
+                    <div id="res-msg" class="mt-4 text-xl font-black h-8"></div>
+                </div>
+            </div>
+        `}window.converterState={current:0,target:60},window.darabMinitState={count:0,target:5,timePer:4},window.bahagiJamState={total:9,boxes:[0,0,0],placed:0},window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("dragging"),e.target.dataset.time&&e.dataTransfer.setData("time",e.target.dataset.time)},window.dragEnd=function(e){draggedElement&&draggedElement.classList.remove("dragging"),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("drag-over")),draggedElement=null},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")},window.dropOnConverter=function(e){var t;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(t=parseInt(draggedElement.dataset.time),window.converterState.current+=t,draggedElement.remove(),draggedElement=null,(t=e.currentTarget.querySelector(".text-slate-300"))&&t.remove(),(t=document.createElement("div")).className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded font-bold text-sm m-1 animate-[popIn_0.3s]",t.textContent="10m",e.currentTarget.appendChild(t),(t=document.getElementById("converter-text")).textContent=window.converterState.current+" / 60 minit",60<=window.converterState.current?(e.currentTarget.classList.add("drop-zone-filled"),e.currentTarget.classList.remove("drop-zone"),e.currentTarget.removeAttribute("ondrop"),t.textContent="✅ 1 JAM LENGKAP!",setInfo("Syabas! 60 Minit = 1 Jam."),triggerWin(),speak("Syabas! Enam puluh minit sama dengan satu jam.")):speak(window.converterState.current+" minit."))},window.dropOnDay=function(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(e.currentTarget.innerHTML='<div class="text-4xl font-black text-emerald-600">6</div><div class="text-sm font-bold text-emerald-800">JAM</div>',e.currentTarget.classList.add("drop-zone-filled"),e.currentTarget.classList.remove("drop-zone"),e.currentTarget.removeAttribute("ondrop"),draggedElement.remove(),draggedElement=null,speak("6 Jam"),0===document.querySelectorAll("#day-line .drop-zone").length)&&(document.getElementById("total-res").innerHTML="2 Hari × 6 Jam = 12 Jam!",document.getElementById("total-res").classList.remove("hidden"),setInfo("Hebat! Jumlahnya 12 Jam."),triggerWin(),speak("Hebat! Jumlahnya 12 Jam."))},window.runLap=function(){var e=window.darabMinitState,t=(e.count++,document.getElementById("lap-track")),a=(1===e.count&&(t.innerHTML=""),document.createElement("span")),a=(a.className="time-block animate-[popIn_0.3s]",a.textContent="4m",t.appendChild(a),1<e.count&&(t.innerHTML+=" + "),e.count*e.timePer),t=(document.getElementById("total-time").textContent=`= ${a} Minit`,document.getElementById("run-btn"));e.count===e.target?(t.disabled=!0,t.textContent="Selesai! 🏆",t.classList.add("grayscale"),setInfo("Tamat! 5 darab 4 minit ialah 20 minit."),triggerWin(),speak("Tamat! 20 minit.")):(t.textContent=`Lari Pusingan ${e.count+1} 🏃‍♂️`,speak(e.count+` pusingan. ${a} minit.`))},window.dropBox=function(e,t){var a;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&((a=draggedElement.cloneNode(!0)).draggable=!1,a.classList.remove("cursor-grab"),e.currentTarget.appendChild(a),draggedElement.remove(),draggedElement=null,(e=window.bahagiJamState).boxes[t]++,e.placed++,document.getElementById("cnt-"+t).textContent=e.boxes[t]+" Jam",9===e.placed)&&(e.boxes.every(e=>3===e)?(setInfo("Sama rata! 9 jam bahagi 3 hari ialah 3 jam."),triggerWin(),speak("Sama rata! 3 jam sehari.")):(setInfo("Tidak sama rata. Cuba lagi."),speak("Tidak sama rata.")))},window.cutLine=function(e){var t=document.getElementById("part-1"),a=document.getElementById("part-2"),n=document.getElementById("res-msg"),r=e/10*100;t.style.width=r+"%",t.textContent=e+"m",a.style.width=100-r+"%",a.textContent=10-e+"m",5===e?(n.textContent="SAMA BESAR! ✅",n.className="mt-8 text-2xl font-black h-10 text-green-600 animate-bounce",setInfo("Betul! 10 bahagi 2 ialah 5."),triggerWin(),speak("Betul! 5 minit setiap bahagian.")):(n.textContent="Tidak Sama Besar ❌",n.className="mt-8 text-2xl font-black h-10 text-red-500",speak("Tak sama. Cuba lagi."))},"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>

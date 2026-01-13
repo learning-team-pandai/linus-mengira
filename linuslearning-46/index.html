@@ -1,0 +1,127 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Kemahiran Pemulihan: Belajar Wang</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.draggable{cursor:grab;user-select:none;transition:transform .2s}.draggable:active{cursor:grabbing;transform:scale(1.1)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:.75rem;min-width:60px;min-height:60px;display:flex;flex-wrap:wrap;gap:2px;align-items:center;justify-content:center;font-weight:700;color:#334155}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.05)}.money-card{width:80px;height:40px;display:flex;align-items:center;justify-content:center;border:2px solid;border-radius:6px;font-weight:800;font-size:.9rem;box-shadow:2px 2px 0 rgba(0,0,0,.1);background-color:#fff}.money-card.rm1{background:#e0f2fe;border-color:#38bdf8;color:#0284c7}.money-card.rm5{background:#dcfce7;border-color:#4ade80;color:#16a34a}.money-card.rm10{background:#fee2e2;border-color:#f87171;color:#dc2626}.money-card.rm20{background:#fef9c3;border-color:#facc15;color:#ca8a04}.money-card.rm50{background:#e0e7ff;border-color:#818cf8;color:#4f46e5}.coin-card{width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid;font-weight:700;font-size:.7rem;box-shadow:1px 1px 0 rgba(0,0,0,.2)}.coin-card.silver{background:#e2e8f0;border-color:#94a3b8;color:#475569}.coin-card.gold{background:#fef08a;border-color:#eab308;color:#a16207}.shop-item{border:2px solid #e5e7eb;background:#fff;border-radius:.75rem;padding:5px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .2s}.shop-item:hover{border-color:#f87171;transform:translateY(-5px)}.interactive-item{cursor:pointer;transition:transform .1s}.interactive-item:active{transform:scale(.95)}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">💡</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Pilih aktiviti!</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-24"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200 overflow-hidden"><div class="py-10 text-center"><div class="text-6xl mb-6 animate-pulse">💰</div><h2 class="text-4xl font-bold text-emerald-600 mb-4">Jom Belajar Wang</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Zoo, Aiskrim & Tabung.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">🔄<br>Tukar</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">💰<br>Tabung</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">🍦<br>Aiskrim</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">🎟️<br>Tiket</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 rounded-xl text-xs">🐘<br>Bajet</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar wang!",draggedElement=null,tabungTotal=0,dompetTotal=0,zooBudget=0;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadActivity1_TukarDuit(t),2===e&&loadActivity2_Menabung(t),3===e&&loadActivity3_BeliAiskrim(t),4===e&&loadActivity4_DompetZoo(t),5===e&&loadActivity5_LawatanZoo(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">💰</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Jom Belajar Wang</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadActivity1_TukarDuit(e){setInfo("Klik wang di sebelah kiri. Lihat tukarannya."),e.innerHTML=`
+        <div class="w-full max-w-5xl flex flex-col h-full overflow-hidden">
+          <h3 class="text-xl font-bold text-blue-600 mb-2 text-center flex-none">🔄 Mesin Tukar Duit</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 min-h-0 overflow-hidden">
+            
+            <div class="bg-slate-100 p-2 rounded-3xl border-2 border-slate-200 flex flex-col h-full overflow-hidden">
+               <h4 class="text-slate-500 font-bold mb-2 text-center uppercase text-xs flex-none">Pilih Wang (Input)</h4>
+               <div class="flex flex-wrap justify-center gap-2 overflow-y-auto content-center flex-1">
+                  <div class="money-card rm10 interactive-item scale-90" onclick="showExchange('rm10')">RM10</div>
+                  <div class="money-card rm5 interactive-item scale-90" onclick="showExchange('rm5')">RM5</div>
+                  <div class="money-card rm1 interactive-item scale-90" onclick="showExchange('rm1')">RM1</div>
+                  <div class="coin-card gold interactive-item" onclick="showExchange('sen50')">50s</div>
+                  <div class="coin-card gold interactive-item" onclick="showExchange('sen20')">20s</div>
+               </div>
+            </div>
+
+            <div class="bg-blue-50 p-2 rounded-3xl border-2 border-blue-200 shadow-inner flex flex-col h-full overflow-hidden">
+               <h4 class="text-blue-600 font-bold mb-2 text-center uppercase text-xs flex-none">Hasil Tukaran</h4>
+               <div id="exchange-output" class="flex-1 flex flex-wrap items-center justify-center gap-2 overflow-y-auto">
+                  <span class="text-slate-400 font-bold text-sm">Klik wang untuk mula...</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      `}function showExchange(e){var t=document.getElementById("exchange-output");let a="",n="";var l="scale-90";switch(e){case"rm10":a=`<div class="money-card rm5 ${l}">RM5</div><div class="money-card rm5 ${l}">RM5</div>`,n="Sepuluh ringgit... sama dengan... dua keping lima ringgit!";break;case"rm5":a=Array(5).fill(`<div class="money-card rm1 ${l}">RM1</div>`).join(""),n="Lima ringgit... sama dengan... lima keping satu ringgit!";break;case"rm1":a='<div class="coin-card gold scale-125">50s</div><div class="coin-card gold scale-125">50s</div>',n="Satu ringgit... sama dengan... dua keping lima puluh sen!";break;case"sen50":a='<div class="coin-card gold">20s</div><div class="coin-card gold">20s</div><div class="coin-card silver">10s</div>',n="Lima puluh sen... sama dengan... 20 sen, 20 sen dan 10 sen!";break;case"sen20":a='<div class="coin-card silver">10s</div><div class="coin-card silver">10s</div>',n="Dua puluh sen... sama dengan... dua keping sepuluh sen!"}t.innerHTML=a,setInfo(n),speak(n)}function loadActivity2_Menabung(e){setInfo("Seret wang dari dompet ke dalam tabung."),tabungTotal=0,e.innerHTML=`
+        <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+          <h3 class="text-xl font-bold text-green-600 mb-2 flex-none">💰 Mari Menabung</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 min-h-0 overflow-hidden">
+             <div class="bg-slate-100 p-2 rounded-3xl border-2 border-slate-200 flex flex-col h-full overflow-hidden">
+                <h4 class="text-slate-500 font-bold mb-2 uppercase text-xs flex-none">Dompet</h4>
+                <div class="flex flex-wrap justify-center gap-2 overflow-y-auto content-center flex-1">
+                   <div class="money-card rm1 draggable scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="1">RM1</div>
+                   <div class="money-card rm1 draggable scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="1">RM1</div>
+                   <div class="money-card rm5 draggable scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="5">RM5</div>
+                </div>
+             </div>
+
+             <div class="bg-green-50 p-2 rounded-3xl border-2 border-green-200 flex flex-col h-full overflow-hidden">
+                <h4 class="text-green-700 font-bold mb-2 uppercase text-xs flex-none">Tabung</h4>
+                <div id="tabung-drop-zone" class="drop-zone flex-1 bg-white rounded-2xl border-green-300 w-full"
+                     ondrop="dropOnTabung(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                    <div class="text-4xl opacity-20 absolute">🐖</div>
+                </div>
+                <div class="text-xl font-black text-green-800 mt-2 flex-none" id="tabung-total">RM 0</div>
+             </div>
+          </div>
+        </div>
+      `}function dropOnTabung(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(e=parseInt(draggedElement.dataset.value),tabungTotal+=e,document.getElementById("tabung-total").textContent="RM "+tabungTotal,draggedElement.style.display="none",draggedElement=null,setInfo(e=`Masuk RM${e}. Jumlah RM${tabungTotal}.`),speak(e),3===document.querySelectorAll('[draggable="true"][style*="display: none"]').length)&&(triggerWin(),speak("Syabas! Tabung penuh."),setTimeout(()=>loadActivity(2),3e3))}function loadActivity3_BeliAiskrim(e){setInfo("Aiskrim RM2. Anda ada RM5. Sila bayar."),e.innerHTML=`
+        <div class="w-full max-w-md text-center flex flex-col h-full overflow-hidden justify-center items-center">
+           <h3 class="text-xl font-bold text-purple-600 mb-2 flex-none">🍦 Kedai Aiskrim</h3>
+           
+           <div class="bg-purple-50 p-2 rounded-3xl border-2 border-purple-200 mb-2 flex-none w-full">
+              <div class="text-6xl mb-1">🍦</div>
+              <div class="text-xl font-black text-purple-800 mb-2">Harga: RM2</div>
+              
+              <div id="kaunter-drop-zone" class="drop-zone bg-white min-h-[80px] rounded-xl mb-2 relative w-full"
+                   ondrop="dropOnKaunterAiskrim(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                   <span class="text-slate-400 absolute text-xs">Letak Duit Sini</span>
+              </div>
+           </div>
+
+           <div id="dompet-beli" class="bg-slate-100 p-2 rounded-2xl border-2 border-slate-200 inline-block flex-none">
+              <h4 class="text-slate-500 font-bold mb-1 text-xs uppercase">Dompet Anda</h4>
+              <div class="money-card rm5 draggable cursor-move mx-auto scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="5">RM5</div>
+           </div>
+
+           <div id="baki-container" class="hidden mt-2 animate-bounce flex-none">
+              <h4 class="text-lg font-bold text-green-600">Baki Anda: RM3</h4>
+              <div class="flex justify-center gap-1 mt-1">
+                 <div class="money-card rm1 scale-75">RM1</div>
+                 <div class="money-card rm1 scale-75">RM1</div>
+                 <div class="money-card rm1 scale-75">RM1</div>
+              </div>
+           </div>
+        </div>
+      `}function dropOnKaunterAiskrim(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&"5"===draggedElement.dataset.value?(document.getElementById("dompet-beli").style.opacity="0",document.getElementById("kaunter-drop-zone").innerHTML="",(e=draggedElement.cloneNode(!0)).removeAttribute("draggable"),e.classList.remove("draggable"),document.getElementById("kaunter-drop-zone").appendChild(e),document.getElementById("baki-container").classList.remove("hidden"),triggerWin(),speak("Terima kasih! Ini baki RM3 anda."),setTimeout(()=>loadActivity(3),4e3)):speak("Sila guna wang RM5.")}function loadActivity4_DompetZoo(e){setInfo("Kumpul RM15 untuk tiket Zoo."),dompetTotal=0,e.innerHTML=`
+         <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-orange-600 mb-2 flex-none">🎟️ Dompet Zoo</h3>
+            
+            <div class="bg-orange-100 border-2 border-orange-300 rounded-2xl p-2 mb-2 inline-block px-6 flex-none">
+               <div class="text-xs text-orange-800 font-bold uppercase">Target</div>
+               <div class="text-2xl font-black text-orange-600">RM 15</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-2 flex-1 min-h-0 overflow-hidden w-full">
+               <div class="bg-slate-100 p-2 rounded-3xl border-2 border-slate-200 flex flex-col h-full overflow-hidden">
+                  <h4 class="text-slate-500 font-bold mb-2 uppercase text-xs flex-none">Bank Wang</h4>
+                  <div class="flex flex-wrap justify-center gap-2 overflow-y-auto content-center flex-1">
+                     <div class="money-card rm1 draggable scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="1">RM1</div>
+                     <div class="money-card rm5 draggable scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="5">RM5</div>
+                     <div class="money-card rm10 draggable scale-90" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="10">RM10</div>
+                  </div>
+               </div>
+
+               <div class="bg-orange-50 p-2 rounded-3xl border-2 border-orange-200 flex flex-col h-full overflow-hidden">
+                  <h4 class="text-orange-700 font-bold mb-2 uppercase text-xs flex-none">Dompet Anda</h4>
+                  <div id="dompet-drop-zone" class="drop-zone flex-1 bg-white rounded-xl items-start content-start p-2 w-full"
+                       ondrop="dropOnDompet(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                  <div class="mt-2 text-xl font-black text-slate-700 flex-none" id="dompet-total-display">Total: RM 0</div>
+               </div>
+            </div>
+         </div>
+      `}function dropOnDompet(e){var t;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(t=parseInt(draggedElement.dataset.value),dompetTotal+=t,(t=draggedElement.cloneNode(!0)).classList.remove("draggable"),t.removeAttribute("draggable"),e.currentTarget.appendChild(t),(e=document.getElementById("dompet-total-display")).textContent="Total: RM "+dompetTotal,15===dompetTotal?(e.classList.add("text-green-600"),speak("Syabas! Cukup RM15."),triggerWin(),setTimeout(()=>loadActivity(4),3e3)):15<dompetTotal?(e.classList.add("text-red-500"),speak("Terlebih! Sila reset."),e.parentElement.classList.add("shake"),setTimeout(()=>loadActivity(4),2e3)):speak(`RM ${dompetTotal}. Tambah lagi.`))}function loadActivity5_LawatanZoo(e){setInfo("Bajet RM50. Klik 'Beli' barang yang anda mahu."),zooBudget=50;e.innerHTML=`
+        <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+           <h3 class="text-xl font-bold text-red-600 mb-2 flex-none">🐘 Bajet Zoo</h3>
+           
+           <div class="bg-red-100 border-2 border-red-300 rounded-full px-4 py-1 mb-2 inline-block flex-none">
+               <span class="text-sm text-red-800 font-bold mr-1">Baki Bajet:</span>
+               <span id="budget-display" class="text-2xl font-black text-red-600">RM 50</span>
+           </div>
+
+           <div class="flex flex-wrap justify-center gap-4 flex-1 overflow-y-auto content-center">
+              ${[{name:"Tiket",price:15,icon:"🎟️"},{name:"Aiskrim",price:3,icon:"🍦"},{name:"Patung",price:10,icon:"🧸"}].map(e=>`
+                 <div class="shop-item w-32 p-2" id="btn-${e.name}">
+                    <div class="text-4xl mb-2">${e.icon}</div>
+                    <div class="text-sm font-bold text-slate-700">${e.name}</div>
+                    <div class="text-lg font-bold text-red-500 mb-2">RM ${e.price}</div>
+                    <button onclick="beliItem(${e.price}, '${e.name}', this)" 
+                            class="btn-3d bg-red-500 text-white py-1 px-4 rounded-lg font-bold w-full text-xs">
+                        Beli
+                    </button>
+                 </div>
+              `).join("")}
+           </div>
+        </div>
+      `}function beliItem(e,t,a){zooBudget>=e?(zooBudget-=e,document.getElementById("budget-display").textContent="RM "+zooBudget,a.disabled=!0,a.textContent="Dibeli!",a.classList.remove("bg-red-500"),a.classList.add("bg-slate-400"),speak(`Berjaya beli ${t}. Baki RM${zooBudget}.`),triggerWin()):(speak("Duit tak cukup!"),document.getElementById("budget-display").parentElement.classList.add("shake"),setTimeout(()=>document.getElementById("budget-display").parentElement.classList.remove("shake"),500))}window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("opacity-50")},window.dragEnd=function(e){e.target&&e.target.classList.remove("opacity-50"),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("drag-over"))},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")}</script>

@@ -1,0 +1,106 @@
+<!doctypehtml><html lang="ms-MY"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kemahiran Pemulihan: Wang & Masa (Lanjutan)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px;overscroll-behavior:none}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;transition:transform .2s;flex:1;display:flex;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.drag-item{cursor:grab;transition:transform .1s;touch-action:none;user-select:none;-webkit-user-select:none}.drag-item:active{cursor:grabbing;transform:scale(.95)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:1rem;min-height:100px}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.02)}.drop-zone-filled{border:3px solid #22c55e;background-color:#dcfce7}.money-token{cursor:grab;transition:transform .1s;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1);font-weight:700;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;z-index:50;-moz-user-select:none;transform:translateZ(0);font-size:.8em}.money-token:active{cursor:grabbing;transform:scale(.95)}.note-base{width:130px;height:65px;border-radius:6px;border:1px solid rgba(0,0,0,.1);font-family:sans-serif;font-size:1.1rem;box-shadow:2px 4px 6px rgba(0,0,0,.15)}.note-base::after{content:'';position:absolute;right:10px;top:0;bottom:0;width:8px;background:linear-gradient(to bottom,rgba(255,255,255,.3),rgba(255,255,255,.7),rgba(255,255,255,.3));pointer-events:none}.note-100{background:linear-gradient(135deg,#e9d5ff,#a855f7);color:#581c87;border:2px solid #7e22ce}.note-50{background:linear-gradient(135deg,#cffafe,#06b6d4);color:#0e7490;border:2px solid #0891b2}.note-20{background:linear-gradient(135deg,#fef3c7,#f97316);color:#7c2d12;border:2px solid #ea580c}.note-10{background:linear-gradient(135deg,#ffe4e6,#f43f5e);color:#881337;border:2px solid #e11d48}.note-5{background:linear-gradient(135deg,#dcfce7,#22c55e);color:#064e3b;border:2px solid #16a34a}.note-1{background:linear-gradient(135deg,#dbeafe,#3b82f6);color:#1e3a8a;border:2px solid #2563eb}.coin-base{border-radius:50%;box-shadow:2px 3px 5px rgba(0,0,0,.25),inset 1px 1px 4px rgba(255,255,255,.8);display:flex;flex-direction:column;line-height:1;justify-content:center;align-items:center;border:2px solid rgba(0,0,0,.15)}.coin-gold{background:radial-gradient(circle at 30% 30%,#fef08a,#eab308);color:#713f12;border-color:#ca8a04}.coin-silver{background:radial-gradient(circle at 30% 30%,#f1f5f9,#94a3b8);color:#334155;border-color:#64748b}.coin-50{width:65px;height:65px;font-size:.95rem}.coin-20{width:55px;height:55px;font-size:.85rem}.coin-10{width:45px;height:45px;font-size:.75rem}.clock-container{max-width:220px;margin:0 auto;touch-action:none}.clock-face{stroke:#334155;stroke-width:8;fill:#f8fafc}.clock-center{fill:#334155}.clock-hand{stroke-linecap:round;transform-origin:50% 50%;transition:transform .3s cubic-bezier(.4,0,.2,1)}.clock-hand-hour{stroke:#3b82f6;stroke-width:8}.clock-hand-minute{stroke:#16a34a;stroke-width:6}.choice-correct{background-color:#dcfce7;border-color:#22c55e;color:#166534}.choice-wrong{background-color:#fee2e2;border-color:#ef4444;color:#991b1b}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="fixed top-2 left-0 right-0 z-50 px-4 pointer-events-none"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-1.5 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-2"><span class="text-2xl animate-bounce">🏦</span> <span id="info-text"class="text-base font-bold text-green-900 leading-none mt-0.5">Wang & Masa (Lanjutan)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-1 transition-colors shadow-sm text-sm">🔊</button></div></div><div class="h-16 flex-none"></div><div class="max-w-6xl mx-auto p-2 w-full flex-1 flex flex-col overflow-hidden min-h-0"><div class="game-card p-4 mb-2 flex items-center justify-center relative w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col"><div class="py-4 text-center"><div class="text-6xl mb-2 animate-pulse">💰</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Wang & Masa</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Kira Baki, Tempoh Masa & Simulasi<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 border-2 border-white flex-none"><h3 class="text-sm font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">🎮 Pilih Aktiviti</h3><div class="flex flex-wrap justify-center gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🧮 Kira Baki</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🛑 Masa Tamat</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🚀 Masa Mula</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-3 rounded-lg text-xs">✅ Cukup Wang?</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🤝 Beri Baki</button></div><div class="flex justify-center gap-2 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-xs">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-sm">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",draggedElement=null;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.1,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}window.bakiGame={},window.clockGame={};let formatMoney=e=>"RM "+parseFloat(e).toFixed(2);function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadKiraBakiActivity(t),2===e&&loadMasaTamatActivity(t),3===e&&loadMasaMulaActivity(t),4===e&&loadCukupWangAdvancedActivity(t),5===e&&loadSimulasiBeriBakiActivity(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="h-full flex flex-col justify-center items-center py-4 text-center"><div class="text-6xl mb-4 animate-bounce">💰</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Wang & Masa</h2><p class="text-lg text-slate-500 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadKiraBakiActivity(e){setInfo("Barang RM 13. Bayar RM 20. Berapa bakinya?");e.innerHTML=`
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🧮 Kira Baki Ringkas</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="max-w-lg w-full bg-blue-50 rounded-2xl p-4 border-2 border-blue-200 text-center mb-4">
+                    <div class="flex justify-around items-end mb-2">
+                        <div>
+                            <div class="text-xs font-bold text-slate-500 mb-1">Harga Barang</div>
+                            <div class="text-3xl font-black text-blue-700">RM 13</div>
+                        </div>
+                        <div class="text-3xl text-slate-300">-</div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-500 mb-1">Wang Dibayar</div>
+                            <div class="text-3xl font-black text-green-600">RM 20</div>
+                        </div>
+                    </div>
+                    <div class="text-xl font-bold text-slate-700 border-t-2 border-blue-200 pt-2">Baki ?</div>
+                </div>
+                <div id="choices" class="flex flex-wrap justify-center gap-2">
+                    ${[{v:5,t:"RM 5.00"},{v:7,t:"RM 7.00"},{v:10,t:"RM 10.00"}].map(e=>`
+                        <button class="btn-3d bg-white border-blue-200 text-blue-800 font-bold py-2 px-6 rounded-xl text-xl"
+                                onclick="checkBaki(this, ${e.v}, 7)">${e.t}</button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function loadMasaTamatActivity(e){setInfo("Mula 2:00. Tempoh 3 jam 30 minit. Klik butang."),window.clockGame={hour:2,min:0,targetH:5,targetM:30,done:!1},e.innerHTML=`
+            <h3 class="text-xl font-bold text-emerald-500 mb-2 text-center flex-none">🛑 Masa Tamat (Tambah)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="text-center font-bold text-slate-600 mb-4 text-sm">Mula: 2:00 | Tempoh: <span class="text-emerald-600">3 Jam 30 Minit</span></div>
+                
+                <div class="flex justify-center mb-4 scale-75 origin-center">
+                     ${getClockSVG("game-clock")}
+                </div>
+                
+                <div class="flex justify-center gap-2" id="ctrls">
+                    <button class="btn-3d bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg text-sm" onclick="modClock(1, 'h')">+ 1 Jam</button>
+                    <button class="btn-3d bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg text-sm" onclick="modClock(30, 'm')">+ 30 Minit</button>
+                </div>
+            </div>
+        `,updateClockFace(2,0)}function loadMasaMulaActivity(e){setInfo("Tamat 5:00. Tempoh 2 jam. Cari masa mula."),window.clockGame={hour:5,min:0,targetH:3,targetM:0,done:!1},e.innerHTML=`
+            <h3 class="text-xl font-bold text-purple-500 mb-2 text-center flex-none">🚀 Masa Mula (Tolak)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="text-center font-bold text-slate-600 mb-4 text-sm">Tamat: 5:00 | Tempoh: <span class="text-purple-600">2 Jam</span></div>
+                
+                <div class="flex justify-center mb-4 scale-75 origin-center">
+                     ${getClockSVG("game-clock")}
+                </div>
+                
+                <div class="flex justify-center gap-2" id="ctrls">
+                    <button class="btn-3d bg-purple-500 text-white font-bold py-2 px-4 rounded-lg text-sm" onclick="modClock(-1, 'h')">- 1 Jam</button>
+                    <button class="btn-3d bg-purple-500 text-white font-bold py-2 px-4 rounded-lg text-sm" onclick="modClock(-30, 'm')">- 30 Minit</button>
+                </div>
+            </div>
+        `,updateClockFace(5,0)}function getClockSVG(e){return`
+        <svg viewBox="0 0 200 200" class="clock-container" id="${e}">
+          <circle cx="100" cy="100" r="95" class="clock-face"/>
+          ${[...Array(12)].map((e,t)=>`<text x="${100+78*Math.sin(30*(t+1)*Math.PI/180)}" y="${100-78*Math.cos(30*(t+1)*Math.PI/180)+5}" text-anchor="middle" font-weight="bold" fill="#334155">${t+1}</text>`).join("")}
+          <line id="hand-h" x1="100" y1="100" x2="100" y2="55" class="clock-hand clock-hand-hour"/>
+          <line id="hand-m" x1="100" y1="100" x2="100" y2="30" class="clock-hand clock-hand-minute"/>
+          <circle cx="100" cy="100" r="6" class="clock-center"/>
+        </svg>`}function updateClockFace(e,t){var a=document.getElementById("hand-h"),n=document.getElementById("hand-m");a&&(a.style.transform=`rotate(${e%12*30+.5*t}deg)`,n.style.transform=`rotate(${6*t}deg)`)}function loadCukupWangAdvancedActivity(e){setInfo("Barang RM 48.50. Pilih wang yang CUKUP.");e.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-500 mb-2 text-center flex-none">✅ Cukup Wang?</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="max-w-md mx-auto bg-orange-50 p-4 rounded-2xl border-2 border-orange-200 text-center mb-6 w-full">
+                    <div class="text-4xl mb-1">🎮</div>
+                    <div class="text-sm font-bold text-slate-600">Harga Permainan</div>
+                    <div class="text-3xl font-black text-orange-700">RM 48.50</div>
+                </div>
+    
+                <div class="flex justify-center gap-4 mb-8 scale-75 origin-center">
+                    ${[{v:20,t:"RM 20",ok:!1,cls:"note-20 note-base"},{v:50,t:"RM 50",ok:!0,cls:"note-50 note-base"}].map(e=>`
+                        <div class="money-token ${e.cls} flex items-center justify-center text-xl cursor-grab" draggable="true" 
+                             ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="${e.v}" data-enough="${e.ok}">
+                             ${e.t}
+                        </div>
+                    `).join("")}
+                </div>
+    
+                <div class="drop-zone max-w-sm w-full h-32 bg-slate-50 rounded-2xl border-dashed border-4 border-slate-300 flex items-center justify-center"
+                     ondrop="dropCheck(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                     <span class="text-slate-400 font-bold pointer-events-none text-sm">Letak Bayaran Di Sini</span>
+                </div>
+            </div>
+        `}function loadSimulasiBeriBakiActivity(e){setInfo("Harga RM 12.50. Terima RM 20. Beri baki RM 7.50."),window.bakiGame={needed:7.5,given:0};e.innerHTML=`
+            <h3 class="text-xl font-bold text-red-500 mb-2 text-center flex-none">🤝 Simulasi Beri Baki</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center w-full">
+                <div class="bg-red-50 p-2 rounded-xl border-2 border-red-200 text-center max-w-2xl mx-auto mb-2 w-full flex-none">
+                    <div class="text-xs font-bold text-slate-600">Harga: RM 12.50 | Terima: RM 20.00</div>
+                    <div class="text-xl font-black text-red-700 mt-1">Baki Perlu: RM 7.50</div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl flex-1 min-h-0">
+                    <div class="bg-white p-2 rounded-xl border-2 border-slate-200 flex flex-col overflow-hidden">
+                        <h4 class="font-bold text-slate-400 mb-2 text-center text-xs">Laci Duit (Pilih baki):</h4>
+                        <div class="flex flex-wrap justify-center gap-2 overflow-y-auto content-start">
+                            ${[{v:5,t:"RM 5",c:"note-5 note-base"},{v:1,t:"RM 1",c:"note-1 note-base"},{v:1,t:"RM 1",c:"note-1 note-base"},{v:.5,t:"50 sen",c:"coin-gold coin-50 coin-base"},{v:.2,t:"20 sen",c:"coin-gold coin-20 coin-base"},{v:.2,t:"20 sen",c:"coin-gold coin-20 coin-base"},{v:.1,t:"10 sen",c:"coin-silver coin-10 coin-base"}].map(e=>`<div class="money-token ${e.c} scale-75 cursor-grab m-0" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="${e.v}">${e.t}</div>`).join("")}
+                        </div>
+                    </div>
+                    <div class="bg-red-50 p-2 rounded-xl border-4 border-red-200 text-center drop-zone flex flex-col items-center justify-start overflow-y-auto"
+                         ondrop="dropBaki(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                         <span class="text-red-300 font-bold mb-1 pointer-events-none text-xs">Letak Baki Di Sini</span>
+                         <div id="given-total" class="text-lg font-black text-red-600 mb-2">RM 0.00</div>
+                         <div id="baki-tray" class="flex flex-wrap justify-center gap-1 w-full scale-90 origin-top"></div>
+                    </div>
+                </div>
+            </div>
+        `}window.dragStart=function(e){e.stopPropagation(),draggedElement=e.currentTarget,e.currentTarget.classList.add("dragging"),e.currentTarget.dataset.value&&e.dataTransfer.setData("value",e.currentTarget.dataset.value),e.currentTarget.dataset.enough&&e.dataTransfer.setData("enough",e.currentTarget.dataset.enough),e.dataTransfer.setDragImage&&e.dataTransfer.setDragImage(e.currentTarget,25,25),e.dataTransfer.effectAllowed="move"},window.dragEnd=function(e){draggedElement&&draggedElement.classList.remove("dragging"),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("drag-over")),draggedElement=null},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")},window.checkBaki=function(e,t,a){document.querySelectorAll("#choices button").forEach(e=>{e.disabled=!0,e.classList.add("opacity-50")}),e.classList.remove("opacity-50"),t===a?(e.classList.add("!bg-green-100","!border-green-500","!text-green-800"),setInfo("Betul! 20 tolak 13 ialah 7."),triggerWin(),speak("Betul! Bakinya 7 ringgit.")):(e.classList.add("!bg-red-100","!border-red-500","!text-red-800","shake"),setInfo("Salah. Jawapan ialah RM 7.00"),speak("Salah."))},window.modClock=function(i,l){if(!window.clockGame.done){let{hour:e,min:t,targetH:a,targetM:n}=window.clockGame;"h"===l?e+=i:t+=i,60<=t&&(e++,t-=60),t<0&&(e--,t+=60),12<e&&(e-=12),e<=0&&(e+=12),window.clockGame.hour=e,window.clockGame.min=t,updateClockFace(e,t),e===a&&t===n?(window.clockGame.done=!0,setInfo("Tahniah! Jawapan tepat."),triggerWin(),speak("Betul!"),document.getElementById("ctrls").innerHTML='<div class="text-2xl font-bold text-green-600">TEPAT! ✅</div>'):speak(`Pukul ${e} `+(0===t?"":t))}},window.dropCheck=function(e){var t,a;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(t="true"===draggedElement.dataset.enough,a=draggedElement.dataset.value,t?(e.currentTarget.innerHTML=`<span class="text-3xl font-bold text-green-600">RM ${a} ✅</span>`,e.currentTarget.classList.add("drop-zone-filled"),setInfo("RM 50 cukup untuk bayar RM 48.50"),triggerWin(),speak("Cukup!")):(e.currentTarget.classList.add("shake"),setTimeout(()=>e.currentTarget.classList.remove("shake"),500),setInfo("RM 20 tak cukup."),speak("Tak cukup.")))},window.dropBaki=function(e){var t,a;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(a=parseFloat(draggedElement.dataset.value),t=window.bakiGame,parseFloat((t.given+a).toFixed(2))>t.needed?(e.currentTarget.classList.add("shake"),setTimeout(()=>e.currentTarget.classList.remove("shake"),500),speak("Terlebih!")):(t.given+=a,(a=draggedElement.cloneNode(!0)).draggable=!1,a.classList.remove("cursor-grab"),document.getElementById("baki-tray").appendChild(a),draggedElement.style.display="none",document.getElementById("given-total").textContent="RM "+t.given.toFixed(2),Math.abs(t.given-t.needed)<.01?(e.currentTarget.classList.add("drop-zone-filled"),setInfo("Tahniah! Baki cukup."),triggerWin(),speak("Baki cukup!")):speak(formatMoney(t.given))))},"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>

@@ -1,0 +1,127 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Matematik Ceria: Operasi Darab</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.pattern-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:2px;background:#dcfce7;padding:4px;border-radius:.5rem;border:3px solid #86efac;max-width:100%}.pattern-cell{height:25px;width:25px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:4px;font-size:.7rem;color:#475569;font-weight:600;transition:all .3s ease}.pattern-cell.highlight{background-color:#22c55e;color:#fff;font-weight:700;transform:scale(1.1);box-shadow:0 2px 4px rgba(0,0,0,.2);z-index:10}.array-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border:4px solid #cbd5e1;background:#f8fafc;border-radius:.75rem;padding:4px;cursor:crosshair;user-select:none;width:100%;max-width:400px}.array-cell{aspect-ratio:1/1;border:1px solid #e2e8f0;background-color:#fff;border-radius:2px;transition:background-color .1s}.array-cell.highlight{background-color:#3b82f6;border-color:#2563eb}.array-cell.target-good{background-color:#22c55e;border-color:#16a34a}.draggable{cursor:grab;user-select:none;transition:transform .2s}.draggable:active{cursor:grabbing;transform:scale(1.1)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:.75rem;min-width:50px;min-height:50px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#334155}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.05)}.drop-zone.filled{border:3px solid #22c55e;background-color:#dcfce7;color:#15803d;border-style:solid}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">✖️</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Operasi Darab (Pembelajaran)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full overflow-hidden"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⚙️</div><h2 class="text-4xl font-bold text-emerald-600 mb-4">Konsep Darab</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Penerokaan Corak & Tatasusunan.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">⚙️<br>Kumpul</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">🎨<br>Corak</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">▦<br>Teroka</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">🎯<br>Bina</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 rounded-xl text-xs">✏️<br>Sifir</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar darab!",draggedElement=null,arrayDragState={drawing:!1,startCell:null},builderState={target:0,question:[12,18,20,16,24]};function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.95,t.pitch=1.05,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t&&loadMachineActivity(e),2===t&&loadPatternActivity(e),3===t&&loadArrayExplorerActivity(e),4===t&&loadArrayBuilderActivity(e),5===t&&loadEquationActivity(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⚙️</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Konsep Darab</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Penerokaan Corak & Tatasusunan.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}function updateMachineValue(t,e){t=document.getElementById(t+"-val");let a=parseInt(t.textContent)+e;8<(a=a<1?1:a)&&(a=8),t.textContent=a}function runMachine(){var e=parseInt(document.getElementById("kumpulan-val").textContent),a=parseInt(document.getElementById("item-val").textContent),t=e*a,n=document.getElementById("visual-output");n.innerHTML="";for(let t=0;t<e;t++){let e='<div class="bg-white border-2 border-blue-400 rounded-xl p-2 flex flex-wrap gap-1 justify-center w-20 shadow-sm">';for(let t=0;t<a;t++)e+='<div class="w-4 h-4 bg-blue-500 rounded-full"></div>';e+="</div>",n.innerHTML+=e}var l=e+` × ${a} = `+t,l=(document.getElementById("equation-output").textContent=l,e+` kumpulan, ${a} item. Jumlahnya ${t}.`);setInfo(l),speak(l)}function loadPatternActivity(t){setInfo("Klik butang sifir untuk melihat corak warna pada papan 100.");let e="";for(let t=1;t<=100;t++)e+=`<div id="cell-${t}" class="pattern-cell">${t}</div>`;t.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-green-600 mb-2 flex-none">🎨 Peneroka Corak Sifir</h3>
+            
+            <div class="flex flex-wrap justify-center gap-2 mb-2 flex-none">
+                <button class="btn-3d bg-green-100 text-green-800 font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(2)">Sifir 2</button>
+                <button class="btn-3d bg-green-100 text-green-800 font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(5)">Sifir 5</button>
+                <button class="btn-3d bg-green-100 text-green-800 font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(10)">Sifir 10</button>
+                <button class="btn-3d bg-green-100 text-green-800 font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(4)">Sifir 4</button>
+                <button class="btn-3d bg-slate-200 text-slate-600 font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(1)">Sifir 1</button>
+                <button class="btn-3d bg-slate-200 text-slate-600 font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(0)">Sifir 0</button>
+                <button class="btn-3d bg-rose-500 text-white font-bold py-1 px-3 rounded-lg text-xs" onclick="showPattern(-1)">Padam 🗑️</button>
+            </div>
+
+            <div class="flex-1 w-full flex items-center justify-center min-h-0 overflow-hidden">
+                 <div class="pattern-grid mx-auto">${e}</div>
+            </div>
+            <div id="pattern-info" class="text-base font-bold text-green-700 min-h-[1.5rem] flex-none"></div>
+        </div>
+      `}function showPattern(e){document.querySelectorAll(".pattern-cell").forEach(t=>t.classList.remove("highlight"));var t=document.getElementById("pattern-info");if(-1===e)t.textContent="Corak dipadamkan.";else if(0===e)t.textContent="Semua nombor darab 0 jadi 0. Tiada corak di sini.",speak("Semua nombor darab 0 jadi 0.");else{for(let t=1;t<=100;t++)1!==e&&t%e!=0||document.getElementById("cell-"+t).classList.add("highlight");var a=`Corak Sifir ${e}.`;speak(t.textContent=a)}}function loadArrayExplorerActivity(t){setInfo("Klik dan seret pada petak untuk melukis segiempat.");let a="";for(let e=0;e<10;e++)for(let t=0;t<12;t++)a+=`<div class="array-cell" data-row="${e}" data-col="${t}"></div>`;t.innerHTML=`
+        <div class="w-full max-w-3xl text-center">
+            <h3 class="text-3xl font-bold text-purple-600 mb-4">▦ Teroka Tatasusunan</h3>
+            
+            <div id="array-info" class="text-3xl font-bold text-purple-800 bg-purple-50 py-2 rounded-xl border border-purple-200 mb-4 min-h-[3.5rem]">
+                Lukis sesuatu...
+            </div>
+            
+            <div class="flex justify-center">
+                <div class="array-grid" 
+                     onmousedown="startArrayDrag(event)" 
+                     onmouseover="doArrayDrag(event)" 
+                     onmouseup="endArrayDrag()"
+                     onmouseleave="endArrayDrag()">
+                  ${a}
+                </div>
+            </div>
+        </div>
+      `}function loadArrayBuilderActivity(t){var e=builderState.question[Math.floor(Math.random()*builderState.question.length)];setInfo(`Bina segiempat yang ada ${builderState.target=e} kotak.`);let a="";for(let e=0;e<10;e++)for(let t=0;t<12;t++)a+=`<div class="array-cell" data-row="${e}" data-col="${t}"></div>`;t.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-orange-600 mb-2 flex-none">🎯 Bina Tatasusunan</h3>
+            
+            <div class="flex items-center justify-center gap-4 mb-2 bg-orange-50 p-2 rounded-xl border border-orange-200 flex-none">
+                <span class="text-lg text-slate-600 font-bold">Sasaran:</span>
+                <span class="text-3xl font-black text-orange-600">${e}</span>
+            </div>
+            
+            <div id="builder-info" class="text-base font-bold text-slate-500 mb-1 flex-none">Lukis kotak...</div>
+            
+            <div class="flex-1 w-full flex items-center justify-center min-h-0 overflow-hidden mb-2">
+                <div class="array-grid" 
+                     onmousedown="startArrayDrag(event)" 
+                     onmouseover="doArrayDrag(event)" 
+                     onmouseup="endArrayBuilder(event)"
+                     onmouseleave="endArrayDrag()">
+                  ${a}
+                </div>
+            </div>
+            
+            <button class="btn-3d bg-slate-400 text-white font-bold py-2 px-6 rounded-xl text-sm flex-none" onclick="loadActivity(4)">Soalan Baru 🔄</button>
+        </div>
+      `}function startArrayDrag(t){t.target.classList.contains("array-cell")&&(arrayDragState.drawing=!0,arrayDragState.startCell=t.target.dataset,clearArrayGrid(),highlightArrayCells(t.target.dataset))}function doArrayDrag(t){arrayDragState.drawing&&t.target.classList.contains("array-cell")&&highlightArrayCells(t.target.dataset)}function endArrayDrag(){arrayDragState.drawing=!1,arrayDragState.startCell=null}function highlightArrayCells(t,a="highlight"){var e=arrayDragState.startCell;if(e){var n=Math.min(e.row,t.row),l=Math.max(e.row,t.row),r=Math.min(e.col,t.col),o=Math.max(e.col,t.col),e=(clearArrayGrid(),l-n+1),t=o-r+1;for(let e=n;e<=l;e++)for(let t=r;t<=o;t++){var i=document.querySelector(`.array-cell[data-row="${e}"][data-col="${t}"]`);i&&i.classList.add(a)}return 3===currentActivity&&(n=e+` × ${t} = `+e*t,speak(document.getElementById("array-info").textContent=n)),{rows:e,cols:t,total:e*t}}}function clearArrayGrid(){document.querySelectorAll(".array-cell").forEach(t=>{t.classList.remove("highlight","target-good")})}function endArrayBuilder(t){var e,a,n;arrayDragState.drawing&&({rows:t,cols:e,total:a}=highlightArrayCells(t.target.dataset),n=document.getElementById("builder-info"),a===builderState.target?(n.textContent=`Tahniah! ${t} × ${e} = ${a}.`,speak("Tahniah! Jawapan betul."),triggerWin(),document.querySelectorAll(".array-cell.highlight").forEach(t=>{t.classList.remove("highlight"),t.classList.add("target-good")})):(t=`${t} × ${e} = ${a}. Bukan ${builderState.target}. Cuba lagi!`,n.textContent=t,speak("Salah. Cuba lagi."),document.querySelector(".array-grid").classList.add("shake"),setTimeout(()=>document.querySelector(".array-grid").classList.remove("shake"),500)),arrayDragState.drawing=!1,arrayDragState.startCell=null)}function loadEquationActivity(t){setInfo("Seret nombor merah ke tempat kosong untuk melengkapkan sifir.");t.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-red-600 mb-2 flex-none">✏️ Lengkapkan Ayat</h3>
+            
+            <div class="bg-red-50 p-2 rounded-2xl border-2 border-red-200 mb-2 flex-none">
+                <div class="text-xs font-bold text-red-400 uppercase mb-1">Pilihan Jawapan</div>
+                <div class="flex flex-wrap justify-center gap-2">
+                    ${[6,10,12,16,18,20,8].sort(()=>Math.random()-.5).map(t=>`
+                        <div class="btn-3d bg-white border-red-200 text-red-600 font-bold text-xl w-12 h-12 rounded-xl flex items-center justify-center draggable" 
+                             draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-number="${t}">
+                             ${t}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div id="equation-list" class="flex flex-col items-center gap-2 flex-1 overflow-y-auto">
+                ${renderEquationRow(4,5,20)}
+                ${renderEquationRow(3,2,6)}
+                ${renderEquationRow(2,10,20)}
+                ${renderEquationRow(4,4,16)}
+            </div>
+        </div>
+      `}function renderEquationRow(t,e,a){return`
+        <div class="flex items-center gap-2 md:gap-4 text-3xl md:text-4xl font-bold text-slate-700 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+            <span class="w-12 text-center">${t}</span>
+            <span class="text-slate-400">×</span>
+            <span class="w-12 text-center">${e}</span>
+            <span class="text-slate-400">=</span>
+            <div class="drop-zone w-20 h-20 text-2xl md:text-3xl rounded-lg bg-slate-100" 
+                 ondrop="dropOnEquation(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-correct="${a}">?</div>
+        </div>`}function dropOnEquation(t){var e;t.preventDefault(),t.currentTarget.classList.remove("drag-over"),draggedElement&&((e=draggedElement.dataset.number)===t.currentTarget.dataset.correct?(t.currentTarget.textContent=e,t.currentTarget.classList.add("filled"),t.currentTarget.classList.remove("drop-zone"),draggedElement=null,speak("Betul!"),0===document.querySelectorAll("#equation-list .drop-zone").length&&(triggerWin(),setInfo("Syabas! Semua selesai."),speak("Syabas! Semua selesai."))):(speak("Salah."),t.currentTarget.classList.add("shake"),setTimeout(()=>t.currentTarget.classList.remove("shake"),500)))}window.dragStart=function(t){draggedElement=t.target,t.target.classList.add("opacity-50")},window.dragEnd=function(t){t.target.classList.remove("opacity-50"),document.querySelectorAll(".drop-zone").forEach(t=>t.classList.remove("drag-over"))},window.allowDrop=function(t){t.preventDefault(),t.currentTarget.classList.contains("drop-zone")&&t.currentTarget.classList.add("drag-over")},window.dragLeave=function(t){t.currentTarget.classList.contains("drop-zone")&&t.currentTarget.classList.remove("drag-over")},setInfo("Tambah atau tolak Kumpulan dan Item. Tekan 'Jalankan!'."),content.innerHTML=`
+        <div class="w-full max-w-4xl flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">⚙️ Mesin Pengumpulan</h3>
+            
+            <div class="flex flex-col md:flex-row justify-center items-start gap-4 flex-1 min-h-0">
+                <div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200 w-full md:w-1/3 flex-none">
+                    <div class="mb-4">
+                        <label class="text-sm font-bold text-slate-700">Bilangan Kumpulan:</label>
+                        <div class="flex items-center justify-center gap-2 mt-2">
+                            <button class="btn-3d bg-blue-500 text-white rounded-full w-8 h-8 text-lg font-bold" onclick="updateMachineValue('kumpulan', -1)">-</button>
+                            <span id="kumpulan-val" class="text-2xl font-bold text-blue-600 w-12 text-center bg-white rounded-lg">3</span>
+                            <button class="btn-3d bg-blue-500 text-white rounded-full w-8 h-8 text-lg font-bold" onclick="updateMachineValue('kumpulan', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-sm font-bold text-slate-700">Item setiap Kumpulan:</label>
+                        <div class="flex items-center justify-center gap-2 mt-2">
+                            <button class="btn-3d bg-blue-500 text-white rounded-full w-8 h-8 text-lg font-bold" onclick="updateMachineValue('item', -1)">-</button>
+                            <span id="item-val" class="text-2xl font-bold text-blue-600 w-12 text-center bg-white rounded-lg">4</span>
+                            <button class="btn-3d bg-blue-500 text-white rounded-full w-8 h-8 text-lg font-bold" onclick="updateMachineValue('item', 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="btn-3d bg-green-500 text-white font-bold py-2 px-4 rounded-xl text-lg w-full" onclick="runMachine()">
+                        Jalankan! ▶️
+                    </button>
+                </div>
+
+                <div class="w-full md:w-2/3 flex flex-col h-full">
+                    <div id="visual-output" class="bg-slate-100 border-2 border-slate-200 rounded-2xl p-2 flex-1 overflow-y-auto flex flex-wrap gap-2 items-center justify-center mb-2"></div>
+                    <div id="equation-output" class="text-center text-2xl font-black text-blue-600 bg-white border-2 border-blue-100 p-2 rounded-xl shadow-sm flex-none">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
+      `</script>

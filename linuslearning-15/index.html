@@ -1,0 +1,93 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Pemulihan: Operasi Tolak</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.draggable{cursor:grab;touch-action:none}.draggable:active{cursor:grabbing;opacity:.6;transform:scale(1.05)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.marker{width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;transition:all .2s;border-bottom:4px solid rgba(0,0,0,.2);font-size:.8rem}.marker:active{border-bottom-width:0;transform:translateY(4px)}.marker.active{background:#22c55e;color:#fff;border-color:#15803d;transform:scale(1.1)}.apple-btn{transition:all .3s;filter:grayscale(0);opacity:1}.apple-btn.eaten{filter:grayscale(100%);opacity:.4;transform:scale(.9)}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">➖</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Belajar Tolak</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">📉</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Operasi Tolak</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Belajar mengurangkan nombor.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">➖ Simbol</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🎨 Warna</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🧱 Bina</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">📏 Garis</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔗 Padan</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!";function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.95,t.pitch=1.05,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t?setupAct1(e):2===t?setupAct2(e):3===t?setupAct3(e):4===t?setupAct4(e):5===t&&setupAct5(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">📉</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Operasi Tolak</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}function setupAct1(t){setInfo("Klik simbol untuk dengar maksudnya."),t.innerHTML=`
+             <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-blue-600 mb-4">➖ Kenali Simbol</h3>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <button onclick="speak('Ini simbol Tolak. Maksudnya buang atau ambil.')" class="btn-3d bg-blue-100 border-blue-300 p-4 rounded-3xl flex flex-col items-center group">
+                        <div class="text-6xl font-black text-blue-600 group-hover:scale-110 transition-transform">−</div>
+                        <div class="text-lg font-bold text-blue-800 mt-2">Tolak</div>
+                        <p class="text-xs text-slate-500">Buang / Kurang</p>
+                    </button>
+                    <button onclick="speak('Ini simbol Sama Dengan. Maksudnya jawapan.')" class="btn-3d bg-green-100 border-green-300 p-4 rounded-3xl flex flex-col items-center group">
+                        <div class="text-6xl font-black text-green-600 group-hover:scale-110 transition-transform">=</div>
+                        <div class="text-lg font-bold text-green-800 mt-2">Sama Dengan</div>
+                        <p class="text-xs text-slate-500">Jawapan / Hasil</p>
+                    </button>
+                </div>
+                
+                <div class="bg-white border-2 border-slate-200 rounded-xl p-2 inline-block">
+                    <div class="text-3xl font-bold text-slate-700">9 − 3 = 6</div>
+                </div>
+            </div>
+        `}let appleState={total:8,eaten:0,target:3};function setupAct2(t){setInfo("Klik 3 epal untuk 'makan' (tolak)."),appleState={total:8,eaten:0,target:3},t.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-green-600 mb-2">🎨 Warna Tolak</h3>
+                <p class="text-lg mb-4 font-bold text-slate-600">Soalan: 8 - 3 = ? <br><span class="text-xs font-normal">Klik 3 epal untuk buang.</span></p>
+                
+                <div class="flex flex-wrap justify-center gap-2 mb-6">
+                    ${Array(8).fill(0).map((t,e)=>`
+                        <button onclick="eatApple(this)" class="apple-btn text-5xl hover:scale-110 transition-transform">🍎</button>
+                    `).join("")}
+                </div>
+                
+                <button onclick="loadActivity(2)" class="btn-3d bg-slate-400 text-white py-2 px-4 rounded-lg text-sm">Mula Semula 🔄</button>
+            </div>
+        `}function setupAct3(t){setInfo("Bina ayat: 7 - 2 = 5"),t.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-purple-600 mb-4">🧱 Bina Ayat Matematik</h3>
+                
+                <div class="flex justify-center gap-1 mb-6 bg-purple-50 p-3 rounded-2xl border-2 border-purple-200">
+                    ${[0,1,2,3,4].map(t=>'<div class="drop-zone w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold bg-white" ondrop="dropItem(event)" ondragover="allowDrop(event)"></div>').join("")}
+                </div>
+
+                <div class="flex justify-center gap-2 flex-wrap">
+                    ${["7","−","2","=","5"].sort(()=>Math.random()-.5).map(t=>`
+                        <div draggable="true" ondragstart="dragStart(event)" data-val="${t}" 
+                             class="draggable btn-3d bg-purple-500 text-white w-12 h-12 rounded-xl text-lg font-bold flex items-center justify-center">
+                            ${t}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function checkSentence(){var t=document.querySelectorAll(".drop-zone");"7−2=5"===Array.from(t).map(t=>t.innerText).join("")&&(speak("Tepat! Tujuh tolak dua sama dengan lima."),triggerWin(),setInfo("Ayat matematik lengkap!"))}window.eatApple=function(t){t.classList.contains("eaten")||(appleState.eaten<appleState.target?(t.classList.add("eaten"),t.innerText="🍏",appleState.eaten++,appleState.eaten===appleState.target?(speak(`Lapan tolak tiga sama dengan ${t=appleState.total-appleState.target}.`),setInfo(`Tinggal ${t} epal merah.`),triggerWin()):speak(appleState.eaten+" dibuang.")):setInfo("Cukup 3 sahaja!"))},window.dragStart=function(t){t.dataTransfer.setData("text",t.target.dataset.val),t.target.style.opacity="0.5"},window.allowDrop=function(t){t.preventDefault()},window.dropItem=function(t){t.preventDefault();var e=t.dataTransfer.getData("text");t.target.innerText=e,t.target.classList.add("border-purple-500"),document.querySelectorAll(".draggable").forEach(t=>t.style.opacity="1"),checkSentence()};let nlState={cur:null,steps:0};function setupAct4(t){setInfo("Klik 6 untuk mula. Kemudian gerak ke kiri."),nlState={cur:null,steps:0};let e="";for(let t=0;t<=10;t++)e+=`
+                <div class="flex flex-col items-center" style="width: 9%;">
+                    <div id="m-${t}" onclick="clickMarker(${t})" class="marker bg-white border-2 border-slate-300 text-slate-600 shadow-sm">${t}</div>
+                    <div class="h-3 w-1 bg-slate-300 mt-1"></div>
+                </div>
+            `;t.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-2xl font-bold text-orange-600 mb-2">📏 Garis Nombor</h3>
+                
+                <p class="text-lg text-slate-500 mb-4">Soalan: <b>6 − 4 = ?</b></p>
+                
+                <div class="bg-orange-50 p-4 rounded-3xl border-2 border-orange-200 mb-4 overflow-x-auto">
+                    <div class="flex justify-between items-end min-w-[500px] relative">
+                        <div class="absolute bottom-2 left-4 right-4 h-1 bg-slate-300 z-0"></div>
+                        ${e}
+                    </div>
+                </div>
+                
+                <div class="text-xl font-bold" id="nl-status">Klik nombor 6</div>
+            </div>
+        `}window.clickMarker=function(t){var e;document.querySelectorAll(".marker");null===nlState.cur?6===t?(nlState.cur=6,document.getElementById("m-6").classList.add("active"),document.getElementById("nl-status").innerText="Sekarang gerak 4 langkah ke KIRI",setInfo("Bagus. Sekarang klik nombor di sebelah kiri."),speak("Bagus. Gerak ke kiri.")):(setInfo("Mula dari nombor 6 dahulu."),document.getElementById("m-"+t).classList.add("shake"),setTimeout(()=>document.getElementById("m-"+t).classList.remove("shake"),500)):t<nlState.cur&&nlState.cur-t<=4-nlState.steps?(e=nlState.cur-t,nlState.steps+=e,document.getElementById("m-"+nlState.cur).classList.remove("active"),document.getElementById("m-"+t).classList.add("active"),nlState.cur=t,4===nlState.steps?(document.getElementById("nl-status").innerHTML=`Jawapan: <span class="text-orange-600 text-4xl">${t}</span>`,setInfo(`Hebat! 6 tolak 4 sama dengan ${t}.`),speak("Jawapannya dua."),triggerWin()):(e=4-nlState.steps,document.getElementById("nl-status").innerText=`Lagi ${e} langkah...`)):setInfo("Salah arah atau terlalu jauh. Gerak ke kiri.")};let matchState={sel:null,solved:0};function setupAct5(t){setInfo("Padankan Masalah (merah) dengan Jawapan (hijau)."),matchState={sel:null,solved:0};t.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-2xl font-bold text-pink-600 mb-4">🔗 Padanan Harian</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-bold text-pink-800">Masalah</h4>
+                        ${[{id:1,txt:"🍪 Ada 10 biskut. Makan 3.",ansId:1},{id:2,txt:"🐱 Ada 8 kucing. 5 lari.",ansId:2},{id:3,txt:"🚗 Ada 12 kereta. 7 pergi.",ansId:3}].map(t=>`
+                            <button onclick="selProb(${t.id}, this)" class="prob-btn btn-3d bg-pink-100 text-pink-900 p-2 rounded-xl border-pink-300 text-sm md:text-base text-left">
+                                ${t.txt}
+                            </button>
+                        `).join("")}
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-bold text-green-800">Jawapan</h4>
+                        ${[{id:1,txt:"10 − 3 = 7"},{id:2,txt:"8 − 5 = 3"},{id:3,txt:"12 − 7 = 5"}].sort(()=>Math.random()-.5).map(t=>`
+                            <button onclick="selAns(${t.id}, this)" class="ans-btn btn-3d bg-green-100 text-green-900 p-2 rounded-xl border-green-300 text-lg font-bold">
+                                ${t.txt}
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.selProb=function(t,e){document.querySelectorAll(".prob-btn").forEach(t=>t.classList.remove("ring-4","ring-pink-400")),e.classList.add("ring-4","ring-pink-400"),matchState.sel={id:t,btn:e},speak("Cari jawapan.")},window.selAns=function(t,e){matchState.sel&&(matchState.sel.id===t?(e.classList.remove("bg-green-100"),e.classList.add("bg-green-500","text-white"),matchState.sel.btn.classList.remove("bg-pink-100"),matchState.sel.btn.classList.add("bg-green-500","text-white"),matchState.sel.btn.classList.remove("ring-4"),matchState.sel.btn.disabled=!0,e.disabled=!0,matchState.sel=null,matchState.solved++,speak("Betul!"),3===matchState.solved&&triggerWin()):(e.classList.add("shake","bg-red-200"),setTimeout(()=>e.classList.remove("shake","bg-red-200"),500),speak("Salah.")))}</script>

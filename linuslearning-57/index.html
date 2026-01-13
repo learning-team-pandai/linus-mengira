@@ -1,0 +1,137 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Matematik Ceria: Operasi Tolak</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.place-block{display:inline-block;margin:2px;transition:all .3s ease}.block-ra{width:40px;height:40px;background-color:#3b82f6;border:2px solid #2563eb;border-radius:4px}.block-pu{width:10px;height:40px;background-color:#22c55e;border:2px solid #16a34a;border-radius:2px}.block-sa{width:10px;height:10px;background-color:#facc15;border:2px solid #eab308;border-radius:50%}.block-removed{opacity:.2;filter:grayscale(100%);transform:scale(.8)}.bentuk-lazim{font-family:Fredoka,monospace;font-size:1.5rem;width:fit-content;margin:0 auto;text-align:right;position:relative;padding-left:2rem}.lazim-row{display:flex;justify-content:flex-end;margin-bottom:.5rem;position:relative;align-items:center}.lazim-col{width:2.5rem;text-align:center;display:inline-block;height:2.5rem;line-height:2.5rem}.symbol-minus{position:absolute;left:-55px;top:0;font-weight:700;color:#ef4444;font-size:3rem;line-height:3.5rem}.line{border-bottom:6px solid #475569;margin:.5rem 0;border-radius:3px}.lazim-input{width:2.5rem;height:2.5rem;text-align:center;font-size:1.5rem;font-weight:700;font-family:Fredoka,monospace;border:2px solid #cbd5e1;border-radius:.5rem;background:#fff;outline:0;transition:all .2s}.lazim-input:focus{border-color:#3b82f6;background-color:#eff6ff}.lazim-input:disabled{background-color:#f1f5f9;color:#9ca3af;border-color:#e2e8f0}.lazim-input.correct{background-color:#dcfce7;border-color:#22c55e;color:#16a34a}.lazim-input.wrong{border-color:#ef4444;background:#fee2e2;animation:shake .4s}.number-card{transition:all .3s;cursor:grab;box-shadow:0 4px 0 rgba(0,0,0,.1);border-width:3px;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-weight:700}.number-card:active{cursor:grabbing;transform:scale(.95)}.dragging{opacity:.5;transform:scale(.9)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:1rem;display:flex;align-items:center;justify-content:center}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.05)}.drop-zone-filled{border:3px solid #22c55e!important;background-color:#dcfce7!important;color:#15803d!important;box-shadow:0 4px 0 rgba(0,0,0,.1)}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">➖</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Operasi Tolak</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-4"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col overflow-hidden"><div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-pulse">💯</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Tolak (1000)</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Belajar tolak nombor tiga digit!<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-2 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🧱<br>Blok</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-1 rounded-xl text-xs">📝<br>Lazim</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-1 rounded-xl text-xs">📏<br>Garis</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs">📖<br>Cerita</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🧩<br>Padan</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-sm">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-base">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",draggedElement=null;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.9,t.pitch=1.1,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function dragStart(t){draggedElement=t.target,t.target.classList.add("dragging")}function dragEnd(t){t.target.classList.remove("dragging"),document.querySelectorAll(".drop-zone").forEach(t=>t.classList.remove("drag-over"))}function allowDrop(t){t.preventDefault(),t.currentTarget.classList.contains("drop-zone")&&t.currentTarget.classList.add("drag-over")}function dragLeave(t){t.currentTarget.classList.contains("drop-zone")&&t.currentTarget.classList.remove("drag-over")}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{e.innerHTML="",1===t&&loadVisualBlockActivity(e),2===t&&loadBentukLazimActivity(e),3===t&&loadNumberLineActivity(e),4===t&&loadStoryProblemActivity(e),5===t&&loadMatchingActivity(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-bounce">💯</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Tolak</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Pilih aktiviti di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}let vb={ra:0,pu:0,sa:0,tolakRa:0,tolakPu:0,tolakSa:0};function loadVisualBlockActivity(t){setInfo("Jom buang blok! Klik butang Tolak."),vb={ra:3,pu:6,sa:9,tolakRa:1,tolakPu:2,tolakSa:6},t.innerHTML=`
+        <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🧱 Visual Blok</h3>
+        
+        <div class="flex-1 overflow-y-auto w-full px-2 flex flex-col items-center">
+            <div class="text-center text-xl font-black text-slate-700 mb-2 bg-blue-50 inline-block px-6 py-2 rounded-full mx-auto border-2 border-blue-100 shadow-sm flex-none">
+               <span class="text-blue-600">${vb.ra}</span><span class="text-green-600">${vb.pu}</span><span class="text-yellow-500">${vb.sa}</span> 
+               <span class="mx-1 text-slate-400">-</span> 
+               <span class="text-blue-600">${vb.tolakRa}</span><span class="text-green-600">${vb.tolakPu}</span><span class="text-yellow-500">${vb.tolakSa}</span> 
+               <span class="mx-1">=</span> ?
+            </div>
+            
+            <div class="grid grid-cols-3 gap-2 mb-2 w-full flex-none">
+               <div class="bg-white p-2 rounded-2xl border-4 border-blue-200 text-center shadow-sm">
+                  <h4 class="font-bold text-blue-500 uppercase mb-1 text-xs">Ratus</h4>
+                  <div id="vb-ra" class="flex flex-wrap justify-center gap-1 min-h-[60px]">
+                     ${Array(vb.ra).fill('<div class="place-block block-ra"></div>').join("")}
+                  </div>
+                  <button id="btn-ra" onclick="vbTolak('ra')" class="btn-3d bg-blue-500 text-white font-bold py-1 px-2 rounded-xl w-full mt-2 text-xs">Tolak ${vb.tolakRa}</button>
+               </div>
+               <div class="bg-white p-2 rounded-2xl border-4 border-green-200 text-center shadow-sm">
+                  <h4 class="font-bold text-green-500 uppercase mb-1 text-xs">Puluh</h4>
+                  <div id="vb-pu" class="flex flex-wrap justify-center gap-1 min-h-[60px]">
+                     ${Array(vb.pu).fill('<div class="place-block block-pu"></div>').join("")}
+                  </div>
+                  <button id="btn-pu" onclick="vbTolak('pu')" class="btn-3d bg-green-500 text-white font-bold py-1 px-2 rounded-xl w-full mt-2 text-xs">Tolak ${vb.tolakPu}</button>
+               </div>
+               <div class="bg-white p-2 rounded-2xl border-4 border-yellow-200 text-center shadow-sm">
+                  <h4 class="font-bold text-yellow-500 uppercase mb-1 text-xs">Sa</h4>
+                  <div id="vb-sa" class="flex flex-wrap justify-center gap-1 min-h-[60px]">
+                     ${Array(vb.sa).fill('<div class="place-block block-sa"></div>').join("")}
+                  </div>
+                  <button id="btn-sa" onclick="vbTolak('sa')" class="btn-3d bg-yellow-500 text-white font-bold py-1 px-2 rounded-xl w-full mt-2 text-xs">Tolak ${vb.tolakSa}</button>
+               </div>
+            </div>
+            
+            <div id="vb-result" class="text-center text-lg font-bold text-slate-700 min-h-[30px] flex-none"></div>
+        </div>
+      `}function vbTolak(t){let e,a,l;"ra"===t&&(e="#vb-ra .block-ra",a=vb.tolakRa,l="btn-ra"),"pu"===t&&(e="#vb-pu .block-pu",a=vb.tolakPu,l="btn-pu"),"sa"===t&&(e="#vb-sa .block-sa",a=vb.tolakSa,l="btn-sa");var n=document.querySelectorAll(e+":not(.block-removed)");for(let t=0;t<a;t++)n[t]&&n[t].classList.add("block-removed");var s,o,i,t=document.getElementById(l);t.disabled=!0,t.textContent="Selesai ✔️",document.getElementById("btn-ra").disabled&&document.getElementById("btn-pu").disabled&&document.getElementById("btn-sa").disabled?(i=""+(t=vb.ra-vb.tolakRa)+(s=vb.pu-vb.tolakPu)+(o=vb.sa-vb.tolakSa),document.getElementById("vb-result").innerHTML=`Baki: <span class="text-blue-600">${t}</span> <span class="text-green-600">${s}</span> <span class="text-yellow-500">${o}</span> = `+i,setInfo("Syabas! Jawapan "+i),triggerWin()):setInfo(`Bagus! ${a} blok dibuang.`)}function loadBentukLazimActivity(t){setInfo("Isi jawapan dari kanan (Sa)."),t.innerHTML=`
+        <h3 class="text-xl font-bold text-emerald-500 mb-2 text-center flex-none">📝 Bentuk Lazim</h3>
+        
+        <div class="flex-1 overflow-y-auto w-full flex flex-col items-center justify-center">
+           <div class="bg-emerald-50 border-4 border-emerald-200 rounded-3xl p-4 shadow-sm inline-block flex-none">
+              <div class="bentuk-lazim">
+                 <div class="lazim-row text-slate-400 text-base font-bold mb-1">
+                     <span class="lazim-col">RA</span><span class="lazim-col">PU</span><span class="lazim-col">SA</span>
+                 </div>
+                 
+                 <div class="lazim-row">
+                     <span class="lazim-col text-slate-700 font-bold">3</span>
+                     <span class="lazim-col text-slate-700 font-bold">6</span>
+                     <span class="lazim-col text-slate-700 font-bold">9</span>
+                 </div>
+
+                 <div class="lazim-row">
+                     <div class="symbol-minus" style="font-size: 2rem; left: -2rem;">-</div>
+                     <span class="lazim-col text-slate-700 font-bold">1</span>
+                     <span class="lazim-col text-slate-700 font-bold">2</span>
+                     <span class="lazim-col text-slate-700 font-bold">6</span>
+                 </div>
+                 
+                 <div class="line"></div>
+                 
+                 <div class="lazim-row">
+                     <span class="lazim-col"><input type="text" id="ans-ra" maxlength="1" class="lazim-input" disabled></span>
+                     <span class="lazim-col"><input type="text" id="ans-pu" maxlength="1" class="lazim-input" disabled></span>
+                     <span class="lazim-col"><input type="text" id="ans-sa" maxlength="1" class="lazim-input"></span>
+                 </div>
+              </div>
+           </div>
+           <div id="lazim-result" class="text-center text-lg font-bold text-emerald-800 mt-4 min-h-[30px] flex-none">Mula dengan Sa...</div>
+        </div>
+      `,setTimeout(()=>document.getElementById("ans-sa").focus(),100),document.getElementById("ans-sa").oninput=t=>checkLazim("sa",t.target,"3"),document.getElementById("ans-pu").oninput=t=>checkLazim("pu",t.target,"4"),document.getElementById("ans-ra").oninput=t=>checkLazim("ra",t.target,"2")}function checkLazim(t,e,a){e.value===a?(e.classList.add("correct"),e.disabled=!0,"sa"===t&&(document.getElementById("ans-pu").disabled=!1,document.getElementById("ans-pu").focus(),setInfo("Betul! Sekarang Puluh.")),"pu"===t&&(document.getElementById("ans-ra").disabled=!1,document.getElementById("ans-ra").focus(),setInfo("Betul! Sekarang Ratus.")),"ra"===t&&(document.getElementById("lazim-result").textContent="Tahniah! Jawapan: 243",setInfo("Tahniah!"),triggerWin())):(e.classList.add("wrong"),setTimeout(()=>e.classList.remove("wrong"),500))}let nl={current:369,steps:[100,20,6],stepIdx:0};function loadNumberLineActivity(t){setInfo("Lompat ke belakang! Mula tolak 100."),nl={current:369,steps:[100,20,6],stepIdx:0},t.innerHTML=`
+        <h3 class="text-xl font-bold text-violet-500 mb-2 text-center flex-none">📏 Garis Nombor</h3>
+        <div class="flex-1 overflow-y-auto w-full flex flex-col items-center justify-center">
+            <div class="text-center text-2xl font-black text-slate-700 mb-4 flex-none">369 - 126 = ?</div>
+            
+            <div class="relative w-full max-w-lg mx-auto h-4 bg-slate-200 rounded-full mb-8 mt-8 flex-none">
+               <div id="nl-marker" class="absolute -top-3 w-8 h-8 bg-violet-600 rounded-full shadow-lg border-4 border-white transition-all duration-1000 ease-in-out flex items-center justify-center" style="left: 100%;">
+                  <div id="nl-label" class="absolute -top-8 bg-violet-100 text-violet-800 font-bold px-2 py-0.5 rounded-lg text-sm">369</div>
+               </div>
+            </div>
+
+            <div class="flex justify-center gap-2 flex-none">
+               <button id="nl-btn-0" onclick="nlLompat(0)" class="btn-3d bg-violet-500 text-white font-bold py-2 px-4 rounded-xl text-sm">Lompat -100</button>
+               <button id="nl-btn-1" onclick="nlLompat(1)" class="btn-3d bg-slate-300 text-white font-bold py-2 px-4 rounded-xl text-sm opacity-50" disabled>Lompat -20</button>
+               <button id="nl-btn-2" onclick="nlLompat(2)" class="btn-3d bg-slate-300 text-white font-bold py-2 px-4 rounded-xl text-sm opacity-50" disabled>Lompat -6</button>
+            </div>
+            <div id="nl-result" class="text-center text-lg font-bold text-violet-800 mt-4 min-h-[30px] flex-none"></div>
+        </div>
+      `}function nlLompat(e){if(e===nl.stepIdx){var a=nl.steps[e];nl.current-=a,nl.stepIdx++,document.getElementById("nl-label").textContent=nl.current;let t=(nl.current-240)/130*100;t<0&&(t=0),document.getElementById("nl-marker").style.left=t+"%",document.getElementById("nl-btn-"+e).disabled=!0,document.getElementById("nl-btn-"+e).classList.add("bg-slate-300","opacity-50"),document.getElementById("nl-btn-"+e).classList.remove("bg-violet-500"),nl.stepIdx<3?((a=document.getElementById("nl-btn-"+nl.stepIdx)).disabled=!1,a.classList.remove("bg-slate-300","opacity-50"),a.classList.add("bg-violet-500"),setInfo(`Baki ${nl.current}. Sekarang tolak ${nl.steps[nl.stepIdx]}.`)):(document.getElementById("nl-result").textContent="Jawapan Akhir: "+nl.current,setInfo("Selesai!"),triggerWin())}}let storyStep=0;function loadStoryProblemActivity(t){setInfo("Baca cerita. Tekan Seterusnya."),storyStep=1,t.innerHTML=`
+        <h3 class="text-xl font-bold text-orange-500 mb-4 text-center flex-none">📖 Cerita Kira</h3>
+        <div class="flex-1 w-full overflow-y-auto px-4 flex flex-col items-center">
+           <div class="max-w-md w-full space-y-4 flex-none">
+               <div id="story-1" class="bg-orange-50 p-4 rounded-3xl border-4 border-orange-200 text-lg leading-relaxed shadow-sm">
+                  Ali ada <strong class="text-orange-600">369</strong> biji guli.<br>
+                  Dia beri <strong class="text-orange-600">126</strong> biji kepada kawan.<br>
+                  Berapakah <strong>baki</strong> guli Ali?
+               </div>
+               
+               <div id="story-2" class="hidden bg-white p-4 rounded-3xl border-4 border-indigo-100 text-center shadow-sm">
+                  <h4 class="font-bold text-slate-400 uppercase mb-1 text-sm">Ayat Matematik</h4>
+                  <div class="text-3xl font-black text-indigo-700">369 - 126 = ?</div>
+               </div>
+
+               <div id="story-3" class="hidden bg-white p-4 rounded-3xl border-4 border-green-100 text-center shadow-sm">
+                  <h4 class="font-bold text-slate-400 uppercase mb-1 text-sm">Jawapan</h4>
+                  <div class="text-4xl font-black text-green-600">243</div>
+                  <p class="text-slate-500 mt-1 font-bold text-sm">Baki guli Ali ialah 243.</p>
+               </div>
+
+               <button id="story-btn" onclick="nextStory()" class="btn-3d w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-lg">Seterusnya</button>
+           </div>
+        </div>
+      `}function nextStory(){2===++storyStep?(document.getElementById("story-1").classList.add("opacity-50"),document.getElementById("story-2").classList.remove("hidden"),setInfo("Tukar cerita jadi ayat matematik.")):3===storyStep&&(document.getElementById("story-2").classList.add("opacity-50"),document.getElementById("story-3").classList.remove("hidden"),document.getElementById("story-btn").textContent="Mula Semula",document.getElementById("story-btn").onclick=()=>loadStoryProblemActivity(document.getElementById("activity-content")),setInfo("Jawapan ialah 243."),triggerWin())}function loadMatchingActivity(t){setInfo("Seret jawapan ke soalan yang betul.");var e=[{q:"584 - 123",a:"461"},{q:"765 - 333",a:"432"},{q:"298 - 105",a:"193"}],a=[...e.map(t=>t.a)].sort(()=>Math.random()-.5);t.innerHTML=`
+        <h3 class="text-xl font-bold text-rose-500 mb-2 text-center flex-none">🧩 Padan Jawapan</h3>
+        
+        <div class="flex-1 w-full overflow-y-auto px-2 flex flex-col items-center">
+            <div class="grid grid-cols-2 gap-4 max-w-2xl mx-auto w-full flex-none">
+               <div class="space-y-2">
+                  ${e.map(t=>`
+                    <div class="flex items-center justify-between bg-white p-2 rounded-2xl border-2 border-slate-200 shadow-sm">
+                       <span class="text-lg font-bold text-slate-700">${t.q} = </span>
+                       <div class="drop-zone w-20 h-10 text-lg" data-correct="${t.a}" 
+                            ondrop="dropMatch(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">?</div>
+                    </div>
+                  `).join("")}
+               </div>
+               
+               <div class="space-y-2" id="ans-pool">
+                  ${a.map(t=>`
+                     <div class="number-card bg-rose-100 text-rose-700 border-rose-300 w-full py-2 rounded-xl text-xl text-center"
+                          draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-number="${t}">${t}</div>
+                  `).join("")}
+               </div>
+            </div>
+        </div>
+      `}function dropMatch(t){var e;t.preventDefault(),t.currentTarget.classList.remove("drag-over"),draggedElement&&((e=draggedElement.dataset.number)===t.currentTarget.dataset.correct?(t.currentTarget.textContent=e,t.currentTarget.classList.add("drop-zone-filled"),t.currentTarget.classList.remove("drop-zone"),t.currentTarget.removeAttribute("ondrop"),draggedElement.remove(),draggedElement=null,0===document.getElementById("ans-pool").children.length?(setInfo("Semua betul!"),triggerWin()):setInfo("Betul!")):(setInfo("Salah."),t.currentTarget.classList.add("shake"),setTimeout(()=>t.currentTarget.classList.remove("shake"),500)))}</script>

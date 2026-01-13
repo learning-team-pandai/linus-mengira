@@ -1,0 +1,119 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Pemulihan: Nombor Hingga 100</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px;user-select:none}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.shake{animation:shake .4s cubic-bezier(.36,.07,.19,.97) both}@keyframes shake{10%,90%{transform:translate3d(-2px,0,0)}20%,80%{transform:translate3d(4px,0,0)}30%,50%,70%{transform:translate3d(-6px,0,0)}40%,60%{transform:translate3d(6px,0,0)}}.draggable{cursor:grab;touch-action:none}.draggable:active{cursor:grabbing;opacity:.8;transform:scale(1.05)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc;border-radius:1rem}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.ten-frame-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.2rem}.dot{width:1.2rem;height:1.2rem;border-radius:50%;transition:background-color .2s;border:2px solid rgba(0,0,0,.1)}.rod{width:10px;height:40px;background-color:#3b82f6;border:2px solid #1e40af;border-radius:4px;display:inline-block;margin:0 1px}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">🔢</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Nombor Hingga 100</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Nombor Hingga 100</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah untuk mula.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔗<br>Padanan</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🧱<br>Blok</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🧮<br>Cerakin</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">📏<br>Susun</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">👆<br>Kenal</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!";function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.95,t.pitch=1.05,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t?setupAct1(e):2===t?setupAct2(e):3===t?setupAct3(e):4===t?setupAct4(e):5===t&&setupAct5(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Nombor Hingga 100</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}let matchState={selectedNum:null,selectedWord:null};function setupAct1(t){setInfo("Padankan Angka (Biru) dengan Perkataan (Hijau)."),matchState={selectedNum:null,selectedWord:null};var e=[{d:"25",w:"dua puluh lima"},{d:"41",w:"empat puluh satu"},{d:"17",w:"tujuh belas"},{d:"100",w:"seratus"},{d:"8",w:"lapan"}],a=[...e].sort(()=>Math.random()-.5),e=[...e].sort(()=>Math.random()-.5);t.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-blue-600 mb-4 flex-none">🔗 Padanan Angka & Perkataan</h3>
+                <div class="grid grid-cols-2 gap-4 flex-1 min-h-0">
+                    <div class="flex flex-col gap-2">
+                        ${a.map(t=>`
+                            <button onclick="selNum('${t.d}', this)" class="num-card btn-3d bg-blue-100 text-blue-900 p-2 rounded-xl border-blue-300 text-2xl font-bold w-full hover:bg-blue-200 h-16">
+                                ${t.d}
+                            </button>
+                        `).join("")}
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        ${e.map(t=>`
+                            <button onclick="selWord('${t.d}', this)" class="word-card btn-3d bg-green-100 text-green-900 p-2 rounded-xl border-green-300 text-base font-bold w-full hover:bg-green-200 h-16 leading-tight">
+                                ${t.w}
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}function checkMatch(){if(matchState.selectedNum&&matchState.selectedWord){let t=matchState.selectedNum,e=matchState.selectedWord;t.val===e.matchVal?(speak("Betul!"),triggerWin(),t.btn.classList.replace("bg-blue-400","bg-slate-300"),e.btn.classList.replace("bg-green-400","bg-slate-300"),t.btn.disabled=!0,e.btn.disabled=!0,t.btn.classList.add("pop-in"),e.btn.classList.add("pop-in"),setInfo(`Tepat! ${t.val} ialah ${e.text}.`)):(speak("Salah."),t.btn.classList.add("shake"),e.btn.classList.add("shake"),setTimeout(()=>{t.btn.classList.remove("shake","bg-blue-400","text-white"),e.btn.classList.remove("shake","bg-green-400","text-white")},500),setInfo("Cuba lagi.")),matchState.selectedNum=null,matchState.selectedWord=null}}window.selNum=function(t,e){e.disabled||(document.querySelectorAll(".num-card").forEach(t=>t.classList.remove("bg-blue-400","text-white")),e.classList.add("bg-blue-400","text-white"),matchState.selectedNum={val:t,btn:e},speak(t),checkMatch())},window.selWord=function(t,e){e.disabled||(document.querySelectorAll(".word-card").forEach(t=>t.classList.remove("bg-green-400","text-white")),e.classList.add("bg-green-400","text-white"),matchState.selectedWord={matchVal:t,btn:e,text:e.innerText},speak(e.innerText),checkMatch())};let blockState={target:35,p:0,s:0};function setupAct2(t){setInfo("Masukkan blok Puluh (Biru) dan Sa (Hijau) ke dalam kotak."),blockState={target:35,p:0,s:0},t.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-green-600 mb-2 flex-none">🧱 Bina Nombor: <span class="text-3xl text-slate-800">${blockState.target}</span></h3>
+                <div class="flex justify-center gap-4 mb-2 text-sm font-bold text-slate-600 bg-slate-100 p-1 rounded-lg inline-flex flex-none">
+                    <span id="count-p">Puluh: 0</span> | <span id="count-s">Sa: 0</span> | <span id="count-total">Jumlah: 0</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2 flex-1 min-h-0">
+                    <div class="drop-zone p-2 flex flex-wrap content-start gap-1 overflow-y-auto" ondrop="dropBlock(event, 'puluh')" ondragover="allowDrop(event)">
+                        <div class="w-full text-center font-bold text-blue-600 mb-1 text-sm">KOTAK PULUH (10)</div>
+                        <div id="bin-puluh" class="flex flex-wrap gap-1 justify-center w-full"></div>
+                    </div>
+                    <div class="drop-zone p-2 flex flex-wrap content-start gap-1 overflow-y-auto" ondrop="dropBlock(event, 'sa')" ondragover="allowDrop(event)">
+                        <div class="w-full text-center font-bold text-green-600 mb-1 text-sm">KOTAK SA (1)</div>
+                        <div id="bin-sa" class="flex flex-wrap gap-1 justify-center w-full"></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-200 p-2 rounded-2xl border-2 border-slate-300 flex-none">
+                    <p class="font-bold text-slate-500 mb-2 text-sm">Tarik blok dari sini:</p>
+                    <div class="flex justify-center gap-8">
+                        <div draggable="true" ondragstart="dragStartBlock(event, 'puluh')" class="draggable btn-3d bg-blue-500 text-white w-12 h-20 rounded-lg flex items-center justify-center text-xl font-bold border-blue-700">10</div>
+                        <div draggable="true" ondragstart="dragStartBlock(event, 'sa')" class="draggable btn-3d bg-green-500 text-white w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold border-green-700">1</div>
+                    </div>
+                </div>
+                
+                <button onclick="resetBlocks()" class="mt-2 btn-3d bg-red-400 text-white px-6 py-2 rounded-lg font-bold text-sm flex-none">Reset</button>
+            </div>
+        `}function updateBlockStats(){var t=10*blockState.p+blockState.s;document.getElementById("count-p").innerText="Puluh: "+blockState.p,document.getElementById("count-s").innerText="Sa: "+blockState.s,document.getElementById("count-total").innerText="Jumlah: "+t,speak(t.toString()),t===blockState.target?(speak("Tahniah! Jawapan betul."),triggerWin(),setInfo(`Hebat! Anda membina nombor ${blockState.target}.`)):t>blockState.target&&setInfo("Dah lebih! Tekan Reset.")}window.dragStartBlock=function(t,e){t.dataTransfer.setData("type",e)},window.allowDrop=function(t){t.preventDefault()},window.dropBlock=function(t,e){t.preventDefault();t=t.dataTransfer.getData("type");t!==e?(speak("Salah kotak."),setInfo(`Blok ${t} tak boleh masuk kotak ${e}!`)):(e=document.createElement("div"),"puluh"===t?(e.className="w-8 h-20 bg-blue-500 border-2 border-blue-700 rounded pop-in",document.getElementById("bin-puluh").appendChild(e),blockState.p++):(e.className="w-8 h-8 bg-green-500 border-2 border-green-700 rounded pop-in",document.getElementById("bin-sa").appendChild(e),blockState.s++),updateBlockStats())},window.resetBlocks=function(){loadActivity(2)};let cerakinState={target:0,p:0,s:0};function setupAct3(t){var e=Math.floor(89*Math.random())+11;cerakinState={target:e,p:Math.floor(e/10),s:e%10,curP:0,curS:0},setInfo(`Cerakinkan nombor ${e}.`),t.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-purple-600 mb-2">🧮 Cerakin Nombor</h3>
+                <div class="text-5xl font-black text-slate-700 mb-4 bg-white inline-block px-6 py-1 rounded-2xl border-4 border-slate-200 shadow-sm">${e}</div>
+
+                <div class="flex flex-col md:flex-row gap-4 justify-center mb-4 flex-1 min-h-0">
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-2 w-full md:w-1/2 flex flex-col items-center justify-center overflow-auto">
+                        <span class="text-xs font-bold text-blue-400 mb-1">ROD PULUH</span>
+                        <div id="vis-puluh" class="flex items-end gap-1 h-12"></div>
+                    </div>
+                    <div class="bg-green-50 border-2 border-green-200 rounded-xl p-2 w-full md:w-1/2 flex flex-col items-center justify-center overflow-auto">
+                        <span class="text-xs font-bold text-green-400 mb-1">DOT SA</span>
+                        <div id="vis-sa" class="ten-frame-grid"></div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-6 items-center flex-none">
+                    <div class="flex flex-col items-center">
+                        <span class="font-bold text-blue-600 text-sm">Puluh</span>
+                        <div class="flex items-center gap-2 mt-1">
+                            <button onclick="modCerakin('p', -1)" class="btn-3d w-10 h-10 bg-red-500 text-white rounded-full text-xl font-bold">-</button>
+                            <span id="val-p" class="text-3xl font-bold w-12">0</span>
+                            <button onclick="modCerakin('p', 1)" class="btn-3d w-10 h-10 bg-green-500 text-white rounded-full text-xl font-bold">+</button>
+                        </div>
+                    </div>
+                    <div class="text-3xl text-slate-300 font-bold">+</div>
+                    <div class="flex flex-col items-center">
+                        <span class="font-bold text-green-600 text-sm">Sa</span>
+                        <div class="flex items-center gap-2 mt-1">
+                            <button onclick="modCerakin('s', -1)" class="btn-3d w-10 h-10 bg-red-500 text-white rounded-full text-xl font-bold">-</button>
+                            <span id="val-s" class="text-3xl font-bold w-12">0</span>
+                            <button onclick="modCerakin('s', 1)" class="btn-3d w-10 h-10 bg-green-500 text-white rounded-full text-xl font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="checkCerakin()" class="mt-4 btn-3d bg-purple-600 text-white px-6 py-2 rounded-xl text-lg font-bold flex-none">Semak Jawapan</button>
+            </div>
+        `,renderCerakinVis()}function renderCerakinVis(){document.getElementById("val-p").innerText=cerakinState.curP,document.getElementById("val-s").innerText=cerakinState.curS;var t=Array(cerakinState.curP).fill('<div class="rod"></div>').join("");document.getElementById("vis-puluh").innerHTML=t;let e="";for(let t=0;t<10;t++)e+=`<div class="dot ${t<cerakinState.curS?"bg-green-500 border-green-600":"bg-slate-200"}"></div>`;document.getElementById("vis-sa").innerHTML=e}function setupAct4(t){setInfo("Susun nombor mengikut urutan menaik.");var e=[45,46,47,48,49];let a=[45,48];t.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-orange-600 mb-4 flex-none">📏 Susun Nombor</h3>
+                
+                <div class="flex flex-wrap justify-center gap-2 mb-8 flex-1 content-center">
+                    ${e.map(t=>a.includes(t)?`<div class="w-14 h-18 md:w-20 md:h-24 bg-slate-200 rounded-xl flex items-center justify-center text-2xl md:text-3xl font-bold text-slate-400 border-4 border-slate-300">${t}</div>`:`<div class="drop-zone w-14 h-18 md:w-20 md:h-24 rounded-xl flex items-center justify-center text-2xl font-bold" 
+                                    data-target="${t}" ondrop="dropSort(event, ${t})" ondragover="allowDrop(event)"></div>`).join("")}
+                </div>
+
+                <div class="bg-orange-100 p-4 rounded-2xl border-2 border-orange-200 flex-none">
+                    <div class="flex justify-center gap-4">
+                        ${e.filter(t=>!a.includes(t)).sort(()=>Math.random()-.5).map(t=>`
+                            <div draggable="true" ondragstart="dragStartSort(event, ${t})" 
+                                 class="draggable btn-3d w-14 h-18 md:w-20 md:h-20 bg-white border-orange-300 text-orange-600 rounded-xl flex items-center justify-center text-2xl md:text-3xl font-bold">
+                                ${t}
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.modCerakin=function(t,e){"p"===t?(cerakinState.curP+=e,cerakinState.curP<0&&(cerakinState.curP=0),9<cerakinState.curP&&(cerakinState.curP=9),speak(10*cerakinState.curP)):(cerakinState.curS+=e,cerakinState.curS<0&&(cerakinState.curS=0),9<cerakinState.curS&&(cerakinState.curS=9),speak(cerakinState.curS)),renderCerakinVis()},window.checkCerakin=function(){cerakinState.curP===cerakinState.p&&cerakinState.curS===cerakinState.s?(speak("Tahniah! Jawapan betul."),triggerWin(),setInfo(`Betul! ${cerakinState.target} ialah ${cerakinState.p} puluh dan ${cerakinState.s} sa.`)):(speak("Belum tepat."),setInfo("Cuba lagi. Semak nilai puluh dan sa."))},window.dragStartSort=function(t,e){t.dataTransfer.setData("val",e),t.dataTransfer.setData("id",t.target.parentNode)},window.dropSort=function(t,e){t.preventDefault();var a=parseInt(t.dataTransfer.getData("val"));a===e?(t.target.classList.remove("drop-zone"),t.target.className="w-14 h-18 md:w-20 md:h-24 bg-orange-500 text-white rounded-xl flex items-center justify-center text-2xl md:text-3xl font-bold border-4 border-orange-600 pop-in shadow-lg",t.target.innerText=a,t.target.removeAttribute("ondrop"),speak(a.toString()),0===document.querySelectorAll(".drop-zone").length&&setTimeout(()=>{speak("Semua betul!"),triggerWin()},500)):(speak("Salah tempat."),setInfo("Nombor tu bukan kat situ."))};let digitState={num:"00",p:"0",s:"0",ask:"sa"};function setupAct5(t){var e=[{n:"57",p:"5",s:"7"},{n:"92",p:"9",s:"2"},{n:"30",p:"3",s:"0"}],e=e[Math.floor(Math.random()*e.length)],a=.5<Math.random()?"sa":"puluh",e=(digitState={...e,ask:a},"puluh"==a?"PULUH":"SA");setInfo(`Klik digit ${e}.`),t.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-pink-600 mb-6">👆 Kenal Nilai Tempat</h3>
+                <p class="text-xl mb-6 text-slate-600 font-bold">Sila klik digit <span class="text-pink-600 underline">${e}</span></p>
+                
+                <div class="flex justify-center gap-4 text-8xl font-black cursor-pointer select-none">
+                    <div onclick="checkDigit('puluh', this)" class="digit-card p-6 rounded-2xl hover:bg-pink-50 border-4 border-transparent transition-all">${digitState.p}</div>
+                    <div onclick="checkDigit('sa', this)" class="digit-card p-6 rounded-2xl hover:bg-pink-50 border-4 border-transparent transition-all">${digitState.s}</div>
+                </div>
+                
+                <button onclick="setupAct5(document.getElementById('activity-content'))" class="mt-8 btn-3d bg-slate-400 text-white px-6 py-2 rounded-lg">Soalan Lain 🔄</button>
+            </div>
+        `,speak(`Klik digit ${e}.`)}window.checkDigit=function(t,e){t===digitState.ask?(e.classList.add("text-pink-600","bg-pink-100","border-pink-300"),speak("Pandai!"),triggerWin(),setInfo("Jawapan Tepat!")):(e.classList.add("shake","text-slate-400"),speak("Salah."),setTimeout(()=>e.classList.remove("shake"),500),setInfo(`Bukan, itu digit ${t}.`))}</script>

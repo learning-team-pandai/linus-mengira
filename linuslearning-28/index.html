@@ -1,0 +1,137 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Kemahiran Pemulihan: Nombor</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.drag-item{cursor:grab;transition:transform .1s}.drag-item:active{cursor:grabbing;transform:scale(1.1)}.drop-zone{border:3px dashed #cbd5e1;background-color:#f8fafc;transition:all .2s}.drop-zone.drag-over{background-color:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.pv-cell{height:60px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;border-radius:.75rem;border:2px solid #e2e8f0;background:#fff}.pv-focus{border-color:#10b981;background-color:#ecfdf5;box-shadow:0 0 0 4px #10b98120}.block-ten{width:16px;height:60px;border:2px solid #1e40af;background:#60a5fa;border-radius:4px}.block-one{width:16px;height:16px;border:2px solid #047857;background:#34d399;border-radius:4px}.grid-cell{font-size:.6rem;display:flex;align-items:center;justify-content:center;border-radius:2px;height:100%;aspect-ratio:1}.grid-path{background-color:#fde047!important;color:#854d0e}.grid-end{background-color:#fca5a5!important;transform:scale(1.2);z-index:10;box-shadow:0 4px 6px rgba(0,0,0,.1)}.slot{width:60px;height:60px;border:3px dashed #94a3b8;border-radius:1rem;background:#f1f5f9;display:flex;justify-content:center;align-items:center}.slot.ready{background:#cffafe;border-color:#06b6d4}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">🔢</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Kemahiran Nombor</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">1️⃣2️⃣3️⃣</div><h2 class="text-4xl md:text-5xl font-bold text-emerald-600 mb-4">Dunia Nombor</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Pilih aktiviti untuk mula belajar.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">✍️<br>Lazim</button> <button onclick="loadActivity(2)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">🧱<br>Blok</button> <button onclick="loadActivity(3)"class="btn-3d bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs">🐸<br>100</button> <button onclick="loadActivity(4)"class="btn-3d bg-rose-500 text-white font-bold py-2 rounded-xl text-xs">🎪<br>Padan</button> <button onclick="loadActivity(5)"class="btn-3d bg-indigo-500 text-white font-bold py-2 rounded-xl text-xs">🔄<br>Susun</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti!",draggedElement=null;function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">1️⃣2️⃣3️⃣</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Dunia Nombor</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}window.dragStart=function(e){e.dataTransfer.setData("text",JSON.stringify(e.target.dataset)),draggedElement=e.target,setTimeout(()=>e.target.style.opacity="0.5",0)},window.dragEnd=function(e){draggedElement&&(draggedElement.style.opacity="1",draggedElement=null)},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.remove("drag-over")};let pv={n1:0,n2:0,stage:"b1",ones:0,tens:0};function setupAct1(e){e.innerHTML=`
+            <div class="w-full max-w-2xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-blue-600 mb-2 flex-none">✍️ Mesin Tambah</h3>
+                <div class="flex justify-center items-center gap-4 mb-2 font-bold text-xl text-slate-600 bg-blue-50 p-1 rounded-lg border border-blue-200 flex-none">
+                    <span id="pv-tag1"></span> <span>+</span> <span id="pv-tag2"></span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1 mb-4 max-w-xs mx-auto flex-1 min-h-0">
+                    <div class="text-center font-bold text-slate-400 text-xs">Puluh</div><div class="text-center font-bold text-slate-400 text-xs">Sa</div><div></div>
+                    
+                    <div id="pv-t1" class="pv-cell drop-zone" data-place="tens" data-row="1" ondrop="pvDrop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                    <div id="pv-o1" class="pv-cell drop-zone" data-place="ones" data-row="1" ondrop="pvDrop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                    <div class="flex items-center text-slate-300 font-bold text-xl">#1</div>
+
+                    <div id="pv-t2" class="pv-cell drop-zone" data-place="tens" data-row="2" ondrop="pvDrop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                    <div id="pv-o2" class="pv-cell drop-zone" data-place="ones" data-row="2" ondrop="pvDrop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                    <div class="flex items-center text-slate-300 font-bold text-xl">#2</div>
+
+                    <div class="col-span-3 border-t-4 border-slate-700 my-1"></div>
+
+                    <div id="pv-ta" class="pv-cell drop-zone bg-yellow-50" data-place="tens" data-row="ans" ondrop="pvDrop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">?</div>
+                    <div id="pv-oa" class="pv-cell drop-zone bg-yellow-50" data-place="ones" data-row="ans" ondrop="pvDrop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">?</div>
+                    <div class="flex items-center text-green-600 font-bold text-xl">=</div>
+                </div>
+
+                <div class="bg-slate-100 p-2 rounded-xl border-2 border-slate-200 text-center flex-none">
+                    <p class="mb-1 text-slate-500 text-xs">Pilihan Nombor:</p>
+                    <div id="pv-bank" class="flex flex-wrap gap-2 justify-center min-h-[50px]"></div>
+                </div>
+                 <button onclick="setupAct1(document.getElementById('activity-content'))" class="mt-2 mx-auto block text-slate-400 underline flex-none">Soalan Baru</button>
+            </div>
+        `,pvStart()}function pvStart(){var e=[{n1:15,n2:3},{n1:44,n2:25},{n1:52,n2:7},{n1:23,n2:16}],e=((pv=e[Math.floor(Math.random()*e.length)]).stage="b1",pv.ones=pv.n1%10+pv.n2%10,pv.tens=Math.floor(pv.n1/10)+Math.floor(pv.n2/10),document.getElementById("pv-tag1").textContent=pv.n1,document.getElementById("pv-tag2").textContent=pv.n2,[{v:Math.floor(pv.n1/10),p:"tens",r:"1"},{v:pv.n1%10,p:"ones",r:"1"},{v:Math.floor(pv.n2/10),p:"tens",r:"2"},{v:pv.n2%10,p:"ones",r:"2"}].filter(e=>0<e.v));let t=document.getElementById("pv-bank");t.innerHTML="",e.forEach(e=>{t.innerHTML+=`<div draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" 
+            data-value="${e.v}" data-place="${e.p}" data-row="${e.r}" 
+            class="drag-item w-12 h-12 bg-white border-2 border-slate-300 rounded-lg flex items-center justify-center text-xl font-black shadow-sm cursor-grab">${e.v}</div>`}),document.getElementById("pv-o1").classList.add("pv-focus"),setInfo(`Mula: Letak nombor Sa (hujung) bagi ${pv.n1}.`)}function pvMakeAns(e,t){let a=document.getElementById("pv-bank");a.innerHTML="",[e,e+1,Math.max(0,e-1)].sort(()=>Math.random()-.5).forEach(e=>{a.innerHTML+=`<div draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" 
+            data-value="${e}" data-place="${t}" data-row="ans" 
+            class="drag-item w-12 h-12 bg-yellow-100 border-2 border-yellow-400 rounded-lg flex items-center justify-center text-xl font-black shadow-sm cursor-grab text-yellow-800">${e}</div>`})}window.pvDrop=function(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over");var t=JSON.parse(e.dataTransfer.getData("text")),e=e.currentTarget;t.row!==e.dataset.row||t.place!==e.dataset.place?(speak("Salah tempat."),draggedElement&&draggedElement.classList.add("shake"),setTimeout(()=>draggedElement?.classList.remove("shake"),400)):(e.textContent=t.value,e.classList.remove("pv-focus"),e.classList.add("bg-blue-100","text-blue-700"),draggedElement&&draggedElement.remove(),speak(t.value.toString()),"b1"===pv.stage&&"pv-o1"===e.id?(document.getElementById("pv-t1").classList.add("pv-focus"),setInfo("Sekarang letak Puluh.")):"b1"===pv.stage&&"pv-t1"===e.id?(pv.stage="b2",document.getElementById("pv-o2").classList.add("pv-focus"),setInfo("Nombor kedua pula. Mula dengan Sa.")):"b2"===pv.stage&&"pv-o2"===e.id?(document.getElementById("pv-t2").classList.add("pv-focus"),setInfo("Letak Puluh untuk nombor kedua.")):"b2"===pv.stage&&"pv-t2"===e.id?(pv.stage="ans",document.getElementById("pv-oa").classList.add("pv-focus"),setInfo("Sekarang tambah Sa + Sa."),pvMakeAns(pv.ones,"ones")):"ans"===pv.stage&&"pv-oa"===e.id?(document.getElementById("pv-ta").classList.add("pv-focus"),setInfo("Tambah Puluh + Puluh."),pvMakeAns(pv.tens,"tens")):"ans"===pv.stage&&"pv-ta"===e.id&&(triggerWin(),speak("Tahniah! Selesai."),setInfo("Siap! Tekan Soalan Baru untuk ulang.")))};let gb={stage:"build1",n1:0,n2:0,counts:{n1t:0,n1o:0,n2t:0,n2o:0,at:0,ao:0}};function setupAct2(e){e.innerHTML=`
+            <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-purple-600 mb-2 flex-none">🧱 Gabung Blok</h3>
+                <div id="gb-title" class="text-2xl font-black text-slate-700 mb-2 flex-none"></div>
+                
+                <div class="grid grid-cols-2 gap-2 mb-2 flex-1 min-h-[120px]">
+                    <div class="bg-purple-50 p-2 rounded-xl border-2 border-purple-100 flex flex-col items-center">
+                        <div class="text-xs font-bold text-purple-400 mb-1">Kawasan 1</div>
+                        <div id="gb-area1" class="drop-zone flex-1 w-full rounded-lg flex flex-wrap gap-1 items-center justify-center p-1" 
+                        ondrop="gbDrop(event, 'area1')" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                    </div>
+                    <div class="bg-purple-50 p-2 rounded-xl border-2 border-purple-100 flex flex-col items-center">
+                        <div class="text-xs font-bold text-purple-400 mb-1">Kawasan 2</div>
+                        <div id="gb-area2" class="drop-zone flex-1 w-full rounded-lg flex flex-wrap gap-1 items-center justify-center p-1" 
+                        ondrop="gbDrop(event, 'area2')" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-100 rounded-xl p-2 mb-2 border-2 border-slate-200 flex-none">
+                    <div class="flex justify-center gap-8">
+                        <div class="flex flex-col items-center">
+                            <div class="block-ten cursor-grab mb-1 shadow-md" draggable="true" ondragstart="dragStart(event)" data-type="ten" data-src="bank"></div>
+                            <span class="font-bold text-xs">Puluh</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-end">
+                            <div class="block-one cursor-grab mb-1 shadow-md" draggable="true" ondragstart="dragStart(event)" data-type="one" data-src="bank"></div>
+                            <span class="font-bold text-xs">Sa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 flex-1 min-h-[100px]">
+                    <div class="flex flex-col">
+                        <div class="text-xs font-bold text-slate-400">Hasil Puluh</div>
+                        <div id="gb-ans-t" class="drop-zone flex-1 bg-green-50 rounded-lg flex flex-wrap gap-1 justify-center p-1"
+                        ondrop="gbDrop(event, 'anst')" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="text-xs font-bold text-slate-400">Hasil Sa</div>
+                        <div id="gb-ans-o" class="drop-zone flex-1 bg-green-50 rounded-lg flex flex-wrap gap-1 justify-center p-1"
+                        ondrop="gbDrop(event, 'anso')" ondragover="allowDrop(event)"></div>
+                    </div>
+                </div>
+                <button onclick="setupAct2(document.getElementById('activity-content'))" class="mt-2 mx-auto block text-slate-400 underline flex-none">Soalan Baru</button>
+            </div>
+        `,gbStart()}function gbStart(){var e=[[12,5],[21,3],[14,2]],e=e[Math.floor(Math.random()*e.length)];gb={stage:"build1",n1:e[0],n2:e[1],target:{n1t:Math.floor(e[0]/10),n1o:e[0]%10,n2t:Math.floor(e[1]/10),n2o:e[1]%10},curr:{n1t:0,n1o:0,n2t:0,n2o:0,at:0,ao:0}},document.getElementById("gb-title").textContent=gb.n1+" + "+gb.n2,setInfo(`Langkah 1: Bina nombor ${gb.n1} di Kawasan 1.`),document.getElementById("gb-area1").classList.add("border-purple-500","bg-purple-100")}function addBlock(e,t,a=!0){var n=document.createElement("div");n.className="ten"===t?"block-ten":"block-one",a?(n.classList.add("drag-item"),n.draggable=!0,n.ondragstart=dragStart,n.dataset.type=t,n.dataset.src="field"):n.style.margin="2px",e.appendChild(n),speak("ten"===t?"puluh":"sa")}function checkGbStage(){var e=gb.target,t=gb.curr;"build1"===gb.stage&&t.n1t===e.n1t&&t.n1o===e.n1o?(gb.stage="build2",setInfo(`Bagus! Bina ${gb.n2} di Kawasan 2.`),document.getElementById("gb-area1").classList.remove("border-purple-500","bg-purple-100"),document.getElementById("gb-area2").classList.add("border-purple-500","bg-purple-100")):"build2"===gb.stage&&t.n2t===e.n2t&&t.n2o===e.n2o?(gb.stage="moveSa",setInfo("Gabung! Pindahkan semua blok SA (Hijau) ke Hasil Sa."),document.getElementById("gb-area2").classList.remove("border-purple-500","bg-purple-100"),document.getElementById("gb-ans-o").classList.add("border-green-500","bg-green-100")):"moveSa"===gb.stage&&t.ao===e.n1o+e.n2o?(gb.stage="moveTen",setInfo("Sekarang pindahkan blok PULUH (Biru) ke Hasil Puluh."),document.getElementById("gb-ans-o").classList.remove("border-green-500","bg-green-100"),document.getElementById("gb-ans-t").classList.add("border-green-500","bg-green-100")):"moveTen"===gb.stage&&t.at===e.n1t+e.n2t&&(triggerWin(),setInfo("Hebat! Semua blok telah digabungkan."),document.getElementById("gb-ans-t").classList.remove("border-green-500","bg-green-100"))}window.gbDrop=function(e,t){e.preventDefault(),e.currentTarget.classList.remove("drag-over");var a=JSON.parse(e.dataTransfer.getData("text")),n=a.type;"build1"===gb.stage&&"area1"===t&&"bank"===a.src?("ten"===n&&gb.curr.n1t<gb.target.n1t?(gb.curr.n1t++,addBlock(e.currentTarget,"ten")):"one"===n&&gb.curr.n1o<gb.target.n1o&&(gb.curr.n1o++,addBlock(e.currentTarget,"one")),checkGbStage()):"build2"===gb.stage&&"area2"===t&&"bank"===a.src?("ten"===n&&gb.curr.n2t<gb.target.n2t?(gb.curr.n2t++,addBlock(e.currentTarget,"ten")):"one"===n&&gb.curr.n2o<gb.target.n2o&&(gb.curr.n2o++,addBlock(e.currentTarget,"one")),checkGbStage()):"moveSa"===gb.stage&&"anso"===t&&"one"===n&&"bank"!==a.src?(draggedElement.remove(),addBlock(e.currentTarget,"one",!1),gb.curr.ao++,checkGbStage()):"moveTen"===gb.stage&&"anst"===t&&"ten"===n&&"bank"!==a.src&&(draggedElement.remove(),addBlock(e.currentTarget,"ten",!1),gb.curr.at++,checkGbStage())};let hg={start:0,add:0,current:0};function setupAct3(e){e.innerHTML=`
+            <div class="w-full flex flex-col items-center h-full overflow-hidden">
+                 <h3 class="text-2xl font-bold text-emerald-600 mb-2 flex-none">🐸 Petak 100</h3>
+                 <div id="hg-q" class="text-xl font-bold mb-2 text-slate-700 flex-none"></div>
+                 
+                 <div class="relative bg-white p-2 rounded-lg shadow-inner border border-slate-300 flex-1 w-full max-w-[360px] aspect-square min-h-0 overflow-y-auto">
+                    <div id="grid-100" class="grid grid-cols-10 gap-0.5 w-full h-full"></div>
+                    <div id="frog-icon" class="absolute text-xl transition-all duration-300 pointer-events-none" style="top:0;left:0">🐸</div>
+                 </div>
+                 <div class="mt-2 flex gap-4 flex-none">
+                    <button onclick="hgStep()" class="btn-3d bg-emerald-500 text-white py-2 px-6 rounded-xl font-bold">Lompat! ▶️</button>
+                    <button onclick="setupAct3(document.getElementById('activity-content'))" class="text-slate-400 underline self-center">Soalan Baru</button>
+                 </div>
+            </div>
+        `,hgStart()}function hgStart(){var e=[[5,4],[12,5],[23,6],[48,5]][Math.floor(4*Math.random())],t=(hg.start=e[0],hg.add=e[1],hg.current=hg.start,hg.target=hg.start+hg.add,document.getElementById("hg-q").textContent=`${hg.start} + ${hg.add} = ?`,document.getElementById("grid-100"));t.innerHTML="",Math.floor(hg.start/10);for(let e=1;e<=100;e++){var a=document.createElement("div");a.className="grid-cell bg-emerald-50 aspect-square text-slate-500",a.textContent=e,a.id="cell-"+e,e===hg.start&&a.classList.add("bg-emerald-300","text-white","font-bold"),t.appendChild(a)}moveFrog(hg.start),setInfo(`Katak di ${hg.start}. Tekan Lompat.`)}function moveFrog(e){var e=document.getElementById("cell-"+e),t=document.getElementById("frog-icon"),e=e.getBoundingClientRect(),a=document.getElementById("grid-100").getBoundingClientRect();t.style.transform=`translate(${e.left-a.left+5}px, ${e.top-a.top+5}px)`}function setupAct4(e){let t=[["10 + 5","15"],["20 + 2","22"],["8 + 2","10"]].sort(()=>Math.random()-.5)[0];var a=[t[1],(parseInt(t[1])+2).toString(),(parseInt(t[1])-1).toString()].sort(()=>Math.random()-.5);e.innerHTML=`
+             <div class="w-full max-w-2xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-rose-600 mb-4 flex-none">🎪 Padankan</h3>
+                
+                <div class="mb-6 flex-none">
+                    <div class="text-slate-500 mb-1 text-sm">Soalan</div>
+                    <div class="inline-block bg-white border-4 border-rose-200 rounded-3xl px-8 py-4 text-4xl font-black text-slate-700 shadow-lg">
+                        ${t[0]}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4 flex-1 min-h-0">
+                    ${a.map(e=>`
+                        <button onclick="checkPadan('${e}', '${t[1]}', this)" class="btn-3d bg-rose-100 text-rose-800 text-3xl font-bold py-4 rounded-xl border-rose-300 hover:bg-rose-200 w-full h-full flex items-center justify-center">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `,setInfo("Pilih jawapan yang betul.")}function setupAct5(e){var t=[12,45,23,8,31].sort(()=>Math.random()-.5);e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-indigo-600 mb-2 flex-none">🔄 Susun Nombor</h3>
+                <p class="text-indigo-400 font-bold mb-4 flex-none">Dari Kecil ➡️ Besar</p>
+
+                <div class="flex flex-wrap justify-center gap-2 mb-4 bg-indigo-50 p-2 rounded-xl min-h-[70px] flex-none">
+                    ${t.map(e=>`
+                        <div draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-val="${e}"
+                        class="drag-item w-12 h-12 bg-white border-2 border-indigo-200 text-indigo-700 rounded-xl flex items-center justify-center text-xl font-black shadow-md">
+                        ${e}
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 bg-slate-100 p-4 rounded-2xl border-dashed border-2 border-slate-300 flex-none">
+                     <div class="slot drop-zone" ondrop="dropSort(event)" ondragover="allowDrop(event)"></div>
+                     <div class="slot drop-zone" ondrop="dropSort(event)" ondragover="allowDrop(event)"></div>
+                     <div class="slot drop-zone" ondrop="dropSort(event)" ondragover="allowDrop(event)"></div>
+                     <div class="slot drop-zone" ondrop="dropSort(event)" ondragover="allowDrop(event)"></div>
+                     <div class="slot drop-zone" ondrop="dropSort(event)" ondragover="allowDrop(event)"></div>
+                </div>
+                 <button onclick="setupAct5(document.getElementById('activity-content'))" class="mt-4 mx-auto block text-slate-400 underline flex-none">Reset</button>
+            </div>
+        `,setInfo("Susun nombor ikut turutan menaik.")}window.hgStep=function(){var e;hg.current<hg.target&&(hg.current++,(e=document.getElementById("cell-"+hg.current)).classList.add("grid-path"),moveFrog(hg.current),speak(hg.current.toString()),hg.current===hg.target)&&(e.classList.add("grid-end"),triggerWin(),setInfo(`Sampai! Jawapannya ${hg.target}.`))},window.checkPadan=function(e,t,a){e===t?(a.classList.replace("bg-rose-100","bg-green-500"),a.classList.replace("text-rose-800","text-white"),triggerWin(),speak("Betul!"),setTimeout(()=>loadActivity(4),1500)):(a.classList.add("shake"),speak("Cuba lagi."),setTimeout(()=>a.classList.remove("shake"),400))},window.dropSort=function(e){e.preventDefault();var e=JSON.parse(e.dataTransfer.getData("text")),e=parseInt(e.val),t=[...document.querySelectorAll(".slot")];let a=t.map(e=>parseInt(e.textContent)).filter(e=>!isNaN(e));a.push(e),a.sort((e,t)=>e-t),t.forEach((e,t)=>{t<a.length&&(e.textContent=a[t],e.classList.add("bg-indigo-100","text-indigo-800","font-black","text-2xl","border-indigo-400"),e.classList.remove("border-dashed"))}),draggedElement&&draggedElement.remove(),speak(e.toString()),5===a.length&&(triggerWin(),setInfo("Hebat! Susunan lengkap."))}</script>

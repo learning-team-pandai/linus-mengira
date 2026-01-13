@@ -1,0 +1,109 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Kemahiran Pemulihan: Masa & Kalendar</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.draggable{cursor:grab;user-select:none;transition:transform .2s}.draggable:active{cursor:grabbing;transform:scale(1.1)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-weight:700;color:#334155;min-height:40px}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.05)}.drop-zone-filled{border-style:solid;border-color:#4ade80;background-color:#f0fdf4;color:#15803d}.schedule-row{border:2px solid #e2e8f0;border-radius:.75rem;padding:10px 15px;transition:all .2s;background:#fff;cursor:pointer;text-align:left}.schedule-row:hover{transform:translateX(5px);border-color:#3b82f6}.highlight-row{background-color:#fef9c3!important;border-color:#eab308!important;transform:scale(1.02)}.date-cell{border:2px solid #cbd5e1;border-radius:.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;background:#fff;min-height:60px}.date-cell:hover{transform:scale(1.05);border-color:#3b82f6;z-index:10}.date-cell.empty{background:0 0;border:none;cursor:default}.date-cell.special{background-color:#fefce8;border-color:#facc15}.date-cell.today{background-color:#dbeafe;border-color:#3b82f6;color:#1e3a8a}.date-cell.semalam{background-color:#f1f5f9;border-color:#64748b;color:#475569;opacity:.7}.date-cell.esok{background-color:#dcfce7;border-color:#22c55e;color:#14532d}.time-card{background:#fff;border:2px solid #94a3b8;border-radius:.75rem;padding:1rem;font-weight:700;cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,.1);transition:transform .1s}.time-card:active{transform:translateY(4px);box-shadow:none}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">🗓️</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Pilih aktiviti!</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-24"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200 overflow-hidden"><div class="py-10 text-center"><div class="text-6xl mb-6 animate-pulse">⏰</div><h2 class="text-4xl font-bold text-emerald-600 mb-4">Masa & Kalendar</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Jadual, Jam & Hari.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">🤔<br>Pukul?</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">📋<br>Cari</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">🕒<br>Padan</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">🗓️<br>Kalendar</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 rounded-xl text-xs">⏪<br>Mesin</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar masa!",draggedElement=null,masterSchedule=[{time:"8:00 PG",activity:"Perhimpunan"},{time:"8:30 PG",activity:"Matematik"},{time:"9:30 PG",activity:"Rehat"},{time:"10:00 PG",activity:"Sains"},{time:"11:00 PG",activity:"B. Melayu"},{time:"11:30 PG",activity:"P. Seni"},{time:"12:00 PTG",activity:"P. Jasmani"},{time:"12:30 PTG",activity:"Pulang"}],mesinMasaState={today:15};function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadWhatActivity(t),2===e&&loadCariAktiviti(t),3===e&&loadPadananJam(t),4===e&&loadDetektifKalendar(t),5===e&&loadMesinMasa(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⏰</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Masa & Kalendar</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadWhatActivity(e){setInfo("Klik kad masa untuk lihat aktiviti.");var t=[...masterSchedule].sort(()=>.5-Math.random()).slice(0,5);e.innerHTML=`
+            <div class="w-full max-w-5xl flex flex-col md:flex-row gap-2 h-full overflow-hidden">
+                <div class="w-full md:w-1/2 bg-blue-50 border-2 border-blue-200 rounded-3xl p-2 flex flex-col flex-1 min-h-0">
+                    <h4 class="text-blue-800 font-bold mb-2 text-lg flex-none">Jadual Hari Ini</h4>
+                    <div class="overflow-y-auto space-y-1 pr-1 custom-scroll flex-1" id="schedule-list">
+                         ${masterSchedule.map(e=>`
+                            <div class="schedule-row p-2 text-sm" data-act="${e.activity}">
+                                <span class="font-bold text-blue-600 w-16 inline-block">${e.time}</span>
+                                <span>${e.activity}</span>
+                            </div>
+                         `).join("")}
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 flex flex-col justify-center flex-none h-auto md:h-full overflow-y-auto">
+                    <h4 class="text-slate-600 font-bold mb-2 text-center text-lg">Pilih Masa</h4>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        ${t.map(e=>`
+                            <div class="time-card bg-white hover:bg-blue-100 border-blue-300 text-blue-900 text-sm p-2 w-24"
+                                 onclick="checkWhatActivity('${e.time}', '${e.activity}')">
+                                ${e.time}
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}function checkWhatActivity(e,t){document.querySelectorAll(".schedule-row").forEach(e=>e.classList.remove("highlight-row"));var a=document.getElementById("schedule-list"),a=Array.from(a.children).find(e=>e.dataset.act===t),a=(a&&(a.classList.add("highlight-row"),a.scrollIntoView({behavior:"smooth",block:"center"})),`Pukul ${e}, aktiviti ialah ${t}.`);setInfo(a),speak(a)}function loadCariAktiviti(e){let t=masterSchedule[Math.floor(Math.random()*masterSchedule.length)];setInfo("Cari aktiviti: "+t.activity),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-green-600 mb-2 flex-none">🔍 Cari Aktiviti</h3>
+                
+                <div class="bg-green-100 border-2 border-green-300 rounded-2xl p-2 mb-2 inline-block flex-none">
+                    <div class="text-slate-600 font-bold mb-1 text-xs">Sila cari:</div>
+                    <div class="text-2xl font-black text-green-800">${t.activity}</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-left flex-1 overflow-y-auto min-h-0 p-2">
+                    ${masterSchedule.map(e=>`
+                        <div class="schedule-row border-green-200 hover:bg-green-50 p-2" 
+                             onclick="checkCari(this, '${t.activity}', '${e.activity}', '${e.time}')">
+                            <span class="font-bold text-slate-500 w-20 inline-block text-xs">${e.time}</span>
+                            <span class="font-bold text-slate-800 text-sm">${e.activity}</span>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function checkCari(e,t,a,l){t===a?(e.classList.add("highlight-row","bg-green-200"),speak(`Betul! ${a} pada pukul ${l}.`),triggerWin(),setTimeout(()=>loadActivity(2),2e3)):(e.classList.add("shake","bg-red-100"),speak("Salah. Cuba lagi."),setTimeout(()=>e.classList.remove("shake","bg-red-100"),500))}function loadPadananJam(e){setInfo("Seret jam ke masa yang betul.");var t=[{icon:"🕘",time:"9:00"},{icon:"🕒",time:"3:00"},{icon:"🕕",time:"6:00"}],a=[...t].sort(()=>Math.random()-.5);e.innerHTML=`
+            <div class="w-full max-w-4xl flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-purple-600 mb-4 text-center flex-none">🕒 Padanan Jam</h3>
+                
+                <div class="flex justify-center gap-4 mb-4 flex-none">
+                    ${a.map(e=>`
+                        <div class="text-6xl cursor-grab hover:scale-110 transition-transform draggable bg-purple-50 rounded-full p-1 border-4 border-purple-200"
+                             draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-ans="${e.time}">
+                            ${e.icon}
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 flex-1 overflow-y-auto">
+                    ${t.map(e=>`
+                        <div class="bg-white border-2 border-purple-200 rounded-2xl p-2 w-32 text-center h-32">
+                            <div class="text-xl font-black text-purple-900 mb-2">${e.time}</div>
+                            <div class="drop-zone h-20 w-full rounded-xl bg-purple-50 text-xs"
+                                 ondrop="dropJam(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-ans="${e.time}">
+                                 <span class="text-purple-300">Letak Sini</span>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function dropJam(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(draggedElement.dataset.ans===e.currentTarget.dataset.ans?(e.currentTarget.innerHTML=draggedElement.innerHTML,e.currentTarget.classList.add("drop-zone-filled"),draggedElement.remove(),speak("Pandai!"),document.querySelector(".draggable")||(triggerWin(),speak("Tahniah! Semua jam betul."))):(speak("Salah jam tu."),e.currentTarget.classList.add("shake"),setTimeout(()=>e.currentTarget.classList.remove("shake"),500)))}function loadDetektifKalendar(e){setInfo("Klik tarikh Ogos untuk lihat peristiwa.");let t="";for(let e=0;e<4;e++)t+='<div class="date-cell empty"></div>';var a={1:"Mula Bulan",15:"Hari Jadi",31:"Merdeka"};for(let e=1;e<=31;e++){var l=a[e]?"special":"",i=a[e]?`<div class="text-[10px] text-orange-600 font-bold truncate w-full text-center">${a[e]}</div>`:"";t+=`
+                <div class="date-cell ${l}" onclick="clickDate(${e}, '${a[e]||""}')">
+                    <span class="text-lg font-bold">${e}</span>
+                    ${i}
+                </div>`}e.innerHTML=`
+            <div class="w-full max-w-2xl flex flex-col h-full overflow-hidden">
+                <div class="bg-orange-100 border-2 border-orange-300 rounded-t-2xl p-2 text-center flex-none">
+                    <h3 class="text-xl font-black text-orange-700 uppercase tracking-widest">Ogos</h3>
+                </div>
+                <div class="bg-white border-2 border-t-0 border-orange-200 rounded-b-2xl p-2 shadow-sm flex-1 overflow-y-auto">
+                    <div class="grid grid-cols-7 gap-1 mb-1 text-center font-bold text-slate-400 text-xs">
+                        ${["A","I","S","R","K","J","S"].map(e=>`<div>${e}</div>`).join("")}
+                    </div>
+                    <div class="grid grid-cols-7 gap-1">
+                        ${t}
+                    </div>
+                </div>
+                <div id="cal-info" class="mt-2 text-center text-lg font-bold text-orange-600 h-6 flex-none"></div>
+            </div>
+        `}function clickDate(e,t){t=t?`Tarikh ${e} Ogos: ${t}!`:e+" Ogos. Tiada apa-apa.";speak(document.getElementById("cal-info").textContent=t)}function loadMesinMasa(e){setInfo("Hari ini 15hb. Tekan butang bawah."),mesinMasaState.today=15;e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden justify-center">
+                <h3 class="text-xl font-bold text-red-600 mb-4 flex-none">⏪ Mesin Masa ⏩</h3>
+
+                <div class="flex justify-center gap-2 md:gap-4 mb-4 flex-none" id="date-row">
+                    ${[13,14,15,16,17].map(e=>`
+                        <div id="d-${e}" class="date-cell w-12 h-16 md:w-16 md:h-24 text-xl md:text-2xl font-black text-slate-400 ${15===e?"today":""}">
+                            ${e}
+                            <div class="text-[0.6rem] font-normal mt-1 text-slate-400 label-text">${15===e?"Hari Ini":""}</div>
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2 flex-none">
+                    <button onclick="timeTravel('semalam')" class="btn-3d bg-slate-400 text-white py-2 px-4 rounded-xl font-bold text-sm">◀ Semalam</button>
+                    <button onclick="timeTravel('hariini')" class="btn-3d bg-blue-500 text-white py-2 px-4 rounded-xl font-bold text-sm">Hari Ini</button>
+                    <button onclick="timeTravel('esok')" class="btn-3d bg-green-500 text-white py-2 px-4 rounded-xl font-bold text-sm">Esok ▶</button>
+                </div>
+            </div>
+        `}function timeTravel(e){document.querySelectorAll(".date-cell").forEach(e=>{e.className="date-cell w-16 h-24 md:w-24 md:h-32 text-2xl md:text-4xl font-black text-slate-400",e.querySelector(".label-text").textContent=""});let t=15,a="Hari ini 15 haribulan.",l="today",i="Hari Ini";"semalam"===e&&(t=14,a="Semalam ialah 14 haribulan.",l="semalam",i="Semalam"),"esok"===e&&(t=16,a="Esok ialah 16 haribulan.",l="esok",i="Esok");e=document.getElementById("d-"+t);e&&(e.classList.add(l),e.querySelector(".label-text").textContent=i),speak(a)}window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("opacity-50")},window.dragEnd=function(e){e.target&&e.target.classList.remove("opacity-50"),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("drag-over"))},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")}</script>

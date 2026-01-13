@@ -1,0 +1,115 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Pemulihan: Konsep Tambah</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.draggable{cursor:grab;touch-action:none}.draggable:active{cursor:grabbing;opacity:.6;transform:scale(1.05)}.jar-container{width:150px;height:180px;border:4px solid #475569;border-radius:0 0 40px 40px;background:rgba(255,255,255,.5);position:relative;overflow:hidden;display:flex;flex-wrap:wrap;align-content:flex-end;justify-content:center;padding:5px;box-shadow:inset 0 0 20px rgba(0,0,0,.05)}.jar-lid{width:160px;height:15px;background:#475569;border-radius:8px;margin-bottom:-4px;z-index:10}.marble{width:35px;height:35px;border-radius:50%;border:3px solid rgba(0,0,0,.2);box-shadow:inset -4px -4px 0 rgba(0,0,0,.1);transition:transform .2s}.marble:hover{transform:scale(1.1)}.marker{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;border:3px solid #cbd5e1;background:#fff;color:#475569}.marker:active{transform:scale(.95)}.marker.active{background:#3b82f6;color:#fff;border-color:#1d4ed8;transform:scale(1.2);box-shadow:0 4px 0 #1e3a8a;border-bottom-width:4px}.marker.highlight{background:#fbbf24;border-color:#d97706;transform:scale(1.1)}.color-swatch{width:40px;height:40px;border-radius:50%;border:3px solid #cbd5e1;cursor:pointer;transition:transform .2s}.color-swatch.selected{border-color:#1e293b;transform:scale(1.2);box-shadow:0 0 0 4px rgba(0,0,0,.1)}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">➕</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Konsep Tambah</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Jom Belajar Tambah!</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Belajar konsep tambah dan "lebih satu".<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🫙 Guli</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">📏 Garis</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🎨 Warna</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🔢 Susun</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🔗 Padan</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!";function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Jom Belajar Tambah!</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Seret guli ke dalam balang untuk mengira."),e.innerHTML=`
+            <div class="w-full max-w-4xl flex flex-col items-center">
+                <h3 class="text-2xl font-bold text-blue-600 mb-2">🫙 Guli dalam Balang</h3>
+                <p class="text-slate-500 mb-4 font-bold text-sm">Tambah guli ke dalam balang.</p>
+                
+                <div class="flex flex-col md:flex-row items-end gap-6">
+                    <div class="bg-slate-100 border-2 border-slate-300 rounded-2xl p-2 w-48 min-h-[150px] flex flex-wrap content-start justify-center gap-2 shadow-inner">
+                         <div class="w-full text-center text-slate-400 font-bold mb-1 text-xs">AMBIL SINI</div>
+                         ${["red","blue","green","yellow","purple"].map(e=>`
+                            <div draggable="true" ondragstart="dragMarble(event, '${e}')" class="marble bg-${e}-400 cursor-grab active:cursor-grabbing transform hover:scale-110"></div>
+                         `).join("")}
+                         ${["orange","teal","pink"].map(e=>`
+                            <div draggable="true" ondragstart="dragMarble(event, '${e}')" class="marble bg-${e}-400 cursor-grab active:cursor-grabbing transform hover:scale-110"></div>
+                         `).join("")}
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="jar-lid"></div>
+                        <div id="jar-zone" ondragover="allowDrop(event)" ondrop="dropMarble(event)" class="jar-container transition-colors">
+                             <div class="marble bg-red-400 pop-in"></div>
+                             <div class="marble bg-blue-400 pop-in"></div>
+                        </div>
+                        <div class="mt-2 bg-blue-100 px-4 py-1 rounded-xl border-2 border-blue-300">
+                            <span class="text-slate-600 font-bold text-sm">Jumlah: </span>
+                            <span id="marble-count" class="text-2xl font-bold text-blue-600">2</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="loadActivity(1)" class="mt-4 text-xs text-slate-400 underline">Mula Semula</button>
+            </div>
+        `}function updateCount(){var e=document.getElementById("jar-zone").children.length;setInfo(`Sekarang ada ${document.getElementById("marble-count").innerText=e} biji guli.`),speak(""+e),triggerWin()}function setupAct2(e){setInfo("Klik nombor. Lihat nombor 'lebih satu' (sebelah kanan).");let t="";for(let e=1;e<=10;e++)t+=`
+                <div class="flex flex-col items-center relative" style="width: 9%;">
+                    <div id="nm-${e}" onclick="clickLineNum(${e})" class="marker">${e}</div>
+                    <div class="h-4 w-1 bg-slate-300 mt-1"></div>
+                </div>
+            `;e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-green-600 mb-2">📏 Garis Nombor</h3>
+                <p class="text-lg text-slate-500 mb-4 font-semibold">Konsep: "Lebih satu" ialah nombor sebelah kanan.</p>
+                
+                <div class="bg-green-50 p-4 rounded-3xl border-2 border-green-200 mb-4 overflow-x-auto shadow-inner">
+                    <div class="flex justify-between items-end min-w-[500px] relative">
+                        <div class="absolute bottom-2 left-4 right-4 h-1 bg-slate-300 z-0"></div>
+                        ${t}
+                    </div>
+                </div>
+                
+                <div id="nl-explainer" class="bg-white border-2 border-slate-200 p-2 rounded-2xl min-h-[60px] flex items-center justify-center">
+                    <p class="text-lg font-bold text-slate-400">Klik mana-mana nombor di atas.</p>
+                </div>
+            </div>
+        `}window.dragMarble=function(e,t){e.dataTransfer.setData("color",t)},window.allowDrop=function(e){e.preventDefault()},window.dropMarble=function(e){e.preventDefault();var e=e.dataTransfer.getData("color"),t=document.getElementById("jar-zone"),a=document.createElement("div");a.className=`marble bg-${e}-400 pop-in`,t.appendChild(a),updateCount()},window.clickLineNum=function(t){document.querySelectorAll(".marker").forEach(e=>{e.classList.remove("active","highlight")});document.getElementById("nm-"+t).classList.add("active");var a=t+1;let n="";if(a<=10){let e=document.getElementById("nm-"+a);setTimeout(()=>e.classList.add("highlight"),300),n=`<span class="text-slate-600">Lebih satu daripada <b class="text-blue-600 text-3xl">${t}</b> ialah <b class="text-green-600 text-4xl">${a}</b>.</span>`,speak(`Lebih satu daripada ${t} ialah ${a}.`)}else n='<span class="text-slate-600">10 adalah nombor terakhir di sini.</span>',speak("Sepuluh adalah nombor terakhir.");document.getElementById("nl-explainer").innerHTML=n};let selectedColor="red",coloredCount=0;function setupAct3(e){selectedColor="red",coloredCount=0,setInfo("Pilih warna, kemudian klik buah untuk warnakan."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-purple-600 mb-4">🎨 Warna Tambah</h3>
+                
+                <div class="flex justify-center gap-4 mb-4 bg-slate-100 p-2 rounded-full inline-flex border-2 border-slate-200">
+                    ${["red","blue","green","yellow","purple"].map(e=>`
+                        <div onclick="pickColor(this, '${e}')" class="color-swatch bg-${e}-400 ${"red"===e?"selected":""}"></div>
+                    `).join("")}
+                </div>
+
+                <div class="grid grid-cols-5 gap-2 justify-items-center mb-4">
+                    ${["🍎","🍊","🍌","🍇","🍓"].map(e=>`
+                        <button onclick="paintItem(this, '${e}')" class="btn-3d w-16 h-16 bg-white border-slate-200 rounded-2xl text-4xl flex items-center justify-center grayscale opacity-50 hover:opacity-70">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+
+                <div class="text-xl font-bold text-slate-700">
+                    Sudah warna: <span id="paint-count" class="text-purple-600 text-3xl">0</span>
+                </div>
+            </div>
+        `}window.pickColor=function(e,t){document.querySelectorAll(".color-swatch").forEach(e=>e.classList.remove("selected")),e.classList.add("selected"),speak("Warna "+("red"===(selectedColor=t)?"Merah":"blue"===t?"Biru":"green"===t?"Hijau":"yellow"===t?"Kuning":"Ungu"))},window.paintItem=function(e,t){e.classList.contains("colored")||(e.classList.remove("grayscale","opacity-50","hover:opacity-70","bg-white"),e.classList.add("colored",`bg-${selectedColor}-400`,"text-white","border-transparent"),e.classList.add("pop-in"),coloredCount++,speak(""+(document.getElementById("paint-count").innerText=coloredCount)),5===coloredCount&&(setInfo("Tahniah! Semua sudah diwarna."),triggerWin()))};let seqTarget=1,seqHistory=[];function setupAct4(e){seqTarget=1,seqHistory=[],setInfo("Klik nombor ikut urutan: 1, 2, 3, 4, 5.");e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-orange-600 mb-2">🔢 Susun Nombor</h3>
+                <p class="text-slate-500 mb-4">Cari nombor <b id="target-num" class="text-orange-600 text-2xl">1</b></p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    ${[3,1,5,2,4].map(e=>`
+                        <button onclick="checkSeq(${e}, this)" class="btn-3d bg-white text-slate-700 border-slate-300 w-20 h-20 rounded-2xl text-4xl font-bold hover:bg-orange-50">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+                
+                <div class="bg-slate-800 text-white p-2 rounded-xl font-mono text-xl tracking-widest min-h-[50px] flex items-center justify-center shadow-lg">
+                    [ <span id="seq-display" class="text-orange-400 mx-2"></span> ]
+                </div>
+            </div>
+        `}window.checkSeq=function(e,t){e===seqTarget?(t.classList.remove("bg-white","text-slate-700"),t.classList.add("bg-orange-500","text-white","border-orange-700"),t.disabled=!0,seqHistory.push(e),document.getElementById("seq-display").innerText=seqHistory.join(" - "),speak(""+e),5===seqTarget?(setInfo("Hebat! Susunan lengkap."),triggerWin(),document.getElementById("target-num").innerText="Selesai!"):(seqTarget++,setInfo(`Sekarang cari nombor ${document.getElementById("target-num").innerText=seqTarget}.`))):(t.classList.add("bg-red-200"),speak("Salah. Cuba lagi."),setTimeout(()=>t.classList.remove("bg-red-200"),500))};let matchSelection=null,matchedPairs=0;function setupAct5(e){matchSelection=null,matchedPairs=0,setInfo("Pilih Kumpulan Objek, kemudian pilih Nombor yang betul.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-pink-600 mb-4">🔗 Padanan Jumlah</h3>
+                
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-bold text-slate-400 mb-1">Kumpulan</h4>
+                        ${[{id:1,icon:"🍎",count:1,color:"blue"},{id:2,icon:"🍊",count:2,color:"green"},{id:3,icon:"⭐",count:3,color:"yellow"},{id:4,icon:"🎈",count:4,color:"purple"}].map(e=>`
+                            <button onclick="selGroup(${e.count}, this)" class="group-btn btn-3d bg-${e.color}-100 border-${e.color}-300 text-3xl py-4 rounded-xl">
+                                ${Array(e.count).fill(e.icon).join(" ")}
+                            </button>
+                        `).join("")}
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-bold text-slate-400 mb-1">Nombor</h4>
+                        ${[4,1,3,2].map(e=>`
+                            <button onclick="selNum(${e}, this)" class="num-btn btn-3d bg-white border-slate-300 text-3xl py-4 rounded-xl font-bold text-slate-600 hover:bg-slate-50">
+                                ${e}
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.selGroup=function(e,t){document.querySelectorAll(".group-btn").forEach(e=>{e.disabled||e.classList.remove("ring-4","ring-pink-400")}),t.classList.add("ring-4","ring-pink-400"),matchSelection={val:e,btn:t},speak(`Ada ${e}. Cari nombor ${e}.`)},window.selNum=function(e,t){matchSelection?matchSelection.val===e?(t.classList.remove("bg-white","text-slate-600"),t.classList.add("bg-green-500","text-white","border-green-700"),matchSelection.btn.classList.remove("ring-4","ring-pink-400"),matchSelection.btn.classList.add("bg-green-500","text-white","opacity-50"),t.disabled=!0,matchSelection.btn.disabled=!0,speak("Betul!"),4===++matchedPairs&&triggerWin(),matchSelection=null):(t.classList.add("bg-red-200","shake"),setTimeout(()=>t.classList.remove("bg-red-200","shake"),500),speak("Salah.")):setInfo("Pilih kumpulan objek (kiri) dahulu.")}</script>

@@ -1,0 +1,141 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Matematik Ceria: Operasi Bahagi</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.draggable{cursor:grab;user-select:none;transition:transform .2s}.draggable:active{cursor:grabbing;transform:scale(1.1)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:.75rem;min-width:80px;min-height:80px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#334155}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.05)}.drop-zone.filled{border:3px solid #22c55e;background-color:#dcfce7;color:#15803d;border-style:solid}.plate{width:90px;height:90px;background-color:#f0f9ff;border:4px dashed #3b82f6;border-radius:50%;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;padding:5px;transition:all .3s ease}.plate.drag-over{background-color:#dbeafe;transform:scale(1.05)}.plate.filled{border-color:#22c55e;background-color:#dcfce7;border-style:solid}.cookie-item{font-size:2rem;animation:popIn .3s ease}.gem-item{font-size:2rem;cursor:pointer;transition:transform .2s;filter:grayscale(20%);opacity:.8}.gem-item:hover{transform:scale(1.1)}.gem-item.selected{filter:grayscale(0);opacity:1;transform:scale(1.2);text-shadow:0 0 10px #a855f7}.gem-item.grouped{opacity:0;transform:scale(0);transition:all .5s}.jar-container{display:flex;justify-content:center;align-items:flex-end;gap:15px;margin-top:10px;flex-wrap:wrap}.glass-jar{border:4px solid #3b82f6;border-top:none;background-color:#e0f2fe;border-radius:0 0 20px 20px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;padding:8px;transition:all .3s ease;position:relative;box-shadow:0 4px 6px rgba(59,130,246,.2)}.glass-jar::before{content:'';position:absolute;top:-5px;left:-4px;right:-4px;height:10px;border:4px solid #3b82f6;border-radius:10px}.glass-jar.big{width:150px;height:100px}.glass-jar.small{width:60px;height:70px}.fish-inside{font-size:1.5rem;animation:swim 2s ease-in-out infinite alternate;filter:drop-shadow(1px 1px 0 rgba(255, 255, 255, .5))}@keyframes swim{from{transform:translateY(0) rotate(0)}to{transform:translateY(-8px) rotate(5deg)}}</style><body class="min-h-screen text-slate-800 pb-10"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">➗</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Operasi Bahagi</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200 overflow-hidden"><div class="py-10 text-center"><div class="text-6xl mb-6 animate-pulse">🍪</div><h2 class="text-4xl font-bold text-emerald-600 mb-4">Konsep Bahagi</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Agih sama rata dan kumpul berkumpulan.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">➖<br>Tolak</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">🍪<br>Bungkus</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">🔵<br>Kongsi</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">🏠<br>Fakta</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 rounded-xl text-xs">🐠<br>Ajaib</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar bahagi!",draggedElement=null,gemsSelected=(window.tolakGame={baki:0,tolak:0,kiraan:0},[]);function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?loadTolakBerturutActivity(t):2===e?loadBungkusBiskutActivity(t):3===e?loadKongsiSamaRataActivity(t):4===e?loadKeluargaFaktaActivity(t):5===e&&loadAkuariumActivity(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🍪</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Konsep Bahagi</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadTolakBerturutActivity(e){e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-blue-600 mb-2 flex-none">➖ Tolak Berturut (Konsep 8 ÷ 2)</h3>
+                <div class="bg-blue-50 p-2 rounded-2xl border-2 border-blue-200 mb-2 flex-none">
+                    <h4 class="text-blue-800 font-bold mb-1 uppercase text-xs">Timbunan Epal</h4>
+                    <div id="tolak-pile" class="flex flex-wrap justify-center gap-2 text-3xl min-h-[40px]"></div>
+                </div>
+                <div class="flex justify-center gap-4 mb-2 flex-none">
+                    <button id="tolak-btn" onclick="doTolak()" class="btn-3d bg-blue-500 text-white font-bold py-2 px-6 rounded-xl text-base">➖ Tolak 2</button>
+                    <button onclick="loadActivity(1)" class="btn-3d bg-slate-400 text-white font-bold py-2 px-4 rounded-xl text-base">🔄 Mula Semula</button>
+                </div>
+                <div class="bg-slate-100 p-2 rounded-2xl border-2 border-slate-200 flex-1 min-h-0 overflow-y-auto">
+                    <h4 class="text-slate-500 font-bold mb-2 uppercase text-xs">Hasil Tolakan</h4>
+                    <div id="tolak-result" class="flex flex-wrap justify-center gap-2 min-h-[60px]"></div>
+                </div>
+                <div id="tolak-summary" class="mt-2 text-lg font-bold text-green-600 flex-none h-8"></div>
+            </div>
+        `,initTolakGame(8,2)}function initTolakGame(e,t){window.tolakGame={baki:e,tolak:t,kiraan:0},setInfo(`Kita ada ${e} epal. Mari tolak ${t} epal berulang kali.`),document.getElementById("tolak-pile").innerHTML=Array(e).fill("🍎").join("")}function doTolak(){var e,{baki:t,tolak:a,kiraan:n}=window.tolakGame;0!==t&&(window.tolakGame={baki:t-=a,tolak:a,kiraan:n+=1},document.getElementById("tolak-pile").innerHTML=Array(t).fill("🍎").join(""),newGroup.className="bg-white p-2 rounded-xl border-2 border-blue-100 text-xl shadow-sm animate-[popIn_0.3s]",newGroup.innerHTML=Array(a).fill("🍎").join(""),document.getElementById("tolak-result").appendChild(newGroup),setInfo(e=`Tolak ${a}, baki ${t}.`),speak(e),0==t)&&(document.getElementById("tolak-btn").disabled=!0,e=`Syabas! ${tolakGame.tolak*n} ÷ ${a} = `+n,document.getElementById("tolak-summary").innerHTML=e,speak("Epal habis. Jawapan ialah "+n),triggerWin())}function loadBungkusBiskutActivity(e){setInfo("Seret biskut ke piring. Setiap piring mesti ada 3 biskut.");let t="";for(let e=0;e<9;e++)t+='<div class="draggable text-3xl cursor-grab" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-item="biskut">🍪</div>';e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-green-600 mb-2 flex-none">🍪 Bungkus Biskut (9 ÷ 3)</h3>
+                <div class="bg-green-50 p-2 rounded-2xl border-2 border-green-200 mb-4 flex-none">
+                    <div id="biskut-basket" class="flex flex-wrap justify-center gap-2 min-h-[40px] bg-white rounded-xl p-2 shadow-inner">${t}</div>
+                </div>
+                <div id="piring-area" class="flex flex-wrap justify-center gap-4 mb-2 flex-1 items-center">
+                    <div class="flex flex-col items-center"><div class="plate bg-white" ondrop="dropOnPiring(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-max="3" data-count="0"></div><span class="font-bold text-slate-400 mt-1 text-sm">Piring 1</span></div>
+                    <div class="flex flex-col items-center"><div class="plate bg-white" ondrop="dropOnPiring(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-max="3" data-count="0"></div><span class="font-bold text-slate-400 mt-1 text-sm">Piring 2</span></div>
+                    <div class="flex flex-col items-center"><div class="plate bg-white" ondrop="dropOnPiring(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-max="3" data-count="0"></div><span class="font-bold text-slate-400 mt-1 text-sm">Piring 3</span></div>
+                </div>
+                <div id="biskut-summary" class="text-lg font-bold text-green-700 flex-none h-8"></div>
+            </div>
+        `}function dropOnPiring(t){if(t.preventDefault(),t.currentTarget.classList.remove("drag-over"),draggedElement&&"biskut"===draggedElement.dataset.item){let e=t.currentTarget;var t=parseInt(e.dataset.count),a=parseInt(e.dataset.max);t<a?(draggedElement.removeAttribute("draggable"),draggedElement.classList.remove("draggable"),e.appendChild(draggedElement),t++,e.dataset.count=t,speak("Masuk."),t===a&&(e.classList.add("filled"),e.removeAttribute("ondrop"),speak("Piring penuh.")),0===document.getElementById("biskut-basket").children.length&&(t="Syabas! 9 ÷ 3 = 3 piring.",setInfo(document.getElementById("biskut-summary").innerHTML=t),speak(t),triggerWin())):(e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),500),speak("Piring dah penuh."))}}function loadKongsiSamaRataActivity(e){setInfo("Agihkan guli SATU DEMI SATU kepada 4 kawan.");let t="";for(let e=0;e<8;e++)t+='<div class="draggable bg-blue-100 border-2 border-blue-300 rounded-full h-10 w-10 flex items-center justify-center text-xl cursor-grab" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-item="guli">🔵</div>';e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-purple-600 mb-2 flex-none">🔵 Kongsi Sama Rata</h3>
+                <div class="bg-purple-50 p-2 rounded-2xl border-2 border-purple-200 mb-2 flex-none">
+                    <div id="guli-pile" class="flex flex-wrap justify-center gap-2 min-h-[40px]">${t}</div>
+                </div>
+                <div id="kanak-area" class="flex flex-wrap justify-center gap-2 mb-2 flex-1 items-center content-center overflow-y-auto">
+                    ${[1,2,3,4].map(e=>`
+                        <div class="drop-zone bg-white rounded-2xl p-2 w-24 min-h-[80px] flex flex-col items-center border-2 border-slate-100" 
+                             ondrop="dropOnKanak(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                            <span class="text-3xl mb-1">🧒</span>
+                            <span class="text-xs font-bold text-slate-400">Kawan ${e}</span>
+                        </div>
+                    `).join("")}
+                </div>
+                <button id="semak-kongsi-btn" class="hidden btn-3d bg-indigo-500 text-white font-bold py-2 px-6 rounded-xl text-base flex-none" onclick="checkKongsiSelesai()">✅ Semak</button>
+                <div id="kongsi-summary" class="mt-2 text-lg font-bold text-indigo-700 flex-none h-8"></div>
+            </div>
+        `}function dropOnKanak(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&"guli"===draggedElement.dataset.item&&(draggedElement.removeAttribute("draggable"),draggedElement.classList.remove("draggable","bg-blue-100"),draggedElement.classList.add("bg-purple-100","scale-75"),e.currentTarget.appendChild(draggedElement),speak("Satu guli."),0===document.getElementById("guli-pile").children.length)&&(document.getElementById("semak-kongsi-btn").classList.remove("hidden"),speak("Semua guli dah habis. Tekan Semak."))}function checkKongsiSelesai(){var e,t=document.querySelectorAll("#kanak-area .drop-zone");let a=[...t].map(e=>e.querySelectorAll('[data-item="guli"]').length);a.every(e=>e===a[0]&&0<e)?(e=`Adil! Semua dapat ${a[0]}. 8 ÷ 4 = 2`,setInfo(document.getElementById("kongsi-summary").textContent=e),speak(e),triggerWin()):(setInfo(e="Tak adil. Ada yang dapat lebih. Cuba lagi."),speak(e),t.forEach(e=>{e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),500)}))}function loadKeluargaFaktaActivity(e){setInfo("Lengkapkan ayat bahagi berdasarkan darab.");var t=[4,3,12];e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-orange-600 mb-2 flex-none">🏠 Keluarga Fakta</h3>
+                <div class="bg-white border-4 border-orange-100 rounded-3xl p-2 mb-4 inline-block shadow-sm flex-none">
+                    <p class="text-slate-500 font-bold uppercase mb-1 text-xs">Fakta Darab</p>
+                    <p class="text-3xl font-black text-slate-800">4 × 3 = 12</p>
+                </div>
+                <div class="flex justify-center gap-4 mb-4 flex-none">
+                    ${t.sort(()=>Math.random()-.5).map(e=>`
+                        <div class="draggable bg-orange-100 border-2 border-orange-300 text-orange-800 font-bold text-2xl rounded-xl p-3 cursor-grab"
+                             draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-number="${e}">${e}</div>
+                    `).join("")}
+                </div>
+                <div class="flex flex-col gap-4 items-center flex-none">
+                    <div class="flex items-center gap-2 bg-orange-50 p-2 rounded-2xl border-2 border-orange-200">
+                        <div class="drop-zone w-16 h-16 bg-white rounded-lg text-2xl" ondrop="dropOnFakta(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-correct="12">?</div>
+                        <span class="text-2xl font-bold text-orange-400">÷</span>
+                        <div class="drop-zone w-16 h-16 bg-white rounded-lg text-2xl" ondrop="dropOnFakta(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-correct="4">?</div>
+                        <span class="text-2xl font-bold text-orange-400">=</span>
+                        <div class="drop-zone w-16 h-16 bg-white rounded-lg text-2xl" ondrop="dropOnFakta(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-correct="3">?</div>
+                    </div>
+                </div>
+                <div id="fakta-summary" class="mt-2 text-lg font-bold text-green-600 flex-none h-8"></div>
+            </div>
+        `}function dropOnFakta(e){var t;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&((t=draggedElement.dataset.number)===e.currentTarget.dataset.correct?(e.currentTarget.textContent=t,e.currentTarget.classList.add("filled"),e.currentTarget.classList.remove("drop-zone"),e.currentTarget.removeAttribute("ondrop"),draggedElement.style.opacity="0.5",draggedElement.draggable=!1,speak("Betul."),0===document.querySelectorAll(".drop-zone[data-correct]").length&&(t="Syabas! Bahagi ialah songsangan darab.",speak(document.getElementById("fakta-summary").textContent=t),triggerWin())):(e.currentTarget.classList.add("shake"),setTimeout(()=>e.currentTarget.classList.remove("shake"),500),speak("Salah.")))}function loadAkuariumActivity(e){setInfo("Kita ada 5 ekor ikan. Pilih nak masukkan dalam bekas mana?"),e.innerHTML=`
+        <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-red-600 mb-2 flex-none">🐠 Akuarium Ajaib</h3>
+            <p class="text-base text-slate-600 mb-2 flex-none">Ada <strong>5 ekor ikan</strong>. Nak simpan dalam bekas mana?</p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-2 flex-none">
+                <div class="bg-white border-4 border-blue-200 rounded-3xl p-2 cursor-pointer hover:bg-blue-50 shadow-lg transform hover:scale-105 transition-all flex flex-col items-center" 
+                     onclick="clickAkuarium(1)">
+                    <div class="w-24 h-16 border-4 border-blue-500 bg-blue-100 rounded-b-2xl mb-1 relative flex items-center justify-center">
+                        <span class="text-xl text-blue-400 font-bold">AIR</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-blue-800">1 Bekas Besar</h4>
+                    <p class="text-slate-500 text-xs">Semua masuk satu tempat.</p>
+                </div>
+                
+                <div class="bg-white border-4 border-purple-200 rounded-3xl p-2 cursor-pointer hover:bg-purple-50 shadow-lg transform hover:scale-105 transition-all flex flex-col items-center" 
+                     onclick="clickAkuarium(5)">
+                    <div class="flex gap-1 mb-1">
+                        <div class="w-4 h-8 border-2 border-purple-500 bg-purple-100 rounded-b-md"></div>
+                        <div class="w-4 h-8 border-2 border-purple-500 bg-purple-100 rounded-b-md"></div>
+                        <div class="w-4 h-8 border-2 border-purple-500 bg-purple-100 rounded-b-md"></div>
+                        <div class="w-4 h-8 border-2 border-purple-500 bg-purple-100 rounded-b-md"></div>
+                        <div class="w-4 h-8 border-2 border-purple-500 bg-purple-100 rounded-b-md"></div>
+                    </div>
+                    <h4 class="text-lg font-bold text-purple-800">5 Bekas Kecil</h4>
+                    <p class="text-slate-500 text-xs">Seorang satu bekas.</p>
+                </div>
+            </div>
+            
+            <div id="akuarium-stage" class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-2 min-h-[150px] flex-1 flex flex-col items-center justify-center overflow-y-auto">
+                <div class="text-gray-400 text-lg font-bold animate-pulse">👆 Tekan kotak di atas untuk tengok ikan masuk!</div>
+            </div>
+        </div>
+      `}function clickAkuarium(e){var t=document.getElementById("akuarium-stage");let a="",n="",l="";if(1===e)n="Semua 5 ekor ikan masuk dalam <strong>1 Bekas Besar</strong>.",l="5 ÷ 1 = 5",a=`
+                <div class="jar-container">
+                    <div class="glass-jar big">
+                        <div class="flex flex-wrap justify-center gap-1">
+                            <span class="fish-inside">🐠</span>
+                            <span class="fish-inside">🐠</span>
+                            <span class="fish-inside">🐠</span>
+                            <span class="fish-inside">🐠</span>
+                            <span class="fish-inside">🐠</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 text-blue-600 font-bold text-lg bg-blue-100 px-2 py-1 rounded-lg">
+                    Bekas ini ada 5 ekor!
+                </div>
+            `,speak("Semua lima ekor masuk satu bekas. Jawapannya lima.");else{n="Setiap ikan dapat <strong>1 Bekas Kecil</strong> sendiri.",l="5 ÷ 5 = 1";let t="";for(let e=0;e<5;e++)t+=`
+                    <div class="flex flex-col items-center">
+                        <div class="glass-jar small">
+                            <span class="fish-inside">🐠</span>
+                        </div>
+                        <span class="text-sm font-bold text-slate-400 mt-1">${e+1}</span>
+                    </div>
+                `;a=`
+                <div class="jar-container">
+                    ${t}
+                </div>
+                <div class="mt-2 text-purple-600 font-bold text-lg bg-purple-100 px-2 py-1 rounded-lg">
+                    Satu bekas ada 1 ekor sahaja.
+                </div>
+            `,speak("Setiap bekas ada satu ekor sahaja. Jawapannya satu.")}t.innerHTML=`
+            <h4 class="text-lg text-slate-700 mb-2 text-center">${n}</h4>
+            ${a}
+            <div class="mt-2 bg-white border-4 border-slate-200 px-4 py-2 rounded-2xl shadow-sm animate-[popIn_0.5s]">
+                <span class="text-3xl font-black text-slate-800">${l}</span>
+            </div>
+        `,triggerWin()}window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("opacity-50")},window.dragEnd=function(e){e.target&&e.target.classList.remove("opacity-50"),document.querySelectorAll(".drop-zone, .plate").forEach(e=>e.classList.remove("drag-over"))},window.allowDrop=function(e){e.preventDefault(),(e.currentTarget.classList.contains("drop-zone")||e.currentTarget.classList.contains("plate"))&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){(e.currentTarget.classList.contains("drop-zone")||e.currentTarget.classList.contains("plate"))&&e.currentTarget.classList.remove("drag-over")}</script>

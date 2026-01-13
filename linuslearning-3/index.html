@@ -1,0 +1,111 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kuantiti & Perbandingan: Klik & Belajar</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.draggable{cursor:grab;touch-action:none;transition:transform .2s}.draggable:active{cursor:grabbing;opacity:.8;transform:scale(1.1) rotate(3deg)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}input[type=range]{-webkit-appearance:none;width:100%;background:0 0}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:28px;width:28px;border-radius:50%;background:#f59e0b;border:3px solid #fff;box-shadow:0 4px 6px rgba(0,0,0,.3);cursor:pointer;margin-top:-10px}input[type=range]::-webkit-slider-runnable-track{width:100%;height:8px;cursor:pointer;background:#fed7aa;border-radius:5px}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.ring-focus{outline:4px solid #3b82f6;outline-offset:2px}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">⚖️</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Kuantiti & Perbandingan</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col items-center justify-center transition-opacity duration-200 overflow-y-auto"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Mula Belajar</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-1 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">🔎 Kenal</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">🧺 Kumpul</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">⚖️ Banding</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">🎚️ Slider</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">🔢 Nombor</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!";function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Kuantiti & Perbandingan</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Klik kumpulan untuk tahu Banyak atau Sedikit.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-blue-600 mb-6">🔎 Kenal Kuantiti</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    ${[{emoji:"🍎",count:3,label:"epal"},{emoji:"🐱",count:7,label:"kucing"},{emoji:"⭐",count:2,label:"bintang"},{emoji:"🚗",count:5,label:"kereta"},{emoji:"🌸",count:8,label:"bunga"},{emoji:"🎈",count:1,label:"belon"}].map(e=>`
+                        <button onclick="checkQty(${e.count}, '${e.label}', this)" 
+                            class="qty-btn btn-3d bg-blue-100 border-blue-300 p-2 rounded-xl flex flex-col items-center justify-center min-h-[100px] hover:bg-blue-200">
+                            <div class="text-3xl mb-1 flex flex-wrap justify-center gap-1">${e.emoji.repeat(e.count)}</div>
+                            <div class="text-base font-bold text-blue-800 capitalize">${e.label}</div>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct2(e){setInfo("Seret item ke bakul yang betul.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-green-600 mb-6">🧺 Kumpul Item</h3>
+                
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div id="bin-sedikit" class="drop-zone bg-red-50 border-red-300 rounded-2xl p-2 min-h-[150px] flex flex-col"
+                         ondragover="allowDrop(event)" ondrop="dropItem(event, 'sedikit')">
+                        <h4 class="text-lg font-bold text-red-600 mb-1">🔻 SEDIKIT (1-3)</h4>
+                        <div class="items-container flex flex-wrap gap-1 justify-center content-start flex-grow"></div>
+                    </div>
+                    <div id="bin-banyak" class="drop-zone bg-blue-50 border-blue-300 rounded-2xl p-2 min-h-[150px] flex flex-col"
+                         ondragover="allowDrop(event)" ondrop="dropItem(event, 'banyak')">
+                        <h4 class="text-lg font-bold text-blue-600 mb-1">🔺 BANYAK (4+)</h4>
+                        <div class="items-container flex flex-wrap gap-1 justify-center content-start flex-grow"></div>
+                    </div>
+                </div>
+
+                <div id="pool" class="flex flex-wrap justify-center gap-3">
+                    ${[{emoji:"🍓",count:2,label:"strawberi"},{emoji:"🐝",count:6,label:"lebah"},{emoji:"🎾",count:1,label:"bola"},{emoji:"🦋",count:8,label:"rama-rama"},{emoji:"🍪",count:4,label:"biskut"},{emoji:"🌺",count:9,label:"bunga"}].map((e,t)=>`
+                        <div id="drag-${t}" draggable="true" ondragstart="dragStart(event)" 
+                             data-count="${e.count}" data-label="${e.label}"
+                             class="draggable btn-3d bg-white border-slate-200 p-2 rounded-xl flex flex-col items-center shadow-sm">
+                            <div class="text-2xl">${e.emoji.repeat(e.count)}</div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct3(e){setInfo("Klik untuk bandingkan Kiri vs Kanan.");e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-purple-600 mb-6">⚖️ Bandingkan</h3>
+                <div class="flex flex-col gap-4">
+                    ${[{l:{e:"🍎",c:3},r:{e:"🍊",c:5}},{l:{e:"⭐",c:7},r:{e:"🌙",c:4}},{l:{e:"🐱",c:6},r:{e:"🐶",c:6}}].map((e,t)=>`
+                        <button onclick="compareRow(${e.l.c}, ${e.r.c}, this)" 
+                            class="comp-row btn-3d bg-purple-50 border-purple-200 p-2 rounded-xl flex items-center justify-between hover:bg-purple-100">
+                            <div class="flex-1 text-center">
+                                <div class="text-2xl">${e.l.e.repeat(e.l.c)}</div>
+                                <div class="font-bold text-purple-800">${e.l.c}</div>
+                            </div>
+                            <div class="text-xl font-black text-slate-400 px-2">VS</div>
+                            <div class="flex-1 text-center">
+                                <div class="text-2xl">${e.r.e.repeat(e.r.c)}</div>
+                                <div class="font-bold text-purple-800">${e.r.c}</div>
+                            </div>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct4(e){setInfo("Gerakkan slider untuk bandingkan A dan B."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-orange-600 mb-6">🎚️ Slider Perbandingan</h3>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-orange-50 border-4 border-orange-200 rounded-2xl p-4">
+                        <div class="flex justify-between font-bold text-orange-800 mb-1">
+                            <span>A</span> <span id="valA" class="text-xl">0</span>
+                        </div>
+                        <input id="rangeA" type="range" min="0" max="10" value="0" oninput="updateSlider()">
+                        <div id="iconsA" class="mt-2 text-xl min-h-[30px] break-words"></div>
+                    </div>
+
+                    <div class="bg-blue-50 border-4 border-blue-200 rounded-2xl p-4">
+                        <div class="flex justify-between font-bold text-blue-800 mb-1">
+                            <span>B</span> <span id="valB" class="text-xl">0</span>
+                        </div>
+                        <input id="rangeB" type="range" min="0" max="10" value="0" oninput="updateSlider()">
+                        <div id="iconsB" class="mt-2 text-xl min-h-[30px] break-words"></div>
+                    </div>
+                </div>
+                
+                <div id="res-slider" class="text-lg font-bold text-slate-600 bg-white p-2 rounded-xl shadow-sm border-2 border-slate-100">
+                    Gerakkan slider...
+                </div>
+            </div>
+        `}function setupAct5(e){setInfo("Klik nombor untuk cari pasangannya.");var t=[{n:3,e:"🍎",l:"tiga epal"},{n:5,e:"⭐",l:"lima bintang"},{n:2,e:"🐱",l:"dua kucing"},{n:4,e:"🚗",l:"empat kereta"}];e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-pink-600 mb-6">🔢 Nombor & Kuantiti</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <h4 class="text-lg font-bold text-slate-400">Nombor</h4>
+                        ${t.map(e=>`
+                            <button onclick="highlightNum(${e.n})" id="nbtn-${e.n}"
+                                class="num-btn btn-3d bg-pink-100 border-pink-300 text-pink-800 text-2xl font-bold p-2 rounded-xl">
+                                ${e.n}
+                            </button>
+                        `).join("")}
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="text-lg font-bold text-slate-400">Kuantiti</h4>
+                        ${t.map(e=>`
+                            <button onclick="describeGroup(${e.n}, '${e.l}')" id="gbtn-${e.n}"
+                                class="grp-btn btn-3d bg-blue-100 border-blue-300 text-blue-800 p-2 rounded-xl">
+                                <div class="text-2xl">${e.e.repeat(e.n)}</div>
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.checkQty=function(e,t,n){document.querySelectorAll(".qty-btn").forEach(e=>e.classList.remove("ring-focus")),n.classList.add("ring-focus");n=e+` ${t} ialah ${e<=3?"SEDIKIT":"BANYAK"}.`;setInfo(n),speak(n),triggerWin()},window.dragStart=function(e){e.dataTransfer.setData("text",e.target.id)},window.allowDrop=function(e){e.preventDefault(),e.target.closest(".drop-zone").classList.add("drag-over")},window.dropItem=function(e,t){e.preventDefault();var n,i,a=e.target.closest(".drop-zone"),e=(a.classList.remove("drag-over"),e.dataTransfer.getData("text")),e=document.getElementById(e);e&&(i=(n=parseInt(e.dataset.count))<=3,"sedikit"===t&&i||"banyak"===t&&!i?(a.querySelector(".items-container").appendChild(e),setInfo(i=`Betul! ${n} ialah ${t}.`),speak(i),triggerWin()):speak("Salah bakul. Cuba lagi."))},window.compareRow=function(e,t,n){document.querySelectorAll(".comp-row").forEach(e=>e.classList.remove("ring-focus")),n.classList.add("ring-focus");let i=`Kiri ${e}, Kanan ${t}. `;setInfo(i+=t<e?"Kiri lebih banyak.":e<t?"Kiri lebih sedikit.":"Sama banyak."),speak(i)},window.updateSlider=function(){var e=Number(document.getElementById("rangeA").value),t=Number(document.getElementById("rangeB").value);document.getElementById("valA").textContent=e,document.getElementById("valB").textContent=t,document.getElementById("iconsA").textContent="🟠".repeat(e),document.getElementById("iconsB").textContent="🔵".repeat(t);let n="";n=t<e?"A lebih banyak daripada B.":e<t?"A lebih sedikit daripada B.":"A dan B sama banyak.",document.getElementById("res-slider").textContent=n,window.speakTimeout&&clearTimeout(window.speakTimeout),window.speakTimeout=setTimeout(()=>{setInfo(n),speak(n)},800)},window.highlightNum=function(e){document.querySelectorAll(".num-btn, .grp-btn").forEach(e=>e.classList.remove("ring-focus")),document.getElementById("nbtn-"+e).classList.add("ring-focus"),document.getElementById("gbtn-"+e).classList.add("ring-focus");e=`Nombor ${e}. Lihat kumpulan ${e} objek.`;setInfo(e),speak(e)},window.describeGroup=function(e,t){highlightNum(e);e=`Ini ialah ${t}.`;setInfo(e),speak(e)}</script>

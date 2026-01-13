@@ -1,0 +1,155 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Kemahiran Pemulihan: Anggaran & Bundar</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.jar-container{width:80px;height:120px;border:4px solid #94a3b8;border-top:none;border-radius:0 0 1rem 1rem;background:#fff;position:relative;margin:0 auto;overflow:hidden;box-shadow:inset 3px 3px 6px rgba(0,0,0,.05)}.jar-lid{width:150px;height:20px;background:#64748b;position:absolute;top:-20px;left:-11px;border-radius:4px}.guli-fill{position:absolute;bottom:0;left:0;width:100%;background-color:#fca5a5;background-image:radial-gradient(#ef4444 20%,transparent 20%);background-size:15px 15px;transition:height 1s ease-out}.guli-fill.ref{background-color:#93c5fd;background-image:radial-gradient(#3b82f6 20%,transparent 20%)}.hill-container{position:relative;width:100%;height:120px;margin-bottom:1rem;overflow:visible}.hill-svg{width:100%;height:100%;overflow:visible}.hill-path{fill:none;stroke:#cbd5e1;stroke-width:8;stroke-linecap:round}.hill-point{width:20px;height:20px;background:#fff;border:5px solid #64748b;border-radius:50%;position:absolute;z-index:10;transform:translate(-50%,50%)}.hill-label{position:absolute;transform:translate(-50%,100%);font-weight:700;color:#64748b;font-size:1.2rem;bottom:-10px}.hill-ball{width:60px;height:60px;background:#3b82f6;border:4px solid #fff;border-radius:50%;position:absolute;z-index:20;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.4rem;box-shadow:0 4px 8px rgba(0,0,0,.3);transition:left 1.5s cubic-bezier(.45,0,.55,1),bottom 1.5s cubic-bezier(.45,0,.55,1),background-color .3s;transform:translate(-50%,50%)}.cerakin-row{display:flex;align-items:center;justify-content:space-between;background:#fff;border:3px solid #e2e8f0;border-radius:1rem;padding:1rem;margin-bottom:1rem}.cerakin-ctrl{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.5rem;cursor:pointer;transition:transform .1s;box-shadow:0 3px 0 rgba(0,0,0,.2);border:none}.cerakin-ctrl:active{transform:translateY(3px);box-shadow:none}.cerakin-ctrl.plus{background-color:#22c55e}.cerakin-ctrl.minus{background-color:#ef4444}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">💯</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Anggaran & Bundar</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-4"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col overflow-hidden"><div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-pulse">📏</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Kemahiran Pemulihan</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Mengagak & Membundar<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-2 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🎯<br>Anggaran</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-1 rounded-xl text-xs">⛰️<br>Puluh</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-1 rounded-xl text-xs">⛰️<br>Ratus</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs">⚙️<br>Cerakin</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-1 rounded-xl text-xs">📚<br>Klik</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-sm">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-base">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",r=(t,e)=>Math.floor(Math.random()*(e-t+1))+t;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.9,t.pitch=1.1,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t&&loadEstimationLab(e),2===t&&loadRoundingHill(e,"puluh"),3===t&&loadRoundingHill(e,"ratus"),4===t&&loadDeconMachine(e),5===t&&loadClickNumberActivity(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-bounce">💯</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Kemahiran Pemulihan</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}function loadEstimationLab(t){setInfo("Gerakkan slider untuk mengagak jumlah guli."),t.innerHTML=`
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🎯 Makmal Anggaran</h3>
+            
+            <div class="flex-1 w-full flex flex-col items-center justify-center overflow-y-auto">
+                <div class="flex justify-center gap-6 mb-4 items-end flex-none">
+                    <div class="text-center">
+                        <div class="jar-container relative">
+                            <div class="jar-lid"></div>
+                            <div class="guli-fill ref" style="height: 20%"></div>
+                            <div class="absolute bottom-1 w-full text-center font-bold text-blue-800 text-sm">100</div>
+                        </div>
+                        <div class="mt-1 font-bold text-slate-500 text-xs">Rujukan</div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="jar-container relative">
+                            <div class="jar-lid"></div>
+                            <div id="guli-mystery" class="guli-fill" style="height: 0%"></div>
+                            <div class="absolute bottom-1 w-full text-center font-bold text-red-800 text-sm">?</div>
+                        </div>
+                        <div class="mt-1 font-bold text-slate-500 text-xs">Misteri</div>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-sm bg-slate-50 p-2 rounded-xl border-2 border-slate-200 text-center flex-none">
+                    <div class="text-xs font-bold text-slate-400 uppercase mb-1">Anggaran Saya</div>
+                    <div id="est-val" class="text-3xl font-black text-slate-700 mb-2">100</div>
+                    
+                    <input type="range" id="est-slider" min="100" max="500" value="100" step="10" 
+                           class="w-full h-4 bg-slate-200 rounded-lg appearance-none cursor-pointer mb-2 accent-blue-500"
+                           oninput="document.getElementById('est-val').textContent = this.value">
+                    
+                    <div class="flex justify-center gap-2">
+                        <button id="btn-check" class="btn-3d bg-blue-500 text-white font-bold py-2 px-6 rounded-xl text-lg">✅ Semak</button>
+                        <button id="btn-new" class="btn-3d bg-emerald-500 text-white font-bold py-2 px-6 rounded-xl text-lg hidden" onclick="setupEstimation()">🔄 Baru</button>
+                    </div>
+                    
+                    <div id="est-msg" class="mt-2 text-sm font-bold text-slate-500 min-h-[20px]"></div>
+                </div>
+            </div>
+        `,setupEstimation()}function setupEstimation(){let n=r(150,480);var t=n/500*100;document.getElementById("guli-mystery").style.height=t+"%",document.getElementById("est-msg").textContent="",document.getElementById("est-slider").value=100,document.getElementById("est-val").textContent=100,document.getElementById("est-slider").disabled=!1;let l=document.getElementById("btn-check"),s=document.getElementById("btn-new");l.classList.remove("hidden"),s.classList.add("hidden"),l.onclick=()=>{var t=parseInt(document.getElementById("est-slider").value),t=Math.abs(t-n);let e="";t<=30?(e=`HEBAT! Jawapan: ${n}.`,triggerWin(),speak("Hebat! Sangat tepat.")):t<=80?(e=`Boleh tahan! Jawapan: ${n}.`,speak("Boleh tahan.")):(e=`Cuba lagi. Jawapan: ${n}.`,speak("Cuba lagi.")),document.getElementById("est-msg").textContent=e,l.classList.add("hidden"),s.classList.remove("hidden"),document.getElementById("est-slider").disabled=!0}}function loadRoundingHill(t,e){var n="puluh"===e?"Bundar Puluh Terdekat":"Bundar Ratus Terdekat",l="puluh"===e?"emerald":"violet";setInfo("Adakah nombor akan turun ke kiri atau kanan?"),t.innerHTML=`
+            <h3 class="text-xl font-bold text-${l}-600 mb-2 text-center flex-none">⛰️ ${n}</h3>
+            
+            <div class="flex-1 w-full flex flex-col items-center justify-center overflow-y-auto">
+                <div class="text-center mb-4 flex-none">
+                    <div class="text-xs font-bold text-slate-400 uppercase">Nombor</div>
+                    <div id="rh-num" class="text-5xl font-black text-slate-700">...</div>
+                    <div class="mt-1">
+                        <span class="text-[10px] font-bold text-amber-500 bg-amber-100 px-1 rounded uppercase">Puncak</span>
+                        <span id="txt-mid" class="font-bold text-amber-600 text-sm">5</span>
+                    </div>
+                </div>
+
+                <div class="hill-container max-w-lg mx-auto flex-none">
+                    <svg class="hill-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+                        <path d="M 20,90 Q 150,-50 280,90" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" />
+                        <line x1="0" y1="90" x2="300" y2="90" stroke="#cbd5e1" stroke-width="4" />
+                    </svg>
+                    
+                    <div class="hill-point" style="left: 6.7%; bottom: 10%;"></div>
+                    <span id="txt-start" class="hill-label" style="left: 6.7%; bottom: -10px; font-size: 0.8rem;">0</span>
+                    
+                    <div class="hill-point" style="left: 50%; bottom: 80%; border-color: #f59e0b; width: 12px; height: 12px;"></div>
+                    
+                    <div class="hill-point" style="left: 93.3%; bottom: 10%;"></div>
+                    <span id="txt-end" class="hill-label" style="left: 93.3%; bottom: -10px; font-size: 0.8rem;">10</span>
+
+                    <div id="hill-ball" class="hill-ball" style="left: 6.7%; bottom: 10%; width: 40px; height: 40px; font-size: 0.9rem; border-width: 2px;">?</div>
+                </div>
+
+                <div id="rh-res" class="text-center font-bold text-xl text-slate-700 min-h-[30px] mt-2 mb-2 flex-none"></div>
+
+                <div class="flex justify-center gap-2 flex-none">
+                    <button id="rh-go" class="btn-3d bg-${l}-500 text-white font-bold py-2 px-6 rounded-xl text-lg">🚀 Bundarkan!</button>
+                    
+                    <button id="rh-replay" class="btn-3d bg-blue-500 text-white font-bold py-2 px-6 rounded-xl text-lg hidden">↩️ Ulang</button>
+                    <button id="rh-new" class="btn-3d bg-emerald-500 text-white font-bold py-2 px-6 rounded-xl text-lg hidden">Soalan Baru ➡️</button>
+                </div>
+            </div>
+        `,setupRounding(e)}function setupRounding(t){let e,n,l,s,a;s="puluh"===t?(e=r(101,998),n=10*Math.floor(e/10),l=n+10,n+5):(e=r(101,998),n=100*Math.floor(e/100),l=n+100,n+50),a=e>=s?l:n,document.getElementById("rh-num").textContent=e,document.getElementById("txt-start").textContent=n,document.getElementById("txt-end").textContent=l,document.getElementById("txt-mid").textContent=s,document.getElementById("rh-res").textContent="";var i=(e-n)/(l-n);let o=6.7+86.6*i,d=-280*i*i+280*i+10,c=document.getElementById("hill-ball"),u=(c.textContent=e,c.style.transition="none",c.style.left=o+"%",c.style.bottom=d+"%",c.style.backgroundColor="#3b82f6",document.getElementById("rh-go")),x=document.getElementById("rh-replay"),m=document.getElementById("rh-new");u.classList.remove("hidden"),x.classList.add("hidden"),m.classList.add("hidden"),u.onclick=()=>{u.classList.add("hidden"),c.style.transition="left 1.5s ease-in, bottom 1.5s ease-in, background-color 0.3s",a===l?(c.style.left="93.3%",c.style.bottom="10%",setInfo(`Nombor ${e} lebih dekat dengan ${l}.`),c.style.backgroundColor="#10b981"):(c.style.left="6.7%",c.style.bottom="10%",setInfo(`Nombor ${e} kurang dari separuh. Kembali ke ${n}.`),c.style.backgroundColor="#ef4444"),setTimeout(()=>{document.getElementById("rh-res").textContent="Jawapan: "+a,triggerWin(),speak("Jawapannya ialah "+a),x.classList.remove("hidden"),m.classList.remove("hidden")},1500)},x.onclick=()=>{c.style.transition="none",c.style.left=o+"%",c.style.bottom=d+"%",c.style.backgroundColor="#3b82f6",document.getElementById("rh-res").textContent="",x.classList.add("hidden"),m.classList.add("hidden"),u.classList.remove("hidden"),setInfo("Sedia untuk bundarkan semula.")},m.onclick=()=>setupRounding(t)}let cm={target:0,curR:0,curP:0,curS:0};function loadDeconMachine(t){cm.target=r(101,999),cm.curR=0,cm.curP=0,cm.curS=0,setInfo("Padankan jumlah anda dengan nombor sasaran."),t.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-500 mb-2 text-center flex-none">⚙️ Mesin Cerakin</h3>
+            
+            <div class="flex-1 w-full flex flex-col items-center justify-center overflow-y-auto">
+                <div class="flex flex-col items-center mb-2 flex-none">
+                    <div class="text-xs font-bold text-slate-400 uppercase">SASARAN</div>
+                    <div class="text-5xl font-black text-slate-700">${cm.target}</div>
+                </div>
+
+                <div class="max-w-sm mx-auto space-y-2 w-full flex-none">
+                    <div class="cerakin-row p-2 mb-1">
+                        <span class="font-bold text-pink-600 text-sm w-16">RATUS</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="adjCerakin('r', -100)" class="cerakin-ctrl minus w-8 h-8 text-lg">-</button>
+                            <span id="val-r" class="text-2xl font-bold text-slate-700 w-16 text-center">0</span>
+                            <button onclick="adjCerakin('r', 100)" class="cerakin-ctrl plus w-8 h-8 text-lg">+</button>
+                        </div>
+                    </div>
+
+                    <div class="cerakin-row p-2 mb-1">
+                        <span class="font-bold text-blue-600 text-sm w-16">PULUH</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="adjCerakin('p', -10)" class="cerakin-ctrl minus w-8 h-8 text-lg">-</button>
+                            <span id="val-p" class="text-2xl font-bold text-slate-700 w-16 text-center">0</span>
+                            <button onclick="adjCerakin('p', 10)" class="cerakin-ctrl plus w-8 h-8 text-lg">+</button>
+                        </div>
+                    </div>
+
+                    <div class="cerakin-row p-2 mb-1">
+                        <span class="font-bold text-amber-600 text-sm w-16">SA</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="adjCerakin('s', -1)" class="cerakin-ctrl minus w-8 h-8 text-lg">-</button>
+                            <span id="val-s" class="text-2xl font-bold text-slate-700 w-16 text-center">0</span>
+                            <button onclick="adjCerakin('s', 1)" class="cerakin-ctrl plus w-8 h-8 text-lg">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-2 bg-orange-50 p-2 rounded-xl border-2 border-orange-100 inline-block w-full max-w-sm flex-none">
+                    <div class="text-sm font-bold text-slate-500 mb-1">Jumlah Anda</div>
+                    <div id="total-display" class="text-3xl font-black text-orange-600">0</div>
+                </div>
+
+                <div class="text-center mt-2 flex-none">
+                    <button onclick="loadActivity(4)" class="btn-3d bg-slate-400 text-white font-bold py-2 px-6 rounded-xl text-base">🔄 Soalan Baru</button>
+                </div>
+            </div>
+        `}function adjCerakin(t,e){"r"===t?0<=cm.curR+e&&cm.curR+e<=900&&(cm.curR+=e):"p"===t?0<=cm.curP+e&&cm.curP+e<=90&&(cm.curP+=e):"s"===t&&0<=cm.curS+e&&cm.curS+e<=9&&(cm.curS+=e),updateCerakinUI()}function updateCerakinUI(){document.getElementById("val-r").textContent=cm.curR,document.getElementById("val-p").textContent=cm.curP,document.getElementById("val-s").textContent=cm.curS;var t=cm.curR+cm.curP+cm.curS,e=document.getElementById("total-display");(e.textContent=t)===cm.target?(e.classList.replace("text-orange-600","text-green-600"),e.innerHTML+=" ✅ TEPAT!",triggerWin(),speak("Tahniah! Jawapan tepat."),document.querySelectorAll(".cerakin-ctrl").forEach(t=>t.disabled=!0)):(e.classList.replace("text-green-600","text-orange-600"),document.querySelectorAll(".cerakin-ctrl").forEach(t=>t.disabled=!1))}function loadClickNumberActivity(t){setInfo("Klik nombor untuk lihat info bundar.");t.innerHTML=`
+        <h3 class="text-xl font-bold text-rose-500 mb-2 text-center flex-none">📚 Klik Nombor</h3>
+        
+        <div class="flex-1 overflow-y-auto p-2">
+            <div class="grid grid-cols-3 gap-2 max-w-lg mx-auto mb-2">
+                ${[123,458,295,612,879,344].map(t=>`
+                    <button onclick="showNumInfo(${t})" class="btn-3d bg-white border-2 border-rose-100 text-rose-600 p-2 rounded-xl text-xl font-black shadow-sm hover:bg-rose-50 h-16 w-full">
+                        ${t}
+                    </button>
+                `).join("")}
+            </div>
+
+            <div id="info-box" class="mt-2 mx-auto max-w-sm bg-rose-50 border-2 border-rose-200 rounded-xl p-2 text-center min-h-[100px] flex flex-col justify-center items-center">
+                <div class="text-slate-400 font-bold text-sm">Pilih nombor di atas</div>
+            </div>
+        </div>
+      `}function showNumInfo(t){var e=100*Math.round(t/100),n=10*Math.round(t/10);document.getElementById("info-box").innerHTML=`
+            <div class="text-4xl font-black text-rose-700 mb-2">${t}</div>
+            <div class="flex justify-around w-full text-left gap-2">
+                <div class="bg-white p-2 rounded-lg border border-rose-100 shadow-sm flex-1 text-center">
+                    <div class="text-[10px] text-slate-400 font-bold uppercase mb-1">Bundar Puluh</div>
+                    <div class="text-xl font-bold text-rose-600">${n}</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-rose-100 shadow-sm flex-1 text-center">
+                    <div class="text-[10px] text-slate-400 font-bold uppercase mb-1">Bundar Ratus</div>
+                    <div class="text-xl font-bold text-rose-600">${e}</div>
+                </div>
+            </div>
+        `,speak(t+`. Bundar puluh, ${n}. Bundar ratus, ${e}.`)}"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>

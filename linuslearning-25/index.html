@@ -1,0 +1,100 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Pemulihan: Menyusun Nombor 1–100</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px;user-select:none}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.shake{animation:shake .4s cubic-bezier(.36,.07,.19,.97) both}@keyframes shake{10%,90%{transform:translate3d(-2px,0,0)}20%,80%{transform:translate3d(4px,0,0)}30%,50%,70%{transform:translate3d(-6px,0,0)}40%,60%{transform:translate3d(6px,0,0)}}.draggable{cursor:grab;touch-action:none}.draggable:active{cursor:grabbing;opacity:.8;transform:scale(1.05)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc;border-radius:1rem}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.drop-zone-filled{border-style:solid;border-color:#22c55e;background-color:#dcfce7}.clothes-line{border-bottom:6px solid #78350f;position:relative}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">🔢</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Menyusun Nombor 1–100</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🚂</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Menyusun Nombor</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah untuk mula.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🎯<br>Klik</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🚂<br>Keretapi</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🎪<br>Sebutan</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">📈<br>Naik</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">📉<br>Turun</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar nombor!",draggedElement=null;function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t,"asc"):5===e&&setupAct4(t,"desc"),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🚂</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Menyusun Nombor</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Klik nombor untuk dengar sebutan.");let t={15:"lima belas",23:"dua puluh tiga",47:"empat puluh tujuh",56:"lima puluh enam",78:"tujuh puluh lapan",89:"lapan puluh sembilan"};e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-blue-600 mb-6 flex-none">🎯 Klik & Belajar</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 flex-1 min-h-0">
+                    ${[15,23,47,56,78,89].map(e=>`
+                        <button onclick="sayNum(${e}, '${t[e]}')" class="btn-3d bg-blue-100 text-blue-800 border-blue-300 rounded-2xl p-4 flex flex-col items-center hover:bg-blue-200 group h-32 justify-center">
+                            <span class="text-4xl font-black mb-1 group-hover:scale-110 transition-transform">${e}</span>
+                            <span class="text-xs font-bold text-blue-400">Tekan Saya</span>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct2(e){setInfo("Seret nombor ke gerabak kosong.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-green-600 mb-4 flex-none">🚂 Lengkapkan Gerabak</h3>
+
+                <div id="train-line" class="flex flex-wrap items-center justify-center gap-1 mb-6 p-2 bg-slate-100 rounded-3xl border-2 border-slate-200 flex-1 content-center overflow-auto">
+                    <span class="text-4xl mr-1">🚂</span>
+                    
+                    <div class="bg-slate-300 text-slate-600 w-16 h-20 rounded-xl flex items-center justify-center text-2xl font-bold border-4 border-slate-400">45</div>
+                    <span class="text-xl text-slate-400">➜</span>
+                    
+                    <div class="drop-zone w-16 h-20 rounded-xl flex items-center justify-center text-2xl font-bold text-slate-400"
+                         ondrop="dropTrain(event, 46)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">?</div>
+                    <span class="text-xl text-slate-400">➜</span>
+                    
+                    <div class="drop-zone w-16 h-20 rounded-xl flex items-center justify-center text-2xl font-bold text-slate-400"
+                         ondrop="dropTrain(event, 47)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">?</div>
+                    <span class="text-xl text-slate-400">➜</span>
+
+                    <div class="bg-slate-300 text-slate-600 w-16 h-20 rounded-xl flex items-center justify-center text-2xl font-bold border-4 border-slate-400">48</div>
+                    <span class="text-xl text-slate-400">➜</span>
+
+                    <div class="drop-zone w-16 h-20 rounded-xl flex items-center justify-center text-2xl font-bold text-slate-400"
+                         ondrop="dropTrain(event, 49)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">?</div>
+                </div>
+
+                <div class="bg-green-100 p-4 rounded-2xl border-2 border-green-200 flex-none">
+                    <p class="font-bold text-green-700 mb-2 text-sm">Pilih nombor:</p>
+                    <div class="flex justify-center gap-4">
+                        ${[47,49,46].sort(()=>Math.random()-.5).map(e=>`
+                            <div draggable="true" ondragstart="dragStart(event)" data-val="${e}"
+                                 class="draggable btn-3d bg-white border-green-300 text-green-700 w-16 h-16 rounded-xl flex items-center justify-center text-2xl font-bold">
+                                ${e}
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}function setupAct3(e){let t=["kosong","satu","dua","tiga","empat","lima","enam","tujuh","lapan","sembilan"];for(var n=(e,t)=>Math.floor(Math.random()*(t-e+1))+e,a=[0,100].includes(n(0,20))?n(0,1)?0:100:n(10,99),l=100===(l=a)?["seratus"]:10===l?["sepuluh"]:11===l?["sebelas"]:11<l&&l<20?[t[l-10],"belas"]:(s=l%10,0===(l=Math.floor(l/10))?[t[s]]:0==s?[t[l],"puluh"]:[t[l],"puluh",t[s]]),s=l.join(" "),r=new Set(l),o=["puluh","belas","seratus",...t];r.size<Math.min(10,o.length);)r.add(o[n(0,o.length-1)]);l=[...r].sort(()=>Math.random()-.5);setInfo(`Bina sebutan untuk nombor ${a}.`),speak(`Nombor ${a}. ${s}.`),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-purple-600 mb-4 flex-none">🎪 Bina Sebutan</h3>
+                
+                <div class="flex flex-col items-center mb-4 flex-none">
+                    <div class="text-6xl font-black text-slate-800 mb-1">${a}</div>
+                    <div class="text-purple-600 font-bold text-sm bg-purple-100 px-3 py-1 rounded-full">Hint: "${s}"</div>
+                </div>
+
+                <div id="token-result" class="min-h-[60px] border-4 border-purple-200 bg-purple-50 rounded-2xl p-2 flex flex-wrap justify-center gap-2 mb-6 flex-none"></div>
+
+                <div class="flex flex-wrap justify-center gap-2 mb-6 overflow-y-auto flex-1 content-start">
+                    ${l.map(e=>`
+                        <button onclick="pickToken(this, '${e}')" class="token-btn btn-3d bg-white border-purple-300 text-purple-800 px-3 py-2 rounded-xl font-bold text-sm">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+
+                <div class="flex justify-center gap-3 flex-none">
+                    <button onclick="setupAct3(document.getElementById('activity-content'))" class="btn-3d bg-slate-400 text-white px-4 py-2 rounded-lg text-sm">Soalan Lain 🔄</button>
+                    <button onclick="checkTokens('${s}')" class="btn-3d bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold text-sm">Semak ✅</button>
+                </div>
+            </div>
+        `}window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("opacity-50"),e.dataTransfer.setData("text/plain","")},window.dragEnd=function(e){e.target.classList.remove("opacity-50"),draggedElement=null},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")},window.sayNum=function(e,t){speak(e+". "+t),setInfo(e+": "+t)},window.dropTrain=function(e,t){var n;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&((n=parseInt(draggedElement.dataset.val))===t?(e.currentTarget.classList.remove("drop-zone"),e.currentTarget.classList.add("drop-zone-filled","pop-in"),e.currentTarget.innerHTML=n,e.currentTarget.removeAttribute("ondrop"),draggedElement.style.display="none",speak("Betul! "+n),setInfo(`Gerabak ${n} disambung!`),0===document.querySelectorAll(".drop-zone").length&&setTimeout(()=>{speak("Keretapi lengkap!"),triggerWin()},500)):(e.currentTarget.classList.add("shake","bg-red-100","border-red-300"),setTimeout(()=>e.currentTarget.classList.remove("shake","bg-red-100","border-red-300"),500),speak("Salah.")))};let pickedTokens=[],clothesState=(window.pickToken=function(e,t){e.disabled||(e.disabled=!0,e.classList.add("opacity-50"),pickedTokens.push(t),(e=document.createElement("span")).className="bg-purple-500 text-white px-4 py-2 rounded-lg font-bold pop-in",e.innerText=t,document.getElementById("token-result").appendChild(e),speak(t))},window.checkTokens=function(e){if(pickedTokens.join(" ")===e)triggerWin(),speak("Tahniah! Jawapan betul."),setInfo("Hebat! Jawapan tepat."),pickedTokens=[];else{document.getElementById("token-result").innerHTML="",document.querySelectorAll(".token-btn").forEach(e=>{e.disabled=!1,e.classList.remove("opacity-50")}),pickedTokens=[];let e=document.getElementById("token-result");e.classList.add("shake","border-red-400","bg-red-50"),setTimeout(()=>e.classList.remove("shake","border-red-400","bg-red-50"),500),speak("Salah. Cuba lagi."),setInfo("Salah. Sila susun semula.")}},{seq:[],next:null});function setupAct4(e,t){var t="asc"===t,n=t?"📈 Sidai Baju (Menaik)":"📉 Sidai Baju (Menurun)";let a=t?"orange":"red";var l=t?[12,13,14,15,16]:[30,29,28,27,26],l=(clothesState={seq:[...l],next:l[0]},[...l].sort(()=>Math.random()-.5));setInfo(`Susun baju ikut tertib ${t?"menaik":"menurun"}.`),e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-${a}-600 mb-4 flex-none">${n}</h3>
+                
+                <div class="relative min-h-[140px] mb-8 pt-6 px-2 flex-1 content-center">
+                    <div class="absolute top-6 left-0 right-0 h-1 bg-slate-800 z-0"></div>
+                    <div id="clothes-line" class="relative z-10 flex justify-center gap-1 min-h-[100px] items-start"
+                         ondrop="dropClothes(event)" ondragover="allowDrop(event)">
+                         </div>
+                </div>
+
+                <div class="bg-${a}-50 p-4 rounded-3xl border-2 border-${a}-200 flex-none">
+                    <p class="font-bold text-${a}-800 mb-2 text-sm">Bakul Baju:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        ${l.map(e=>`
+                            <div draggable="true" ondragstart="dragStart(event)" data-val="${e}"
+                                 class="draggable w-16 h-20 bg-${a}-100 border-2 border-${a}-400 text-${a}-800 rounded-t-3xl rounded-b-lg flex flex-col items-center justify-center shadow-md cursor-grab hover:scale-105 transition-transform">
+                                <div class="w-3 h-3 bg-slate-800 rounded-full mb-1 opacity-20"></div>
+                                <span class="text-2xl font-bold">${e}</span>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.dropClothes=function(e,t){var n;e.preventDefault(),draggedElement&&((e=parseInt(draggedElement.dataset.val))===clothesState.next?(draggedElement.style.opacity="1",draggedElement.setAttribute("draggable","false"),draggedElement.classList.remove("cursor-grab","draggable"),(n=document.createElement("div")).className="flex flex-col items-center pop-in",n.innerHTML=`
+                <div class="w-2 h-8 bg-slate-400 rounded-full -mb-4 z-0"></div>
+            `,n.appendChild(draggedElement),document.getElementById("clothes-line").appendChild(n),speak(e.toString()),(n=clothesState.seq.indexOf(e))<clothesState.seq.length-1?(clothesState.next=clothesState.seq[n+1],setInfo(`Seterusnya nombor ${clothesState.next}.`)):(clothesState.next=null,setInfo("Semua baju dah disidai!"),triggerWin(),speak("Syabas! Siap."))):(speak("Salah urutan."),setInfo(`Cari nombor ${clothesState.next} dahulu.`),draggedElement.classList.add("shake"),setTimeout(()=>draggedElement.classList.remove("shake"),500)))}</script>

@@ -1,0 +1,114 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Wang Hingga RM10</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.money-bg{background-image:url(https://www.transparenttextures.com/patterns/shattered-island.png)}.coin{border-radius:50%;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-weight:700;border:4px dashed rgba(0,0,0,.2)}.note{border-radius:6px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-weight:700;border:4px solid rgba(0,0,0,.1)}.drop-zone{transition:all .2s;border:3px dashed #94a3b8;background:#f1f5f9}.drop-zone.drag-over{border-color:#3b82f6;background:#dbeafe;transform:scale(1.05)}.draggable{cursor:grab;transition:transform .1s}.draggable:active{cursor:grabbing;transform:scale(1.1) rotate(5deg)}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">💵</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Wang Hingga RM10</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">💸</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Wang Kita</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Belajar nilai wang sehingga RM10.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔢 Susun</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🐷 Tabung</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">👛 Dompet</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔙 Baki</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🛒 Kedai</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let MONEY_DATA={S5:{label:"5 Sen",value:.05,speech:"lima sen",type:"syiling",img:"./Assets/5 sen.png",color:"gray"},S10:{label:"10 Sen",value:.1,speech:"sepuluh sen",type:"syiling",img:"./Assets/10 sen.png",color:"gray"},S20:{label:"20 Sen",value:.2,speech:"dua puluh sen",type:"syiling",img:"./Assets/20 sen.png",color:"yellow"},S50:{label:"50 Sen",value:.5,speech:"lima puluh sen",type:"syiling",img:"./Assets/50 sen.png",color:"yellow"},RM1:{label:"RM 1",value:1,speech:"satu ringgit",type:"kertas",img:"./Assets/RM1.png",color:"blue"},RM5:{label:"RM 5",value:5,speech:"lima ringgit",type:"kertas",img:"./Assets/RM5.png",color:"green"},RM10:{label:"RM 10",value:10,speech:"sepuluh ringgit",type:"kertas",img:"./Assets/RM10.png",color:"red"},RM20:{label:"RM 20",value:20,speech:"dua puluh ringgit",type:"kertas",img:"./Assets/RM20.png",color:"orange"},RM50:{label:"RM 50",value:50,speech:"lima puluh ringgit",type:"kertas",img:"./Assets/RM50.png",color:"teal"},RM100:{label:"RM 100",value:100,speech:"seratus ringgit",type:"kertas",img:"./Assets/RM100.png",color:"purple"}},ALL_IDS=Object.keys(MONEY_DATA),currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti!",draggedElement=null,susunState={nextVal:.05},tabungState={total:0,saku:.5},dompetState={target:0,current:0},kedaiState={wallet:10,total:0};function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function formatRM(e){return e%1==0?"RM "+e:"RM "+e.toFixed(2)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">💸</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Wang Kita</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function createMoneyCard(e,t=!1,a=""){var n=MONEY_DATA[e],s=(n.type,"syiling"===n.type?"w-14 h-14":"w-24 h-12");"syiling"===n.type?n.label.replace(" Sen",""):n.label.replace("RM ","");return`
+            <div class="flex items-center justify-center font-bold shadow-md bg-white p-1 rounded-lg ${a} ${t?"draggable cursor-grab active:cursor-grabbing hover:scale-105 transition-transform":""}"
+                 ${t?`draggable="true" ondragstart="dragStart(event)" data-id="${e}"`:""}>
+                <img src="${n.img}" class="${s} object-contain drop-shadow-sm pointer-events-none">
+            </div>
+        `}let susunSequence=[],susunCorrectOrder=[],susunDropped=[];function setupAct1(e){setInfo("Susun lima keping wang dari nilai kecil ke besar.");var t=Object.keys(MONEY_DATA).sort(()=>.5-Math.random());susunSequence=t.slice(0,5),susunCorrectOrder=susunSequence.slice().sort((e,t)=>MONEY_DATA[e].value-MONEY_DATA[t].value),susunDropped=Array(5).fill(null),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-blue-600 mb-4">🔢 Susun Nilai</h3>
+                <p class="mb-4 text-slate-500">Susun lima keping wang berikut dari nilai kecil ke besar.</p>
+                
+                <div class="flex flex-wrap justify-center gap-3 mb-6 min-h-[100px] border-b-2 border-slate-100 pb-4">
+                    ${susunSequence.map(e=>createMoneyCard(e,!0)).join("")}
+                </div>
+                
+                <div class="flex justify-center gap-2 mb-6">
+                    ${susunSequence.map((e,t)=>`
+                        <div class="drop-zone w-16 h-16 rounded-xl flex items-center justify-center text-slate-400 font-bold text-lg"
+                             ondrop="dropSort(event, ${t})" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondragenter="dragEnter(event)" data-index="${t}">
+                             ${t+1}
+                        </div>
+                    `).join("")}
+                </div>
+                
+                <button onclick="checkSort()" class="btn-3d bg-blue-500 text-white px-6 py-2 rounded-xl font-bold text-lg">Semak Jawapan 🔍</button>
+            </div>
+        `}function setupAct2(e){let t=parseFloat((5*Math.random()+1).toFixed(2));var a=[{v:t-.5,l:formatRM(t-.5)},{v:t,l:formatRM(t)},{v:t+.5,l:formatRM(t+.5)}].sort(()=>.5-Math.random()),n=ALL_IDS.filter(e=>MONEY_DATA[e].value<=t),s=[];let r=0;for(;r<t;){var l=n[Math.floor(Math.random()*n.length)],l=MONEY_DATA[l];if(r+l.value<=t+.01&&(s.push({type:"syiling"===l.type?"coin":"note",val:"syiling"===l.type?l.label.replace(" Sen",""):l.label.replace("RM ",""),img:l.img}),r+=l.value),10<s.length)break}setInfo("Berapa jumlah wang dalam tabung?"),e.innerHTML=`
+             <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-green-600 mb-4">🐷 Tabung Saya</h3>
+                <p class="mb-4 text-slate-500">Berapa jumlah wang dalam tabung?</p>
+                
+                <div class="bg-pink-100 border-4 border-pink-300 rounded-full w-64 h-64 mx-auto flex flex-wrap items-center justify-center gap-1 p-8 mb-6 shadow-xl overflow-hidden relative">
+                    <div class="absolute top-4 w-24 h-3 bg-pink-800 rounded-full opacity-20"></div>
+                    ${s.map(e=>`
+                         <img src="${e.img}" class="${"coin"===e.type?"w-10 h-10":"w-16 h-8"} object-contain drop-shadow-sm animate-popIn hover:scale-110 transition-transform cursor-pointer" title="${e.val}">
+                    `).join("")}
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+                    ${a.map(e=>`
+                        <button onclick="checkTabung(${e.v}, ${t}, this)" class="btn-3d bg-green-500 text-white py-2 rounded-xl text-lg font-bold">
+                            ${e.l}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct3(e){var t=parseFloat((5*Math.random()+1).toFixed(2)),a=(dompetState={target:t,current:0},setInfo(`Kumpul RM ${t.toFixed(2)} dalam dompet.`),["S5","S10","S20","S50","RM1","RM5"].sort(()=>.5-Math.random()).slice(0,6));e.innerHTML=`
+             <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-purple-600 mb-4">👛 Dompet Ajaib</h3>
+                <p class="mb-4 text-slate-500">Seret wang ke dalam dompet untuk mencapai sasaran.</p>
+                
+                <div class="flex gap-4 justify-center items-start">
+                    <div class="flex flex-wrap justify-center gap-2 bg-slate-100 p-3 rounded-2xl min-h-[150px] w-1/2 border-2 border-slate-200">
+                        ${a.map(e=>createMoneyCard(e,!0)).join("")}
+                    </div>
+                    
+                    <div class="w-1/2">
+                        <div class="bg-purple-50 p-3 rounded-xl border-2 border-purple-200 mb-3 font-bold text-purple-800">Sasaran: ${formatRM(t)}</div>
+                        <div class="drop-zone bg-purple-100 rounded-3xl border-4 border-purple-300 min-h-[200px] flex flex-col items-center justify-center p-3"
+                             ondrop="dropDompet(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondragenter="dragEnter(event)">
+                             <div id="dompet-val" class="text-4xl font-black text-purple-700 mb-2">${formatRM(0)}</div>
+                             <p class="text-purple-600 opacity-50 font-bold text-sm">Letak Duit Sini</p>
+                        </div>
+                        <button onclick="loadActivity(3)" class="mt-3 text-slate-400 hover:text-slate-600 underline text-sm">Reset</button>
+                    </div>
+                </div>
+            </div>
+        `}function setupAct4(e){var t=parseFloat((5*Math.random()+1).toFixed(2)),a=[5,10],a=a[Math.floor(Math.random()*a.length)];let n=a-t;var s=[parseFloat((n-.5).toFixed(2)),parseFloat(n.toFixed(2)),parseFloat((n+.5).toFixed(2))].filter(e=>0<=e).sort(()=>.5-Math.random());setInfo(`Harga ${formatRM(t)}. Bayar ${formatRM(a)}. Berapa baki?`),e.innerHTML=`
+             <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-orange-600 mb-4">🔙 Kira Baki</h3>
+                
+                <div class="bg-white border-2 border-orange-200 p-4 rounded-3xl mb-4 inline-block shadow-lg">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="text-5xl border-2 border-slate-100 p-2 rounded-xl">🎁</div>
+                        <div>
+                            <div class="text-slate-500 font-bold uppercase text-xs">Harga Barang</div>
+                            <div class="text-3xl font-black text-orange-600">${formatRM(t)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                     <p class="text-slate-500 font-bold mb-2">Anda Bayar:</p>
+                     <div class="flex justify-center gap-2">
+                         ${createMoneyCard("RM"+a,!1,"bg-red-100 border-red-300 text-red-800")}
+                     </div>
+                </div>
+                
+                <p class="text-lg font-bold text-orange-800 mb-2 bg-orange-50 inline-block px-4 py-1 rounded-full">Baki: RM ?</p>
+
+                <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+                    ${s.map(e=>`
+                       <button onclick="checkBaki(${e}, ${n}, this)" class="btn-3d bg-orange-500 text-white py-2 rounded-xl text-lg font-bold">${formatRM(e)}</button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct5(e){setInfo("Beli barang. Pastikan duit cukup."),kedaiState={wallet:10,total:0};e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-orange-600 mb-4">🛒 Kedai Runcit</h3>
+                <div class="flex justify-between px-10 mb-4 font-bold text-xl">
+                    <div>Dompet: <span class="text-green-600" id="wallet-display">RM 10.00</span></div>
+                    <div>Total: <span class="text-red-600" id="total-display">RM 0.00</span></div>
+                </div>
+                
+                <div class="flex justify-center gap-6">
+                    ${[{n:"Roti",p:1.2,i:"🍞"},{n:"Air",p:2.5,i:"🧃"},{n:"Buku",p:4,i:"📘"}].map(e=>`
+                        <button onclick="buyItem(${e.p}, '${e.n}')" class="btn-3d bg-white border-slate-200 p-6 rounded-2xl hover:bg-orange-50 group">
+                            <div class="text-6xl mb-2 group-hover:scale-110 transition">${e.i}</div>
+                            <div class="font-bold text-slate-700">${e.n}</div>
+                            <div class="text-orange-600 font-black">RM ${e.p.toFixed(2)}</div>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.dragStart=function(e){e.dataTransfer.setData("text/plain",e.target.dataset.id),draggedElement=e.target,setTimeout(()=>e.target.classList.add("hidden"),0)},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.remove("drag-over")},window.dragEnter=function(e){e.preventDefault(),e.currentTarget.classList.add("drag-over")},window.dropSort=function(e,t){e.preventDefault(),e.currentTarget.classList.remove("drag-over");var a=e.dataTransfer.getData("text/plain"),n=(susunDropped[t]&&(n=document.querySelector(`[data-id="${susunDropped[t]}"]`))&&(n.classList.remove("hidden"),n.style.opacity="1",n.setAttribute("draggable","true"),n.classList.add("draggable"),document.querySelector(".border-b-2.border-slate-100.pb-4").appendChild(n)),draggedElement);n&&(n.classList.remove("hidden"),n.style.opacity="1",n.removeAttribute("draggable"),n.classList.remove("draggable"),e.currentTarget.innerHTML="",e.currentTarget.appendChild(n),susunDropped[t]=a)},window.checkSort=function(){let t=!0;for(let e=0;e<susunCorrectOrder.length;e++)if(susunDropped[e]!==susunCorrectOrder[e]){t=!1;break}t?(speak("Tahniah! Susunan betul."),triggerWin(),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.add("bg-green-100","border-green-400"))):(speak("Cuba lagi. Susunan salah."),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.add("shake")),setTimeout(()=>document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("shake")),500))},window.checkTabung=function(e,t,a){Math.abs(e-t)<.01?(a.classList.remove("bg-green-500"),a.classList.add("bg-green-600","text-white"),speak("Betul! Jumlahnya "+formatRM(t)),triggerWin()):(a.classList.add("shake"),setTimeout(()=>a.classList.remove("shake"),500),speak("Salah. Cuba lagi."))},window.dropDompet=function(e){e.preventDefault(),e.currentTarget.classList.remove("drag-over");var t=e.dataTransfer.getData("text/plain"),t=MONEY_DATA[t],a=draggedElement;a&&(a.classList.remove("hidden"),a.style.opacity="1",a.removeAttribute("draggable"),a.classList.remove("draggable"),e.currentTarget.appendChild(a)),dompetState.current+=t.value,document.getElementById("dompet-val").innerText=formatRM(dompetState.current),Math.abs(dompetState.current-dompetState.target)<.01?(speak("Cukup! Bagus."),triggerWin(),document.querySelector(".drop-zone").classList.add("bg-green-100","border-green-400")):dompetState.current>dompetState.target?(speak("Terlebih."),document.getElementById("dompet-val").classList.add("shake"),setTimeout(()=>document.getElementById("dompet-val").classList.remove("shake"),500)):speak(t.speech)},window.checkBaki=function(e,t,a){Math.abs(e-t)<.01?(a.classList.remove("bg-orange-500"),a.classList.add("bg-green-500"),speak("Betul! Baki "+formatRM(t)),triggerWin()):(a.classList.add("shake"),setTimeout(()=>a.classList.remove("shake"),500),speak("Salah."))},window.buyItem=function(e,t){kedaiState.wallet>=e?(kedaiState.wallet-=e,kedaiState.total+=e,document.getElementById("wallet-display").innerText="RM "+kedaiState.wallet.toFixed(2),document.getElementById("total-display").innerText="RM "+kedaiState.total.toFixed(2),speak(`Beli ${t}.`)):speak("Duit tak cukup!")}</script>

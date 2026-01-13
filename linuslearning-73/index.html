@@ -1,0 +1,165 @@
+<!doctypehtml><html lang="ms-MY"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kemahiran Pemulihan: Gabungan Operasi (+/-)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}.pulse-bounce{animation:pulse-bounce .5s ease-out 1}@keyframes pulse-bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}.fade-in{animation:fade-in .5s ease-out 1}@keyframes fade-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.num-display{min-width:80px;padding:.5rem 1rem;border:3px solid #94a3b8;border-radius:1rem;font-weight:700;font-size:1.8rem;background-color:#f8fafc;color:#334155;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 2px 4px rgba(0,0,0,.05);transition:all .3s ease}.step-box{border:3px dashed #cbd5e1;background-color:#f8fafc;padding:1rem;border-radius:1rem;margin-bottom:1rem;opacity:.6;transition:all .3s ease;text-align:left}.step-box.active{opacity:1;border-style:solid;transform:scale(1.02);box-shadow:4px 4px 0 rgba(0,0,0,.05)}.step-box.done{opacity:.8;border-style:solid;border-color:#22c55e;background-color:#dcfce7}.eq-box{padding:1rem;border-radius:1rem;font-size:2rem;font-weight:800;border:4px solid #cbd5e1;background-color:#fff;margin:0 .5rem;transition:all .4s ease;display:flex;align-items:center;justify-content:center;min-width:80px}.eq-box.op{border:none;background:0 0;font-size:1.5rem;min-width:auto}.eq-box.merged{transform:scale(1.1);border-color:#22c55e;background-color:#dcfce7;color:#15803d}.eq-box.faded{opacity:0;width:0;padding:0;margin:0;border:0;overflow:hidden}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="fixed top-2 left-0 right-0 z-50 px-4 pointer-events-none"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-1.5 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-2"><span class="text-2xl animate-bounce">📈</span> <span id="info-text"class="text-base font-bold text-green-900 leading-none mt-0.5">Gabungan Operasi (+/-)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-1 transition-colors shadow-sm text-sm">🔊</button></div></div><div class="h-16 flex-none"></div><div class="max-w-6xl mx-auto p-2 w-full flex-1 flex flex-col overflow-hidden min-h-0"><div class="game-card p-4 mb-2 flex items-center justify-center relative w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col"><div class="py-4 text-center"><div class="text-6xl mb-2 animate-pulse">📉</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Bercampur</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Tambah dan Tolak Serentak<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 border-2 border-white flex-none"><h3 class="text-sm font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">🎮 Pilih Aktiviti</h3><div class="flex flex-wrap justify-center gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🚌 Perjalanan Bas</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-3 rounded-lg text-xs">💧 Paras Air</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-3 rounded-lg text-xs">⌨️ Kira Langkah</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🧩 Susun Kotak</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🎯 Tembak Belon</button></div><div class="flex justify-center gap-2 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-xs">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-sm">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",r=(e,t)=>Math.floor(Math.random()*(t-e+1))+e;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.1,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function pulseElement(e){e&&(e.classList.add("pulse-bounce"),setTimeout(()=>e.classList.remove("pulse-bounce"),500))}function shakeElement(e){e&&(e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),500))}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadActivity1(t),2===e&&loadActivity2(t),3===e&&loadActivity3(t),4===e&&loadActivity4(t),5===e&&loadActivity5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="h-full flex flex-col justify-center items-center py-4 text-center"><div class="text-6xl mb-4 animate-bounce">📉</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Bercampur</h2><p class="text-lg text-slate-500 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}let a1={A:0,B:0,C:0,mid:0,final:0,step:0};function loadActivity1(e){a1.A=r(20,50),a1.B=r(10,30),a1.mid=a1.A+a1.B,a1.C=r(5,a1.mid-1),a1.final=a1.mid-a1.C,a1.step=0,setInfo(`Bas ada ${a1.A}. Naik ${a1.B}. Turun ${a1.C}. Berapa tinggal?`),e.innerHTML=`
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🚌 Perjalanan Bas</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-2 text-xl bg-blue-50 p-2 rounded-xl border-2 border-blue-100 scale-90">
+                    <div class="num-display bg-white text-lg min-w-[3rem] px-2 py-1">${a1.A}</div>
+                    <span class="text-slate-400 font-bold">+</span>
+                    <div class="num-display bg-white text-lg min-w-[3rem] px-2 py-1">${a1.B}</div>
+                    <span class="text-rose-500 font-bold">−</span>
+                    <div class="num-display bg-white text-lg min-w-[3rem] px-2 py-1">${a1.C}</div>
+                    <span class="text-slate-400 font-bold">=</span>
+                    <div id="a1-result" class="num-display bg-white border-blue-500 text-blue-600 text-lg min-w-[3rem] px-2 py-1">?</div>
+                </div>
+
+                <div class="max-w-sm mx-auto mb-2 space-y-1 w-full">
+                    <div id="a1-step1" class="step-box active scale-90 origin-center p-2 mb-1" style="border-color: #3b82f6;">
+                        <div class="flex items-center gap-2">
+                             <div class="text-xl">🏁</div>
+                             <div>
+                                <div class="text-xs font-bold text-slate-400 uppercase">Permulaan</div>
+                                <div class="text-sm font-bold">Bas ada <span class="text-blue-600">${a1.A}</span> penumpang.</div>
+                             </div>
+                        </div>
+                    </div>
+                    
+                    <div id="a1-step2" class="step-box scale-90 origin-center p-2 mb-1">
+                        <div class="flex items-center gap-2">
+                             <div class="text-xl">➕</div>
+                             <div>
+                                <div class="text-xs font-bold text-slate-400 uppercase">Stesen 1 (Naik)</div>
+                                <div class="text-sm font-bold"><span class="text-green-600">+${a1.B}</span> orang naik. Jumlah: <span id="a1-mid" class="bg-slate-200 px-1 rounded">?</span></div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div id="a1-step3" class="step-box scale-90 origin-center p-2 mb-1">
+                        <div class="flex items-center gap-2">
+                             <div class="text-xl">➖</div>
+                             <div>
+                                <div class="text-xs font-bold text-slate-400 uppercase">Stesen 2 (Turun)</div>
+                                <div class="text-sm font-bold"><span class="text-rose-500">-${a1.C}</span> orang turun. Baki: <span id="a1-fin" class="bg-slate-200 px-1 rounded">?</span></div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button id="a1-btn" onclick="runA1()" class="btn-3d bg-blue-500 text-white font-bold py-2 px-6 rounded-xl text-lg">Jalan Terus ➡️</button>
+                </div>
+            </div>
+        `}function runA1(){var e,{mid:t,final:a,step:n}=a1,s=document.getElementById("a1-btn");0===n?(document.getElementById("a1-step1").classList.replace("active","done"),document.getElementById("a1-step2").classList.add("active"),document.getElementById("a1-step2").style.borderColor="#3b82f6",(e=document.getElementById("a1-mid")).textContent=t,e.className="text-green-700 bg-green-100 px-2 rounded animate-pulse",setInfo(`Sekarang ada ${t} orang.`),a1.step=1):1===n&&(document.getElementById("a1-step2").classList.replace("active","done"),document.getElementById("a1-step3").classList.add("active"),document.getElementById("a1-step3").style.borderColor="#3b82f6",(e=document.getElementById("a1-fin")).textContent=a,e.className="text-blue-700 bg-blue-100 px-2 rounded animate-pulse",document.getElementById("a1-result").textContent=a,s.disabled=!0,s.textContent="Tamat Perjalanan",triggerWin(),speak(`Sampai destinasi. Baki ${a} orang.`))}let a2={A:0,B:0,C:0,mid:0,final:0,step:0};function loadActivity2(e){a2.A=r(100,200),a2.B=r(30,80),a2.mid=a2.A-a2.B,a2.C=r(20,50),a2.final=a2.mid+a2.C,a2.step=0,setInfo(`Ada ${a2.A}L. Guna ${a2.B}L. Tambah ${a2.C}L. Berapa baki?`),e.innerHTML=`
+            <h3 class="text-xl font-bold text-green-600 mb-2 text-center flex-none">💧 Paras Air</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-2 text-xl bg-green-50 p-2 rounded-xl border-2 border-green-100 scale-90">
+                    <div class="num-display bg-white text-lg min-w-[3rem] px-2 py-1">${a2.A}</div>
+                    <span class="text-rose-500 font-bold">−</span>
+                    <div class="num-display bg-white text-lg min-w-[3rem] px-2 py-1">${a2.B}</div>
+                    <span class="text-slate-400 font-bold">+</span>
+                    <div class="num-display bg-white text-lg min-w-[3rem] px-2 py-1">${a2.C}</div>
+                    <span class="text-slate-400 font-bold">=</span>
+                    <div id="a2-result" class="num-display bg-white border-green-500 text-green-600 text-lg min-w-[3rem] px-2 py-1">?</div>
+                </div>
+
+                <div class="max-w-sm mx-auto mb-2 space-y-1 w-full">
+                     <div id="a2-step1" class="step-box active scale-90 origin-center p-2 mb-1" style="border-color: #22c55e;">
+                        <div class="flex items-center gap-2">
+                             <div class="text-xl">🛢️</div>
+                             <div>
+                                <div class="text-xs font-bold text-slate-400 uppercase">Mula</div>
+                                <div class="text-sm font-bold">Tangki ada <span class="text-blue-600">${a2.A}</span> liter air.</div>
+                             </div>
+                        </div>
+                    </div>
+
+                     <div id="a2-step2" class="step-box scale-90 origin-center p-2 mb-1">
+                        <div class="flex items-center gap-2">
+                             <div class="text-xl">🚿</div>
+                             <div>
+                                <div class="text-xs font-bold text-slate-400 uppercase">Guna Air (Tolak)</div>
+                                <div class="text-sm font-bold"><span class="text-rose-500">-${a2.B}</span> liter diguna. Baki: <span id="a2-mid" class="bg-slate-200 px-1 rounded">?</span></div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div id="a2-step3" class="step-box scale-90 origin-center p-2 mb-1">
+                        <div class="flex items-center gap-2">
+                             <div class="text-xl">🌧️</div>
+                             <div>
+                                <div class="text-xs font-bold text-slate-400 uppercase">Hujan (Tambah)</div>
+                                <div class="text-sm font-bold"><span class="text-green-600">+${a2.C}</span> liter masuk. Akhir: <span id="a2-fin" class="bg-slate-200 px-1 rounded">?</span></div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button id="a2-btn" onclick="runA2()" class="btn-3d bg-green-500 text-white font-bold py-2 px-6 rounded-xl text-lg">Proses Air ➡️</button>
+                </div>
+            </div>
+        `}function runA2(){var e,{mid:t,final:a,step:n}=a2,s=document.getElementById("a2-btn");0===n?(document.getElementById("a2-step1").classList.replace("active","done"),document.getElementById("a2-step2").classList.add("active"),document.getElementById("a2-step2").style.borderColor="#22c55e",(e=document.getElementById("a2-mid")).textContent=t,e.className="text-rose-700 bg-rose-100 px-2 rounded animate-pulse",setInfo(`Air tinggal ${t} liter.`),a2.step=1):1===n&&(document.getElementById("a2-step2").classList.replace("active","done"),document.getElementById("a2-step3").classList.add("active"),document.getElementById("a2-step3").style.borderColor="#22c55e",(e=document.getElementById("a2-fin")).textContent=a,e.className="text-green-700 bg-green-100 px-2 rounded animate-pulse",document.getElementById("a2-result").textContent=a,s.disabled=!0,s.textContent="Selesai",triggerWin(),speak(`Baki akhir ialah ${a} liter.`))}let a3={A:0,B:0,C:0,mid:0,final:0};function loadActivity3(e){a3.A=r(80,150),a3.B=r(30,80),a3.mid=a3.A+a3.B,a3.C=r(20,50),a3.final=a3.mid-a3.C,setInfo("Kira langkah 1 dahulu, kemudian langkah 2."),e.innerHTML=`
+            <h3 class="text-xl font-bold text-violet-500 mb-2 text-center flex-none">⌨️ Kira Ikut Langkah</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="text-lg font-bold text-center mb-4 text-slate-700 bg-violet-50 p-2 rounded-xl inline-block">
+                    ${a3.A} + ${a3.B} − ${a3.C} = <span id="a3-res-top" class="text-violet-600">?</span>
+                </div>
+
+                <div class="max-w-sm mx-auto space-y-4 w-full">
+                    <div class="bg-white border-2 border-violet-200 p-3 rounded-xl shadow-sm">
+                        <label class="block text-slate-500 font-bold mb-1 uppercase text-xs">Langkah 1 (Tambah)</label>
+                        <div class="flex items-center gap-2 text-lg font-bold justify-center">
+                            <span>${a3.A} + ${a3.B} = </span>
+                            <input id="a3-in1" type="number" onchange="checkA3(1)" class="w-24 p-1 text-center border-2 border-slate-300 rounded-lg focus:border-violet-500 outline-none" placeholder="?">
+                        </div>
+                    </div>
+
+                    <div id="a3-step2-area" class="bg-white border-2 border-violet-200 p-3 rounded-xl shadow-sm opacity-50 pointer-events-none transition-all">
+                        <label class="block text-slate-500 font-bold mb-1 uppercase text-xs">Langkah 2 (Tolak)</label>
+                        <div class="flex items-center gap-2 text-lg font-bold justify-center">
+                            <span id="a3-mid-disp">?</span><span> − ${a3.C} = </span>
+                            <input id="a3-in2" type="number" onchange="checkA3(2)" class="w-24 p-1 text-center border-2 border-slate-300 rounded-lg focus:border-violet-500 outline-none" placeholder="?">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="a3-fb" class="text-center mt-2 text-sm font-bold text-slate-500 h-6">Kira jawapan langkah 1...</div>
+            </div>
+        `}function checkA3(e){var t=document.getElementById("a3-in1"),a=document.getElementById("a3-in2"),n=document.getElementById("a3-step2-area"),s=document.getElementById("a3-fb");1===e?parseInt(t.value)===a3.mid?(t.disabled=!0,t.classList.add("bg-green-100","border-green-500","text-green-700"),n.classList.remove("opacity-50","pointer-events-none"),document.getElementById("a3-mid-disp").textContent=a3.mid,document.getElementById("a3-mid-disp").classList.add("text-green-600"),s.textContent="Betul! Sekarang kira langkah kedua.",a.focus()):(shakeElement(t),s.textContent="Salah. Cuba tambah semula."):2===e&&(parseInt(a.value)===a3.final?(a.disabled=!0,a.classList.add("bg-green-100","border-green-500","text-green-700"),document.getElementById("a3-res-top").textContent=a3.final,s.textContent="TAHNIAH! Jawapan Tepat!",triggerWin(),speak(`Jawapan akhir ialah ${a3.final}.`)):(shakeElement(a),s.textContent="Salah. Cuba tolak semula."))}let a4={A:0,B:0,C:0,mid:0,final:0,step:0};function loadActivity4(e){a4.A=r(100,200),a4.B=r(50,100),a4.C=r(20,50),a4.mid=a4.A+a4.B,a4.final=a4.mid-a4.C,a4.step=0,setInfo("Tekan butang untuk lihat kotak bergabung."),e.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-500 mb-2 text-center flex-none">🧩 Susun & Gabung</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+
+                <div class="flex flex-wrap items-center justify-center min-h-[120px] mb-4 gap-2 scale-90">
+                    <div id="box-a" class="eq-box text-xl p-2 min-w-[3rem]">${a4.A}</div>
+                    <div id="op1" class="eq-box op text-xl">+</div>
+                    <div id="box-b" class="eq-box text-xl p-2 min-w-[3rem]">${a4.B}</div>
+                    <div id="op2" class="eq-box op text-xl">−</div>
+                    <div id="box-c" class="eq-box text-xl p-2 min-w-[3rem]">${a4.C}</div>
+                </div>
+
+                <div id="a4-desc" class="text-center text-sm font-bold text-slate-500 mb-4 h-6">Kira dari kiri dahulu.</div>
+
+                <div class="text-center">
+                    <button id="a4-btn" onclick="runA4()" class="btn-3d bg-orange-500 text-white font-bold py-2 px-6 rounded-xl text-lg">Gabung Langkah 1 ➡️</button>
+                </div>
+            </div>
+        `}function runA4(){var e,t=document.getElementById("a4-btn"),a=document.getElementById("a4-desc");0===a4.step?(document.getElementById("box-a").classList.add("faded"),document.getElementById("op1").classList.add("faded"),(e=document.getElementById("box-b")).textContent=a4.mid,e.classList.add("merged"),a.textContent=`${a4.A} + ${a4.B} menjadi ${a4.mid}.`,t.textContent="Gabung Langkah Akhir ➡️",a4.step=1):1===a4.step&&(document.getElementById("box-b").classList.add("faded"),document.getElementById("op2").classList.add("faded"),(e=document.getElementById("box-c")).textContent=a4.final,e.classList.add("merged"),a.textContent=`${a4.mid} - ${a4.C} menjadi ${a4.final}.`,t.disabled=!0,t.textContent="Selesai!",triggerWin(),speak("Siap!"))}let a5={ans:0};function loadActivity5(e){var t=r(50,100),a=r(20,50),n=r(10,30);a5.ans=t+a-n,setInfo("Kira cepat dan tembak!"),e.innerHTML=`
+            <h3 class="text-xl font-bold text-rose-500 mb-2 text-center flex-none">🎯 Tembak Belon</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+
+                <div class="relative flex justify-center items-center py-4 mb-2">
+                    <div class="text-[100px] leading-none animate-bounce cursor-pointer relative" onclick="document.getElementById('a5-in').focus()">🎈</div>
+                    <div class="absolute bg-white px-2 py-1 rounded-lg shadow-xl border-2 border-slate-200 text-lg font-bold transform -rotate-6 top-6">
+                        ${t} + ${a} − ${n} = ?
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-center gap-2 mb-2">
+                    <input id="a5-in" type="number" class="w-24 p-2 text-center text-xl font-bold border-4 border-rose-300 rounded-xl outline-none focus:border-rose-500" placeholder="?">
+                    <button onclick="shootA5()" class="btn-3d bg-rose-500 text-white font-bold py-2 px-4 rounded-xl text-xl">🏹</button>
+                </div>
+
+                <div id="a5-fb" class="text-center text-sm font-bold text-slate-500 min-h-[24px]">Masukkan jawapan...</div>
+            </div>
+        `}function shootA5(){var e=parseInt(document.getElementById("a5-in").value),t=document.getElementById("a5-fb");e===a5.ans?(t.innerHTML='<span class="text-green-600 text-2xl">POP! 💥 TEPAT!</span>',triggerWin(),speak("Pop! Betul!")):(t.innerHTML='<span class="text-rose-500">Tersasar! Cuba lagi.</span>',shakeElement(document.getElementById("a5-in")))}"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>

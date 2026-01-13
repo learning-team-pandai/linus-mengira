@@ -1,0 +1,109 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Kemahiran Pemulihan: Masa & Waktu</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:.75rem;min-width:80px;min-height:40px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#334155}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.05)}.drop-zone-filled{border-style:solid;border-color:#4ade80;background-color:#f0fdf4;color:#15803d}.clock-face{width:180px;height:180px;border:6px solid #475569;background:#fff;border-radius:50%;position:relative;margin:10px auto;box-shadow:inset 0 0 20px rgba(0,0,0,.05)}.clock-hand{position:absolute;bottom:50%;left:50%;transform-origin:bottom center;border-radius:10px;z-index:10}.hour-hand{width:8px;height:70px;background:#1e293b;transform:translateX(-50%) rotate(0)}.minute-hand{width:6px;height:100px;background:#ef4444;transform:translateX(-50%) rotate(0)}.clock-center{width:16px;height:16px;background:#475569;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20}.clock-number{position:absolute;font-weight:700;color:#94a3b8;font-size:1.2rem}#timeline-display{transition:all .5s ease;border:4px solid rgba(0,0,0,.1)}#timeline-display.night{background:#0f172a;color:#fff}#timeline-display.dawn{background:#fdba74;color:#7c2d12}#timeline-display.day{background:#bae6fd;color:#0c4a6e}#timeline-display.dusk{background:#fbcfe8;color:#831843}.item-card{background:#fff;border:2px solid #e2e8f0;border-radius:.75rem;padding:1rem;font-weight:700;cursor:pointer;text-align:center;box-shadow:4px 4px 0 rgba(0,0,0,.1);transition:transform .1s}.item-card:active{transform:scale(.95)}.item-card:hover{border-color:#3b82f6}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">⏰</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Pilih aktiviti!</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-24"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200 overflow-hidden"><div class="py-10 text-center"><div class="text-6xl mb-6 animate-pulse">🕰️</div><h2 class="text-4xl font-bold text-emerald-600 mb-4">Masa & Waktu</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Belajar jam & jadual.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">⚙️<br>Jam</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">5️⃣<br>Gandaan</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">☀️<br>Garis</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">📋<br>Padan</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 rounded-xl text-xs">📅<br>Jadual</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar masa!",draggedElement=null;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadClockSandbox(t),2===e&&loadExploreFives(t),3===e&&loadTimelineActivity(t),4===e&&loadTimeMatching(t),5===e&&loadScheduleBuilder(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🕰️</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Masa & Waktu</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadClockSandbox(e){setInfo("Gerakkan slider untuk memutar jam."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden items-center justify-center">
+                <h3 class="text-xl font-bold text-blue-600 mb-2 flex-none">⚙️ Jam Ajaib</h3>
+                
+                <div class="bg-blue-50 rounded-3xl p-2 border-2 border-blue-200 inline-block relative flex-none">
+                    <div class="clock-face">
+                        <div id="hour-hand" class="clock-hand hour-hand"></div>
+                        <div id="minute-hand" class="clock-hand minute-hand"></div>
+                        <div class="clock-center"></div>
+                        ${[12,3,6,9].map(e=>{let t=3===e?"right:5px; top:50%; transform:translateY(-50%)":9===e?"left:5px; top:50%; transform:translateY(-50%)":6===e?"bottom:5px; left:50%; transform:translateX(-50%)":12===e?"top:5px; left:50%; transform:translateX(-50%)":"";return`<div class="clock-number text-sm" style="${t}">${e}</div>`}).join("")}
+                    </div>
+                    <div id="digital-display" class="text-3xl font-mono font-bold text-slate-700 bg-white border-2 border-slate-300 rounded-xl px-4 py-1 inline-block mt-2">00:00</div>
+                </div>
+
+                <div class="w-full max-w-sm mx-auto mt-2 space-y-2 bg-white p-2 rounded-2xl border-2 border-slate-200 shadow-sm flex-none">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-500 mb-1">Jarum Jam</label>
+                        <input id="hour-slider" type="range" min="0" max="11" value="0" step="1" class="w-full h-4 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" oninput="updateClockDisplay()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-500 mb-1">Jarum Minit</label>
+                        <input id="minute-slider" type="range" min="0" max="55" value="0" step="5" class="w-full h-4 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-500" oninput="updateClockDisplay()">
+                    </div>
+                </div>
+            </div>
+        `,updateClockDisplay()}function loadExploreFives(e){setInfo("Klik nombor jam untuk tahu minitnya.");var t=Array.from({length:12},(e,t)=>t+1);e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-green-600 mb-4 flex-none">5️⃣ Sifir 5 (Minit)</h3>
+                
+                <div class="grid grid-cols-4 md:grid-cols-6 gap-2 mb-4 flex-1 overflow-y-auto content-center">
+                    ${t.map(e=>`
+                        <div onclick="clickFive(${e})" class="item-card bg-green-50 hover:bg-green-100 border-green-200 text-green-800 p-2">
+                            <div class="text-2xl font-black mb-1">${e}</div>
+                            <div class="text-[0.6rem] uppercase font-bold text-green-600">Jarum<br>Panjang</div>
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div id="five-result" class="bg-white border-4 border-green-400 rounded-3xl p-4 shadow-lg max-w-2xl mx-auto transition-all opacity-0 scale-95 flex-none mb-4">
+                    <div id="five-text" class="text-xl font-bold text-slate-700">Sentuh nombor di atas!</div>
+                </div>
+            </div>
+        `}function loadTimelineActivity(e){setInfo("Gerakkan slider untuk lihat aktiviti siang dan malam."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden justify-center">
+                <h3 class="text-xl font-bold text-purple-600 mb-4 flex-none">☀️ Garis Masa 24 Jam</h3>
+                
+                <div id="timeline-display" class="night rounded-3xl p-4 mb-4 shadow-inner min-h-[150px] flex flex-col justify-center items-center flex-none">
+                    <div id="timeline-time" class="text-4xl font-mono font-black mb-2">00:00</div>
+                    <div id="timeline-context" class="text-xl font-bold uppercase tracking-wider mb-1 opacity-80">Tengah Malam</div>
+                    <div id="timeline-activity" class="text-lg font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">Masa untuk tidur...</div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 flex-none w-full">
+                    <input id="time-slider" type="range" min="0" max="23.5" value="0" step="0.5" class="w-full h-6 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-600" oninput="updateTimeline(this.value)">
+                    <div class="flex justify-between text-xs font-bold text-slate-400 mt-2 px-1">
+                        <span>00:00</span><span>12:00</span><span>23:30</span>
+                    </div>
+                </div>
+            </div>
+        `,updateTimeline(0)}function loadTimeMatching(e){setInfo("Seret kad oren ke kotak jawapan yang betul.");var t=[{t:"03:30",w:"Tiga Setengah"},{t:"02:00",w:"Pukul Dua"},{t:"05:15",w:"Lima Suku"},{t:"07:45",w:"Tujuh Tiga Suku"}],a=[...t].sort(()=>Math.random()-.5);e.innerHTML=`
+            <div class="w-full max-w-5xl flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-orange-600 mb-2 text-center flex-none">📋 Padanan Waktu</h3>
+                
+                <div class="flex flex-wrap justify-center gap-2 mb-2 p-2 bg-orange-50 rounded-3xl border-2 border-orange-200 flex-none max-h-[120px] overflow-y-auto">
+                    ${a.map(e=>`
+                        <div class="item-card bg-white border-orange-300 text-orange-800 draggable hover:scale-105 p-2 text-xs" 
+                             draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-val="${e.w}">
+                            ${e.w}
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 overflow-y-auto min-h-0 pb-10">
+                    ${t.map(e=>`
+                        <div class="flex items-center justify-between p-2 bg-white border-2 border-slate-200 rounded-xl shadow-sm">
+                            <div class="text-2xl font-mono font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">${e.t}</div>
+                            <div class="text-xl">➡️</div>
+                            <div class="drop-zone w-32 text-xs" ondrop="dropMatch(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" data-ans="${e.w}">
+                                <span class="text-slate-300">Letak Sini</span>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function loadScheduleBuilder(e){setInfo("Bina jadual harian anda. Tarik aktiviti ke dalam kotak.");e.innerHTML=`
+            <div class="w-full max-w-5xl flex flex-col h-full overflow-hidden">
+                <h3 class="text-xl font-bold text-red-600 mb-2 text-center flex-none">📅 Jadual Saya</h3>
+
+                <div class="flex flex-wrap justify-center gap-2 mb-2 p-2 bg-red-50 rounded-3xl border-2 border-red-200 flex-none">
+                    ${["Bangun Tidur","Sarapan","Sekolah","Main","Ulangkaji","Tidur"].map(e=>`
+                        <div class="item-card bg-white border-red-300 text-red-800 draggable p-2 text-xs" 
+                             draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-act="${e}">
+                            ${e}
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="space-y-2 max-w-2xl mx-auto flex-1 overflow-y-auto w-full pb-10">
+                    ${["07:00 Pagi","10:00 Pagi","02:00 Petang","05:00 Petang","08:00 Malam","10:00 Malam"].map((e,t)=>`
+                        <div class="flex items-center gap-2 p-2 bg-white rounded-xl border-2 border-slate-100 shadow-sm">
+                            <div class="w-24 text-right font-bold text-slate-500 text-xs">${e}</div>
+                            <div class="drop-zone flex-grow text-xs h-8" ondrop="dropSchedule(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                                <span class="text-slate-300">Aktiviti?</span>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("opacity-50")},window.dragEnd=function(e){e.target&&e.target.classList.remove("opacity-50"),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("drag-over"))},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")},window.updateClockDisplay=function(){var e=parseInt(document.getElementById("hour-slider").value),t=parseInt(document.getElementById("minute-slider").value),a=30*(e%12+t/60),n=6*t,a=(document.getElementById("hour-hand").style.transform=`translateX(-50%) rotate(${a}deg)`,document.getElementById("minute-hand").style.transform=`translateX(-50%) rotate(${n}deg)`,String(e||12).padStart(2,"0")+":"+String(t).padStart(2,"0"));document.getElementById("digital-display").textContent=a},window.clickFive=function(e){var t=document.getElementById("five-result"),a=document.getElementById("five-text"),t=(t.classList.remove("opacity-0","scale-95"),5*e),e=`Nombor ${e} ialah ${t} minit!`;a.innerHTML='<span class="text-6xl block mb-2">⏱️</span> '+e,speak(e)},window.updateTimeline=function(e){e=parseFloat(e);var t=Math.floor(e),a=e%1*60,t=String(t).padStart(2,"0")+":"+String(a).padStart(2,"0");let n,l,i;i=e<5?(n="Tengah Malam",l="Tidur nyenyak...","night"):e<7?(n="Subuh",l="Bangun tidur & Solat","dawn"):e<12?(n="Pagi",l="Pergi Sekolah / Belajar","day"):e<14?(n="Tengahari",l="Makan & Rehat","day"):e<17?(n="Petang",l="Balik Sekolah / Koko","day"):e<19?(n="Lewat Petang",l="Riadah & Main","dusk"):(l=e<21?(n="Malam","Makan Malam & Ulangkaji"):(n="Malam","Tidur"),"night"),document.getElementById("timeline-time").textContent=t,document.getElementById("timeline-context").textContent=n,document.getElementById("timeline-activity").textContent=l,document.getElementById("timeline-display").className="rounded-3xl p-10 mb-8 shadow-inner min-h-[300px] flex flex-col justify-center items-center "+i,17.5===e&&speak("5:30 Petang. Masa bermain!")},window.dropMatch=function(e){var t;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&((t=draggedElement.dataset.val)===e.currentTarget.dataset.ans?(e.currentTarget.innerHTML=`<span class="text-lg font-bold text-green-700">${t}</span>`,e.currentTarget.classList.add("drop-zone-filled"),draggedElement.remove(),speak("Betul!"),document.querySelector(".draggable")||(triggerWin(),speak("Tahniah! Semua betul."))):(speak("Salah. Cuba lagi."),e.currentTarget.classList.add("shake"),setTimeout(()=>e.currentTarget.classList.remove("shake"),500)))},window.dropSchedule=function(e){var t;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(t=draggedElement.dataset.act,e.currentTarget.innerHTML=`<span class="text-lg font-bold text-red-700">${t}</span>`,e.currentTarget.classList.add("drop-zone-filled"),speak(t))}</script>

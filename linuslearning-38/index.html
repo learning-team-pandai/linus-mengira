@@ -1,0 +1,104 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Matematik Ceria: Operasi Darab Asas</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}input[type=range]{accent-color:#22c55e;cursor:pointer}.group-box{border:2px solid #93c5fd;background:#eff6ff;border-radius:.75rem;padding:4px;margin:4px;min-width:60px;min-height:60px;box-shadow:0 4px 0 #bfdbfe;display:flex;flex-wrap:wrap;justify-content:center;align-items:center}.group-item{width:20px;height:20px;border-radius:50%;background:#2563eb;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;margin:1px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}.visual-grid{display:grid;gap:4px;border:4px dashed #86efac;background:#f0fdf4;padding:8px;border-radius:1rem;transition:all .5s ease-in-out}.grid-dot{width:16px;height:16px;background:#16a34a;border-radius:50%;margin:0 auto}.numline-container{background:#faf5ff;border:3px solid #e9d5ff;border-radius:1rem;padding:1rem;width:100%;overflow-x:auto;position:relative;box-shadow:inset 0 2px 4px rgba(0,0,0,.05);height:100px}.numline-track{display:flex;border-bottom:4px solid #7e22ce;padding-bottom:5px;min-width:max-content}.numline-item{width:30px;text-align:center;position:relative;flex-shrink:0;color:#581c87;font-weight:600;font-size:.8rem}.numline-item::after{content:'';position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:#7e22ce}.numline-item.active{color:#9333ea;transform:scale(1.2);font-weight:800}.frog-char{position:absolute;bottom:20px;left:0;font-size:2rem;transition:transform .5s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(2px 4px 0 rgba(0, 0, 0, .1))}.glass-box{border:4px solid #fdba74;background:#fff7ed;border-radius:0 0 1rem 1rem;border-top:0;width:60px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;font-size:2rem;margin:4px;position:relative;box-shadow:0 4px 6px rgba(0,0,0,.05)}.glass-box::before{content:'';position:absolute;top:-5px;left:-4px;right:-4px;height:10px;border:4px solid #fdba74;border-radius:50%;background:rgba(255,255,255,.5)}.glass-box.sifir-satu{border-color:#fda4af;background:#fff1f2}.glass-box.sifir-satu::before{border-color:#fda4af}.glass-box .text-3xl{font-size:1.5rem!important;margin-bottom:.25rem!important}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">✖️</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Operasi Darab Asas</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full overflow-hidden"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🔢</div><h2 class="text-4xl font-bold text-emerald-600 mb-4">Konsep Darab</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Kumpulan, Sifir dan Garis Nombor.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">🍎<br>Kumpulan</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">🔄<br>Pusing</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">🐸<br>Lompat</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">🥛<br>Sifir 0</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 rounded-xl text-xs">🔵<br>Sifir 1</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar darab!";function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e&&loadGroupMachineActivity(t),2===e&&loadCommutativeBoxActivity(t),3===e&&loadNumberLineActivity(t),4===e&&loadSifirZeroActivity(t),5===e&&loadSifirOneActivity(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🔢</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Konsep Darab</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function loadGroupMachineActivity(e){setInfo("Guna slider untuk ubah Kumpulan dan Ahli."),e.innerHTML=`
+        <div class="w-full max-w-4xl flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🍎 Mesin Kumpulan</h3>
+            
+            <div class="flex flex-col md:flex-row gap-4 items-start flex-1 min-h-0">
+                <div class="w-full md:w-1/3 bg-blue-50 p-4 rounded-2xl border-2 border-blue-200">
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-blue-800 mb-1">Kumpulan: <span id="val-kumpulan" class="text-lg text-blue-600">3</span></label>
+                        <input type="range" id="slider-kumpulan" min="1" max="5" value="3" class="w-full h-4 bg-blue-200 rounded-lg appearance-none cursor-pointer" oninput="renderGroupMachine()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-blue-800 mb-1">Ahli: <span id="val-ahli" class="text-lg text-blue-600">2</span></label>
+                        <input type="range" id="slider-ahli" min="0" max="8" value="2" class="w-full h-4 bg-blue-200 rounded-lg appearance-none cursor-pointer" oninput="renderGroupMachine()">
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-2/3 flex flex-col h-full">
+                    <div id="group-visual" class="flex flex-wrap justify-center items-center bg-slate-50 border-2 border-slate-200 p-2 rounded-2xl flex-1 overflow-y-auto mb-2"></div>
+                    <div id="group-result" class="text-center text-2xl font-black text-slate-700 bg-yellow-100 border-2 border-yellow-200 p-2 rounded-xl shadow-sm animate-bounce flex-none">
+                        3 × 2 = 6
+                    </div>
+                </div>
+            </div>
+        </div>
+      `,renderGroupMachine()}function renderGroupMachine(){var t=parseInt(document.getElementById("slider-kumpulan").value),n=parseInt(document.getElementById("slider-ahli").value),l=(document.getElementById("val-kumpulan").textContent=t,document.getElementById("val-ahli").textContent=n,document.getElementById("group-visual"));l.innerHTML="";let i=0;for(let e=0;e<t;e++){let t="";for(let e=0;e<n;e++)t+='<div class="group-item">🍎</div>';l.innerHTML+=`<div class="group-box">${t}</div>`,i+=n}document.getElementById("group-result").textContent=t+` × ${n} = `+i}function loadCommutativeBoxActivity(e){window.commState={a:2,b:5,rotated:!1},setInfo("Adakah 2 x 5 sama dengan 5 x 2? Tekan 'Pusingkan!'."),e.innerHTML=`
+        <div class="w-full max-w-4xl flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-green-600 mb-2 text-center flex-none">🔄 Kotak Pusing (Sifir Kalis Tukar Tertib)</h3>
+            
+            <div class="flex flex-col md:flex-row gap-4 items-start flex-1 min-h-0 mb-4">
+                <div class="w-full md:w-1/3 bg-green-50 p-4 rounded-2xl border-2 border-green-200">
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-green-800 mb-1">Baris (A): <span id="val-a" class="text-lg">2</span></label>
+                        <input type="range" id="slider-a" min="1" max="6" value="2" class="w-full h-4 bg-green-200 rounded-lg cursor-pointer" oninput="updateCommState('a', this.value)">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-green-800 mb-1">Lajur (B): <span id="val-b" class="text-lg">5</span></label>
+                        <input type="range" id="slider-b" min="1" max="6" value="5" class="w-full h-4 bg-green-200 rounded-lg cursor-pointer" oninput="updateCommState('b', this.value)">
+                    </div>
+                    <button onclick="toggleCommRotation()" class="btn-3d bg-green-500 text-white font-bold py-2 px-4 rounded-xl text-lg w-full">
+                        Pusingkan! 🔄
+                    </button>
+                </div>
+                
+                <div class="w-full md:w-2/3 flex flex-col items-center h-full">
+                    <div id="comm-visual-grid" class="visual-grid mb-2 flex-1 w-full flex items-center justify-center"></div>
+                    <div id="comm-result" class="text-center text-2xl font-black text-slate-700 bg-yellow-100 border-2 border-yellow-200 p-2 rounded-xl shadow-sm w-full flex-none">
+                        2 × 5 = 10
+                    </div>
+                </div>
+            </div>
+        </div>
+      `,renderCommutativeBox()}function updateCommState(e,t){window.commState[e]=parseInt(t),window.commState.rotated=!1,renderCommutativeBox()}function toggleCommRotation(){window.commState.rotated=!window.commState.rotated,renderCommutativeBox();var{a:e,b:t,rotated:n}=window.commState;speak(n?`Sekarang ${t} baris, ${e} lajur.`:`Asal ${e} baris, ${t} lajur.`)}function renderCommutativeBox(){var{a:e,b:t,rotated:n}=window.commState,l=(document.getElementById("val-a").textContent=e,document.getElementById("val-b").textContent=t,document.getElementById("comm-visual-grid")),i=(l.innerHTML="",n?t:e),a=n?e:t;l.style.gridTemplateColumns=`repeat(${a}, minmax(0, 1fr))`;for(let e=0;e<i*a;e++)l.innerHTML+='<div class="grid-dot"></div>';document.getElementById("comm-result").textContent=n?t+` × ${e} = `+e*t:e+` × ${t} = `+e*t}function loadNumberLineActivity(e){window.numlineState={sifir:2,steps:0,max:20},setInfo("Pilih Sifir dan tekan 'Lompat!'."),e.innerHTML=`
+        <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-purple-600 mb-2 flex-none">🐸 Lompat Sifir</h3>
+            
+            <div class="flex justify-center gap-2 mb-2 flex-none">
+                <button onclick="setSifir(2, 20)" class="btn-3d bg-purple-100 text-purple-800 font-bold py-2 px-6 rounded-xl text-sm">Sifir 2</button>
+                <button onclick="setSifir(5, 50)" class="btn-3d bg-purple-100 text-purple-800 font-bold py-2 px-6 rounded-xl text-sm">Sifir 5</button>
+                <button onclick="setSifir(10, 100)" class="btn-3d bg-purple-100 text-purple-800 font-bold py-2 px-6 rounded-xl text-sm">Sifir 10</button>
+            </div>
+            
+            <div class="numline-container mb-4 flex-1 min-h-0 bg-white shadow-inner">
+                <div id="numline-track" class="numline-track h-full items-end pb-8"></div>
+                <div id="frog-char" class="frog-char">🐸</div>
+            </div>
+
+            <div class="flex justify-center gap-2 flex-none">
+                <button onclick="jumpNumberLine()" class="btn-3d bg-purple-500 text-white font-bold py-2 px-8 rounded-xl text-lg">Lompat! 🚀</button>
+                <button onclick="resetNumberLine()" class="btn-3d bg-slate-400 text-white font-bold py-2 px-6 rounded-xl text-lg">Reset ↺</button>
+            </div>
+            
+            <div id="numline-result" class="mt-2 text-lg font-bold text-slate-600 flex-none">Mula di 0</div>
+        </div>
+      `,renderNumberLine()}function setSifir(e,t){window.numlineState={sifir:e,steps:0,max:t},renderNumberLine(),setInfo(`Sifir ${e} dipilih.`)}function resetNumberLine(){setSifir(window.numlineState.sifir,window.numlineState.max)}function renderNumberLine(){var t=window.numlineState.max,n=document.getElementById("numline-track");n.innerHTML="";for(let e=0;e<=t;e++)n.innerHTML+=`<div class="numline-item" id="num-${e}">${e}</div>`;document.getElementById("num-0").classList.add("active"),document.getElementById("frog-char").style.transform="translateX(0px)",document.getElementById("numline-result").textContent="Mula di 0"}function jumpNumberLine(){var e,t,n,{sifir:l,steps:i,max:a}=window.numlineState,i=i+1,o=i*l;a<o?speak("Dah sampai hujung."):(window.numlineState.steps=i,document.querySelectorAll(".numline-item.active").forEach(e=>e.classList.remove("active")),(t=document.getElementById("num-"+o)).classList.add("active"),e=document.querySelector(".numline-container"),n=document.getElementById("frog-char"),t=t.offsetLeft,n.style.transform=`translateX(${t}px)`,t>e.clientWidth/2&&e.scrollTo({left:t-e.clientWidth/2,behavior:"smooth"}),n=i+` × ${l} = `+o,document.getElementById("numline-result").textContent=`Lompatan ke-${i}: `+n,speak(n),o===a&&triggerWin())}function loadSifirZeroActivity(e){setInfo("Guna slider. Apa jadi bila darab 0?"),e.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-orange-500 mb-2 flex-none">🥛 Misteri Sifir 0</h3>
+            
+            <div class="bg-orange-50 p-4 rounded-2xl border-2 border-orange-200 mb-4 flex-none">
+                <label class="block text-lg font-bold text-orange-800 mb-1">Bilangan Gelas (Kosong): <span id="val-gelas-0">1</span></label>
+                <input type="range" id="slider-gelas-0" min="1" max="8" value="1" class="w-full h-4 bg-orange-200 rounded-lg cursor-pointer" oninput="renderSifirZero()">
+            </div>
+
+            <div id="visual-sifir-0" class="flex flex-wrap justify-center items-center flex-1 overflow-y-auto mb-2 content-start gap-2"></div>
+            
+            <div id="result-sifir-0" class="text-2xl font-black text-orange-600 bg-white border-2 border-orange-100 p-2 rounded-xl shadow-sm flex-none">
+                1 × 0 = 0
+            </div>
+        </div>
+      `,renderSifirZero()}function renderSifirZero(){var t=document.getElementById("slider-gelas-0").value,n=(document.getElementById("val-gelas-0").textContent=t,document.getElementById("visual-sifir-0"));n.innerHTML="";for(let e=0;e<t;e++)n.innerHTML+='<div class="glass-box"></div>';document.getElementById("result-sifir-0").textContent=t+" × 0 = 0"}function loadSifirOneActivity(e){setInfo("Guna slider. Apa jadi bila darab 1?"),e.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-xl font-bold text-rose-500 mb-2 flex-none">🔵 Misteri Sifir 1</h3>
+            
+            <div class="bg-rose-50 p-4 rounded-2xl border-2 border-rose-200 mb-4 flex-none">
+                <label class="block text-lg font-bold text-rose-800 mb-1">Bilangan Gelas (1 Guli): <span id="val-gelas-1">4</span></label>
+                <input type="range" id="slider-gelas-1" min="1" max="8" value="4" class="w-full h-4 bg-rose-200 rounded-lg cursor-pointer" oninput="renderSifirOne()">
+            </div>
+
+            <div id="visual-sifir-1" class="flex flex-wrap justify-center items-center flex-1 overflow-y-auto mb-2 content-start gap-2"></div>
+            
+            <div id="result-sifir-1" class="text-2xl font-black text-rose-600 bg-white border-2 border-rose-100 p-2 rounded-xl shadow-sm flex-none">
+                4 × 1 = 4
+            </div>
+        </div>
+      `,renderSifirOne()}function renderSifirOne(){var t=document.getElementById("slider-gelas-1").value,n=(document.getElementById("val-gelas-1").textContent=t,document.getElementById("visual-sifir-1"));n.innerHTML="";for(let e=0;e<t;e++)n.innerHTML+='<div class="glass-box sifir-satu"><div class="text-3xl mb-2">🔵</div></div>';document.getElementById("result-sifir-1").textContent=t+" × 1 = "+t}window.commState={a:2,b:5,rotated:!1},window.numlineState={sifir:2,steps:0,max:20}</script>

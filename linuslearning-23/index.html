@@ -1,0 +1,88 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Nombor Hingga 100</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.grid-100{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;width:100%;max-width:500px;margin:0 auto}.cell-100{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #cbd5e1;border-radius:4px;font-size:.6rem;font-weight:700;cursor:pointer;transition:all .1s;background-color:#fff}.cell-100:hover{background-color:#e0f2fe;transform:scale(1.1);z-index:10}.cell-100.selected{background-color:#3b82f6;color:#fff;border-color:#1d4ed8}.cell-100.correct{background-color:#22c55e;color:#fff;border-color:#15803d}.chip{cursor:pointer;transition:all .2s}.chip:hover{transform:scale(1.05)}.chip.selected{transform:scale(1.1);box-shadow:0 0 0 4px #fbbf24}.toggle-checkbox:checked{right:0;border-color:#68d391}.toggle-checkbox:checked+.toggle-label{background-color:#68d391}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">🔢</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Nombor Hingga 100</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">💯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Nombor 1-100</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Kenali nombor, kira dan padan.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🟦<br>Petak 100</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔍<br>Cari</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🧮<br>Mesin</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🔗<br>Padan</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🧩<br>Corak</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk bermula!",numberWords={1:"satu",2:"dua",3:"tiga",4:"empat",5:"lima",6:"enam",7:"tujuh",8:"lapan",9:"sembilan",10:"sepuluh",11:"sebelas",12:"dua belas",13:"tiga belas",14:"empat belas",15:"lima belas",16:"enam belas",17:"tujuh belas",18:"lapan belas",19:"sembilan belas",20:"dua puluh",30:"tiga puluh",40:"empat puluh",50:"lima puluh",60:"enam puluh",70:"tujuh puluh",80:"lapan puluh",90:"sembilan puluh",100:"seratus"};function toWords(e){var t,n;return numberWords[e]||(e<100?(t=10*Math.floor(e/10),n=e%10,numberWords[String(t)]+" "+numberWords[String(n)]):String(e))}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">💯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Nombor 1-100</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Klik nombor untuk dengar sebutannya.");let t="";for(let e=1;e<=100;e++)t+=`<div class="cell-100 bg-white" onclick="clickGrid(${e}, this)">${e}</div>`;e.innerHTML=`
+            <div class="w-full max-w-2xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-blue-600 mb-2 flex-none">🟦 Petak 100 Ajaib</h3>
+                <div class="bg-slate-100 p-2 rounded-2xl shadow-inner border-2 border-slate-200 flex-1 min-h-0 overflow-y-auto">
+                    <div class="grid-100 pb-4">${t}</div>
+                </div>
+            </div>
+        `}window.clickGrid=function(e,t){document.querySelectorAll(".cell-100.selected").forEach(e=>e.classList.remove("selected")),t.classList.add("selected");t=toWords(e);setInfo(`Nombor ${e}: "${t}"`),speak(t)};let targetNum=0;function setupAct2(e){setInfo("Tekan 'Dengar Arahan' kemudian cari nombornya."),targetNum=0;let t="";for(let e=1;e<=100;e++)t+=`<div class="cell-100 bg-white hover:bg-green-100" onclick="checkFind(${e}, this)">${e}</div>`;e.innerHTML=`
+            <div class="w-full max-w-2xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-green-600 mb-2 flex-none">🔍 Cari Saya!</h3>
+                <button onclick="playQuestion()" class="btn-3d bg-green-500 text-white px-6 py-1 rounded-xl font-bold text-lg mb-2 flex-none mx-auto">
+                    🔊 Dengar Arahan
+                </button>
+                <div class="bg-green-50 p-2 rounded-2xl shadow-inner border-2 border-green-200 flex-1 min-h-0 overflow-y-auto">
+                    <div class="grid-100 pb-4">${t}</div>
+                </div>
+            </div>
+        `}window.playQuestion=function(){var e=`Cari nombor... ${toWords(targetNum=Math.floor(100*Math.random())+1)}.`;setInfo(e),speak(e),document.querySelectorAll(".cell-100").forEach(e=>e.classList.remove("correct","selected","bg-red-200"))},window.checkFind=function(e,t){0===targetNum?setInfo("Sila tekan butang Dengar Arahan dahulu."):e===targetNum?(t.classList.add("correct"),speak("Betul!"),triggerWin(),setInfo(`Tahniah! Itu nombor ${e}.`),targetNum=0):(t.classList.add("bg-red-200"),speak("Bukan."))};let currentCount=0,targetCount=43;function setupAct3(e){setInfo(`Kira sehingga ${targetCount} menggunakan butang tambah.`),currentCount=0,e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-purple-600 mb-4">🧮 Mesin Kira Kumpulan</h3>
+                
+                <div class="flex flex-col items-center mb-6">
+                    <div class="text-lg text-slate-500 mb-1">Sasaran: <span class="font-bold text-purple-700">${targetCount}</span></div>
+                    <div id="counter-display" class="text-7xl font-black text-purple-800 bg-purple-50 px-6 py-2 rounded-3xl border-4 border-purple-200 shadow-lg">0</div>
+                </div>
+
+                <div class="flex justify-center gap-3 mb-6">
+                    <button onclick="addCount(10)" class="btn-3d bg-purple-100 text-purple-900 border-purple-300 px-4 py-3 rounded-xl text-xl font-bold">+10</button>
+                    <button onclick="addCount(5)" class="btn-3d bg-purple-100 text-purple-900 border-purple-300 px-4 py-3 rounded-xl text-xl font-bold">+5</button>
+                    <button onclick="addCount(1)" class="btn-3d bg-purple-100 text-purple-900 border-purple-300 px-4 py-3 rounded-xl text-xl font-bold">+1</button>
+                </div>
+                
+                <button onclick="resetCount()" class="text-slate-400 font-bold hover:text-slate-600 underline text-sm">Mula Semula</button>
+            </div>
+        `}window.addCount=function(e){currentCount>=targetCount||(currentCount+=e,(e=document.getElementById("counter-display")).innerText=currentCount,e.classList.remove("pop-in"),e.offsetWidth,e.classList.add("pop-in"),currentCount===targetCount?(e.classList.add("text-green-600"),setInfo("Tahniah! Sasaran tercapai."),speak("Tahniah!"),triggerWin()):currentCount>targetCount?(e.classList.add("text-red-600"),setInfo("Terlebih! Cuba mula semula."),speak("Terlebih.")):speak(currentCount))},window.resetCount=function(){setupAct3(document.getElementById("activity-content"))};let selNum=null,guideMode=!0;function setupAct4(e){setInfo("Pilih nombor, kemudian pilih gambar yang sepadan."),selNum=null,guideMode=!0;var t=[{n:15,box:1,apple:5},{n:31,box:3,apple:1},{n:23,box:2,apple:3}];e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-orange-600 mb-2 flex-none">🔗 Padankan (Nilai Tempat)</h3>
+                
+                <div class="flex justify-center items-center gap-2 mb-4 flex-none">
+                    <span class="text-xs font-bold text-slate-500">Panduan: 📦=10, 🍎=1</span>
+                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="guide-toggle" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" checked onclick="toggleGuide()"/>
+                        <label for="guide-toggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-green-300 cursor-pointer"></label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 flex-1 min-h-0">
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-bold text-orange-800 text-sm">Nombor</h4>
+                        ${t.map(e=>`
+                            <button onclick="selectNum(${e.n}, this)" class="num-btn btn-3d bg-white border-orange-200 text-orange-900 p-2 rounded-xl text-2xl font-bold">
+                                ${e.n}
+                            </button>
+                        `).join("")}
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-bold text-slate-600 text-sm">Gambar Rajah</h4>
+                        ${t.sort(()=>Math.random()-.5).map(e=>`
+                            <button onclick="selectViz(${e.n}, this)" class="viz-btn btn-3d bg-white border-slate-200 p-2 rounded-xl flex items-center justify-center gap-1 min-h-[60px]">
+                                <div class="flex gap-0.5 transform scale-75 origin-right">${"📦".repeat(e.box)}</div>
+                                <div class="w-px h-6 bg-slate-300 mx-1"></div>
+                                <div class="flex gap-0.5 transform scale-75 origin-left">${"🍎".repeat(e.apple)}</div>
+                                <div class="hint-text ml-1 text-[10px] font-bold bg-green-100 text-green-800 px-1 py-0.5 rounded ${guideMode?"":"hidden"}">= ${e.n}</div>
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.toggleGuide=function(){guideMode=!guideMode,document.querySelectorAll(".hint-text").forEach(e=>{guideMode?e.classList.remove("hidden"):e.classList.add("hidden")})},window.selectNum=function(e,t){document.querySelectorAll(".num-btn").forEach(e=>e.classList.remove("bg-orange-200","border-orange-400")),t.disabled||(t.classList.add("bg-orange-200","border-orange-400"),selNum={n:e,btn:t},speak(toWords(e)))},window.selectViz=function(e,t){selNum?e===selNum.n?(t.classList.remove("bg-white"),t.classList.add("bg-green-100","border-green-400"),selNum.btn.classList.remove("bg-white","bg-orange-200"),selNum.btn.classList.add("bg-green-100","border-green-400"),t.disabled=!0,selNum.btn.disabled=!0,selNum=null,speak("Betul! Padan."),triggerWin()):(t.classList.add("shake","bg-red-100"),setTimeout(()=>t.classList.remove("shake","bg-red-100"),500),speak("Salah.")):setInfo("Pilih nombor di kiri dahulu.")};let selAns=null;function setupAct5(e){setInfo("Pilih jawapan di bawah, kemudian isi tempat kosong '?'."),selAns=null;e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-pink-600 mb-4">🧩 Lengkapkan Corak</h3>
+                
+                <div class="grid grid-cols-4 gap-2 mb-6 max-w-lg mx-auto">
+                    ${["14","?","16","17","24","25","?","27","?","35","36","37"].map((e,t)=>"?"===e?`<button onclick="fillSlot(${t}, this)" class="slot-btn btn-3d bg-pink-50 border-pink-300 text-pink-400 font-bold text-xl py-3 rounded-xl">?</button>`:`<div class="bg-gray-100 text-gray-500 font-bold text-xl py-3 rounded-xl border-2 border-gray-200">${e}</div>`).join("")}
+                </div>
+
+                <div class="bg-white p-3 rounded-2xl border-2 border-slate-200 inline-block">
+                    <div class="text-slate-400 text-xs mb-2 font-bold">PILIHAN JAWAPAN</div>
+                    <div class="flex gap-3 justify-center">
+                        ${["15","26","34"].map(e=>`
+                            <button onclick="pickAns('${e}', this)" class="ans-btn btn-3d bg-yellow-100 text-yellow-800 border-yellow-300 font-bold text-xl py-2 px-4 rounded-xl">
+                                ${e}
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `,window.patternMap={1:"15",6:"26",8:"34"}}window.pickAns=function(e,t){document.querySelectorAll(".ans-btn").forEach(e=>e.classList.remove("ring-4","ring-yellow-400")),t.classList.contains("opacity-0")||(t.classList.add("ring-4","ring-yellow-400"),selAns={val:e,btn:t},speak(e))},window.fillSlot=function(e,t){selAns?(e=window.patternMap[e],selAns.val===e?(t.innerText=selAns.val,t.classList.remove("bg-pink-50","text-pink-400","border-pink-300"),t.classList.add("bg-green-100","text-green-800","border-green-400","pop-in"),t.disabled=!0,selAns.btn.classList.add("opacity-0","pointer-events-none"),selAns.btn.classList.remove("ring-4"),selAns=null,speak("Betul!"),3===document.querySelectorAll(".slot-btn:disabled").length&&triggerWin()):(t.classList.add("shake","bg-red-100"),setTimeout(()=>t.classList.remove("shake","bg-red-100"),500),speak("Salah tempat."))):setInfo("Sila pilih jawapan di bawah dahulu.")}</script>

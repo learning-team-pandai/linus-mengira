@@ -1,0 +1,87 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Matematik Ceria: Tolak Kumpul Semula</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:1rem;display:flex;align-items:center;justify-content:center}.drop-zone-filled{border:3px solid #22c55e!important;background-color:#dcfce7!important;color:#15803d}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.block-area{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px;min-height:120px;padding:1rem;border-radius:1rem;background:#fff;border:2px dashed #cbd5e1}.block-ratus{width:50px;height:50px;background-color:#fca5a5;border:2px solid #ef4444;border-radius:4px}.block-puluh{width:10px;height:50px;background-color:#86efac;border:2px solid #22c55e;border-radius:2px}.block-sa{width:10px;height:10px;background-color:#93c5fd;border:2px solid #3b82f6;border-radius:50%}.alg-grid{display:grid;grid-template-columns:40px repeat(3,60px);justify-content:center;font-family:monospace;font-size:2rem;font-weight:700;text-align:center;gap:5px;background-color:#f8fafc;padding:1rem;border-radius:1rem;border:4px solid #e2e8f0}.alg-label{font-size:1.2rem;color:#94a3b8;font-weight:700;padding-bottom:.5rem;font-family:Fredoka,sans-serif}.alg-num{position:relative;height:60px;display:flex;align-items:center;justify-content:center;border-radius:.5rem;transition:background-color .2s}.alg-symbol{display:flex;align-items:center;justify-content:center;color:#64748b;font-size:2rem}.alg-num-potong{color:#ef4444;text-decoration:line-through;opacity:.4}.alg-num-atas{position:absolute;top:-25px;left:50%;transform:translateX(-50%);font-size:1.8rem;color:#22c55e;font-weight:800;background:#dcfce7;padding:2px 10px;border-radius:8px;border:2px solid #22c55e;z-index:10;box-shadow:0 4px 6px rgba(0,0,0,.1)}.alg-pinjam-sebelah{position:absolute;left:5px;font-size:2rem;color:#22c55e;font-weight:800;top:20px;z-index:5}.alg-hasil{border-top:6px solid #475569;height:80px;display:flex;align-items:center;justify-content:center;color:#059669}.pulse{animation:pulse 1.5s infinite;cursor:pointer;background-color:#fef3c7;border:2px solid #fcd34d;box-shadow:0 0 15px rgba(252,211,77,.5)}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">➖</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Operasi Tolak (Kumpul Semula)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-4"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col overflow-hidden"><div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-pulse">💯</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Tolak</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Belajar meminjam dengan mudah!<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-2 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs">📦<br>P.Puluh</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-1 rounded-xl text-xs">📦<br>P.Ratus</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-1 rounded-xl text-xs">✏️<br>Sa</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs">✏️<br>Puluh</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-1 rounded-xl text-xs">✏️<br>Penuh</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-sm">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-base">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Selamat datang!";function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.9,t.pitch=1.1,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t&&loadPecahPuluh(e),2===t&&loadPecahRatus(e),3===t&&loadAlgorithm(e,"pinjam-sa"),4===t&&loadAlgorithm(e,"pinjam-puluh"),5===t&&loadAlgorithm(e,"penuh"),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-bounce">💯</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Operasi Tolak (Kumpul Semula)</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Pilih aktiviti di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula belajar!")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}function loadPecahPuluh(t){setInfo("Tukar 1 Puluh kepada 10 Sa."),t.innerHTML=`
+        <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">📦 Konsep 1: Pecah Puluh</h3>
+        
+        <div class="flex-1 w-full overflow-y-auto px-2 flex flex-col">
+            <div class="grid grid-cols-3 gap-2 items-center w-full">
+                <div class="bg-white p-2 rounded-2xl border-4 border-slate-200 shadow-sm col-span-1">
+                    <h4 class="text-center font-bold text-slate-500 mb-1 text-xs">SEBELUM (41)</h4>
+                    <div class="text-sm font-bold text-center text-blue-700 mb-2">4 Puluh, 1 Sa</div>
+                    <div class="block-area !min-h-[60px] !p-1">
+                       ${'<div class="block-puluh"></div>'.repeat(4)}
+                    </div>
+                    <div class="block-area mt-1 !min-h-[20px] !p-1">
+                       ${'<div class="block-sa"></div>'.repeat(1)}
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center col-span-1">
+                    <button onclick="doPecahPuluh()" class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-sm w-full shadow-lg">Tukar 1 Puluh ➡️</button>
+                </div>
+
+                <div id="pecah-puluh-hasil" class="bg-green-50 p-2 rounded-2xl border-4 border-green-200 opacity-0 transition-opacity duration-500 shadow-sm col-span-1">
+                    <h4 class="text-center font-bold text-green-600 mb-1 text-xs">SELEPAS</h4>
+                    <div class="text-sm font-bold text-center text-green-800 mb-2">3 Puluh, 11 Sa</div>
+                    <div class="block-area bg-white !min-h-[60px] !p-1">
+                       ${'<div class="block-puluh"></div>'.repeat(3)}
+                    </div>
+                    <div class="block-area mt-1 bg-white !min-h-[20px] !p-1 flex flex-wrap gap-1">
+                       ${'<div class="block-sa"></div>'.repeat(11)}
+                    </div>
+                </div>
+            </div>
+        </div>
+      `}function loadPecahRatus(t){setInfo("Tukar 1 Ratus kepada 10 Puluh."),t.innerHTML=`
+        <h3 class="text-xl font-bold text-emerald-500 mb-2 text-center flex-none">📦 Konsep 2: Pecah Ratus</h3>
+        
+        <div class="flex-1 w-full overflow-y-auto px-2 flex flex-col">
+            <div class="grid grid-cols-3 gap-2 items-center w-full">
+                <div class="bg-white p-2 rounded-2xl border-4 border-slate-200 shadow-sm col-span-1">
+                    <h4 class="text-center font-bold text-slate-500 mb-1 text-xs">SEBELUM (340)</h4>
+                    <div class="text-sm font-bold text-center text-emerald-700 mb-2">3 Ra, 4 Pu</div>
+                    <div class="block-area !min-h-[60px] !p-1">
+                       ${'<div class="block-ratus"></div>'.repeat(3)}
+                    </div>
+                    <div class="block-area mt-1 !min-h-[20px] !p-1">
+                       ${'<div class="block-puluh"></div>'.repeat(4)}
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center col-span-1">
+                    <button onclick="doPecahRatus()" class="btn-3d bg-emerald-500 text-white font-bold py-2 px-1 rounded-xl text-sm w-full shadow-lg">Tukar 1 Ratus ➡️</button>
+                </div>
+
+                <div id="pecah-ratus-hasil" class="bg-green-50 p-2 rounded-2xl border-4 border-green-200 opacity-0 transition-opacity duration-500 shadow-sm col-span-1">
+                    <h4 class="text-center font-bold text-green-600 mb-1 text-xs">SELEPAS</h4>
+                    <div class="text-sm font-bold text-center text-green-800 mb-2">2 Ra, 14 Pu</div>
+                    <div class="block-area bg-white !min-h-[60px] !p-1">
+                       ${'<div class="block-ratus"></div>'.repeat(2)}
+                    </div>
+                    <div class="block-area mt-1 bg-white !min-h-[20px] !p-1 flex flex-wrap gap-1">
+                       ${'<div class="block-puluh"></div>'.repeat(14)}
+                    </div>
+                </div>
+            </div>
+        </div>
+      `}window.doPecahPuluh=function(){var t=document.getElementById("pecah-puluh-hasil");t&&(t.classList.remove("opacity-0"),setInfo(t="Bagus! 4 Puluh 1 Sa = 3 Puluh 11 Sa."),speak(t),triggerWin())},window.doPecahRatus=function(){var t=document.getElementById("pecah-ratus-hasil");t&&(t.classList.remove("opacity-0"),setInfo(t="Hebat! 3 Ratus 4 Puluh = 2 Ratus 14 Puluh."),speak(t),triggerWin())};let problems={"pinjam-sa":{title:"✏️ Pinjam dari Puluh (42 - 7)",color:"violet-500",numA:[null,4,2],numB:[null,null,7],steps:[{info:"2 tak boleh tolak 7. Klik '4' (Puluh) untuk pinjam.",target:"p-a",nextState:1},{info:"Bagus! '4' jadi '3'. '2' jadi '12'. Klik '12' untuk tolak.",target:"s-a",nextState:2},{info:"12 - 7 = 5. Klik '3' untuk bawa turun.",target:"p-a",nextState:3},{info:"Siap! 42 - 7 = 35.",target:null,nextState:4}]},"pinjam-puluh":{title:"✏️ Pinjam dari Ratus (340 - 60)",color:"orange-500",numA:[3,4,0],numB:[null,6,0],steps:[{info:"Sa: 0 - 0 = 0. Klik '0' Sa.",target:"s-a",nextState:1},{info:"Puluh: 4 tak boleh tolak 6. Klik '3' Ratus untuk pinjam.",target:"r-a",nextState:2},{info:"Ratus jadi 2, Puluh jadi 14. Klik '14' untuk tolak.",target:"p-a",nextState:3},{info:"14 - 6 = 8. Klik '2' Ratus.",target:"r-a",nextState:4},{info:"Siap! 340 - 60 = 280.",target:null,nextState:5}]},penuh:{title:"✏️ Latihan Penuh (741 - 263)",color:"rose-500",numA:[7,4,1],numB:[2,6,3],steps:[{info:"Sa: 1 tak boleh tolak 3. Klik '4' Puluh.",target:"p-a",nextState:1},{info:"Jadi 11. Klik '11' untuk tolak 3.",target:"s-a",nextState:2},{info:"Puluh: 3 tak boleh tolak 6. Klik '7' Ratus.",target:"r-a",nextState:3},{info:"Jadi 13. Klik '13' untuk tolak 6.",target:"p-a",nextState:4},{info:"Ratus: 6 - 2 = 4. Klik '6'.",target:"r-a",nextState:5},{info:"Tahniah! Jawapan 478.",target:null,nextState:6}]}};function loadAlgorithm(t,e){var a=problems[e];setInfo(a.steps[0].info),t.innerHTML=`
+          <h3 class="text-xl font-bold text-${a.color} mb-2 text-center flex-none">${a.title}</h3>
+          <div id="alg-container" data-type="${e}" data-state="0" class="flex-1 flex flex-col justify-center items-center overflow-auto w-full">
+             <div class="alg-grid shadow-lg scale-90 origin-top">
+                <div class="alg-label"></div><div class="alg-label">Ra</div><div class="alg-label">Pu</div><div class="alg-label">Sa</div>
+                
+                <div class="alg-num"></div>
+                <div class="alg-num" id="r-a">${a.numA[0]??""}</div>
+                <div class="alg-num" id="p-a">${a.numA[1]??""}</div>
+                <div class="alg-num" id="s-a">${a.numA[2]??""}</div>
+                
+                <div class="alg-symbol">-</div>
+                <div class="alg-num" id="r-b">${a.numB[0]??""}</div>
+                <div class="alg-num" id="p-b">${a.numB[1]??""}</div>
+                <div class="alg-num" id="s-b">${a.numB[2]??""}</div>
+                
+                <div class="alg-hasil"></div>
+                <div class="alg-hasil" id="r-h"></div>
+                <div class="alg-hasil" id="p-h"></div>
+                <div class="alg-hasil" id="s-h"></div>
+             </div>
+          </div>
+        `,setupAlgClick(e)}function setupAlgClick(t){var e=problems[t].steps[0],e=document.getElementById(e.target);e&&(e.classList.add("pulse"),e.onclick=()=>algStep(t))}function algStep(t){var e=problems[t],a=document.getElementById("alg-container"),n=parseInt(a.dataset.state),l=e.steps[n],s=document.getElementById(l.target),s=(s&&(s.classList.remove("pulse"),s.onclick=null),"pinjam-sa"===t?0===n?(document.getElementById("p-a").innerHTML='<span class="alg-num-potong">4</span><span class="alg-num-atas">3</span>',document.getElementById("s-a").innerHTML='<span class="alg-pinjam-sebelah">1</span>'+e.numA[2]):1===n?document.getElementById("s-h").textContent="5":2===n&&(document.getElementById("p-h").textContent="3"):"pinjam-puluh"===t?0===n?document.getElementById("s-h").textContent="0":1===n?(document.getElementById("r-a").innerHTML='<span class="alg-num-potong">3</span><span class="alg-num-atas">2</span>',document.getElementById("p-a").innerHTML='<span class="alg-pinjam-sebelah">1</span>'+e.numA[1]):2===n?document.getElementById("p-h").textContent="8":3===n&&(document.getElementById("r-h").textContent="2"):"penuh"===t&&(0===n?(document.getElementById("p-a").innerHTML='<span class="alg-num-potong">4</span><span class="alg-num-atas">3</span>',document.getElementById("s-a").innerHTML='<span class="alg-pinjam-sebelah">1</span>'+e.numA[2]):1===n?document.getElementById("s-h").textContent="8":2===n?(document.getElementById("r-a").innerHTML='<span class="alg-num-potong">7</span><span class="alg-num-atas">6</span>',document.getElementById("p-a").innerHTML='<span class="alg-num-potong">4</span><span class="alg-num-atas" style="color:#ef4444;text-decoration:line-through;opacity:0.5">3</span><div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);color:#22c55e;font-weight:800;background:#dcfce7;padding:2px 8px;border:2px solid #22c55e;border-radius:8px;z-index:20;font-size:1.5rem;">13</div>'):3===n?document.getElementById("p-h").textContent="7":4===n&&(document.getElementById("r-h").textContent="4")),l.nextState);!((a.dataset.state=s)>=e.steps.length)&&(setInfo((n=e.steps[s]).info),speak(n.info),n.target)?((l=document.getElementById(n.target)).classList.add("pulse"),l.onclick=()=>algStep(t)):triggerWin()}</script>

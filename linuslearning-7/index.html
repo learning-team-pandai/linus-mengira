@@ -1,0 +1,88 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Nombor 11–20: Klik & Belajar</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.draggable{cursor:grab;touch-action:none}.draggable:active{cursor:grabbing;opacity:.6;transform:scale(1.05) rotate(3deg)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}input[type=range]{-webkit-appearance:none;width:100%;background:0 0}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:30px;width:30px;border-radius:50%;background:#db2777;border:3px solid #fff;box-shadow:0 4px 6px rgba(0,0,0,.3);cursor:pointer;margin-top:-12px}input[type=range]::-webkit-slider-runnable-track{width:100%;height:8px;cursor:pointer;background:#fbcfe8;border-radius:5px;border:1px solid #f9a8d4}.num-card{transition:all .2s}.num-card:hover{transform:scale(1.05);z-index:10}.num-card.selected{background-color:#fef08a;border-color:#eab308;transform:scale(1.1);z-index:20}.num-card.correct{background-color:#86efac!important;border-color:#16a34a!important;color:#064e3b!important;transform:scale(.95);opacity:.8}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">🔢</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Nombor 11–20</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Nombor 11–20</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah untuk mula belajar.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">1️⃣ Klik</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🔄 Susun</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🧮 Kira</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🔗 Padan</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🧭 Slider</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!",words={11:"sebelas",12:"dua belas",13:"tiga belas",14:"empat belas",15:"lima belas",16:"enam belas",17:"tujuh belas",18:"lapan belas",19:"sembilan belas",20:"dua puluh"};function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Nombor 11–20</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Klik nombor untuk dengar sebutannya.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-blue-600 mb-4">1️⃣ Klik & Sebut</h3>
+                <div class="grid grid-cols-5 gap-2 mb-4">
+                    ${[11,12,13,14,15,16,17,18,19,20].map(e=>`
+                        <button onclick="clickNum(${e}, this)" class="num-card btn-3d bg-blue-100 text-blue-800 font-black text-2xl py-4 rounded-xl border-blue-300 hover:bg-blue-200 flex flex-col items-center">
+                            <span>${e}</span>
+                            <span class="text-xs font-normal text-blue-600 mt-1 opacity-70">${words[e]}</span>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct2(e){setInfo("Seret nombor ke kotak hijau.");var t=[11,12,13,14,15,16,17,18,19,20].sort(()=>Math.random()-.5);e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-green-600 mb-2">🔄 Susun Tertib</h3>
+                <p class="text-slate-500 mb-2 font-bold text-sm">Seret kad ke kotak hijau untuk bina urutan.</p>
+
+                <div class="drop-zone min-h-[80px] rounded-2xl flex flex-wrap gap-2 justify-center items-center p-2 mb-2 border-green-300 bg-green-50"
+                     ondrop="dropToSeq(event)" ondragover="allowDrop(event)" id="seqZone">
+                     <span class="text-green-400 font-bold pointer-events-none text-sm">Seret ke sini...</span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2 mb-4">
+                    ${t.map(e=>`
+                        <div draggable="true" ondragstart="dragStart(event)" data-number="${e}" 
+                             class="draggable btn-3d bg-white text-green-700 w-12 h-12 rounded-lg text-xl font-bold flex items-center justify-center border-green-200 shadow-sm">
+                            ${e}
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="flex gap-4 justify-center">
+                     <button onclick="readSequence()" class="btn-3d bg-green-500 text-white px-4 py-1 rounded-lg font-bold text-sm">🔊 Baca</button>
+                     <button onclick="setupAct2(document.getElementById('activity-content'))" class="btn-3d bg-slate-400 text-white px-4 py-1 rounded-lg font-bold text-sm">🔄 Reset</button>
+                </div>
+            </div>
+        `}function setupAct3(e){setInfo("Klik kumpulan buah untuk kira.");var t=[11,12,13,14,15,16,17,18,19,20].sort(()=>Math.random()-.5).slice(0,6);e.innerHTML=`
+            <div class="w-full max-w-6xl text-center">
+                <h3 class="text-3xl font-bold text-purple-600 mb-4">🧮 Kira Objek</h3>
+                <div class="grid grid-cols-3 gap-2">
+                    ${t.map(e=>`
+                        <button onclick="sayCount(${e}, this)" class="num-card btn-3d bg-purple-50 border-purple-200 p-2 rounded-xl flex flex-col items-center justify-center min-h-[100px]">
+                            <div class="text-xl leading-none mb-1 tracking-tighter w-full break-words">
+                                ${"🍎".repeat(e)}
+                            </div>
+                            <div class="text-xs font-bold text-purple-400 mt-1">Klik Kira</div>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.clickNum=function(e,t){document.querySelectorAll(".num-card").forEach(e=>e.classList.remove("selected")),t.classList.add("selected"),setInfo(`Ini nombor ${words[e]}.`),speak("Nombor "+words[e])},window.dragStart=function(e){e.dataTransfer.setData("text",e.target.dataset.number),e.target.style.opacity="0.4"},window.allowDrop=function(e){e.preventDefault(),e.target.closest(".drop-zone").classList.add("drag-over")},window.dropToSeq=function(e){e.preventDefault();var t=document.getElementById("seqZone"),n=(t.classList.remove("drag-over"),t.querySelector("span")),n=(n&&n.remove(),e.dataTransfer.getData("text"));n&&((e=document.createElement("div")).className="bg-white border-2 border-green-500 text-green-800 rounded-lg px-4 py-3 text-2xl font-bold animate-popIn shadow-sm",e.textContent=n,t.appendChild(e),(t=document.querySelector(`[data-number="${n}"]`))&&(t.style.display="none"),setInfo(`Ditambah: ${n}.`),speak(n))},window.readSequence=function(){var e,t=[...document.querySelectorAll("#seqZone > div")].map(e=>e.textContent.trim());0===t.length?(setInfo("Kotak kosong. Seret nombor dulu."),speak("Seret nombor dahulu.")):(setInfo(e=`Urutan ialah: ${t.join(", ")}.`),speak(e),5<=t.length&&triggerWin())},window.sayCount=function(e,t){document.querySelectorAll(".num-card").forEach(e=>e.classList.remove("selected")),t.classList.add("selected");t.lastElementChild.textContent;t.lastElementChild.textContent=""+e,t.lastElementChild.classList.add("text-3xl","text-purple-700");t=`Ada ${words[e]} epal.`;setInfo(t),speak(t)};let selectedMatch=null;function setupAct4(e){setInfo("Padankan nombor dengan perkataannya."),selectedMatch=null;var t=[11,15,18,20],n=t.map(e=>({type:"num",val:e,id:"n-"+e})),t=t.map(e=>({type:"word",val:e,id:"w-"+e})),n=[...n,...t].sort(()=>Math.random()-.5);e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-orange-600 mb-4">🔗 Padankan</h3>
+                <div class="grid grid-cols-4 gap-2">
+                    ${n.map(e=>`
+                        <button onclick="pickMatch('${e.type}', ${e.val}, this)" 
+                            class="num-card btn-3d bg-orange-50 border-orange-200 text-orange-800 font-bold p-2 rounded-xl text-lg flex items-center justify-center min-h-[80px]">
+                            ${"num"===e.type?`<span class="text-3xl">${e.val}</span>`:`<span class="text-sm">${words[e.val]}</span>`}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.pickMatch=function(t,n,a){if(!a.classList.contains("correct")&&!a.classList.contains("selected"))if(speak("num"===t?"Nombor "+n:words[n]),a.classList.add("selected"),selectedMatch){let e=selectedMatch;e.val===n&&e.type!==t?setTimeout(()=>{e.el.classList.remove("selected"),a.classList.remove("selected"),e.el.classList.add("correct"),a.classList.add("correct"),triggerWin(),speak("Pandai! Padanan betul.")},500):setTimeout(()=>{e.el.classList.remove("selected"),a.classList.remove("selected"),speak("Cuba lagi.")},800),selectedMatch=null}else selectedMatch={type:t,val:n,el:a}};let lastDetailText="";function setupAct5(e){setInfo("Gerakkan butang gelongsor."),e.innerHTML=`
+            <div class="w-full max-w-3xl text-center">
+                <h3 class="text-3xl font-bold text-pink-600 mb-4">🧭 Urutan Slider 11-20</h3>
+                
+                <div class="bg-pink-50 border-4 border-pink-200 rounded-3xl p-4 mb-4">
+                    <div class="flex items-center justify-between text-pink-400 font-bold mb-2 px-2 text-sm">
+                        <span>11</span><span>20</span>
+                    </div>
+                    
+                    <input id="numSlider" type="range" min="11" max="20" value="11" 
+                           class="mb-4" oninput="onSlideChange(this.value)">
+
+                    <div id="slideInfo" class="text-5xl font-black text-pink-500 animate-popIn min-h-[60px]">
+                        11
+                    </div>
+                    <div id="slideWord" class="text-xl text-pink-400 font-bold min-h-[30px]">
+                        sebelas
+                    </div>
+                </div>
+
+                <div class="flex gap-4 justify-center">
+                    <button onclick="speakDetail()" class="btn-3d bg-pink-500 text-white px-4 py-2 rounded-xl font-bold text-sm">ℹ️ Info</button>
+                    <button onclick="playSequence(true)" class="btn-3d bg-pink-400 text-white px-4 py-2 rounded-xl font-bold text-sm">▶️ Naik</button>
+                </div>
+            </div>
+        `,onSlideChange(11)}window.onSlideChange=function(e){e=parseInt(e),document.getElementById("slideInfo").textContent=e,document.getElementById("slideWord").textContent=words[e];var t=e-1,n=e+1;lastDetailText=11===e?`Sebelas ialah permulaan. Selepasnya ${words[n]}.`:20===e?`Dua puluh ialah akhir. Sebelumnya ${words[t]}.`:`${words[e]} datang selepas ${words[t]} dan sebelum ${words[n]}.`,speak("Nombor "+words[e])},window.speakDetail=function(){lastDetailText&&(setInfo(lastDetailText),speak(lastDetailText))},window.playSequence=async function(e){var t,n=document.getElementById("numSlider");for(t of[11,12,13,14,15,16,17,18,19,20])n.value=t,onSlideChange(t),await new Promise(e=>setTimeout(e,1200));triggerWin()}</script>

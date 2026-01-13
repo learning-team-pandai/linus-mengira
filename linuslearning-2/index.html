@@ -1,0 +1,118 @@
+<!doctypehtml><html lang="ms-MY"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Bentuk & Jenis: Klik & Belajar</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.draggable{cursor:grab;touch-action:none;transition:transform .2s}.draggable:active{cursor:grabbing;opacity:.8;transform:scale(1.1) rotate(3deg)}.drop-zone{transition:all .2s;border:4px dashed #cbd5e1;background:#f8fafc}.drop-zone.drag-over{background:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.ring-focus{outline:4px solid #3b82f6;outline-offset:2px}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">🎨</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Bentuk & Jenis</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-4 flex flex-col min-h-0"><div class="game-card p-4 mb-4 flex-1 w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col items-center justify-center transition-opacity duration-200 overflow-y-auto"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Kemahiran Bentuk</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih aktiviti di bawah.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-4 border-2 border-white"><h3 class="text-xl font-bold text-slate-700 mb-2 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-4"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">1️⃣ Kenal</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">2️⃣ Padan</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">3️⃣ Warna</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">4️⃣ Jenis</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-3 px-1 rounded-xl text-sm md:text-base">5️⃣ Kumpul</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-4"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-2 px-6 rounded-full text-lg">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-2 px-8 rounded-full text-xl">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula belajar!";function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">🎯</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Bentuk & Jenis</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}function setupAct1(e){setInfo("Klik bentuk untuk dengar namanya.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-blue-600 mb-6">1️⃣ Kenal Bentuk</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    ${[{n:"bulatan",e:"🔵"},{n:"segi empat",e:"🟦"},{n:"segitiga",e:"🔺"},{n:"bintang",e:"⭐"},{n:"hati",e:"❤️"},{n:"berlian",e:"💎"}].map(e=>`
+                        <button onclick="clickShape('${e.n}', this)" 
+                            class="shape-btn btn-3d bg-blue-100 border-blue-300 p-2 rounded-xl flex flex-col items-center justify-center min-h-[100px] hover:bg-blue-200">
+                            <div class="text-5xl mb-2">${e.e}</div>
+                            <div class="text-base font-bold text-blue-800 capitalize">${e.n}</div>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct2(e){setInfo("Seret bentuk ke objek yang betul.");var t=[{shape:"🔵",sName:"bulatan",obj:"🏀",oName:"bola"},{shape:"🟦",sName:"segi empat",obj:"📦",oName:"kotak"},{shape:"🔺",sName:"segitiga",obj:"🏔️",oName:"gunung"},{shape:"⭐",sName:"bintang",obj:"🌟",oName:"bintang"}];e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-green-600 mb-6">2️⃣ Padankan Bentuk</h3>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="flex flex-col gap-4">
+                        <h4 class="text-xl font-bold text-slate-400">Bentuk</h4>
+                        ${t.map((e,t)=>`
+                            <div id="drag-${t}" draggable="true" ondragstart="dragStart(event)" data-name="${e.sName}"
+                                 class="draggable btn-3d bg-green-100 border-green-300 p-2 rounded-xl flex items-center justify-center gap-2">
+                                <span class="text-4xl">${e.shape}</span>
+                            </div>
+                        `).join("")}
+                    </div>
+                    
+                    <div class="flex flex-col gap-4">
+                        <h4 class="text-xl font-bold text-slate-400">Objek</h4>
+                        ${t.map((e,t)=>`
+                            <div class="drop-zone bg-slate-50 border-slate-300 rounded-xl p-2 flex items-center justify-between"
+                                 ondragover="allowDrop(event)" ondrop="dropShape(event, '${e.sName}')">
+                                <div class="text-left">
+                                    <div class="text-3xl">${e.obj}</div>
+                                    <div class="text-xs text-slate-500 font-bold">${e.oName}</div>
+                                </div>
+                                <div class="target-slot w-12 h-12 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center bg-white">
+                                    ?
+                                </div>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.clickShape=function(e,t){document.querySelectorAll(".shape-btn").forEach(e=>e.classList.remove("ring-focus")),t.classList.add("ring-focus");t=`Ini bentuk ${e}.`;setInfo(t),speak(t)},window.dragStart=function(e){e.dataTransfer.setData("text",e.target.id),e.dataTransfer.setData("name",e.target.dataset.name)},window.allowDrop=function(e){e.preventDefault(),e.target.closest(".drop-zone").classList.add("drag-over")},window.dropShape=function(e,t){e.preventDefault();var a=e.target.closest(".drop-zone"),n=(a.classList.remove("drag-over"),e.dataTransfer.getData("text"));e.dataTransfer.getData("name")===t?(e=document.getElementById(n),(n=a.querySelector(".target-slot")).innerHTML="",n.appendChild(e),n.classList.remove("border-dashed"),setInfo(a=`Betul! Objek ini berbentuk ${t}.`),speak(a),triggerWin()):speak("Salah bentuk. Cuba lagi.")};let paintColor=null;function setupAct3(e){setInfo("Pilih warna, kemudian klik bentuk."),paintColor=null,e.innerHTML=`
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-3xl font-bold text-purple-600 mb-6">3️⃣ Warna Bentuk</h3>
+                
+                <div class="flex justify-center gap-4 mb-8">
+                    ${[{n:"merah",c:"bg-red-500",t:"text-red-600",e:"🟥"},{n:"biru",c:"bg-blue-500",t:"text-blue-600",e:"🟦"},{n:"hijau",c:"bg-green-500",t:"text-green-600",e:"🟩"},{n:"kuning",c:"bg-yellow-400",t:"text-yellow-600",e:"🟨"}].map(e=>`
+                        <button onclick="pickColor('${e.n}', '${e.e}')" 
+                                class="color-btn btn-3d bg-white border-slate-200 p-2 rounded-xl flex flex-col items-center min-w-[60px]">
+                            <div class="text-3xl mb-1">${e.e}</div>
+                            <span class="text-[10px] font-bold ${e.t}">${e.n}</span>
+                        </button>
+                    `).join("")}
+                </div>
+
+                <div class="grid grid-cols-3 gap-6">
+                    ${["⚪","⚪","⚪"].map((e,t)=>`
+                        <button id="shape-c-${t}" onclick="paintShape(this)" 
+                            class="paint-target btn-3d bg-slate-100 border-slate-300 text-5xl p-4 rounded-2xl flex items-center justify-center">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct4(e){setInfo("Klik objek untuk masukkan ke kategori.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-orange-600 mb-6">4️⃣ Kenal Jenis</h3>
+                
+                <div class="grid grid-cols-3 gap-4 mb-8">
+                    ${[{e:"🐱",n:"kucing",cat:"Haiwan"},{e:"🍎",n:"epal",cat:"Buah"},{e:"🚗",n:"kereta",cat:"Kenderaan"},{e:"🐶",n:"anjing",cat:"Haiwan"},{e:"🍌",n:"pisang",cat:"Buah"},{e:"🚌",n:"bas",cat:"Kenderaan"}].map((e,t)=>`
+                        <button onclick="classifyItem('${e.n}', '${e.cat}', this)" 
+                            class="item-btn btn-3d bg-orange-100 border-orange-300 p-2 rounded-xl flex flex-col items-center">
+                            <span class="text-3xl mb-1">${e.e}</span>
+                            <span class="text-xs font-bold text-orange-800">${e.n}</span>
+                        </button>
+                    `).join("")}
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 text-left">
+                    ${["Haiwan","Buah","Kenderaan"].map(e=>`
+                        <div class="bg-white border-2 border-slate-200 rounded-xl p-2 h-32 flex flex-col">
+                            <h4 class="text-sm font-bold text-slate-500 uppercase mb-2 border-b pb-1">${e}</h4>
+                            <div id="cat-${e}" class="flex flex-wrap gap-2 content-start"></div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct5(e){setInfo("Seret objek ke bakul yang betul.");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center">
+                <h3 class="text-3xl font-bold text-pink-600 mb-6">5️⃣ Kumpul Jenis</h3>
+                
+                <div class="grid grid-cols-3 gap-4 mb-8">
+                    ${[{id:"bin-haiwan",name:"Haiwan",icon:"🐾",color:"pink"},{id:"bin-buah",name:"Buah",icon:"🍎",color:"red"},{id:"bin-kenderaan",name:"Kenderaan",icon:"🚗",color:"blue"}].map(e=>`
+                        <div id="${e.id}" data-cat="${e.name}" 
+                             class="drop-zone bg-${e.color}-50 border-${e.color}-200 rounded-xl p-2 min-h-[100px] flex flex-col items-center"
+                             ondragover="allowDrop(event)" ondrop="dropToBin(event)">
+                            <div class="text-3xl mb-1">${e.icon}</div>
+                            <div class="font-bold text-${e.color}-600 mb-2">${e.name}</div>
+                            <div class="bin-content flex flex-wrap gap-1 justify-center"></div>
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-3">
+                    ${[{e:"🐱",n:"kucing",cat:"Haiwan"},{e:"🍎",n:"epal",cat:"Buah"},{e:"🚗",n:"kereta",cat:"Kenderaan"},{e:"🐶",n:"anjing",cat:"Haiwan"},{e:"🍌",n:"pisang",cat:"Buah"},{e:"🚲",n:"basikal",cat:"Kenderaan"}].map((e,t)=>`
+                        <div id="drag-item-${t}" draggable="true" ondragstart="dragStartBin(event)" 
+                             data-cat="${e.cat}" data-name="${e.n}"
+                             class="draggable btn-3d bg-white border-slate-300 p-2 rounded-xl flex flex-col items-center shadow-sm">
+                            <span class="text-3xl">${e.e}</span>
+                            <span class="text-xs mt-1 font-bold text-slate-500">${e.n}</span>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `}window.pickColor=function(e,t){paintColor={name:e,emoji:t},document.querySelectorAll(".color-btn").forEach(e=>e.classList.remove("ring-focus")),setInfo(`Warna ${e} dipilih.`)},window.paintShape=function(e){paintColor?(e.textContent=paintColor.emoji,setInfo(e=`Bentuk diwarnakan ${paintColor.name}.`),speak(e)):speak("Sila pilih warna dahulu.")},window.classifyItem=function(e,t,a){a.style.visibility="hidden";a=document.createElement("span"),a.className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full animate-popIn",a.textContent=e,document.getElementById("cat-"+t).appendChild(a),a=e+` ialah ${t}.`;setInfo(a),speak(a)},window.dragStartBin=function(e){e.dataTransfer.setData("text",e.target.id),e.dataTransfer.setData("cat",e.target.dataset.cat),e.dataTransfer.setData("name",e.target.dataset.name)},window.dropToBin=function(e){e.preventDefault();var t=e.target.closest(".drop-zone"),a=(t.classList.remove("drag-over"),e.dataTransfer.getData("text")),n=e.dataTransfer.getData("cat"),e=e.dataTransfer.getData("name");n===t.dataset.cat?((a=document.getElementById(a)).className="bg-white border shadow-sm px-2 py-1 rounded-lg text-xs font-bold animate-popIn",a.innerHTML=e,a.removeAttribute("draggable"),t.querySelector(".bin-content").appendChild(a),setInfo(t=`Betul! ${e} masuk kumpulan ${n}.`),speak(t),triggerWin()):speak("Salah bakul. Cuba lagi.")}</script>

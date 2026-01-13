@@ -1,0 +1,126 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Masa dan Waktu (Intermediate)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}#scene-container{background-size:cover;background-position:center;border:4px solid #475569;border-radius:1.5rem;transition:background-image .5s ease;cursor:zoom-in;position:relative}#clock-face{width:180px;height:180px;border-radius:50%;border:6px solid #4b5563;background:#fff;position:relative;margin:0 auto;box-shadow:inset 0 0 20px rgba(0,0,0,.1)}.clock-number{position:absolute;width:24px;height:24px;text-align:center;line-height:24px;font-weight:700;color:#374151;transform:translate(-50%,-50%);font-size:.9rem}.n12{top:10%;left:50%}.n3{top:50%;left:90%}.n6{top:90%;left:50%}.n9{top:50%;left:10%}.n1{top:17%;left:73%}.n2{top:30%;left:87%}.n4{top:70%;left:87%}.n5{top:83%;left:73%}.n7{top:83%;left:27%}.n8{top:70%;left:13%}.n10{top:30%;left:13%}.n11{top:17%;left:27%}.clock-hand{position:absolute;bottom:50%;left:50%;transform-origin:bottom center;background:#1f2937;border-radius:4px;transition:transform .5s cubic-bezier(.4,2.08,.55,.44)}#hand-hour{width:5px;height:40px;margin-left:-2.5px;z-index:5}#hand-minute{width:3px;height:60px;margin-left:-1.5px;z-index:6;background:#4b5563}#clock-center{width:10px;height:10px;background:#ef4444;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10}.drop-zone{border:3px dashed #cbd5e1;background-color:#f8fafc;transition:all .2s}.drop-zone.drag-over{background-color:#dbeafe;border-color:#3b82f6;transform:scale(1.02)}.highlight{background-color:#fcd34d!important;transform:scale(1.05);border-color:#f59e0b!important;font-weight:800}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">⏰</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Masa & Waktu (Int.)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⌛</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Masa & Waktu</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Peringkat Pertengahan: Cerita, Jam & Kalendar.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🌄<br>Cerita</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">⏱️<br>Jam</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🕵️<br>Detektif</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">📅<br>Tarikh</button> <button onclick="loadActivity(5)"class="btn-3d bg-red-500 text-white font-bold py-2 px-1 rounded-xl text-xs md:text-sm">🗓️<br>Bulan</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk bermula!",draggedElement=null;function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.95,e.pitch=1.05,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function triggerWin(){confetti({particleCount:100,spread:70,origin:{y:.6}})}function openModal(e){document.getElementById("modal-img").src=e,document.getElementById("image-modal").classList.remove("hidden")}function closeModal(){document.getElementById("image-modal").classList.add("hidden")}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.style.opacity=0,setTimeout(()=>{1===e?setupAct1(t):2===e?setupAct2(t):3===e?setupAct3(t):4===e?setupAct4(t):5===e&&setupAct5(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">⌛</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Masa & Waktu</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti di bawah.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}let storyState={nextCorrect:1};function setupAct1(e){setInfo("Susun aktiviti mengikut urutan (1-4)."),storyState={nextCorrect:1};e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-blue-600 mb-4 flex-none">🌄 Cerita Seharian</h3>
+                
+                <div class="flex-1 min-h-0 flex flex-col justify-center items-center">
+                    <div class="flex justify-center gap-4 mb-6 bg-blue-50 p-4 rounded-2xl border-2 border-blue-200 min-h-[120px]"
+                        id="timeline-zone">
+                        <div class="drop-zone w-24 h-24 rounded-xl flex items-center justify-center text-blue-300 font-bold text-2xl border-dashed border-4 border-blue-200"
+                            ondrop="dropStory(event)" ondragover="allowDrop(event)">1</div>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-3">
+                        ${[{id:1,n:"Bangun Pagi",i:"🌅"},{id:2,n:"Sekolah",i:"🏫"},{id:3,n:"Main Petang",i:"⚽"},{id:4,n:"Tidur Malam",i:"😴"}].sort(()=>Math.random()-.5).map(e=>`
+                            <div draggable="true" ondragstart="dragStart(event)" data-id="${e.id}" 
+                                class="draggable btn-3d bg-white border-slate-300 p-2 rounded-xl w-24 flex flex-col items-center cursor-grab">
+                                <div class="text-3xl mb-1 pointer-events-none">${e.i}</div>
+                                <div class="text-xs font-bold text-slate-600 pointer-events-none">${e.n}</div>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}function setupAct2(e){setInfo("Tekan butang untuk ubah waktu jam."),e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-green-600 mb-4 flex-none">⏱️ Jarum Jam</h3>
+                
+                <div class="flex-1 min-h-0 flex flex-col items-center justify-center">
+                    <div id="clock-face" class="mb-4 shadow-xl flex-none">
+                        ${[12,1,2,3,4,5,6,7,8,9,10,11].map(e=>`<div class="clock-number n${e}">${e}</div>`).join("")}
+                        <div id="hand-hour" class="clock-hand"></div>
+                        <div id="hand-minute" class="clock-hand"></div>
+                        <div id="clock-center"></div>
+                    </div>
+                    
+                    <div id="digital-display" class="text-3xl font-mono font-bold text-slate-700 mb-6 bg-green-50 inline-block px-4 py-1 rounded-lg border border-green-200 flex-none">
+                        12:00
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-2 flex-none">
+                        <button onclick="setTime(3,0)" class="btn-3d bg-green-500 text-white font-bold py-2 px-4 rounded-lg text-sm">3:00</button>
+                        <button onclick="setTime(6,30)" class="btn-3d bg-green-500 text-white font-bold py-2 px-4 rounded-lg text-sm">6:30</button>
+                        <button onclick="setTime(9,15)" class="btn-3d bg-green-500 text-white font-bold py-2 px-4 rounded-lg text-sm">9:15</button>
+                        <button onclick="setTime(11,45)" class="btn-3d bg-green-500 text-white font-bold py-2 px-4 rounded-lg text-sm">11:45</button>
+                    </div>
+                </div>
+            </div>
+        `,setTime(12,0)}window.dragStart=function(e){e.dataTransfer.setData("text",e.target.dataset.id),e.target.style.opacity="0.5"},window.allowDrop=function(e){e.preventDefault()},window.dropStory=function(e){e.preventDefault();var t=parseInt(e.dataTransfer.getData("text"));document.querySelectorAll(".draggable").forEach(e=>e.style.opacity="1"),t===storyState.nextCorrect?(t=document.querySelector(`.draggable[data-id="${t}"]`),(e=e.currentTarget).innerHTML="",e.className="w-24 h-24 rounded-xl bg-blue-100 border-2 border-blue-400 flex flex-col items-center justify-center shadow-md animate-popIn",e.appendChild(t.cloneNode(!0)),t.remove(),e.firstElementChild.removeAttribute("draggable"),e.firstElementChild.className="flex flex-col items-center",e.removeAttribute("ondrop"),storyState.nextCorrect++,storyState.nextCorrect<=4?((t=document.createElement("div")).className="drop-zone w-24 h-24 rounded-xl flex items-center justify-center text-blue-300 font-bold text-2xl border-dashed border-4 border-blue-200 animate-popIn",t.innerText=storyState.nextCorrect,t.setAttribute("ondrop","dropStory(event)"),t.setAttribute("ondragover","allowDrop(event)"),document.getElementById("timeline-zone").appendChild(t),speak("Betul. Seterusnya?")):(speak("Syabas! Lengkap satu hari."),triggerWin())):speak("Salah urutan. Cuba lagi.")},window.setTime=function(e,t){var n=e%12*30+.5*t,a=6*t,n=(document.getElementById("hand-hour").style.transform=`rotate(${n}deg)`,document.getElementById("hand-minute").style.transform=`rotate(${a}deg)`,0===e?12:e),a=t.toString().padStart(2,"0");document.getElementById("digital-display").innerText=n+":"+a,speak(`Pukul ${e} ${0===t?"":t} minit.`)};let detectiveState={current:null};function setupAct3(e){setInfo("Pilih hari ini (hijau). Kemudian kira hari.");detectiveState={current:null},e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full overflow-y-auto">
+                <h3 class="text-2xl font-bold text-purple-600 mb-4 flex-none">🕵️ Detektif Hari</h3>
+                
+                <div class="flex-1 min-h-0 flex flex-col justify-center">
+                    <p class="mb-1 text-slate-500 font-bold text-sm">PILIH HARI INI:</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        ${["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"].map((e,t)=>`
+                            <button onclick="selectToday(${t}, this)" class="day-btn btn-3d bg-white text-purple-800 border-purple-200 font-bold py-2 px-3 rounded-xl text-sm">
+                                ${e}
+                            </button>
+                        `).join("")}
+                    </div>
+                    
+                    <div id="calc-area" class="opacity-50 pointer-events-none transition-opacity">
+                        <p class="mb-1 text-slate-500 font-bold text-sm">KIRA:</p>
+                        <div class="flex justify-center gap-2 mb-4">
+                            <button onclick="calcDay(1)" class="btn-3d bg-purple-500 text-white font-bold py-2 px-3 rounded-lg text-sm">Esok (+1)</button>
+                            <button onclick="calcDay(2)" class="btn-3d bg-purple-500 text-white font-bold py-2 px-3 rounded-lg text-sm">Lusa (+2)</button>
+                            <button onclick="calcDay(-1)" class="btn-3d bg-purple-500 text-white font-bold py-2 px-3 rounded-lg text-sm">Semalam (-1)</button>
+                        </div>
+                        
+                        <div id="result-day" class="text-3xl font-bold text-purple-900 h-12">---</div>
+                    </div>
+                </div>
+            </div>
+        `}function setupAct4(e){setInfo("Pilih Nama Bulan yang betul.");var t=["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"],n=Math.floor(12*Math.random());let a=t[n];e.innerHTML=`
+            <div class="w-full max-w-4xl text-center flex flex-col h-full justify-center">
+                <h3 class="text-2xl font-bold text-orange-600 mb-4">📅 Tulis Tarikh</h3>
+                
+                <div class="bg-orange-50 p-4 rounded-3xl border-4 border-orange-200 inline-block mb-6 mx-auto w-fit">
+                    <div class="text-slate-500 mb-1 font-bold text-xs">TARIKH HARI INI</div>
+                    <div class="text-4xl font-black text-slate-800 flex items-center gap-2">
+                        <span>15</span>
+                        <span class="text-orange-500">/</span>
+                        <span class="text-orange-600 border-b-4 border-orange-600 px-2">${n+1}</span>
+                        <span class="text-orange-500">/</span>
+                        <span>2025</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-3 md:grid-cols-4 gap-2">
+                    ${t.map(e=>`
+                        <button onclick="checkMonth('${e}', '${a}', this)" class="btn-3d bg-white text-slate-600 border-slate-300 font-bold py-2 rounded-xl hover:bg-orange-50 text-sm">
+                            ${e}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `}function setupAct5(e){setInfo("Asingkan bulan mengikut bilangan hari (Warna).");e.innerHTML=`
+            <div class="w-full max-w-5xl text-center flex flex-col h-full overflow-hidden">
+                <h3 class="text-2xl font-bold text-red-600 mb-4 flex-none">🗓️ Susun Bulan</h3>
+                
+                <div class="flex-1 min-h-0 flex flex-col">
+                    <div class="flex justify-center gap-4 mb-4 flex-none">
+                        <div class="drop-zone w-24 h-32 rounded-xl bg-red-50 border-red-300 flex flex-col items-center p-2"
+                             ondrop="dropMonth(event, 'red')" ondragover="allowDrop(event)">
+                             <div class="font-bold text-red-600 mb-auto text-sm">31 Hari</div>
+                        </div>
+                        <div class="drop-zone w-24 h-32 rounded-xl bg-orange-50 border-orange-300 flex flex-col items-center p-2"
+                             ondrop="dropMonth(event, 'orange')" ondragover="allowDrop(event)">
+                             <div class="font-bold text-orange-600 mb-auto text-sm">30 Hari</div>
+                        </div>
+                        <div class="drop-zone w-24 h-32 rounded-xl bg-blue-50 border-blue-300 flex flex-col items-center p-2"
+                             ondrop="dropMonth(event, 'blue')" ondragover="allowDrop(event)">
+                             <div class="font-bold text-blue-600 mb-auto text-sm">Lain</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-2 overflow-y-auto pb-4">
+                        ${[{n:"Jan",d:31,c:"red"},{n:"Feb",d:28,c:"blue"},{n:"Apr",d:30,c:"orange"},{n:"Mei",d:31,c:"red"},{n:"Jun",d:30,c:"orange"},{n:"Dis",d:31,c:"red"}].sort(()=>Math.random()-.5).map(e=>`
+                            <div draggable="true" ondragstart="dragStart(event)" data-color="${e.c}"
+                                 class="draggable btn-3d bg-white border-slate-300 text-slate-700 font-bold py-2 px-4 rounded-xl cursor-grab text-sm">
+                                ${e.n}
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            </div>
+        `}window.selectToday=function(e,t){document.querySelectorAll(".day-btn").forEach(e=>{e.classList.remove("bg-green-400","text-white","border-green-600"),e.classList.add("bg-white","text-purple-800")}),t.classList.remove("bg-white","text-purple-800"),t.classList.add("bg-green-400","text-white","border-green-600"),detectiveState.current=e;document.getElementById("calc-area").classList.remove("opacity-50","pointer-events-none"),document.getElementById("result-day").innerText="---";speak(`Hari ini ${["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"][e]}.`)},window.calcDay=function(t){if(null!==detectiveState.current){let e=(detectiveState.current+t)%7;e<0&&(e+=7);t=["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"][e];document.getElementById("result-day").innerText=t,document.getElementById("result-day").classList.remove("pop-in"),document.getElementById("result-day").offsetWidth,document.getElementById("result-day").classList.add("pop-in"),speak(`Jawapannya ${t}.`)}},window.checkMonth=function(e,t,n){e===t?(n.classList.remove("bg-white","text-slate-600"),n.classList.add("bg-green-500","text-white","border-green-600"),speak("Betul!"),triggerWin(),setTimeout(()=>setupAct4(document.getElementById("activity-content")),1500)):(n.classList.add("bg-red-100","shake"),setTimeout(()=>n.classList.remove("bg-red-100","shake"),500),speak("Salah."))},window.dropMonth=function(e,t){e.preventDefault();e.dataTransfer.getData("text")};let originalDragStart=window.dragStart;window.dragStart=function(e){e.target.dataset.color?(e.dataTransfer.setData("color",e.target.dataset.color),e.target.style.opacity="0.5",e.target.id="dragging-el"):originalDragStart(e)},window.dropMonth=function(e,t){e.preventDefault();var n=e.dataTransfer.getData("color");let a=document.getElementById("dragging-el");a&&(a.style.opacity="1",a.id="",n===t?(e.currentTarget.appendChild(a),a.removeAttribute("draggable"),a.classList.remove("btn-3d","bg-white","border-slate-300"),"red"===n&&(a.className="bg-red-500 text-white px-2 py-1 rounded mb-1 w-full text-sm font-bold shadow"),"orange"===n&&(a.className="bg-orange-500 text-white px-2 py-1 rounded mb-1 w-full text-sm font-bold shadow"),"blue"===n&&(a.className="bg-blue-500 text-white px-2 py-1 rounded mb-1 w-full text-sm font-bold shadow"),speak("Betul!")):(speak("Salah kumpulan."),a.classList.add("shake"),setTimeout(()=>a.classList.remove("shake"),500)))}</script>

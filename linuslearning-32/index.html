@@ -1,0 +1,102 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Matematik Ceria: Operasi Tolak (1-100)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.grid-100{display:grid;grid-template-columns:repeat(10,minmax(20px,1fr));gap:2px;height:100%;align-content:center}.cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #cbd5e1;border-radius:4px;background:#fff;font-weight:700;color:#475569}.cell.on{background:#dbeafe;border-color:#60a5fa;color:#1e3a8a}.cell.result{background:#dcfce7;border-color:#22c55e;color:#14532d;transform:scale(1.1);box-shadow:0 4px 6px -1px rgba(0,0,0,.1)}.cell.win{background:#4ade80!important;border-color:#166534!important;color:#fff;animation:pop .5s ease}@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.1)}100%{transform:scale(1)}}.candy-btn{transition:all .2s;font-size:1.5rem;display:flex;align-items:center;justify-content:center;width:45px;height:45px;border-radius:50%;background:#fff;border:2px solid #e2e8f0;cursor:pointer}.candy-btn:hover{transform:scale(1.1);border-color:#3b82f6}.candy-btn.taken{opacity:.4;transform:scale(.9);background:#f1f5f9;border-color:#cbd5e1;cursor:default}.input-std{border:3px solid #cbd5e1;border-radius:12px;padding:4px;text-align:center;font-weight:700;font-size:1.1rem;outline:0;transition:border .2s}.input-std:focus{border-color:#3b82f6}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">➖</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Operasi Tolak (1-100)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">📉</div><h2 class="text-4xl md:text-5xl font-bold text-emerald-600 mb-4">Operasi Tolak</h2><p class="text-lg text-slate-500 mb-8 font-semibold">Tanpa Kumpul Semula (1-100)<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 rounded-xl text-xs">🍬<br>Ambil</button> <button onclick="loadActivity(2)"class="btn-3d bg-green-500 text-white font-bold py-2 rounded-xl text-xs">📉<br>Garis</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 rounded-xl text-xs">🟩<br>Petak</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 rounded-xl text-xs">🧮<br>Lazim</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 rounded-xl text-xs">📝<br>Cerita</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula!";function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.95,t.pitch=1.05,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t&&loadTakeAndLeft(e),2===t&&loadNumberlineBack(e),3===t&&loadHundredChart(e),4===t&&loadColumnNoBorrow(e),5===t&&loadStorySubtraction(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">📉</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Operasi Tolak</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Tanpa Kumpul Semula (1-100)</p></div>',setInfo("Pilih aktiviti untuk mula!")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}function genPair_1digit(){var t=6+Math.floor(4*Math.random()),e=1+Math.floor(5*Math.random());return e<=t?[t,e]:genPair_1digit()}function loadTakeAndLeft(t){let[n,l]=genPair_1digit(),o=n-l;setInfo("Klik objek untuk 'ambil' dan kira baki."),t.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-2xl font-bold text-blue-500 mb-2 flex-none">🍬 Ambil & Baki</h3>
+            <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-4 flex-1 flex flex-col min-h-0 overflow-y-auto w-full">
+               <div class="text-xl font-bold text-slate-700 mb-2 flex-none">Soalan: ${n} - ${l} = <span id="t-result" class="text-blue-500">?</span></div>
+               <p class="text-slate-500 mb-4 flex-none text-sm">Klik ${l} biji gula-gula untuk buang.</p>
+               
+               <div id="candies" class="flex flex-wrap gap-2 justify-center mb-4 overflow-y-auto flex-1 content-start"></div>
+               
+               <div class="flex justify-center gap-2 flex-none">
+                  <button id="t-check" class="btn-3d bg-blue-500 text-white font-bold py-2 px-6 rounded-xl text-lg">✅ Semak</button>
+                  <button id="t-new" class="btn-3d bg-slate-400 text-white font-bold py-2 px-6 rounded-xl text-lg">🔄 Baru</button>
+               </div>
+               <div id="t-fb" class="mt-2 font-bold text-lg h-6 flex-none"></div>
+            </div>
+        </div>`;var e=document.getElementById("candies");let a=0;for(let t=0;t<n;t++){let t=document.createElement("button");t.className="candy-btn",t.textContent="🍬",t.onclick=()=>{t.dataset.off||(t.dataset.off="1",t.textContent="❌",t.classList.add("taken"),a++)},e.appendChild(t)}document.getElementById("t-check").onclick=()=>{var t=n-a,e=(document.getElementById("t-result").textContent=t,document.getElementById("t-fb"));a===l&&t==o?(e.className="mt-4 font-bold text-xl text-green-600",e.textContent=`Betul! Baki ialah ${o}.`,triggerWin(),speak(`Betul. Baki ialah ${o}.`)):(e.className="mt-4 font-bold text-xl text-rose-500",e.textContent=`Belum tepat. Sila buang ${l} biji.`,speak("Belum tepat."))},document.getElementById("t-new").onclick=()=>loadTakeAndLeft(t)}function genPair_line(){var t=2+Math.floor(6*Math.random()),e=2+Math.floor(8*Math.random());return[10*t+e,1+Math.floor(Math.random()*e)]}function loadNumberlineBack(t){let[n,l]=genPair_line(),o=n-l,a=(setInfo("Lompat ke belakang untuk menolak."),t.innerHTML=`
+        <div class="w-full max-w-3xl text-center flex flex-col h-full overflow-hidden">
+            <h3 class="text-2xl font-bold text-green-500 mb-2 flex-none">📉 Garis Nombor Mundur</h3>
+            <div class="bg-green-50 border-2 border-green-200 rounded-2xl p-4 flex-1 flex flex-col min-h-0 w-full justify-center">
+               <div class="text-xl font-bold text-slate-700 mb-4 flex-none">Soalan: ${n} - ${l} = <span id="nl-ans" class="text-green-600">?</span></div>
+               
+               <div class="flex justify-center gap-2 mb-6 flex-none">
+                  <button id="j1" class="btn-3d bg-white text-green-700 border-2 border-green-200 rounded-xl px-3 py-1 font-bold">-1</button>
+                  <button id="j2" class="btn-3d bg-white text-green-700 border-2 border-green-200 rounded-xl px-3 py-1 font-bold">-2</button>
+                  <button id="j5" class="btn-3d bg-white text-green-700 border-2 border-green-200 rounded-xl px-3 py-1 font-bold">-5</button>
+                  <button id="nl-reset" class="btn-3d bg-slate-400 text-white rounded-xl px-3 py-1 font-bold">Reset</button>
+               </div>
+
+               <div class="relative h-24 w-full bg-white rounded-xl border-2 border-slate-100 shadow-inner mb-2 flex-none">
+                  <div class="absolute left-8 right-8 top-1/2 h-2 bg-slate-300 rounded-full"></div>
+                  <div class="absolute left-8 top-[60%] font-bold text-slate-400">0</div>
+                  <div class="absolute right-8 top-[60%] font-bold text-slate-400">${n}</div>
+                  
+                  <div id="marker" class="absolute top-[25%] transition-all duration-500" style="left: calc(8% + 84%);">
+                     <div class="text-3xl filter drop-shadow-md">🐸</div>
+                     <div class="text-xs font-bold text-center bg-green-100 px-1 rounded-md border border-green-300">${n}</div>
+                  </div>
+               </div>
+               <div id="nl-fb" class="font-bold text-lg h-6 flex-none"></div>
+            </div>
+        </div>`,n),d=0;function e(){var t=a/(n||1)*84+8,e=document.getElementById("marker");e.style.left=t+"%",e.querySelector("div:nth-child(2)").textContent=a,document.getElementById("nl-ans").textContent=a,d===l&&(t=a===o,e=document.getElementById("nl-fb"),t)&&(e.className="text-green-600",e.textContent="Selesai! Jawapan betul.",triggerWin(),speak(`${n} tolak ${l} ialah `+o))}function i(t){d+t>l?speak("Terlalu banyak."):(d+=t,a-=t,e())}document.getElementById("j1").onclick=()=>i(1),document.getElementById("j2").onclick=()=>i(2),document.getElementById("j5").onclick=()=>i(5),document.getElementById("nl-reset").onclick=()=>{a=n,d=0,e(),document.getElementById("nl-fb").textContent=""}}function genPair_chart(){var t=3+Math.floor(6*Math.random()),e=2+Math.floor(8*Math.random()),n=Math.floor(Math.random()*(t+1)),l=1+Math.floor(Math.random()*e),o=10*t+e,a=10*n+l;return 0===a||o-a<=0?genPair_chart():[o,a,t,e,n,l]}function loadHundredChart(t){let[e,n,,,l,o]=genPair_chart(),a=e-n;setInfo("Gunakan butang -10 dan -1 untuk bergerak di grid."),t.innerHTML=`
+        <div class="w-full max-w-5xl mx-auto flex flex-col h-full overflow-hidden text-center">
+            <h3 class="text-xl font-bold text-purple-500 mb-2 flex-none">🟩 Petak 100</h3>
+            <div class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-2 flex-1 flex flex-col md:flex-row gap-4 min-h-0 w-full">
+               <div class="flex-none md:w-1/3 flex flex-col justify-center">
+                  <div class="text-xl font-bold text-slate-700 mb-2 text-center">Soalan: ${e} - ${n} = <span id="hc-ans" class="text-purple-600">?</span></div>
+                  <div class="flex flex-wrap gap-2 justify-center mb-2">
+                     <button id="m10" class="btn-3d bg-purple-500 text-white px-3 py-1 rounded-xl font-bold text-sm">-10 (Naik)</button>
+                     <button id="m1" class="btn-3d bg-purple-400 text-white px-3 py-1 rounded-xl font-bold text-sm">-1 (Kiri)</button>
+                     <button id="hc-reset" class="btn-3d bg-slate-400 text-white px-3 py-1 rounded-xl font-bold text-sm">Reset</button>
+                  </div>
+                  <div id="hc-fb" class="text-center font-bold text-base h-6"></div>
+                  <div class="mt-2 text-center"><button class="text-slate-400 underline font-bold" onclick="loadHundredChart(document.getElementById('activity-content'))">Soalan Baru</button></div>
+               </div>
+               <div class="flex-1 min-h-0 overflow-hidden">
+                  <div id="chart" class="grid-100 bg-white p-1 rounded-xl border-2 border-slate-200 shadow-sm h-full w-full object-contain mx-auto"></div>
+               </div>
+            </div>
+        </div>`;var d=document.getElementById("chart");for(let t=1;t<=100;t++){var i=document.createElement("div");i.className="cell",i.textContent=t,d.appendChild(i)}let s=d.children,r=t=>t-1,c=e,u=0,x=0,b=!1;function f(){[...s].forEach(t=>t.classList.remove("on","result","win"));for(let t=1;t<=e;t++)s[r(t)].classList.add("on");s[r(c)].classList.add("result"),document.getElementById("hc-ans").textContent=c}function m(t){if(!b){if(10===t){if(u>=l)return;u++,c-=10}else{if(x>=o)return;x++,--c}f(),u!==l||x!==o||c!==a||b||(b=!0,s[r(c)].classList.add("win"),document.getElementById("hc-fb").textContent="Tepat Sekali!",document.getElementById("hc-fb").className="text-center font-bold text-lg text-green-600",triggerWin(),speak("Tepat sekali!"))}}document.getElementById("m10").onclick=()=>m(10),document.getElementById("m1").onclick=()=>m(1),document.getElementById("hc-reset").onclick=()=>{b||(c=e,u=0,x=0,f())},f()}function genPair_column(){var t=2+Math.floor(7*Math.random()),e=2+Math.floor(8*Math.random()),n=Math.floor(Math.random()*(t+1)),l=1+Math.floor(Math.random()*e),o=10*t+e,a=10*n+l;return o-a<=0?genPair_column():[o,a,t-n,e-l]}function loadColumnNoBorrow(t){let[e,n,l,o]=genPair_column();setInfo("Selesaikan bahagian Sa dahulu, kemudian Puluh."),t.innerHTML=`
+        <div class="w-full max-w-md mx-auto flex flex-col h-full overflow-hidden text-center">
+            <h3 class="text-xl font-bold text-orange-500 mb-2 flex-none">🧮 Bentuk Lazim</h3>
+            <div class="bg-orange-50 border-2 border-orange-200 rounded-2xl p-4 flex-1 flex flex-col justify-center min-h-0 w-full">
+               <div class="grid grid-cols-2 gap-1 text-xl font-bold text-slate-700 mb-2">
+                  <div class="text-xs text-slate-400 uppercase">Puluh</div><div class="text-xs text-slate-400 uppercase">Sa</div>
+                  <div class="bg-white p-2 rounded-xl border-2 border-slate-200 flex items-center justify-center">${Math.floor(e/10)}</div><div class="bg-white p-2 rounded-xl border-2 border-slate-200 flex items-center justify-center">${e%10}</div>
+                  <div class="flex items-center justify-center text-3xl text-orange-500">-</div><div></div>
+                  <div class="bg-white p-2 rounded-xl border-2 border-slate-200 flex items-center justify-center">${Math.floor(n/10)}</div><div class="bg-white p-2 rounded-xl border-2 border-slate-200 flex items-center justify-center">${n%10}</div>
+               </div>
+               <hr class="border-t-4 border-slate-300 my-2 rounded-full">
+               <div class="grid grid-cols-2 gap-2 mb-4">
+                  <input id="col-p" class="input-std py-2 text-xl" type="number" placeholder="?">
+                  <input id="col-s" class="input-std py-2 text-xl" type="number" placeholder="?">
+               </div>
+               <div class="flex-none">
+                  <button id="col-check" class="btn-3d bg-orange-500 text-white font-bold py-2 px-6 rounded-xl text-lg w-full">✅ Semak</button>
+                  <div id="col-fb" class="mt-2 font-bold text-lg h-6"></div>
+                  <div class="mt-1"><button class="text-slate-400 font-bold underline" onclick="loadColumnNoBorrow(document.getElementById('activity-content'))">Soalan Baru</button></div>
+               </div>
+            </div>
+        </div>`,document.getElementById("col-check").onclick=()=>{var t=Number(document.getElementById("col-p").value),e=Number(document.getElementById("col-s").value),n=document.getElementById("col-fb");t===l&&e===o?(n.textContent="Betul!",n.className="mt-4 font-bold text-lg text-green-600",triggerWin(),speak("Betul!")):(n.textContent="Salah. Cuba kira Sa dulu.",n.className="mt-4 font-bold text-lg text-rose-500")}}function loadStorySubtraction(t){var e=[{img:"✏️",text:(t,e)=>`Ali mempunyai ${t} pensel. Dia memberi ${e} pensel kepada kawan.`,unit:"pensel"},{img:"🍪",text:(t,e)=>`Sara ada ${t} biskut. Dia makan ${e} biskut.`,unit:"biskut"}];let o=20+Math.floor(30*Math.random()),a=5+Math.floor(10*Math.random()),d=o-a;e=e[Math.floor(Math.random()*e.length)];setInfo("Isi tempat kosong berdasarkan cerita."),t.innerHTML=`
+        <div class="w-full max-w-3xl mx-auto flex flex-col h-full overflow-hidden text-center">
+            <h3 class="text-xl font-bold text-rose-500 mb-2 flex-none">📝 Cerita Harian</h3>
+            <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 flex-1 flex flex-col min-h-0 w-full justify-center">
+               <div class="flex items-center gap-2 mb-4 justify-center bg-white p-2 rounded-xl shadow-sm flex-none">
+                  <div class="text-4xl rounded-full">${e.img}</div>
+                  <p class="text-lg font-medium text-slate-700" id="story-txt">${e.text(o,a)} <br>Berapakah baki ${e.unit}?</p>
+               </div>
+               
+               <div class="bg-white rounded-xl p-4 border-2 border-rose-100 shadow-sm mb-2 flex-none">
+                  <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
+                     <input id="st-a" class="input-std w-16" type="number">
+                     <span class="text-2xl font-bold text-rose-400">-</span>
+                     <input id="st-b" class="input-std w-16" type="number">
+                     <span class="text-2xl font-bold text-rose-400">=</span>
+                     <input id="st-s" class="input-std w-20 bg-rose-50" type="number" placeholder="Baki">
+                  </div>
+                  <div class="text-center"><button id="st-check" class="btn-3d bg-rose-500 text-white font-bold py-2 px-6 rounded-xl text-lg">Semak</button></div>
+               </div>
+               <div id="st-fb" class="text-center font-bold text-lg h-6 flex-none"></div>
+               <div class="text-center mt-2 flex-none"><button class="text-slate-400 font-bold underline" onclick="loadStorySubtraction(document.getElementById('activity-content'))">Cerita Baru</button></div>
+            </div>
+        </div>`,document.getElementById("st-check").onclick=()=>{var t=Number(document.getElementById("st-a").value),e=Number(document.getElementById("st-b").value),n=Number(document.getElementById("st-s").value),l=document.getElementById("st-fb");t===o&&e===a&&n===d?(l.textContent="Hebat! Jawapan tepat.",l.className="text-center font-bold text-xl text-green-600",triggerWin(),speak("Hebat!")):(l.textContent="Semak semula ayat matematik.",l.className="text-center font-bold text-xl text-rose-500")}}</script>

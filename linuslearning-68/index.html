@@ -1,0 +1,115 @@
+<!doctypehtml><html lang="ms-MY"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kemahiran Pemulihan: Masa & Waktu (Intermediate)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;transition:transform .2s;flex:1;display:flex;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.drag-item{cursor:grab;user-select:none;transition:transform .1s}.drag-item:active{cursor:grabbing;transform:scale(.95)}.clock-container{max-width:220px;margin:0 auto;touch-action:none}.clock-face{stroke:#334155;stroke-width:8;fill:#f8fafc}.clock-center{fill:#334155}.clock-hand{stroke-linecap:round;transform-origin:50% 50%;transition:transform .1s cubic-bezier(.4,0,.2,1)}.clock-hand-hour{stroke:#3b82f6;stroke-width:8}.clock-hand-minute{stroke:#16a34a;stroke-width:6}.clock-hand-second{stroke:#ef4444;stroke-width:3}.jadual-item{border-left:6px solid #8b5cf6;background-color:#f3f4f6;padding:10px;border-radius:8px;margin-bottom:8px}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="fixed top-2 left-0 right-0 z-50 px-4 pointer-events-none"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-1.5 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-2"><span class="text-2xl animate-bounce">⏰</span> <span id="info-text"class="text-base font-bold text-green-900 leading-none mt-0.5">Masa & Waktu (Sederhana)</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-1 transition-colors shadow-sm text-sm">🔊</button></div></div><div class="h-16 flex-none"></div><div class="max-w-6xl mx-auto p-2 w-full flex-1 flex flex-col overflow-hidden min-h-0"><div class="game-card p-4 mb-2 flex items-center justify-center relative w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col"><div class="py-4 text-center"><div class="text-6xl mb-2 animate-pulse">⏳</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Masa & Waktu</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Kira Tempoh, Jadual & Lumba Minit<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 border-2 border-white flex-none"><h3 class="text-sm font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">🎮 Pilih Aktiviti</h3><div class="flex flex-wrap justify-center gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🕰️ Mesin Masa</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-3 rounded-lg text-xs">⏱️ Kira Tempoh</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-3 rounded-lg text-xs">📝 Jadual Saya</button> <button onclick="loadActivity(4)"class="btn-3d bg-red-500 text-white font-bold py-2 px-3 rounded-lg text-xs">⏳ Baki Masa</button> <button onclick="loadActivity(5)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🏁 Lumba Minit</button></div><div class="flex justify-center gap-2 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-xs">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-sm">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",clockState={hour:3,minute:0,isDragging:null},activityTimer=null,activityState={};function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.9,t.pitch=1.1,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function createClockSVG(t,e,a,n=!1){var i="clock-"+Math.random().toString(36).substr(2,9);return t.innerHTML=`
+        <svg viewBox="0 0 200 200" class="clock-container" id="${i}">
+          <circle cx="100" cy="100" r="95" class="clock-face"/>
+          ${Array.from({length:12}).map((t,e)=>{var a=30*(e+1)*Math.PI/180;return`<text x="${100+78*Math.sin(a)}" y="${5+(100-78*Math.cos(a))}" text-anchor="middle" font-size="16" font-weight="bold" fill="#334155" style="font-family: 'Fredoka'">${e+1}</text>`}).join("")}
+          ${Array.from({length:60}).map((t,e)=>{var a=6*e*Math.PI/180;return`<line x1="${100+Math.sin(a)*(e%5==0?85:90)}" y1="${100-Math.cos(a)*(e%5==0?85:90)}" x2="${100+92*Math.sin(a)}" y2="${100-92*Math.cos(a)}" style="stroke:${e%5==0?"#334155":"#cbd5e1"}; stroke-width: ${e%5==0?3:1};" />`}).join("")}
+          
+          <line id="hand-hour-${i}" x1="100" y1="100" x2="100" y2="55" class="clock-hand clock-hand-hour"/>
+          <line id="hand-minute-${i}" x1="100" y1="100" x2="100" y2="30" class="clock-hand clock-hand-minute"/>
+          <circle cx="100" cy="100" r="6" class="clock-center"/>
+        </svg>
+      `,updateClockHands(i,e,a),n||((t=document.getElementById(i)).style.cursor="pointer",clockState={hour:e,minute:a,isDragging:null,id:i},t.addEventListener("mousedown",startClockDrag),t.addEventListener("touchstart",startClockDrag,{passive:!1})),i}function updateClockHands(t,e,a){var n,i=document.getElementById("hand-hour-"+t),t=document.getElementById("hand-minute-"+t);i&&t&&(n=6*a,i.style.transform=`rotate(${e%12*30+.5*a}deg)`,t.style.transform=`rotate(${n}deg)`)}function startClockDrag(t){t.preventDefault();var e=t.currentTarget.getBoundingClientRect(),a=e.left+e.width/2,a=(t.clientX||t.touches[0].clientX)-a,t=(t.clientY||t.touches[0].clientY)-(e.top+e.height/2),a=Math.sqrt(a*a+t*t);a<.35*e.width?clockState.isDragging="hour":a<.5*e.width&&(clockState.isDragging="minute"),clockState.isDragging&&(window.addEventListener("mousemove",handleClockDrag),window.addEventListener("touchmove",handleClockDrag,{passive:!1}),window.addEventListener("mouseup",stopClockDrag),window.addEventListener("touchend",stopClockDrag))}function handleClockDrag(e){if(clockState.isDragging){e.preventDefault();var a=document.getElementById(clockState.id);if(a){var a=a.getBoundingClientRect(),n=a.width/2,i=(e.clientX||e.touches[0].clientX)-a.left,e=(e.clientY||e.touches[0].clientY)-a.top;let t=180*(Math.atan2(e-a.height/2,i-n)+Math.PI/2)/Math.PI;t<0&&(t+=360),"minute"===clockState.isDragging?clockState.minute=Math.round(t/6)%60:(e=Math.round(t/30)%12,clockState.hour=(12<=clockState.hour?12:0)+e),updateClockHands(clockState.id,clockState.hour,clockState.minute),1===currentActivity&&updateMesinMasaDisplay(clockState.hour,clockState.minute)}}}function stopClockDrag(t){clockState.isDragging&&(clockState.isDragging=null,window.removeEventListener("mousemove",handleClockDrag),window.removeEventListener("touchmove",handleClockDrag),window.removeEventListener("mouseup",stopClockDrag),window.removeEventListener("touchend",stopClockDrag),speak(`Jam pukul ${clockState.hour}:`+clockState.minute.toString().padStart(2,"0")))}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,stopClockDrag(),activityTimer&&clearInterval(activityTimer),setTimeout(()=>{1===t&&loadMesinMasa(e),2===t&&loadKiraTempoh(e),3===t&&loadJadualHarian(e),4===t&&loadBakiMasa(e),5===t&&loadLumbaMinit(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,activityTimer&&clearInterval(activityTimer),document.getElementById("activity-content").innerHTML='<div class="h-full flex flex-col justify-center items-center py-4 text-center"><div class="text-6xl mb-4 animate-bounce">⏳</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Masa & Waktu</h2><p class="text-lg text-slate-500 font-semibold">Pilih butang di bawah.</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}function loadMesinMasa(t){setInfo("Mula 2:00. Tempoh 3 jam 15 minit. Laraskan Jam Tamat."),t.innerHTML=`
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🕰️ Mesin Masa (Laraskan Jam)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="bg-blue-50 rounded-2xl p-4 border-2 border-blue-200 text-center w-full max-w-3xl">
+                    <p class="text-sm text-slate-600 mb-2 font-bold">Mula: 2:00 | Tempoh: <span class="text-blue-600">3 jam 15 minit</span></p>
+                    
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-4">
+                        <div class="bg-white p-2 rounded-xl shadow-sm">
+                            <div class="text-xs font-bold text-slate-400 mb-1">Masa Mula</div>
+                            <div id="clock-start" class="scale-90"></div>
+                        </div>
+                        <div class="text-2xl text-slate-300">➡️</div>
+                        <div class="bg-white p-2 rounded-xl shadow-sm border-2 border-blue-300">
+                            <div class="text-xs font-bold text-blue-500 mb-1">Jam Tamat (Gerakkan Jarum)</div>
+                            <div id="clock-end" class="scale-90"></div>
+                            <div id="digital-display-1" class="text-xl font-black text-slate-700 mt-1 bg-slate-100 rounded px-2">03:00</div>
+                        </div>
+                    </div>
+    
+                    <button id="semak-1" class="btn-3d bg-blue-500 text-white font-bold py-2 px-6 rounded-lg text-sm">Semak Jawapan</button>
+                </div>
+            </div>
+        `,createClockSVG(document.getElementById("clock-start"),2,0,!0),createClockSVG(document.getElementById("clock-end"),3,0,!1),updateMesinMasaDisplay(3,0),document.getElementById("semak-1").onclick=()=>{clockState.hour%12==5&&15===clockState.minute?(setInfo("Tahniah! 5:15 ialah jawapan yang betul."),triggerWin(),speak("Betul! 5 15.")):(setInfo("Salah. 2 tambah 3 jadi 5. Cuba lagi."),speak("Salah. Cuba lagi."),document.getElementById("clock-end").classList.add("shake"),setTimeout(()=>document.getElementById("clock-end").classList.remove("shake"),500))}}function updateMesinMasaDisplay(t,e){t=t%12==0?12:t%12;document.getElementById("digital-display-1").textContent=t.toString().padStart(2,"0")+":"+e.toString().padStart(2,"0")}function loadKiraTempoh(t){setInfo("Berapa jam dari 9:00 pagi hingga 1:00 petang?"),activityState={duration:0},t.innerHTML=`
+            <h3 class="text-xl font-bold text-emerald-500 mb-2 text-center flex-none">⏱️ Kira Tempoh</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="bg-emerald-50 rounded-2xl p-4 border-2 border-emerald-200 w-full max-w-3xl text-center">
+                    <p class="text-sm font-bold text-slate-600 mb-4">Dari 9:00 Pagi hingga 1:00 Petang</p>
+                    
+                    <div class="flex justify-center gap-4 mb-4">
+                        <div id="clock-start-2" class="scale-75 origin-top"></div>
+                        <div id="clock-end-2" class="scale-75 origin-top"></div>
+                    </div>
+    
+                    <div class="bg-white p-2 rounded-lg inline-block shadow-sm border border-emerald-100 mb-4">
+                        <div class="text-xs text-slate-400 font-bold uppercase">Tempoh Dikira</div>
+                        <div id="tempoh-display" class="text-3xl font-black text-emerald-600 my-1">0 jam</div>
+                        <div class="flex gap-2 justify-center">
+                            <button id="tolak-jam" class="bg-slate-200 text-slate-600 px-3 py-1 rounded text-sm font-bold hover:bg-slate-300">-</button>
+                            <button id="tambah-jam" class="bg-emerald-500 text-white px-3 py-1 rounded text-sm font-bold hover:bg-emerald-600">+</button>
+                        </div>
+                    </div>
+                    <br>
+                    <button id="semak-2" class="btn-3d bg-emerald-600 text-white font-bold py-2 px-6 rounded-lg text-sm">Semak</button>
+                </div>
+            </div>
+        `,createClockSVG(document.getElementById("clock-start-2"),9,0,!0),createClockSVG(document.getElementById("clock-end-2"),13,0,!0);let e=document.getElementById("tempoh-display");document.getElementById("tambah-jam").onclick=()=>{activityState.duration++,e.textContent=activityState.duration+" jam"},document.getElementById("tolak-jam").onclick=()=>{0<activityState.duration&&activityState.duration--,e.textContent=activityState.duration+" jam"},document.getElementById("semak-2").onclick=()=>{4===activityState.duration?(setInfo("Tepat! 4 jam."),triggerWin(),speak("Betul, 4 jam.")):(setInfo("Salah. Kira: 9 ke 10, 10 ke 11..."),speak("Salah."),e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),500))}}function loadJadualHarian(t){setInfo("Bina jadual anda. Klik butang aktiviti."),activityState={currentTimeMinutes:480},t.innerHTML=`
+            <h3 class="text-xl font-bold text-violet-500 mb-2 text-center flex-none">📝 Jadual Harian Saya</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center w-full">
+                <div class="flex flex-col md:flex-row gap-4 h-full w-full max-w-4xl">
+                    <div class="bg-violet-50 p-2 rounded-xl border-2 border-violet-200 md:w-1/3 flex flex-col">
+                        <h4 class="font-bold text-violet-800 mb-2 text-center text-xs">Pilih Aktiviti</h4>
+                        <div id="bank-butang" class="flex flex-col gap-2 overflow-y-auto">
+                            <button data-name="Matematik" data-duration="60" class="btn-3d bg-white border-violet-200 text-violet-700 font-bold py-2 px-3 rounded-lg text-left text-xs">📐 Matematik (1j)</button>
+                            <button data-name="Rehat" data-duration="30" class="btn-3d bg-white border-violet-200 text-violet-700 font-bold py-2 px-3 rounded-lg text-left text-xs">🥪 Rehat (30m)</button>
+                            <button data-name="Sains" data-duration="90" class="btn-3d bg-white border-violet-200 text-violet-700 font-bold py-2 px-3 rounded-lg text-left text-xs">🧪 Sains (1j 30m)</button>
+                            <button data-name="Sukan" data-duration="45" class="btn-3d bg-white border-violet-200 text-violet-700 font-bold py-2 px-3 rounded-lg text-left text-xs">⚽ Sukan (45m)</button>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 bg-white p-2 rounded-xl border-2 border-slate-200 flex flex-col overflow-hidden">
+                        <h4 class="font-bold text-slate-500 mb-2 text-xs">Jadual (Mula 8:00 AM)</h4>
+                        <div id="jadual-list" class="flex-grow overflow-y-auto pr-1">
+                            <div class="text-slate-300 text-center italic mt-4 text-xs">Jadual kosong...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,document.getElementById("bank-butang").querySelectorAll("button").forEach(t=>{t.onclick=t=>{var e=t.target.dataset.name,t=parseInt(t.target.dataset.duration),a=activityState.currentTimeMinutes,t=a+t,n=document.createElement("div"),a=(n.className="jadual-item animate-[popIn_0.3s]",n.innerHTML=`
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-slate-700">${e}</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-1 rounded text-xs font-bold">${formatTime(a)} ➔ ${formatTime(t)}</span>
+                    </div>
+                `,document.getElementById("jadual-list"));a.querySelector(".text-slate-300")&&(a.innerHTML=""),a.appendChild(n),a.scrollTop=a.scrollHeight,activityState.currentTimeMinutes=t,speak("Tambah "+e)}})}function formatTime(t){var e=Math.floor(t/60)%24,a=12<=e?"PM":"AM";return`${e%12||12}:${(t%60).toString().padStart(2,"0")} `+a}function loadBakiMasa(t){activityState={baki:20},setInfo("Anda ada 20 minit rehat. Pilih aktiviti!"),t.innerHTML=`
+            <h3 class="text-xl font-bold text-red-500 mb-2 text-center flex-none">⏳ Baki Masa Rehat</h3>
+            <div class="flex-1 overflow-y-auto px-4 w-full flex flex-col items-center">
+                <div class="max-w-2xl mx-auto bg-red-50 rounded-full py-2 px-6 border-2 border-red-200 text-center mb-4 w-fit flex-none">
+                    <span class="text-red-800 font-bold uppercase text-xs mr-2">Baki Masa</span>
+                    <span id="baki-display" class="text-3xl font-black text-red-600">20</span>
+                    <span class="text-red-800 font-bold text-xs ml-1">minit</span>
+                </div>
+    
+                <div id="options-grid" class="grid grid-cols-2 gap-2 max-w-xl mx-auto w-full flex-none"></div>
+                <div class="text-center mt-4 flex-none"><button onclick="loadActivity(4)" class="text-slate-400 underline font-bold text-xs">Reset</button></div>
+            </div>
+        `,renderOptions()}function renderOptions(){let a=document.getElementById("options-grid");a.innerHTML="",0===activityState.baki?a.innerHTML='<div class="col-span-2 text-center font-bold text-2xl text-red-600 animate-pulse">KRINGGG! Masa Tamat!</div>':[{name:"Makan",cost:10,icon:"🍜"},{name:"Beli Air",cost:5,icon:"🥤"},{name:"Tandas",cost:5,icon:"🚽"},{name:"Main Bola",cost:15,icon:"⚽"}].forEach(t=>{var e=activityState.baki<t.cost;a.innerHTML+=`
+                <button onclick="useTime(${t.cost})" ${e?"disabled":""} 
+                    class="btn-3d bg-white border-red-200 text-slate-700 p-4 rounded-xl flex items-center justify-between ${e?"opacity-50 grayscale":""}">
+                    <span class="text-2xl mr-2">${t.icon}</span>
+                    <span class="font-bold">${t.name}</span>
+                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">-${t.cost}m</span>
+                </button>
+            `})}function loadLumbaMinit(t){setInfo("Tekan & Tahan butang. Lepaskan bila jarum sampai minit 15!"),t.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-500 mb-2 text-center flex-none">🏁 Lumba Minit (Refleks)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                <div class="text-center mb-2 font-bold text-slate-500 text-xs">Sasaran: <span class="text-orange-600 text-lg">15 Minit</span></div>
+                
+                <div id="game-clock" class="mb-2 scale-90"></div>
+                <div id="game-res" class="text-center text-xl font-black text-slate-800 mb-4 h-8">0 Minit</div>
+                
+                <div class="text-center">
+                    <button id="hold-btn" class="btn-3d bg-orange-500 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg active:bg-orange-600">
+                        TEKAN & TAHAN ✊
+                    </button>
+                </div>
+            </div>
+        `;let e=createClockSVG(document.getElementById("game-clock"),0,0,!0),a=0,n=document.getElementById("hold-btn"),i=document.getElementById("game-res"),l=()=>{a=(a+1)%60,updateClockHands(e,0,a),i.textContent=a+" Minit"};n.onmousedown=t=>{t.preventDefault(),a=0,activityTimer=setInterval(l,40),n.classList.add("scale-95")},n.onmouseup=t=>{t.preventDefault(),clearInterval(activityTimer),n.classList.remove("scale-95"),15===a?(i.className="text-center text-4xl font-black text-green-500 animate-bounce",i.textContent="TEPAT! 🎉",triggerWin(),speak("Hebat! Tepat sekali.")):(i.className="text-center text-3xl font-black text-red-500",i.textContent=`Tersasar! (${a} minit)`,speak("Tersasar."))},n.ontouchstart=n.onmousedown,n.ontouchend=n.onmouseup}window.useTime=function(t){activityState.baki-=t,document.getElementById("baki-display").textContent=activityState.baki,renderOptions(),speak(`Tolak ${t} minit.`)},"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>

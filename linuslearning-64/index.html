@@ -1,0 +1,129 @@
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Kemahiran Pemulihan: Wang Hingga RM1000</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;transition:transform .2s;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out;border-color:#ef4444!important;background-color:#fee2e2!important}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}.money-card{font-family:monospace;font-size:1.1rem;font-weight:700;border-width:2px;border-style:solid;border-radius:.5rem;padding:.5rem 1rem;text-align:center;cursor:grab;user-select:none;transition:transform .1s;box-shadow:0 2px 4px rgba(0,0,0,.1)}.money-card:active{cursor:grabbing;transform:scale(.95)}.rm100{background-color:#f3e8ff;border-color:#a855f7;color:#6b21a8}.rm50{background-color:#e0f2fe;border-color:#0ea5e9;color:#0369a1}.rm20{background-color:#ffedd5;border-color:#f97316;color:#c2410c}.rm10{background-color:#fee2e2;border-color:#ef4444;color:#b91c1c}.rm5{background-color:#dcfce7;border-color:#22c55e;color:#15803d}.rm1{background-color:#ecfdf5;border-color:#3b82f6;color:#1d4ed8}.sen50{background-color:#fefce8;border-color:#eab308;color:#854d0e;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:.9rem}.sen20{background-color:#fefce8;border-color:#eab308;color:#854d0e;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:.8rem}.sen10{background-color:#fefce8;border-color:#eab308;color:#854d0e;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:.7rem}.drop-zone{border:3px dashed #94a3b8;background-color:#f8fafc;transition:all .3s ease;border-radius:1rem;min-height:120px}.drop-zone.drag-over{border-color:#3b82f6;background-color:#dbeafe;transform:scale(1.02)}.drop-zone-filled{border:3px solid #22c55e;background-color:#dcfce7}.dragging{opacity:.5;transform:rotate(5deg) scale(1.1)}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-2 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-2xl animate-bounce">💰</span> <span id="info-text"class="text-lg font-bold text-green-900 leading-none mt-1">Jom belajar Wang!</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="h-4"></div><div class="flex-1 w-full max-w-5xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-4 mb-2 flex-1 w-full relative"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col overflow-hidden"><div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-pulse">💸</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Wang Hingga RM1000</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Pilih aktiviti di bawah untuk mula meneroka!<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-2 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🎯<br>Nilai</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🧮<br>Kira</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🏧<br>Tukar</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-xs">🛒<br>Bayar</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-1 rounded-xl text-xs">⚖️<br>Banding</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-sm">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-base">Seterusnya ➡️</button></div></div></div><div id="money-bank-templates"class="hidden"><div class="money-card rm100"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="100">RM100</div><div class="money-card rm50"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="50">RM50</div><div class="money-card rm20"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="20">RM20</div><div class="money-card rm10"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="10">RM10</div><div class="money-card rm5"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="5">RM5</div><div class="money-card rm1"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="1">RM1</div><div class="money-card sen50"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="0.50">50 sen</div><div class="money-card sen20"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="0.20">20 sen</div><div class="money-card sen10"draggable="true"ondragstart="dragStart(event)"ondragend="dragEnd(event)"data-value="0.10">10 sen</div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",draggedElement=null;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(e){var t;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(e=new SpeechSynthesisUtterance(e)).lang="ms-MY",e.rate=.9,e.pitch=1.1,(t=window.speechSynthesis.getVoices().find(e=>"ms-MY"===e.lang||e.lang?.startsWith("ms")))&&(e.voice=t),window.speechSynthesis.speak(e))}function setInfo(e){currentInfo=e;let t=document.getElementById("info-text");t.style.opacity=0,setTimeout(()=>{t.textContent=e,t.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function getMoneyBankHTML(){var e;let t="";for(e of document.getElementById("money-bank-templates").children)t+=e.outerHTML;return t}function getMoneyClass(e){return e.includes("sen")?"sen"+e.split(" ")[0]:e.toLowerCase()}function loadActivity(e){currentActivity=e;let t=document.getElementById("activity-content");t.dataset.total="0",t.dataset.totalA="0",t.dataset.totalB="0",t.dataset.paid="0",t.style.opacity=0,setTimeout(()=>{1===e&&loadValueExploreActivity(t),2===e&&loadCounterActivity(t),3===e&&loadExchangeActivity(t),4===e&&loadPaymentActivity(t),5===e&&loadCompareActivity(t),t.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML='<div class="py-10 text-center flex flex-col justify-center h-full"><div class="text-6xl mb-4 animate-bounce">💸</div><h2 class="text-3xl font-bold text-indigo-600 mb-2">Wang Hingga RM1000</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Jom belajar wang!</p></div>',setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let e=currentActivity+1;loadActivity(e=5<e?1:e)}window.dragStart=function(e){draggedElement=e.target,e.target.classList.add("dragging"),e.dataTransfer.setData("text/plain",e.target.dataset.value)},window.dragEnd=function(e){draggedElement&&draggedElement.classList.remove("dragging"),document.querySelectorAll(".drop-zone").forEach(e=>e.classList.remove("drag-over")),draggedElement=null},window.allowDrop=function(e){e.preventDefault(),e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.add("drag-over")},window.dragLeave=function(e){e.currentTarget.classList.contains("drop-zone")&&e.currentTarget.classList.remove("drag-over")};let activity1Items=[{num:130,text:"Seratus tiga puluh ringgit",breakdown:[{val:"RM100",count:1},{val:"RM20",count:1},{val:"RM10",count:1}]},{num:255,text:"Dua ratus lima puluh lima ringgit",breakdown:[{val:"RM100",count:2},{val:"RM50",count:1},{val:"RM5",count:1}]},{num:407.2,text:"Empat ratus tujuh ringgit dua puluh sen",breakdown:[{val:"RM100",count:4},{val:"RM5",count:1},{val:"RM1",count:2},{val:"20 sen",count:1}]},{num:680,text:"Enam ratus lapan puluh ringgit",breakdown:[{val:"RM100",count:6},{val:"RM50",count:1},{val:"RM20",count:1},{val:"RM10",count:1}]},{num:999,text:"Sembilan ratus sembilan puluh sembilan ringgit",breakdown:[{val:"RM100",count:9},{val:"RM50",count:1},{val:"RM20",count:2},{val:"RM5",count:1},{val:"RM1",count:4}]},{num:345.5,text:"Tiga ratus empat puluh lima ringgit lima puluh sen",breakdown:[{val:"RM100",count:3},{val:"RM20",count:2},{val:"RM5",count:1},{val:"50 sen",count:1}]}];function loadValueExploreActivity(e){setInfo("Klik nilai wang untuk lihat pecahannya."),e.innerHTML=`
+        <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🎯 Eksplorasi Nilai</h3>
+        <div class="flex-1 w-full overflow-y-auto px-4 flex flex-col items-center">
+            <div class="bg-blue-50 rounded-3xl p-4 border-4 border-blue-200 max-w-2xl mx-auto w-full flex-none">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
+                  ${activity1Items.map(e=>`
+                    <button onclick="clickMoneyValue(${e.num})" class="btn-3d bg-white text-blue-700 font-black py-2 rounded-xl text-lg border-blue-200 shadow-sm">
+                        RM${e.num}
+                    </button>
+                  `).join("")}
+                </div>
+                
+                <div id="money-info" class="bg-white p-4 rounded-2xl border-2 border-blue-100 min-h-[100px] text-center flex flex-col items-center justify-center">
+                    <p class="text-slate-400 font-bold text-sm">Pilih satu nilai di atas.</p>
+                </div>
+            </div>
+        </div>
+      `}function loadCounterActivity(e){setInfo("Seret wang dari Bank ke Kaunter."),e.dataset.total="0",e.innerHTML=`
+        <h3 class="text-xl font-bold text-emerald-500 mb-2 text-center flex-none">🧮 Kaunter Kira</h3>
+        <div class="flex-1 w-full overflow-y-auto px-4 flex flex-col items-center">
+            <div class="flex flex-col md:flex-row gap-4 w-full max-w-4xl flex-none">
+                <div class="md:w-1/3 bg-white p-2 rounded-2xl border-2 border-emerald-100 flex-none">
+                    <h4 class="text-center font-bold text-slate-400 uppercase mb-2 text-xs">Bank Wang</h4>
+                    <div class="flex flex-wrap justify-center gap-1 scale-90 origin-top">${getMoneyBankHTML()}</div>
+                </div>
+                
+                <div class="md:w-2/3 bg-emerald-50 p-4 rounded-2xl border-4 border-emerald-200 relative flex flex-col flex-none">
+                     <button onclick="clearCounter()" class="absolute top-2 right-2 bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-lg text-xs font-bold hover:bg-emerald-300">Reset 🧹</button>
+                     <h4 class="text-center font-bold text-emerald-700 uppercase mb-2 text-xs">Kaunter Kira</h4>
+                     
+                     <div id="counter-zone" class="drop-zone bg-white rounded-xl p-2 flex flex-wrap justify-center gap-1 content-start min-h-[150px] flex-1"
+                          ondrop="dropOnCounter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                     </div>
+                     
+                     <div class="mt-2 bg-emerald-600 text-white p-2 rounded-lg text-center shadow-md flex-none">
+                        <span class="text-[10px] font-bold uppercase opacity-80">Jumlah</span>
+                        <div id="counter-total" class="text-2xl font-black mt-0 leading-none">RM0.00</div>
+                     </div>
+                </div>
+            </div>
+        </div>
+      `}function loadExchangeActivity(e){setInfo("Seret RM100 atau RM50 ke mesin."),e.innerHTML=`
+        <h3 class="text-xl font-bold text-violet-500 mb-2 text-center flex-none">🏧 Mesin Tukar</h3>
+        <div class="flex-1 w-full overflow-y-auto px-4 flex flex-col items-center">
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full flex-none">
+                <div class="text-center">
+                    <h4 class="font-bold text-slate-400 mb-2 text-xs">Wang Besar</h4>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="money-card rm100 w-32 py-4 text-lg shadow-md" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="100">RM100</div>
+                        <div class="money-card rm50 w-32 py-4 text-lg shadow-md" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" data-value="50">RM50</div>
+                    </div>
+                </div>
+
+                <div class="bg-violet-50 p-4 rounded-3xl border-4 border-violet-200 text-center">
+                    <div id="exchange-machine" class="drop-zone bg-white rounded-2xl p-4 border-4 border-dashed border-violet-300 flex items-center justify-center mb-4 min-h-[100px]"
+                         ondrop="dropOnMachine(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+                        <span class="text-violet-300 font-bold text-sm">📥 Masukkan Wang</span>
+                    </div>
+                    
+                    <h4 class="font-bold text-violet-700 mb-1 text-xs">Hasil Tukaran (RM10)</h4>
+                    <div id="exchange-output" class="bg-white rounded-xl p-2 min-h-[80px] flex flex-wrap justify-center gap-1 border-2 border-violet-100"></div>
+                </div>
+            </div>
+        </div>
+      `}function loadPaymentActivity(e){var t=[{name:"Basikal 🚲",price:350},{name:"TV 📺",price:800},{name:"Beg 🎒",price:120}],t=t[Math.floor(Math.random()*t.length)];e.dataset.target=t.price,e.dataset.paid="0",setInfo(`Bayar harga ${t.name} dengan tepat.`),e.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-500 mb-2 text-center flex-none">🛒 Jom Bayar</h3>
+            <div class="flex-1 w-full overflow-y-auto px-4 flex flex-col items-center">
+                <div class="max-w-3xl mx-auto bg-orange-50 rounded-2xl p-2 border-2 border-orange-200 text-center mb-2 w-full flex-none">
+                    <div class="text-lg text-orange-800 font-medium mb-1">Barang: <span class="font-bold text-black">${t.name}</span></div>
+                    <div class="text-3xl font-black text-orange-600 mb-2">RM${t.price}</div>
+                    <div class="bg-white rounded-lg p-1 inline-block px-4 border border-orange-200">
+                        <span class="text-[10px] text-slate-400 uppercase font-bold">Baki Diperlukan</span>
+                        <div id="payment-needed" class="text-xl font-bold text-orange-500">RM${t.price.toFixed(2)}</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 w-full max-w-4xl flex-none">
+                    <div class="bg-white p-2 rounded-2xl border-2 border-slate-100">
+                        <h4 class="text-center font-bold text-slate-400 uppercase mb-1 text-xs">Dompet</h4>
+                        <div class="flex flex-wrap justify-center gap-1 scale-90 origin-top">${getMoneyBankHTML()}</div>
+                    </div>
+                    
+                    <div class="bg-white p-2 rounded-2xl border-2 border-slate-100 relative max-h-[250px] overflow-y-auto">
+                        <button onclick="clearPayment()" class="absolute top-1 right-1 text-[10px] bg-slate-200 px-2 py-0.5 rounded hover:bg-slate-300">Reset</button>
+                        <h4 class="text-center font-bold text-slate-400 uppercase mb-1 text-xs">Slot Bayaran</h4>
+                        <div id="payment-slot" class="drop-zone rounded-xl min-h-[100px] bg-slate-50 flex flex-wrap justify-center gap-1 p-2"
+                             ondrop="dropOnPayment(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                        <div id="payment-status" class="text-center mt-1 font-bold h-6 text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        `}function loadCompareActivity(e){setInfo("Bandingkan jumlah wang di Dompet A dan B."),e.innerHTML=`
+            <h3 class="text-xl font-bold text-rose-500 mb-2 text-center flex-none">⚖️ Banding Nilai</h3>
+            <div class="flex-1 w-full overflow-y-auto px-4 flex flex-col items-center">
+                <div class="mb-2 text-center flex-none">
+                    <div class="inline-flex flex-wrap justify-center gap-1 bg-white p-2 rounded-xl border shadow-sm scale-90 origin-top">
+                        ${getMoneyBankHTML()}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 items-start w-full max-w-4xl flex-1 min-h-0">
+                    <div class="bg-rose-50 p-2 rounded-2xl border-2 border-rose-200 text-center h-full flex flex-col">
+                        <h4 class="font-bold text-rose-700 mb-1 text-xs">Dompet A</h4>
+                        <div id="wallet-a" data-total="0" class="drop-zone bg-white rounded-xl min-h-[100px] mb-1 flex flex-wrap justify-center gap-1 p-1 flex-1"
+                             ondrop="dropOnWallet(event, 'a')" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                        <div id="total-a" class="text-sm font-black text-rose-600">RM0.00</div>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center h-full pt-4">
+                        <div id="compare-sign" class="text-4xl font-black text-slate-300 mb-2">=</div>
+                        <button onclick="resetWallets()" class="btn-3d bg-slate-400 text-white py-1 px-3 rounded-lg text-xs">Reset</button>
+                    </div>
+
+                    <div class="bg-blue-50 p-2 rounded-2xl border-2 border-blue-200 text-center h-full flex flex-col">
+                        <h4 class="font-bold text-blue-700 mb-1 text-xs">Dompet B</h4>
+                        <div id="wallet-b" data-total="0" class="drop-zone bg-white rounded-xl min-h-[100px] mb-1 flex flex-wrap justify-center gap-1 p-1 flex-1"
+                             ondrop="dropOnWallet(event, 'b')" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                        <div id="total-b" class="text-sm font-black text-blue-600">RM0.00</div>
+                    </div>
+                </div>
+            </div>
+        `}window.clickMoneyValue=function(t){var e,a,n=activity1Items.find(e=>e.num===t);n&&(e=n.breakdown.map(e=>{var t=getMoneyClass(e.val);return t.startsWith("sen")?`<span class="${t} w-10 h-10 text-[0.6rem] flex items-center justify-center rounded-full border inline-block m-1 shadow-sm scale-75 relative"><span class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">${e.count}</span>${e.val}</span>`:`<span class="money-card ${t} text-xs px-2 py-1 inline-block m-1 shadow-sm scale-90 relative"><span class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">${e.count}</span>${e.val}</span>`}).join(""),a=n.breakdown.map(e=>e.count+" keping "+e.val).join(", "),a=`RM${n.num}. ${n.text}. Terdiri daripada: ${a}.`,document.getElementById("money-info").innerHTML=`
+            <div class="text-4xl font-black text-blue-600 mb-2">RM${n.num}</div>
+            <div class="text-lg font-medium text-slate-600 mb-4 italic">"${n.text}"</div>
+            <div class="bg-blue-50 rounded-xl p-3 border border-blue-100 w-full">
+                <div class="text-xs font-bold text-blue-400 uppercase mb-2">Pecahan Wang</div>
+                <div class="flex flex-wrap justify-center gap-1">${e}</div>
+            </div>
+        `,setInfo(a),speak(a))},window.dropOnCounter=function(e){var t,a,n;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(t=parseFloat(draggedElement.dataset.value),n=document.getElementById("activity-content"),a=parseFloat(n.dataset.total||0)+t,n.dataset.total=a,document.getElementById("counter-total").textContent="RM"+a.toFixed(2),(n=draggedElement.cloneNode(!0)).setAttribute("draggable","false"),n.style.cursor="default",n.classList.remove("hover:scale-105"),e.currentTarget.appendChild(n),speak(`Tambah RM${t}. Jumlah RM`+a.toFixed(2)))},window.clearCounter=function(){document.getElementById("activity-content").dataset.total="0",document.getElementById("counter-total").textContent="RM0.00",document.getElementById("counter-zone").innerHTML="",speak("Kaunter bersih.")},window.dropOnMachine=function(e){if(e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement){var a=parseInt(draggedElement.dataset.value);let t=document.getElementById("exchange-output");if(t.innerHTML="",100===a||50===a){var n=a/10;for(let e=0;e<n;e++)setTimeout(()=>{t.innerHTML+='<div class="money-card rm10 text-xs px-2 py-1 animate-[popIn_0.3s_ease]">RM10</div>'},100*e);a=`RM${a} ditukar kepada ${n} keping RM10.`;setInfo(a),speak(a),triggerWin()}else setInfo("Hanya RM100 dan RM50 diterima."),speak("Salah wang."),e.currentTarget.classList.add("shake"),setTimeout(()=>e.currentTarget.classList.remove("shake"),500)}},window.dropOnPayment=function(e){var t,a,n;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(n=document.getElementById("activity-content"),a=parseFloat(n.dataset.target),t=parseFloat(n.dataset.paid)+parseFloat(draggedElement.dataset.value),a=a-(n.dataset.paid=t),document.getElementById("payment-needed").textContent="RM"+Math.max(0,a).toFixed(2),(n=draggedElement.cloneNode(!0)).setAttribute("draggable","false"),e.currentTarget.appendChild(n),e=document.getElementById("payment-status"),0==a?(e.textContent="✅ Bayaran Tepat!",e.className="text-center mt-2 font-bold h-6 text-green-600",setInfo("Tahniah! Bayaran selesai."),speak("Tahniah! Bayaran selesai."),triggerWin()):a<0?(e.textContent="⚠️ Terlebih RM"+Math.abs(a).toFixed(2),e.className="text-center mt-2 font-bold h-6 text-red-500",speak("Terlebih bayar.")):speak("RM"+t))},window.clearPayment=function(){var e=document.getElementById("activity-content");e.dataset.paid="0",document.getElementById("payment-needed").textContent="RM"+parseFloat(e.dataset.target).toFixed(2),document.getElementById("payment-slot").innerHTML="",document.getElementById("payment-status").textContent=""},window.dropOnWallet=function(e,t){var a,n;e.preventDefault(),e.currentTarget.classList.remove("drag-over"),draggedElement&&(n=document.getElementById("wallet-"+t),a=parseFloat(n.dataset.total)+parseFloat(draggedElement.dataset.value),n.dataset.total=a,document.getElementById("total-"+t).textContent="RM"+a.toFixed(2),(n=draggedElement.cloneNode(!0)).setAttribute("draggable","false"),n.classList.add("scale-75"),e.currentTarget.appendChild(n),updateComparison())},window.updateComparison=function(){var e=parseFloat(document.getElementById("wallet-a").dataset.total),t=parseFloat(document.getElementById("wallet-b").dataset.total),a=document.getElementById("compare-sign");t<e?(a.textContent=">",a.className="text-6xl font-black text-rose-500 mb-4"):e<t?(a.textContent="<",a.className="text-6xl font-black text-blue-500 mb-4"):(a.textContent="=",a.className="text-6xl font-black text-green-500 mb-4")},window.resetWallets=function(){loadCompareActivity(document.getElementById("activity-content"))},"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>

@@ -1,0 +1,132 @@
+<!doctypehtml><html lang="ms-MY"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Kemahiran Pemulihan: Anu Darab & Bahagi</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.shake{animation:shake .4s ease-in-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275)}@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}.num-display{min-width:100px;padding:.5rem 1rem;border:3px solid #94a3b8;border-radius:1rem;font-weight:700;font-size:2rem;background-color:#f8fafc;color:#334155;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 2px 4px rgba(0,0,0,.05)}.num-anu{border-color:#3b82f6;background-color:#eff6ff;color:#1d4ed8;border-style:dashed}.num-result{border-color:#22c55e;background-color:#dcfce7;color:#15803d}.info-panel{background-color:#f1f5f9;border:2px solid #e2e8f0;border-radius:1rem;padding:1rem;margin-bottom:1.5rem;text-align:center}.machine-box{height:110px;min-width:110px;padding:0 15px;border:4px solid #475569;background:#fff;border-radius:1.5rem;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:800;color:#334155;box-shadow:4px 4px 0 rgba(0,0,0,.1)}.machine-box.anu{border-style:dashed;background:#fff1f2;color:#e11d48;border-color:#fb7185}.machine-box.result{background:#dcfce7;color:#166534;border-color:#22c55e}.machine-box.op{border-color:#60a5fa;background-color:#eff6ff;color:#2563eb}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="fixed top-2 left-0 right-0 z-50 px-4 pointer-events-none"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-4 py-1.5 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-2"><span class="text-2xl animate-bounce">✖️➗</span> <span id="info-text"class="text-base font-bold text-green-900 leading-none mt-0.5">Anu: Darab & Bahagi</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-1 transition-colors shadow-sm text-sm">🔊</button></div></div><div class="h-16 flex-none"></div><div class="max-w-6xl mx-auto p-2 w-full flex-1 flex flex-col overflow-hidden min-h-0"><div class="game-card p-4 mb-2 flex items-center justify-center relative w-full"><div id="activity-content"class="w-full h-full relative z-10 flex flex-col"><div class="py-4 text-center"><div class="text-6xl mb-2 animate-pulse">🤔</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Cari Nilai 'Anu'</h2><p class="text-lg text-slate-500 mb-4 font-semibold">Operasi Darab dan Bahagi<div class="text-2xl animate-bounce">👇</div></div></div></div><div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 border-2 border-white flex-none"><h3 class="text-sm font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">🎮 Pilih Aktiviti</h3><div class="flex flex-wrap justify-center gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🍪 Mesin Biskut</button> <button onclick="loadActivity(2)"class="btn-3d bg-emerald-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🍬 Agih Gula</button> <button onclick="loadActivity(3)"class="btn-3d bg-violet-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🍫 Kotak Coklat</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🧱 Bina Tembok</button> <button onclick="loadActivity(5)"class="btn-3d bg-rose-500 text-white font-bold py-2 px-3 rounded-lg text-xs">🤖 Mesin Songsang</button></div><div class="flex justify-center gap-2 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-xs">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-sm">Seterusnya ➡️</button></div></div></div><script>let currentActivity=0,ttsEnabled=!1,currentInfo="Pilih aktiviti untuk mula.",r=(t,e)=>Math.floor(Math.random()*(e-t+1))+t;function triggerWin(){confetti({particleCount:150,spread:80,origin:{y:.6}})}function speak(t){var e;ttsEnabled&&"speechSynthesis"in window&&(window.speechSynthesis.cancel(),(t=new SpeechSynthesisUtterance(t)).lang="ms-MY",t.rate=.9,t.pitch=1.1,(e=window.speechSynthesis.getVoices().find(t=>"ms-MY"===t.lang||t.lang?.startsWith("ms")))&&(t.voice=e),window.speechSynthesis.speak(t))}function setInfo(t){currentInfo=t;let e=document.getElementById("info-text");e.style.opacity=0,setTimeout(()=>{e.textContent=t,e.style.opacity=1},200)}function speakInfo(){ttsEnabled||(ttsEnabled=!0,document.getElementById("speak-btn").classList.add("bg-green-100","text-green-600")),speak(currentInfo)}function loadActivity(t){currentActivity=t;let e=document.getElementById("activity-content");e.style.opacity=0,setTimeout(()=>{1===t&&loadActivity1(e),2===t&&loadActivity2(e),3===t&&loadActivity3(e),4===t&&loadActivity4(e),5===t&&loadActivity5(e),e.style.opacity=1},200)}function clearActivity(){currentActivity=0,document.getElementById("activity-content").innerHTML=`<div class="h-full flex flex-col justify-center items-center py-4 text-center"><div class="text-6xl mb-4 animate-bounce">🤔</div><h2 class="text-3xl font-bold text-emerald-600 mb-2">Cari Nilai 'Anu'</h2><p class="text-lg text-slate-500 font-semibold">Pilih butang di bawah.</p></div>`,setInfo("Pilih aktiviti untuk mula.")}function nextActivity(){let t=currentActivity+1;loadActivity(t=5<t?1:t)}let a1={C:0,B:0,res:0,input:0,curr:0};function loadActivity1(t){a1.B=r(3,10),a1.res=r(3,10),a1.C=a1.B*a1.res,a1.input=0,a1.curr=0,setInfo(`Kita perlu ${a1.C} biskut. Satu pek ada ${a1.B}. Berapa pek perlu beli?`),t.innerHTML=`
+            <h3 class="text-xl font-bold text-blue-500 mb-2 text-center flex-none">🍪 Mesin Biskut (Cari Bil. Kumpulan)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-4 text-xl">
+                    <div id="a1-anu" class="num-display num-anu animate-pulse border-2">?</div>
+                    <span class="text-slate-400 font-bold">×</span>
+                    <div class="num-display border-2">${a1.B}</div>
+                    <span class="text-slate-400 font-bold">=</span>
+                    <div class="num-display border-2">${a1.C}</div>
+                </div>
+
+                <div class="info-panel max-w-sm mx-auto p-3 text-sm mb-4">
+                    <div class="text-sm">Sasaran: <span class="font-bold text-slate-700">${a1.C}</span> biskut</div>
+                    <div class="text-sm mt-1">Semasa: <span id="a1-total" class="font-bold text-blue-600 text-lg">0</span> biskut</div>
+                    <div class="text-sm mt-1">Bil. Pek: <span id="a1-disp" class="font-bold text-blue-800 text-lg">0</span></div>
+                </div>
+
+                <div class="flex justify-center gap-2 mb-4">
+                    <button onclick="adjA1(1)" class="btn-3d bg-blue-500 text-white font-bold py-2 px-4 rounded-xl text-sm">+1 Pek</button>
+                    <button onclick="adjA1(-1)" class="btn-3d bg-rose-500 text-white font-bold py-2 px-4 rounded-xl text-sm">-1 Pek</button>
+                </div>
+
+                <div id="a1-fb" class="text-lg font-bold text-slate-500 text-center min-h-[30px]">Tambah pek sampai cukup.</div>
+            </div>
+        `}function adjA1(t){a1.input+=t,a1.input<0&&(a1.input=0),a1.curr=a1.input*a1.B,a1.curr>a1.C+2*a1.B&&(a1.input-=t,a1.curr=a1.input*a1.B),document.getElementById("a1-anu").textContent=a1.input,document.getElementById("a1-disp").textContent=a1.input,document.getElementById("a1-total").textContent=a1.curr;t=document.getElementById("a1-fb");let e=document.getElementById("a1-anu");a1.curr===a1.C?(t.innerHTML='<span class="text-green-600">CUKUP! 🎉</span>',e.classList.remove("num-anu","animate-pulse"),e.classList.add("num-result"),triggerWin(),speak(`Betul! ${a1.input} darab ${a1.B} sama dengan ${a1.C}.`)):a1.curr>a1.C?(t.innerHTML=`<span class="text-rose-500">Terlebih! (${a1.curr})</span>`,e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),400)):(t.textContent="Tambah lagi...",e.classList.add("num-anu"),e.classList.remove("num-result"))}let a2={A:0,C:0,res:0,input:0,sisa:0};function loadActivity2(t){a2.A=r(2,5),a2.res=r(3,10),a2.C=a2.A*a2.res,a2.input=0,a2.sisa=a2.C,setInfo(`Ada ${a2.C} gula-gula untuk ${a2.A} orang. Berapa seorang dapat?`),t.innerHTML=`
+            <h3 class="text-xl font-bold text-emerald-600 mb-2 text-center flex-none">🍬 Agih Setara (Cari Saiz Kumpulan)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-4 text-xl">
+                    <div class="num-display border-2">${a2.A}</div>
+                    <span class="text-slate-400 font-bold">×</span>
+                    <div id="a2-anu" class="num-display num-anu animate-pulse border-2">?</div>
+                    <span class="text-slate-400 font-bold">=</span>
+                    <div class="num-display border-2">${a2.C}</div>
+                </div>
+
+                <div class="info-panel max-w-sm mx-auto p-3 text-sm mb-4 bg-emerald-50 border-emerald-200">
+                    <div class="text-sm">Baki Gula-gula: <span id="a2-sisa" class="font-bold text-blue-600 text-xl">${a2.sisa}</span></div>
+                    <div class="text-sm mt-1">Seorang Dapat: <span id="a2-disp" class="font-bold text-emerald-800 text-lg">0</span></div>
+                </div>
+
+                <div class="flex justify-center gap-2 mb-4">
+                    <button onclick="adjA2(1)" class="btn-3d bg-emerald-500 text-white font-bold py-2 px-4 rounded-xl text-sm">Agih +1</button>
+                    <button onclick="adjA2(-1)" class="btn-3d bg-rose-500 text-white font-bold py-2 px-4 rounded-xl text-sm">Ambil -1</button>
+                </div>
+
+                <div id="a2-fb" class="text-lg font-bold text-slate-500 text-center min-h-[30px]">Agih sampai baki 0.</div>
+            </div>
+        `}function adjA2(t){a2.input+=t,a2.input<0&&(a2.input=0),a2.sisa=a2.C-a2.A*a2.input,a2.sisa<-2*a2.A&&(a2.input-=t,a2.sisa=a2.C-a2.A*a2.input),document.getElementById("a2-anu").textContent=a2.input,document.getElementById("a2-disp").textContent=a2.input,document.getElementById("a2-sisa").textContent=a2.sisa;t=document.getElementById("a2-fb");let e=document.getElementById("a2-anu");0===a2.sisa?(t.innerHTML='<span class="text-green-600">SIAP! 🎉</span>',e.classList.remove("num-anu","animate-pulse"),e.classList.add("num-result"),triggerWin(),speak(`Tepat! Jawapannya ialah ${a2.input}.`)):a2.sisa<0?(t.innerHTML='<span class="text-rose-500">Gula tak cukup!</span>',e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),400)):(t.textContent="Teruskan agih...",e.classList.add("num-anu"),e.classList.remove("num-result"))}let a3={A:0,B:0,res:0,currGroups:0,anuTotal:0};function loadActivity3(t){a3.A=r(2,5),a3.B=r(5,20),a3.res=a3.A*a3.B,a3.currGroups=0,a3.anuTotal=0,setInfo(`${a3.A} orang, setiap orang ada ${a3.B} coklat. Berapa semua coklat?`),t.innerHTML=`
+            <h3 class="text-xl font-bold text-violet-600 mb-2 text-center flex-none">🍫 Kotak Coklat (Cari Jumlah Asal)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-4 text-xl">
+                    <div id="a3-anu" class="num-display num-anu animate-pulse border-2">?</div>
+                    <span class="text-slate-400 font-bold">÷</span>
+                    <div class="num-display border-2">${a3.A}</div>
+                    <span class="text-slate-400 font-bold">=</span>
+                    <div class="num-display border-2">${a3.B}</div>
+                </div>
+
+                <div class="info-panel max-w-sm mx-auto p-3 text-sm mb-4 bg-violet-50 border-violet-200">
+                    <div class="text-sm">Kumpulan Dikira: <span id="a3-grps" class="font-bold text-blue-600 text-lg">0</span> / ${a3.A}</div>
+                    <div class="text-sm mt-1">Jumlah Coklat: <span id="a3-tot" class="font-bold text-violet-800 text-lg">0</span></div>
+                </div>
+
+                <div class="flex justify-center gap-2 mb-4">
+                    <button onclick="adjA3(1)" class="btn-3d bg-violet-500 text-white font-bold py-2 px-4 rounded-xl text-sm">+1 Kumpulan</button>
+                    <button onclick="adjA3(-1)" class="btn-3d bg-rose-500 text-white font-bold py-2 px-4 rounded-xl text-sm">-1 Kumpulan</button>
+                </div>
+
+                <div id="a3-fb" class="text-lg font-bold text-slate-500 text-center min-h-[30px]">Kumpul balik semua coklat.</div>
+            </div>
+        `}function adjA3(t){a3.currGroups+=t,a3.currGroups<0&&(a3.currGroups=0),a3.currGroups>a3.A&&(a3.currGroups=a3.A),a3.anuTotal=a3.currGroups*a3.B,document.getElementById("a3-anu").textContent=a3.anuTotal,document.getElementById("a3-grps").textContent=a3.currGroups,document.getElementById("a3-tot").textContent=a3.anuTotal;var t=document.getElementById("a3-fb"),e=document.getElementById("a3-anu");a3.currGroups===a3.A?(t.innerHTML='<span class="text-green-600">SEMUA DIKUMPUL! 🎉</span>',e.classList.remove("num-anu","animate-pulse"),e.classList.add("num-result"),triggerWin(),speak(`Betul! Jumlah asal ialah ${a3.anuTotal}.`)):(t.textContent=`Baru ada ${a3.currGroups} kumpulan...`,e.classList.add("num-anu"),e.classList.remove("num-result"))}let a4={A:0,C:0,res:0,cols:0,curr:0};function loadActivity4(t){a4.A=r(3,10),a4.res=r(3,10),a4.C=a4.A*a4.res,a4.cols=0,a4.curr=0,setInfo(`Tembok perlu ${a4.C} jubin. Tinggi ${a4.A} baris. Berapa lajur perlu bina?`),t.innerHTML=`
+            <h3 class="text-xl font-bold text-orange-600 mb-2 text-center flex-none">🧱 Bina Tembok (Cari Lajur)</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-4 text-xl">
+                    <div class="num-display border-2">${a4.A}</div>
+                    <span class="text-slate-400 font-bold">×</span>
+                    <div id="a4-anu" class="num-display num-anu animate-pulse border-2">?</div>
+                    <span class="text-slate-400 font-bold">=</span>
+                    <div class="num-display border-2">${a4.C}</div>
+                </div>
+
+                <div class="info-panel max-w-sm mx-auto p-3 text-sm mb-4 bg-orange-50 border-orange-200">
+                    <div class="text-sm">Jubin Semasa: <span id="a4-tot" class="font-bold text-orange-600 text-xl">0</span> / ${a4.C}</div>
+                    <div class="text-sm mt-1">Bil. Lajur: <span id="a4-cols" class="font-bold text-orange-800 text-lg">0</span></div>
+                </div>
+
+                <div class="flex justify-center gap-2 mb-4">
+                    <button onclick="adjA4(1)" class="btn-3d bg-orange-500 text-white font-bold py-2 px-4 rounded-xl text-sm">+1 Lajur</button>
+                    <button onclick="adjA4(-1)" class="btn-3d bg-rose-500 text-white font-bold py-2 px-4 rounded-xl text-sm">-1 Lajur</button>
+                </div>
+
+                <div id="a4-fb" class="text-lg font-bold text-slate-500 text-center min-h-[30px]">Tambah lajur jubin.</div>
+            </div>
+        `}function adjA4(t){a4.cols+=t,a4.cols<0&&(a4.cols=0),a4.curr=a4.cols*a4.A,a4.curr>a4.C+2*a4.A&&(a4.cols-=t,a4.curr=a4.cols*a4.A),document.getElementById("a4-anu").textContent=a4.cols,document.getElementById("a4-cols").textContent=a4.cols,document.getElementById("a4-tot").textContent=a4.curr;t=document.getElementById("a4-fb");let e=document.getElementById("a4-anu");a4.curr===a4.C?(t.innerHTML='<span class="text-green-600">TEMBOK SIAP! 🎉</span>',e.classList.remove("num-anu","animate-pulse"),e.classList.add("num-result"),triggerWin(),speak(`Tepat! Kita perlukan ${a4.cols} lajur.`)):a4.curr>a4.C?(t.innerHTML='<span class="text-rose-500">Terlebih jubin!</span>',e.classList.add("shake"),setTimeout(()=>e.classList.remove("shake"),400)):(t.textContent="Bina lagi...",e.classList.add("num-anu"),e.classList.remove("num-result"))}let a5={type:"mul",op:0,res:0,ans:0,rev:!1};function loadActivity5(t){a5.op=r(2,10),a5.rev=!1,a5.type=r(0,1)?"mul":"div","mul"===a5.type?(a5.ans=r(3,10),a5.res=a5.ans*a5.op):(a5.res=r(3,10),a5.ans=a5.res*a5.op),setInfo("Tekan butang SONGSANG untuk cari nombor asal.");var e="mul"===a5.type?"×":"÷";t.innerHTML=`
+            <h3 class="text-xl font-bold text-rose-500 mb-2 text-center flex-none">🤖 Mesin Songsang</h3>
+            <div class="flex-1 overflow-hidden p-2 flex flex-col items-center justify-center">
+                
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-4 p-4 bg-slate-50 rounded-2xl border-2 border-slate-200 shadow-sm scale-90">
+                    <div class="machine-box anu transform transition hover:scale-105 cursor-default text-2xl w-20 h-20 min-w-[5rem]">?</div>
+                    <div class="text-2xl text-slate-300 animate-pulse">➜</div>
+                    <div class="machine-box op transform transition hover:scale-105 cursor-default text-2xl w-24 h-20 min-w-[6rem]">
+                        ${e} ${a5.op}
+                    </div>
+                    <div class="text-2xl text-slate-300 animate-pulse">➜</div>
+                    <div class="machine-box transform transition hover:scale-105 cursor-default text-2xl w-24 h-20 min-w-[6rem]">${a5.res}</div>
+                </div>
+    
+                <div id="a5-answer-area" class="hidden pop-in mb-4">
+                    <div class="flex flex-wrap items-center justify-center gap-2 mb-2 p-4 bg-green-50 rounded-2xl border-2 border-green-200 scale-90">
+                         <div class="machine-box text-2xl w-24 h-20 min-w-[6rem]">${a5.res}</div>
+                         <div class="text-2xl text-green-300">➜</div>
+                         
+                         <div class="machine-box border-green-400 text-green-700 bg-green-100 text-2xl w-24 h-20 min-w-[6rem]">
+                            ${"mul"===a5.type?"÷":"×"} ${a5.op}
+                         </div>
+                        
+                        <div class="text-2xl text-green-300">➜</div>
+                        <div class="machine-box result text-2xl w-24 h-20 min-w-[6rem]">${a5.ans}</div>
+                    </div>
+                    <div class="text-center text-lg font-bold text-green-700 mb-2">Jawapan: ${a5.ans}</div>
+                </div>
+    
+                <div class="text-center mt-2">
+                    <button id="btn-songsang" onclick="revealA5()" class="btn-3d bg-indigo-500 text-white font-bold py-2 px-6 rounded-xl text-lg shadow-lg hover:bg-indigo-600">🔄 Songsangkan!</button>
+                    <button id="btn-new" onclick="loadActivity5(document.getElementById('activity-content'))" class="hidden btn-3d bg-slate-400 text-white font-bold py-2 px-6 rounded-xl text-lg">Soalan Baru</button>
+                </div>
+            </div>
+        `}function revealA5(){document.getElementById("a5-answer-area").classList.remove("hidden"),document.getElementById("btn-songsang").classList.add("hidden"),document.getElementById("btn-new").classList.remove("hidden"),triggerWin(),speak("mul"===a5.type?`Darab jadi bahagi. ${a5.res} bahagi ${a5.op} sama dengan ${a5.ans}.`:`Bahagi jadi darab. ${a5.res} darab ${a5.op} sama dengan ${a5.ans}.`)}"speechSynthesis"in window&&setInterval(()=>{window.speechSynthesis.paused&&window.speechSynthesis.resume()},1e3)</script>
