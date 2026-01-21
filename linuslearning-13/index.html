@@ -1,1 +1,407 @@
-<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Matematik Ceria: Penambahan (Aktiviti)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.grid-100{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;width:100%;height:100%}.cell-100{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #cbd5e1;border-radius:4px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .1s;background:#fff;padding:0;line-height:1}.cell-100:hover{background:#f1f5f9;z-index:5;transform:scale(1.1)}.cell-100.active{background:#3b82f6;color:#fff;border-color:#1d4ed8;transform:scale(1.1);box-shadow:0 4px 6px -1px rgba(59,130,246,.5);z-index:10}.cell-100.jump{background:#22c55e;color:#fff;animation:popIn .3s}.grid-scroll-container{width:100%;padding:2px}.pupil-cell{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:3px solid #cbd5e1;border-radius:50%;background:#fff;font-size:1.2rem;transition:all .2s}.pupil-cell.active{border-color:#ef4444;background:#fee2e2;transform:scale(1.2);box-shadow:0 0 15px #ef4444}.race-track{position:relative;width:100%;height:60px;background:#e2e8f0;border-radius:30px;margin-bottom:10px;border:2px solid #94a3b8;overflow:hidden}.race-line{position:absolute;top:50%;left:0;right:0;height:2px;background:repeating-linear-gradient(to right,#94a3b8 0,#94a3b8 10px,transparent 10px,transparent 20px)}.racer{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;transition:left .5s ease-in-out;z-index:10}.finish-line{position:absolute;right:20px;top:0;bottom:0;width:10px;background:repeating-linear-gradient(45deg,#000,#000 10px,#fff 10px,#fff 20px);z-index:5}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}@media (max-height:650px){.fixed.top-4{top:.25rem!important;padding:0 .5rem!important}.max-w-4xl.rounded-full{padding:.25rem 1rem!important;border-width:2px!important}.text-3xl{font-size:1.5rem!important}#info-text{font-size:1.1rem!important;margin-top:0!important}#speak-btn{padding:.25rem!important;font-size:.9rem!important}.max-w-6xl{padding:.25rem!important}.game-card{padding:.5rem!important;margin-bottom:.25rem!important;border-width:2px!important;min-height:auto!important}.game-card .py-10{padding:1rem 0!important}.game-card .text-8xl{font-size:3rem!important;margin-bottom:.25rem!important}.game-card h2{font-size:1.5rem!important;margin-bottom:0!important}.game-card p{font-size:.9rem!important;margin-bottom:.5rem!important}.game-card .text-4xl{font-size:1.25rem!important;margin-top:0!important}.bg-white\/80{padding:.5rem!important;border-width:1px!important}.bg-white\/80 h3{font-size:1rem!important;margin-bottom:.25rem!important}.grid{gap:.25rem!important;margin-bottom:.25rem!important}.btn-3d{padding:.5rem .25rem!important;font-size:.75rem!important;border-bottom-width:3px!important;border-radius:.5rem!important}.btn-3d:active:not(:disabled){transform:translateY(2px)!important;border-bottom-width:1px!important}.border-t-2{padding-top:.25rem!important;border-width:1px!important}.border-t-2 .btn-3d{padding:.25rem 1rem!important;font-size:.8rem!important}.p-4.flex.flex-col{padding:.5rem!important}.text-3xl.font-black{font-size:2rem!important;margin-bottom:.25rem!important}.pupil-cell{width:30px!important;height:30px!important;font-size:1rem!important;border-width:2px!important}.bg-green-50.rounded-3xl{padding:.5rem!important;margin-bottom:.5rem!important}#kbResult .text-3xl{font-size:1.5rem!important;padding:.5rem!important}.space-y-4>*+*{margin-top:.5rem!important}.text-3xl.tracking-widest{font-size:1.5rem!important}.p-4{padding:.5rem!important}.text-2xl.font-mono{font-size:1.5rem!important;padding:.5rem!important}.grid-scroll-container{max-height:none!important;overflow:visible!important;padding:0!important}.cell-100{font-size:.8rem!important}.bg-pink-50.sticky{position:relative!important;top:auto!important;margin-top:.5rem!important}}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">🧮</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Matematik Asas</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">➕</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Aktiviti Penambahan</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Kotak Beracun, Masalah Harian & Papan 100.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🃏 Kad</button> <button onclick="loadActivity(2)"class="btn-3d bg-red-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">�️ Lumba</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🦋 Rama</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🟡 Guli</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">💯 Grid</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>let _0x507d59=_0x29b0,currentActivity=((()=>{for(var t=_0x29b0,n=_0x57b7();;)try{if(471277==-parseInt(t(1184))*(parseInt(t(1077))/2)+parseInt(t(1007))/3*(parseInt(t(1378))/4)+-parseInt(t(587))/5*(parseInt(t(1394))/6)+parseInt(t(1307))/7+parseInt(t(1045))/8*(-parseInt(t(1013))/9)+parseInt(t(865))/10+parseInt(t(735))/11*(-parseInt(t(900))/12))break;n.push(n.shift())}catch(t){n.push(n.shift())}})(),function(){let y=_0x29b0,I={mIOmU:y(946)+"+$",TpkMW:function(t,n,e,r){return t(n,e,r)},wHGqt:function(t,n){return t!=n},IiBkA:function(t,n){return t<n},PTihf:function(t,n){return t<n},BseEs:function(t,n){return t==n},TGfQR:function(t,n){return t+n},lblPx:function(t,n){return t(n)},FJrCm:function(t,n){return t+n},WceqJ:y(1168)+y(578),wzipH:y(1322)+y(1189)+y(1311)+" )",eBTis:function(t){return t()},pGQXv:y(1286)+y(853)+y(779)+y(823)+y(502)+y(719)+y(1294),OFZTR:y(901)+y(619)+y(562)+y(1134)+y(1172)+y(885)+y(819)+y(715)+y(573)+y(736),omoSJ:function(t,n,e,r){return t(n,e,r)},DLoqA:function(t,n,e,r){return t(n,e,r)},DBTkI:function(t,n){return n<t},gkGLQ:function(t,n,e,r){return t(n,e,r)},YgwHq:function(t,n){return t||n},dMKWQ:function(t,n){return t<n},OWYBL:function(t,n){return t===n},Awpze:function(t,n){return t-n},ecnjt:function(t,n){return t!==n},AKkQF:function(t,n){return t===n},EZQTl:y(514)+y(1228)+y(1452)+"]",zmgHU:y(1066)+y(1267)+y(1305)+y(747),ckXPI:y(1409)+y(1073),KPHQe:y(793)+y(1339)+y(706)+y(947),Dekwe:y(1122),dyUYF:y(1239),oOHMJ:y(770),iuGqL:function(t){return t()},RDLgI:function(t,n,e){return t(n,e)},qLXcy:function(t,n){return t+n},DYJzs:function(t){return t()},TDESs:y(557),qxZYY:y(505),Coqtf:y(931),sHHYx:y(970),nMBIu:y(1478),kSmMN:y(991),ooHvP:y(917),FYcMd:function(t,n,e){return t(n,e)},PNjrm:function(t){return t()},YpXqv:function(t,n,e){return t(n,e)},ckweY:function(t,n,e){return t(n,e)},Cwulw:y(620)+y(1469)+y(1091),nBgwP:function(t,n){return t!==n},CJJxA:y(904)+y(925)+y(739)+y(1335)+y(1299)+y(1411)+y(1413)+y(1465)+y(566)+y(553)+y(731)+y(888)+y(1330)+y(1107)+y(1370)+y(1430)+y(1454)+y(1152),SJDIL:y(1375)+"k",oRDAV:y(1310)+"ed"},t=(()=>{let r=!0;return function(n,e){var t=r?function(){var t;if(e)return t=e[_0x29b0(1225)](n,arguments),e=null,t}:function(){};return r=!1,t}})(),n=I[y(1143)](t,this,function(){var t=y;return n[t(786)]()[t(1439)](I[t(1396)])[t(786)]()[t(758)+"r"](n)[t(1439)](I[t(1396)])});I[y(1263)](n);var e=(()=>{let r=!0;return function(n,e){var t=r?function(){var t;if(e)return t=e[_0x29b0(1225)](n,arguments),e=null,t}:function(){};return r=!1,t}})(),e=I[y(829)](e,this,function(){let u=y,i={HaWuK:function(t,n){var e=_0x29b0;return I[e(1025)](t,n)},RrQCm:function(t,n){var e=_0x29b0;return I[e(508)](t,n)},LYpLO:function(t,n){var e=_0x29b0;return I[e(1094)](t,n)},lDwTc:function(t,n){var e=_0x29b0;return I[e(595)](t,n)},bHaCq:function(t,n){var e=_0x29b0;return I[e(817)](t,n)},jVZKJ:function(t,n,e,r){var a=_0x29b0;return I[a(1241)](t,n,e,r)}},e;try{var t=I[u(902)](Function,I[u(1254)](I[u(817)](I[u(579)],I[u(512)]),");"));e=I[u(1008)](t)}catch(t){e=window}var n,r,a,t=new RegExp(I[u(1243)],"g"),o=I[u(1035)][u(558)](t,"")[u(525)](";");function c(e,t,r){var a=u;if(i[a(716)](e[a(957)],t))return!1;for(let n=0;i[a(1118)](n,t);n++)for(let t=0;i[a(673)](t,r[a(957)]);t+=2)if(i[a(1352)](n,r[t])&&i[a(716)](e[a(827)](n),r[i[a(1014)](t,1)]))return!1;return!0}function l(t,n,e){var r=u;return i[r(1361)](p,n,t,e)}function s(t,n,e){var r=u;return i[r(1361)](l,n,e,t)}let f,d,x,b,p=function(t,n,e){var r=u;return I[r(1241)](c,n,e,t)};for(n in e)if(I[u(1274)](c,n,8,[7,116,5,101,3,117,0,100])){f=n;break}for(r in e[f])if(I[u(1159)](s,6,r,[5,110,0,100])){d=r;break}for(a in e[f])if(I[u(1274)](l,a,[7,110,0,108],8)){x=a;break}if(!I[u(1429)]("~",d))for(var m in e[f][x])if(I[u(891)](p,[7,101,0,104],m,8)){b=m;break}if(f&&e[f]){var t=e[f][d],g=!!e[f][x]&&e[f][x][b],h=I[u(598)](t,g);if(h){let n=!1;for(let t=0;I[u(1271)](t,o[u(957)]);t++){var v=o[t],w=I[u(982)](v[0],String[u(1476)+"de"](46))?v[u(650)](1):v,k=I[u(830)](h[u(957)],w[u(957)]),w=h[u(1188)](w,k);I[u(627)](w,-1)&&I[u(981)](w,k)&&(I[u(595)](h[u(957)],v[u(957)])||I[u(982)](v[u(1188)]("."),0))&&(n=!0)}n||(t=new RegExp(I[u(1119)],"g"),g=I[u(1064)][u(558)](t,""),e[f][x]=g)}}});I[y(1008)](e);let r=(()=>{let r=!0;return function(n,e){var t=r?function(){var t;if(e)return t=e[_0x29b0(1225)](n,arguments),e=null,t}:function(){};return r=!1,t}})(),c=(!function(){let a=y,u={gtKCP:I[a(939)],CwQJe:I[a(1224)],fygvU:function(t,n){var e=a;return I[e(902)](t,n)},YjQaZ:I[a(586)],vEPQO:function(t,n){var e=a;return I[e(1254)](t,n)},Bpjbw:I[a(515)],rMMZP:I[a(837)],riCBM:function(t){var n=a;return I[n(915)](t)}};I[a(1303)](r,this,function(){var t=a,n=new RegExp(u[t(1e3)]),e=new RegExp(u[t(1223)],"i"),r=u[t(649)](_0x5e9ca5,u[t(1450)]);n[t(652)](u[t(759)](r,u[t(958)]))&&e[t(652)](u[t(759)](r,u[t(855)]))?u[t(503)](_0x5e9ca5):u[t(649)](r,"0")})()}(),(()=>{let r=!0;return function(n,e){var t=r?function(){var t;if(e)return t=e[_0x29b0(1225)](n,arguments),e=null,t}:function(){};return r=!1,t}})()),a=I[y(1105)](c,this,function(){let e=y,r={FqTvQ:function(t,n){var e=_0x29b0;return I[e(902)](t,n)},nHmGr:function(t,n){var e=_0x29b0;return I[e(817)](t,n)},hSqQQ:function(t,n){var e=_0x29b0;return I[e(1247)](t,n)},dNRBW:I[e(579)],IEWEY:I[e(512)]},t=I[e(992)](function(){var t=e;let n;try{n=r[t(1194)](Function,r[t(697)](r[t(866)](r[t(1109)],r[t(965)]),");"))()}catch(t){n=window}return n}),n=t[e(1285)]=t[e(1285)]||{},a=[I[e(869)],I[e(1156)],I[e(1434)],I[e(577)],I[e(647)],I[e(1273)],I[e(859)]];for(let t=0;I[e(508)](t,a[e(957)]);t++){var u=c[e(758)+"r"][e(730)][e(707)](c),i=a[t],o=n[i]||u;u[e(1458)]=c[e(707)](c),u[e(786)]=o[e(786)][e(707)](o),n[i]=u}});I[y(915)](a);e=I[y(681)];if(I[y(753)](window[y(927)][y(1111)],e))throw document[y(1135)][y(546)]=I[y(749)],window[y(927)][y(1011)]=I[y(1424)],new Error(I[y(1386)])}(),0),ttsEnabled=!1,currentInfo=_0x507d59(920)+_0x507d59(1181)+_0x507d59(528);function speak(t){let n=_0x507d59,e={fliCj:function(t,n){return t in n},UMQnj:n(1108)+n(597),LLVOS:n(1242)};var r;ttsEnabled&&e[n(852)](e[n(1317)],window)&&(window[n(1108)+n(597)][n(657)](),(t=new SpeechSynthesisUtterance(t))[n(950)]=e[n(1149)],t[n(1365)]=.95,t[n(1103)]=1.05,(r=window[n(1108)+n(597)][n(1327)]()[n(1300)](t=>t[n(950)]===n(1242)||t[n(950)]?.[n(1180)]("ms")))&&(t[n(996)]=r),window[n(1108)+n(597)][n(691)](t))}function setInfo(n){let e=_0x507d59,t={pYfOP:e(1436),rgIIt:function(t,n,e){return t(n,e)}},r=(currentInfo=n,document[e(787)+e(960)](t[e(1046)]));r[e(1380)][e(1312)]=0,t[e(1169)](setTimeout,()=>{var t=e;r[t(805)+"t"]=n,r[t(1380)][t(1312)]=1},200)}function speakInfo(){var t=_0x507d59,n={wiGZc:t(1291),YYlLa:t(1001)+"00",ftdyX:t(569)+t(618),VoxMU:function(t,n){return t(n)}};ttsEnabled||(ttsEnabled=!0,document[t(787)+t(960)](n[t(1129)])[t(532)][t(1438)](n[t(732)],n[t(1332)])),n[t(1467)](speak,currentInfo)}function cryptoRandomId(){var t=_0x507d59;return Math[t(1309)]()[t(786)](36)[t(650)](2,9)}function loadActivity(n){let e=_0x507d59,r={DlBzi:function(t,n){return t===n},EXEsE:function(t,n){return t(n)},lyUid:function(t,n){return t(n)},gTYmR:function(t,n){return t===n},LfVow:function(t,n){return t===n},jJjJa:function(t,n){return t(n)},ZhSOt:e(1415)+e(511),tceWD:function(t,n,e){return t(n,e)}},a=(currentActivity=n,document[e(787)+e(960)](r[e(1347)]));a[e(1380)][e(1312)]=0,r[e(1161)](setTimeout,()=>{var t=e;r[t(1016)](n,1)?r[t(1067)](setupAct1,a):r[t(1016)](n,2)?r[t(1214)](setupAct2,a):r[t(1193)](n,3)?r[t(1067)](setupAct3,a):r[t(1016)](n,4)?r[t(1214)](setupAct4,a):r[t(1372)](n,5)&&r[t(531)](setupAct5,a),a[t(1380)][t(1312)]=1},200)}function clearActivity(){var t=_0x507d59,n={kfjYB:t(1415)+t(511),GGgAs:function(t,n){return t(n)},PgZFQ:t(920)+t(1444)+t(1038)};currentActivity=0,document[t(787)+t(960)](n[t(551)])[t(546)]=t(766)+t(527)+t(1280)+t(1416)+t(816)+t(771)+t(725)+t(1028)+t(789)+t(635)+t(622)+t(663)+t(1265)+t(1186)+t(1443)+t(968)+t(849)+t(734)+t(690)+t(807)+t(980)+t(1177)+t(581)+t(1362)+"v>",n[t(516)](setInfo,n[t(1065)])}function nextActivity(){var t=_0x507d59,n={RQaym:function(t,n){return t+n},UAWuk:function(t,n){return n<t},vAOfq:function(t,n){return t(n)}};let e=n[t(877)](currentActivity,1);n[t(504)](e,5)&&(e=1),n[t(1121)](loadActivity,e)}function setupAct1(t){let r=_0x507d59,a={RwYfy:function(t,n){return t+n},BPoiO:function(t,n){return t*n},IaydH:function(t,n){return t+n},NurpJ:function(t,n){return t*n},FQuJb:function(t,n){return t+n},XhGbf:function(t){return t()},yMOci:function(t,n){return t(n)},bnQJi:r(633)+r(1196)+r(640)+r(1126)};a[r(563)](setInfo,a[r(641)]);var n=Array[r(887)]({length:3},()=>{var t=r,n=Math[t(760)](a[t(1278)](2,a[t(1139)](Math[t(1309)](),8))),e=Math[t(760)](a[t(930)](2,a[t(936)](Math[t(1309)](),8)));return{a:n,b:e,sum:a[t(1337)](n,e),id:a[t(782)](cryptoRandomId)}});t[r(546)]=r(1048)+r(988)+r(1295)+r(1171)+r(1256)+r(767)+r(810)+r(537)+r(1333)+r(1269)+r(1212)+r(1292)+r(1404)+r(1364)+r(1048)+r(561)+r(1253)+r(1255)+r(538)+r(911)+r(1015)+r(810)+r(1460)+n[r(1093)](t=>r(1048)+r(810)+r(630)+r(493)+r(813)+r(1459)+r(797)+r(616)+r(609)+r(1353)+r(738)+r(1418)+r(615)+r(810)+r(810)+r(630)+r(1209)+r(1433)+r(847)+r(954)+r(1251)+t.a+r(552)+t.b+(r(798)+r(810)+r(810)+r(964)+r(810)+r(810)+r(825)+r(882)+r(1428)+r(868))+t.a+", "+t.b+", "+t[r(1277)]+(r(1147)+r(916)+r(1431)+r(1075)+r(1240)+r(953)+r(1359)+r(659)+r(1475)+r(810)+r(810)+r(810)+r(1261)+r(810)+r(810)+r(1301)+r(940)+r(810)+r(810)+r(689)+r(810)+r(810)+r(630)+r(912)+r(639)+r(1145)+r(1437)+r(778)+r(1021)+r(1005)+r(524)+r(1057)+r(1031)+r(703)+r(810)+r(810)+r(718)+r(849)+r(1088)+r(1086)+r(694))+t[r(1277)]+(r(798)+r(810)+r(810)+r(768)+r(703)+r(810)+r(1350)+r(1205)+r(810)+r(781)))[r(740)]("")+(r(1048)+r(688)+r(1385)+r(1350)+r(1205)+" ")}window[_0x507d59(644)]=function(t,n,e,r){var a=_0x507d59,u={kUQPD:a(1272),JXOBv:a(1030),fVyNq:function(t,n){return t(n)}},t=(t[a(1150)+a(1366)][a(532)][a(491)](u[a(1464)]),t[a(1380)][a(754)]=u[a(1398)],n+a(634)+e+a(1176)+r+".");u[a(1039)](setInfo,t),u[a(1039)](speak,t)};let racePos=0,raceBotPos=0,raceTarget=8,raceTimer=null,raceQ=null;function setupAct2(t){var n=_0x507d59,e={Jkfen:n(1442),IIbat:function(t,n){return t(n)},GhexI:function(t,n){return t(n)},zkerQ:n(935)+n(1022)+n(1369)+n(604)},r=e[n(605)][n(525)]("|");let a=0;for(;;){switch(r[a++]){case"0":t[n(546)]=n(1048)+n(988)+n(1295)+n(1171)+n(1256)+n(767)+n(810)+n(537)+n(1333)+n(1269)+n(1220)+n(834)+n(986)+n(1470)+n(1356)+n(810)+n(791)+n(810)+n(890)+n(752)+n(862)+n(1040)+n(570)+n(1071)+n(1048)+n(810)+n(890)+n(794)+n(1210)+n(1205)+n(810)+n(988)+n(632)+n(1210)+n(1205)+n(810)+n(1072)+n(810)+n(1232)+n(1207)+n(1052)+n(810)+n(1236)+n(880)+n(711)+n(790)+n(926)+n(1381)+n(723)+n(536)+n(1266)+n(520)+n(1298)+n(810)+n(689)+n(810)+n(1331)+n(1479)+n(1052)+n(810)+n(1236)+n(976)+n(995)+n(943)+n(924)+n(555)+n(1367)+n(626)+n(497)+n(648)+n(495)+n(720)+n(529)+n(1399)+n(776)+n(810)+n(708)+n(810)+n(630)+n(1417)+n(685)+n(881)+n(795)+n(810)+n(630)+n(1059)+n(543)+n(810)+n(1414)+n(1423)+n(496)+n(1083)+n(554)+n(944)+n(780)+n(1142)+n(921)+n(1374)+n(1270)+n(1348)+(n(822)+n(810)+n(810)+n(1032)+n(809)+n(810)+n(810)+n(798)+n(810)+n(1301)+n(776)+n(810)+n(689)+n(810)+n(1414)+n(1423)+n(871)+n(654)+n(842)+n(728)+n(883)+n(1284)+n(1048)+n(810)+n(1427)+n(856)+n(850)+n(1087)+n(810)+n(1301)+n(776)+n(810)+n(1136)+n(810)+n(791)+n(810)+n(530)+n(517)+n(1164)+n(1226)+n(494)+n(668)+n(994)+n(1117)+n(1166)+n(755)+n(744)+n(1359)+n(671)+n(670)+n(1382)+n(804)+n(810)+n(810)+n(1441)+n(1162)+n(1301)+n(940)+n(810)+n(798)+n(1460));continue;case"1":racePos=0;continue;case"2":e[n(1340)](clearInterval,raceTimer);continue;case"3":raceBotPos=0;continue;case"4":e[n(913)](setInfo,e[n(907)]);continue}break}}function _0x29b0(t,n){return t-=491,_0x57b7()[t]}function updateCars(){var t=_0x507d59,n={pRdHQ:function(t,n){return t+n},oJlqx:function(t,n){return t*n},cZKjx:function(t,n){return t/n},QpBna:function(t,n){return t+n},XvrIh:function(t,n){return t*n},hCsrc:t(1051),bkVXh:t(808)},e=n[t(1406)](2,n[t(1044)](n[t(1401)](racePos,raceTarget),88)),r=n[t(665)](2,n[t(1221)](n[t(1401)](raceBotPos,100),88)),a=document[t(787)+t(960)](n[t(500)]),u=document[t(787)+t(960)](n[t(625)]);a&&(a[t(1380)][t(874)]=n[t(665)](Math[t(1133)](e,90),"%")),u&&(u[t(1380)][t(874)]=n[t(665)](Math[t(1133)](r,90),"%"))}function nextRaceQ(){let n=_0x507d59,t={hkbsK:function(t,n){return t+n},MUPqw:function(t,n){return t*n},xotEr:function(t,n){return t+n},iQwjr:n(1419)+n(1403),WwEKx:function(t,n){return t(n)},GLONe:function(t,n){return t<n},wkktV:function(t,n){return t+n},HqUvx:function(t,n){return t-n},fFIQu:function(t,n){return t*n},nsGyt:n(1354)+"ns"},e=Math[n(760)](t[n(1451)](2,t[n(1027)](Math[n(1309)](),9))),r=Math[n(760)](t[n(1446)](2,t[n(1027)](Math[n(1309)](),9))),a=t[n(1446)](e,r);raceQ={a:e,b:r,sum:a};document[n(787)+n(960)](t[n(763)])[n(1315)]=e+n(552)+r+n(948),t[n(1400)](speak,e+n(634)+r);for(var u=[a];t[n(1320)](u[n(957)],3);){var i=Math[n(1217)](2,t[n(751)](t[n(1262)](a,2),Math[n(760)](t[n(892)](Math[n(1309)](),5))));u[n(1281)](i)||u[n(636)](i)}u[n(1319)](()=>Math[n(1309)]()-.5),document[n(787)+n(960)](t[n(956)])[n(546)]=u[n(1093)](t=>n(1048)+n(1231)+n(601)+n(737)+n(1238)+t+(n(1147)+n(916)+n(580)+n(1287)+n(591)+n(638)+n(1426)+n(1379)+n(872)+n(592)+n(1076)+n(884)+n(1326)+n(945)+n(733)+n(1360)+n(810)+n(1460))+t+(n(1048)+n(700)+n(701)+n(1460)))[n(740)]("")}function checkWin(){var t=_0x507d59,n={nMFXd:function(t,n){return n<=t},PJTVv:function(t,n){return t(n)},LrzHs:t(1098)+t(1304),nNFqW:function(t,n){return t(n)},qKetc:t(1349)+t(971)+".",ZFHqu:function(t,n){return t(n)},HKXXn:function(t,n){return n<=t},PriEa:function(t,n){return t(n)},VrmQb:t(814)};n[t(1120)](racePos,raceTarget)?(n[t(535)](clearInterval,raceTimer),document[t(787)+t(960)](n[t(722)])[t(546)]=t(1048)+t(810)+t(890)+t(745)+t(1425)+t(571)+t(820)+t(932)+t(1408)+t(1461)+t(783)+t(810)+t(1017)+t(1260)+t(1090)+t(944)+t(602)+t(1234)+t(655)+t(1279)+t(810)+t(521)+t(989)+t(1033)+t(1235)+t(1258)+t(1146)+t(717)+t(810)+t(521)+t(1336)+t(1387)+t(878)+t(510)+t(1412)+t(1200)+t(1206)+t(1053)+t(547)+t(867)+t(1075)+t(1198)+t(953)+t(1359)+t(526)+t(606)+t(811)+t(810)+t(1350)+t(1205)+t(1460),n[t(998)](speak,n[t(1081)]),n[t(666)](confetti,{particleCount:200,spread:100,origin:{y:.6}})):n[t(1199)](raceBotPos,100)&&(n[t(535)](clearInterval,raceTimer),document[t(787)+t(960)](n[t(722)])[t(546)]=t(1048)+t(810)+t(890)+t(745)+t(584)+t(571)+t(820)+t(1230)+t(897)+t(1461)+t(783)+t(810)+t(1017)+t(1260)+t(1090)+t(944)+t(780)+t(1234)+t(1373)+t(1175)+t(810)+t(810)+t(1462)+t(967)+t(727)+t(802)+t(623)+t(533)+t(1048)+t(810)+t(1246)+t(1383)+t(1127)+t(1141)+t(987)+t(1440)+t(806)+t(999)+t(1085)+t(979)+t(593)+t(961)+t(1376)+t(631)+t(1245)+t(506)+t(1219)+t(1048)+t(810)+t(1136)+t(810)+t(698),n[t(886)](speak,n[t(1249)]))}function setupAct3(t){let e=_0x507d59,n={RWDsN:function(t,n){return t(n)},RtMkt:e(764)+e(1069)+"a.",lJIob:e(899)+e(1259)+e(742)+e(1124),eawhr:e(1395)+e(1082)+e(549)+e(721)};n[e(658)](setInfo,n[e(1402)]);var r=[{left:3,right:4,emoji:"🦋",teks:n[e(642)]},{left:2,right:5,emoji:"🐞",teks:n[e(1410)]}];t[e(546)]=e(1048)+e(988)+e(1295)+e(1171)+e(1256)+e(767)+e(810)+e(537)+e(1333)+e(1269)+e(651)+e(572)+e(840)+e(1056)+e(501)+e(810)+e(988)+e(1049)+e(540)+e(810)+e(1391)+r[e(1093)]((t,n)=>e(1048)+e(810)+e(630)+e(493)+e(1204)+e(773)+e(748)+e(1371)+e(1132)+e(756)+e(810)+e(810)+e(988)+e(679)+e(617)+e(582)+e(611)+t[e(895)][e(692)](t[e(874)])+e(552)+t[e(895)][e(692)](t[e(851)])+(e(798)+e(810)+e(810)+e(1178)+e(679)+e(831)+e(559)+e(910)+e(1323))+t[e(909)]+(e(1043)+e(810)+e(810)+e(791)+e(810)+e(810)+e(1290)+e(1276)+e(1191)+e(975))+t[e(874)]+", "+t[e(851)]+(e(1147)+e(916)+e(1123)+e(1190)+e(1302)+e(955)+e(1037)+e(714)+e(699)+e(810)+e(810)+e(589)+e(933)+e(810)+e(810)+e(1453)+e(1128)+e(810)+e(810)+e(1072)+e(810)+e(810)+e(903)+e(608)+e(769)+e(1345)+e(614)+e(773)+e(748)+e(1125)+e(1447)+e(699)+e(810)+e(810)+e(630)+e(1209)+e(712)+e(1174)+e(977)+e(523))+t[e(874)]+e(552)+t[e(851)]+e(541)+(t[e(874)]+t[e(851)])+(e(798)+e(810)+e(810)+e(768)+e(703)+e(810)+e(1350)+e(1205)+e(810)+e(781)))[e(740)]("")+(e(1048)+e(688)+e(1385)+e(1350)+e(1205)+" ")}function setupAct4(t){let e=_0x507d59,n={RcCNa:function(t,n){return t(n)},FtzVB:e(683)+e(1344),pSVcG:e(914),ciUbk:e(1351)};n[e(889)](setInfo,n[e(686)]);var r=[{nama:n[e(726)],a:9,b:5},{nama:n[e(1472)],a:7,b:6}];t[e(546)]=e(1048)+e(718)+e(1405)+e(1157)+e(1009)+e(828)+e(810)+e(550)+e(983)+e(1037)+e(1201)+e(898)+e(603)+e(1321)+e(942)+e(810)+e(903)+e(1173)+e(696)+e(1244)+e(836)+e(1096)+e(810)+e(698)+r[e(1093)]((t,n)=>e(1048)+e(810)+e(630)+e(493)+e(653)+e(773)+e(1024)+e(1029)+e(1132)+e(756)+e(810)+e(810)+e(1116)+e(1144)+e(1393)+e(1201)+e(1063)+e(1050)+e(1101)+e(810)+e(810)+e(704)+t[e(963)]+(e(1183)+e(1070)+e(1154)+'">')+t.a+(e(1318)+e(810)+e(810)+e(810)+e(860)+e(1328)+e(849)+e(536))+">"+t.b+(e(937)+e(810)+e(810)+e(687)+e(703)+e(810)+e(810)+e(1048)+e(810)+e(521)+e(873)+e(1445)+e(773)+e(637)+e(815)+e(959)+e(1237)+e(1115)+e(1218)+e(548)+e(1079)+e(985)+e(1058)+e(997)+e(810)+e(810)+e(576)+e(1070)+e(702))+'">'+(t.a<10?e(583)+t.a:t.a)+(e(798)+e(810)+e(810)+e(521)+e(873)+e(832)+e(839)+e(568)+e(1334)+e(896)+e(997)+e(810)+e(810)+e(810)+e(1463)+e(875)+e(1342)+e(1341)+e(835)+e(796)+e(929)+e(1012)+e(810)+e(810)+e(810))+(t.b<10?e(583)+t.b:t.b)+(e(1048)+e(810)+e(810)+e(600)+e(810)+e(810)+e(810)+e(903)+e(1293)+e(542)+e(519)+e(1248)+e(1456))+n+(e(699)+e(810)+e(810)+e(1460))+(t.a+t.b)+(e(1048)+e(810)+e(810)+e(600)+e(810)+e(810)+e(1301)+e(776)+e(810)+e(810)+e(1072)+e(810)+e(810)+e(1112)+e(772)+e(762))+n+", "+t.a+", "+t.b+(e(1147)+e(916)+e(1062)+e(1190)+e(1302)+e(955)+e(1037)+e(743)+e(1113)+e(810)+e(810)+e(876)+e(1316)+e(810)+e(810)+e(848)+e(703)+e(810)+e(1350)+e(1205)+e(810)+e(781)))[e(740)]("")+(e(1048)+e(1301)+e(776)+e(688)+e(1385)+"  ")}window[_0x507d59(1068)]=function(){let n=_0x507d59,e={zlgLu:function(t,n){return t<n},fZwqg:function(t){return t()},yHuHi:n(978)+n(1343),CXfrj:n(1030),iKLlH:function(t,n,e){return t(n,e)},UPlRR:function(t){return t()}};document[n(787)+n(960)](e[n(1097)])[n(1380)][n(754)]=e[n(1160)],racePos=0,raceBotPos=0,e[n(1084)](updateCars),raceTimer=e[n(1074)](setInterval,()=>{var t=n;e[t(784)](raceBotPos,100)&&(raceBotPos+=4,e[t(1084)](updateCars),e[t(1084)](checkWin))},1e3),e[n(934)](nextRaceQ)},window[_0x507d59(1355)]=function(t){let n=_0x507d59,e={pdbLq:function(t,n){return n<=t},FmaVN:function(t,n){return t===n},StgkM:n(949),DStUd:function(t,n){return t(n)},gleqC:n(1389),tYKZJ:function(t){return t()},bDcuf:function(t,n){return t<n},mkAHG:function(t){return t()},yqFUG:n(1419)+n(1403),iWeju:n(1252)+"00",aGzxj:function(t,n){return t(n)},JuypA:n(993),fZIry:function(t,n,e){return t(n,e)}};if(!e[n(858)](racePos,raceTarget)&&!e[n(858)](raceBotPos,100))if(e[n(1358)](t,raceQ[n(1277)])){var r=e[n(645)][n(525)]("|");let t=0;for(;;){switch(r[t++]){case"0":e[n(818)](speak,e[n(1208)]);continue;case"1":e[n(1060)](checkWin);continue;case"2":racePos++;continue;case"3":e[n(1060)](updateCars);continue;case"4":e[n(599)](racePos,raceTarget)&&e[n(1325)](nextRaceQ);continue}break}}else document[n(787)+n(960)](e[n(539)])[n(532)][n(1438)](e[n(785)]),e[n(565)](speak,e[n(1041)]),e[n(1368)](setTimeout,()=>document[n(787)+n(960)](n(1419)+n(1403))[n(532)][n(491)](n(1252)+"00"),500)},window[_0x507d59(1191)+"y"]=function(t,n,e){var r=_0x507d59,a={JprhO:r(1272),WeLNY:r(1030),YqGdT:function(t,n){return t(n)},cVuqc:function(t,n){return t+n}};t[r(1150)+r(1366)][r(532)][r(491)](a[r(844)]),t[r(1380)][r(754)]=a[r(1471)],a[r(1004)](speak,r(990)+a[r(660)](n,e)+r(1296))},window[_0x507d59(1158)]=function(t,n,e){var r=_0x507d59,a={JAGNx:r(1272),QyWQK:function(t,n){return t(n)},TCfMO:function(t,n){return t+n}};document[r(826)+r(676)](r(669)+t)[r(532)][r(491)](a[r(729)]),a[r(1473)](speak,n+r(634)+e+r(1176)+a[r(1018)](n,e)+".")};let startNum=null,currentNum=null,totalAdded=0;function setupAct5(t){var n=_0x507d59,e={NMzxb:function(t,n){return t(n)},AlYBe:n(1227)+n(705)+n(966),MHfoT:function(t,n){return t<=n}};e[n(801)](setInfo,e[n(974)]),startNum=null,currentNum=null,totalAdded=0;let r="";for(let t=1;e[n(1110)](t,100);t++)r+=n(766)+n(1388)+n(1179)+t+(n(1202)+n(922))+t+n(870)+t+n(1106);t[n(546)]=n(1048)+n(718)+n(1405)+n(777)+n(1009)+n(828)+n(810)+n(550)+n(983)+n(1037)+n(684)+n(1092)+n(1195)+n(677)+n(810)+n(689)+n(810)+n(988)+n(624)+n(972)+n(728)+n(1163)+n(1289)+n(810)+n(630)+n(709)+n(788)+n(699)+n(810)+n(561)+n(1253)+n(1114)+n(680)+n(513)+n(621)+n(810)+n(810)+n(718)+n(799)+n(674)+r+(n(798)+n(810)+n(810)+n(1136)+n(810)+n(1301)+n(776)+n(810)+n(964)+n(810)+n(576)+n(1357)+n(800)+n(774)+n(905)+n(1197)+n(1268)+n(854)+n(1455)+n(1099)+n(1192)+n(810)+n(521)+n(873)+n(969)+n(622)+n(564)+n(1407)+n(1449)+n(1205)+n(810)+n(561)+n(1253)+n(1255)+n(836)+n(612)+n(810)+n(810)+n(1112)+n(1148)+n(1432)+n(1085)+n(1264)+n(1215)+n(1480)+n(1026)+n(1359)+n(1338)+n(1474)+n(1137)+n(1435)+n(545)+n(810)+n(810)+n(530)+n(973)+n(646)+n(906)+n(534)+n(1457)+n(1421)+n(518)+n(664)+n(1222)+n(661)+n(1047)+n(567)+n(703)+n(810)+n(810)+n(879)+n(590)+n(507)+n(845)+n(741)+n(1185)+n(1257)+n(962)+n(757)+n(1003)+n(1140)+n(575)+n(1187)+n(1048)+n(810)+n(521)+n(1336)+n(1102)+n(588)+n(845)+n(741)+n(1185)+n(1257)+n(962)+n(757)+n(1003)+n(1140)+n(575)+n(1390)+n(703)+(n(810)+n(1350)+n(1205)+n(810)+n(761)+n(810)+n(810)+n(903)+n(1167)+n(695)+n(667)+n(710)+n(765)+n(1203)+n(810)+n(810)+n(1414)+n(672)+n(1466)+n(1095)+n(928)+n(610)+n(952)+n(1298)+n(810)+n(810)+n(1236)+n(498)+n(1089)+n(821)+n(664)+n(1151)+n(951)+n(908)+n(1153)+n(1019)+n(1138)+n(1213)+n(703)+n(810)+n(1350)+n(1363)+n(810)+n(585)+n(918)+n(682)+n(938)+n(1422)+n(1042)+n(1415)+n(678)+n(668)+n(894)+n(1055)+n(775)+n(757)+n(509)+n(846)+n(574)+n(824)+n(1250)+n(810)+n(984)+n(1048)+n(688)+n(1385)+n(1350)+n(1205)+" "))}function _0x57b7(){let t=["t-pink-600","MUPqw",'">➕</div><',"ge-200 rou","none",'ate-popIn"',"      Sied","ext-xl tex","SwxyZ","OFZTR","QygPB","xl font-bo","wah.","fVyNq","ve shadow-","JuypA","mentById('",'"</p>\n    ',"oJlqx","35528RQpSvo","pYfOP",' text-sm">',"\n         ",'ass="space',"b-2 text-l","player-car","--\x3e\n      ",'" class="b',"View","ate-400 te","lah: Haiwa","-full anim","ading-loos",'class="mb-',"tYKZJ","xVyct","orange-500","ange-900 m","zmgHU","PgZFQ","ITafbfrOEv","EXEsE","raceStart","a rama-ram",' class="te','late-200">',"   \n      ","\\( *\\)","iKLlH","ext-white ","ue-50 text","12KBXVvf","PnoHt","t-mono tex",". Pilih bu","qKetc","di daun. 5",'" class="t',"fZwqg",'ass="btn-3',"bold text-","re --\x3e\n   ","-2xl font-",'lay" class',"ext-4xl fo",".github.io","nk-600 mb-","map","PTihf","xt-slate-4",'4">\n      ',"yHuHi","race-game-","sticky top","jump",'eft">\n    ','lick="jump',"pitch","4|0|2","ckweY","</div>","ily:sans-s","speechSynt","dNRBW","MHfoT","hostname","  <button ",'full">\n   ',"rid-scroll","auto shado","   <p clas","een-500 te","RrQCm","EZQTl","nMFXd","vAOfq","init","purple-500","tang.","le-100 ani","ian semak.",'="setupAct',"ton>\n     ","wiGZc","Mula pada ","eq-display","nded-2xl p","min","eam-pFFaqE","body"," </div>\n  ",'g text-sm"',"ify-center","BPoiO","ounded-lg ","2(document","700 h-20 f","FYcMd",'s="text-ba',"dden mt-2 ","ngat laju!",')" class="','onclick="j',"LLVOS","nextElemen","text-slate","div>","ex items-c","xt-red-600","e) {}","qxZYY","ll max-w-4","revealGuli","DLoqA","CXfrj","tceWD","!\n        "," items-sta",'ceStart()"',"KjDVe","xt-white p",'ss="mt-2 p',"return (fu","rgIIt","EwgZq","l max-w-4x","qCGZndEayi",'ss="grid g',"-bold text","</h2>\n    "," ialah ","Pilih buta","     <p cl",'" id="c-',"startsWith","viti untuk","xmgZZ"," ada <span","142733mGRANa","order-pink",'">Aktiviti',"5</button>","indexOf",'ctor("retu'," text-whit","revealStor",'-0">\n     ',"gTYmR","FqTvQ",'2">💯 Papan'," sebut jum","200 rounde","px-6 py-2 ","HKXXn","'activity-","ld text-or",'" onclick=','ink-100">\n',"purple-50 ","v>\n       ","content'))","layer Car ","gleqC",'class="tex','line"></di',"ebihi 100.","d text-blu",'">---</div',"lyUid"," border-pi","XtMcr","max","w-inner te","i</button>","d text-red","XvrIh","py-1 px-2 ","CwQJe","KPHQe","apply",' id="btn-r',"Pilih nomb","VISUFgwyRC"," nombor mu"," border-sl","       <bu","    \x3c!-- P","string",'600 mb-4">',"t-green-80","    <div i"," w-fit mx-","Race(","chain","px-2 py-1 ","TpkMW","ms-MY","pGQXv"," md:grid-c","-bold mt-4","     <butt","qLXcy"," pt-1 hidd","VrmQb","on>\n      ",' mb-2">',"text-red-5",'v class="g',"FJrCm","rid grid-c","l text-cen","-200 text-",'0">Awak sa',"a hinggap.",'2 class="t',"👀 Jawapan\n","HqUvx","PNjrm","d bg-white","d-600 mb-4",' style="le',"omVut:IblS","d-2xl p-4 ","l font-bol","tify-cente","dMKWQ","hidden","kSmMN","omoSJ","n dahulu.",' onclick="',"sum","RwYfy","/h2>\n     ",'xt-center"',"includes","gger","FFhOM",' mx-auto">',"console","[ESwFzkjSs","er-4 borde","ggGIG",'rt">\n     ',"   <button","speak-btn","e-600 mb-2",'ss="font-b',"LFJH]",'ass="w-ful'," ekor.","Mula nombo","/div>\n    ",":center;al","find","        </","e px-4 py-","RDLgI","area","UaFgwyRCQn","qTedQ","5869423ftrKdk",".cell-100.","random","Unauthoriz",'rn this")(',"opacity","torAll","GCwQa","innerText","ira\n      ","UMQnj","</span>. \n","sort","GLONe","alah Guli<","{}.constru",'b-2">"',"dBfjT","mkAHG","bold py-4 ","getVoices","ri <span c","EwCTV","d;font-fam","       <!-","ftdyX",'s="text-2x',"ext-blue-5","fy-content","button onc","FQuJb"," py-1 px-2","a-zA-Z_$][","IIbat","0px] text-","e left-[-2","tart","uk lazim.","hite p-2 r","tang + unt","ZhSOt","r animate-","Tahniah! A","      </di","Siti","lDwTc","lex flex-c","race-optio","answerRace","ar</h3>\n  ",' class="bg',"FmaVN"," font-bold",'on-all">\n ',"jVZKJ","h.</p></di","v>\n\n      ","ontan</h3>","rate","tSibling","00 text-re","fZIry","untuk mena",'erif;">❌ U',"le-200 rou","LfVow","🚗 KALAH...","center jus","about:blan","py-2 round","click100","3660sMhxAk","er:border-","style","ll duratio","t-4 animat","on onclick","XHgOq","iv>\n      ","oRDAV",'lick="setu','="cell-100',"Betul","10</button","       ","Vkbqf","se font-bo","12GixREf","2 kumbang ","mIOmU","FtPTW","JXOBv",'tant;">🏎️</',"WwEKx","cZKjx","RtMkt","ion",'">🃏 Kad Sp','lass="w-fu',"pRdHQ",'00 mb-1">K',"een-500 an","function *","eawhr","ign-items:","ementById(","center;hei","        <d","activity-c","><div clas",'id="race-g',"enter rela","race-quest","iQfLm","k-200 text","ent.getEle",'iv id="rac',"SJDIL","green-100 ","te-700 hov","     \x3c!-- ",'"revealA1(',"DBTkI","NAUTHORIZE","blue-500 t",'ump(1)" cl',"t-3xl font","Coqtf",">+1</butto","info-text","bg-white p","add","search","tById('act","MULA LUMBA","4|1|3|2|0"," Penambaha","viti di ba",'"bg-white ',"xotEr","mate-popIn","OXQEN","awalan</di","YjQaZ","hkbsK","QIPJEXiTmy","     </but","D HOST ❌</","col gap-2 ","en result-","border-pin","__proto__","rder-4 bor","         ","imate-popI",'<p class="',"<span clas","kUQPD","ght:100vh;","text-xs te","VoxMU","forEach","eam-pandai","ereta Pint","WeLNY","ciUbk","QyWQK"," rounded-l",'-full">\n  ',"fromCharCo","while (tru","exception","- Bot Car ","nk-200 tex","remove","Sila pilih",'class="bg-','ace-start"','yle="left:',"e-question","scale opac",'d="eq-disp',"HtTNH","hCsrc","n</h3>\n   ","NkMjqQEPzD","riCBM","UAWuk","warn",'">Cuba Lag','p(5)" clas',"IiBkA","y-1 rounde","ment.getEl","ontent","wzipH"," shadow-in","[ITffrOEvm","dyUYF","GGgAs",'nclick="ra',"-pink-600 ","orange-600",'ft: 2%">🏎️<',"         <","stateObjec",'0">',"blue-100 w","split",' mt-4">Mai','="py-10 te'," bermula!","65% !impor"," <button o","jJjJa","classList","i ini.</p>"," bg-white ","PJTVv",'-blue-600"',"  <h3 clas","ols-1 md:g","yqFUG",'-y-4">\n   '," = ","lack text-",'6">\n      ',"daQTM","n>\n       ","innerHTML","tn-3d bg-g","xt-2xl fon"," lagi samp","   <h3 cla","kfjYB"," + ","2rem;color","ext-5xl fo","duration-5","TphnR","log","replace","ld text-pu",", jadi ","       <di","cDFQPMg-tx","yMOci","ext-pink-8","aGzxj","font-size:","+2</button","late-800 t","text-green","inner bg-s","rounded-3x","ple-600 mb","ojMSEcsLqL",'text-sm">R','text-sm">+',"      <div","sHHYx","nction() ","WceqJ","white bord","ng di bawa","racking-wi","&nbsp;","slate-100 ","        <b","Dekwe","148195dSJPsH",'(10)" clas',"     Kira ",'click="jum',"r-slate-20","over:bg-bl","500 text-w","YwWqc","BseEs","SIYzi","hesis","YgwHq","bDcuf","   </div>\n","tton oncli","ext-green-",'b-4">🟡 Mas',"ng!","Jkfen","n Lagi</bu",".cell-100",'ss="hidden',"-2xl p-4 f",'ld">Ayat M','dest">','2">\n      ',"smooth","ounded-xl ",'tive">\n   ',"00 rounded","3xl mb-2 t","-600","saHrniRLnw","learning-t",'ner">\n    ',"ont-bold t","menang kal",'ass="grid ',"bkVXh","d-600 gray","ecnjt","iCkDo","GadbA","     <div ","ed-xl font",'ass="race-',"Ambil kad,"," tambah ","text-5xl f","push","order-slat","0 text-sla","wer-box hi","lah, kemud","bnQJi","lJIob","gNSco","revealA1","StgkM",'mp(2)" cla',"nMBIu",'ity-80" st',"fygvU","slice","d text-pur","test","orange-50 ",' class="gr',"🏆 MENANG!<","counter","cancel","RWDsN"," text-sm w","cVuqc","rounded-lg","SnFGE","ext-emeral","font-bold ","QpBna","ZFHqu","e rounded-",' class="bt',".result-","hadow-lg m"," text-xl s",'iv class="',"LYpLO",'-100">',"or lain.","tor"," 100</h3>\n","ontent'))\"",'ass="text-',"-container","Cwulw",'ick="setup',"Lihat bent","ld text-pi",'ame-area" ',"FtzVB","       </p","       </d","      \n   ","slate-500 ","speak","repeat","active",'blue-600">',"-2 bg-whit","rid-cols-1","nHmGr","    ",'">\n       ',"       </b","utton>\n   ","xt-red-500",">\n        ","        ","or mula di","0-9a-zA-Z_","bind"," </div>\n\n ",'class="md:',"xl border-",'car" class',"t-2xl font","5|1|7|6|3|","ld text-sm","QbE.PzDOic","HaWuK","</p>\n     ","    <div c","OcjMSEcsLq"," 2%; top: ","ai.","LrzHs","n-500 text","debu","mate-pulse","pSVcG","xt-slate-8","ls-3 gap-4","JAGNx","prototype",":red;font-","YYlLa","l transiti","-2xl text-","7711UIELvt","FJH",'ck="answer',"ol items-c","flex;justi","join","bg-white b"," 4 lagi da","ld mt-4 w-","ounded-2xl",'s="p-8 bg-',"center","IPkJEXiTmy","order-purp","CJJxA","Tambah ","wkktV",'s="race-tr',"nBgwP","display","x-8 py-3 r",'-4">\n     ',"ont-bold p","constructo","vEPQO","floor","       \n  ","evealGuli(","iQwjr","Baca cerit","2 border-p","<div class",'ter">\n    ',"     </div"," mt-2 bg-w","input","l mb-6 ani",'onclick="r',"border-2 b","order-4 bo","xt-white f","div>\n     ","ll max-w-5","-2 rounded","xFFqEqCGZE","ext-slate-","   ","XhGbf",'n">\n      ',"zlgLu","iWeju","toString","getElement","col-span-2",'h2 class="','="racer tr',"    \n     ","---","\\+\\+ *(?:[",'s="finish-','8">\n      ',"text-lg to","der-blue-2","</div>\n   ",'lass="grid',"-pink-50 b","NMzxb",'00">Robot ',"Nombor mel",'e-pulse">\n',"textConten","ivity-cont","mb-8 font-","bot-car","ia...\n    ","          ","tton>\n    ","LkuZD","blue-50 bo","Cuba lagi.","e-200 roun",'s="text-8x',"TGfQR","DStUd","NkgitMjhqu","l border-4",'="text-xl ','bounce">\n ',"yYMxkXYSjG","eset</butt","    <butto","querySelec","charCodeAt",'nter">\n   ',"YpXqv","Awpze","lg font-bo",'"border-b-',"call",'-600 mb-4"',"slate-400 ","ols-2 gap-","oOHMJ"," Cuba nomb","4 border-s",'-4">🦋 Masa',"uk melompa","id grid-co","action","JprhO",'s="btn-3d ',"d-lg mt-1 ","-black tex","  </button",'lass="text',"nerated he","right","fliCj","HRLwcDFQPM","flex flex-","rMMZP","Options ge","eVPzH","pdbLq","ooHvP","  Kawan be","aXVZs","ack relati","KXOxo","XfveB","1842260rIlVqy","hSqQQ","reen-500 t","this, ","TDESs",')">','e-options"',"blue-400 h","div class=","left",'s="absolut',"         K","RQaym","pAct2(docu","<button on",'d="player-','class="mt-',"n onclick="," max-w-2xl","-3xl font-","YMxkXYSj.G","PriEa","from","weight:bol","RcCNa"," <div clas","gkGLQ","fFIQu","la di papa","n-3d bg-sl","emoji","00 relativ","ate-400 an","ange-600 m","3 rama-ram","2256TgVldx","ESlweFzkjS","lblPx","  <div cla","<div style","rder-pink-",'ss="btn-3d',"zkerQ","-[30px] fl","teks","rple-900 m","rid-cols-3",'class="ans',"GhexI","Ali","iuGqL","btn-3d bg-","trace","utton oncl","ELNtm","Pilih akti","lex items-",'"click100(',"yqMds","ition-all ",'="display:',"ansition-a","location","00 font-bo",'p-3">+</sp',"IaydH","info"," border-gr","Jumlah\n   ","UPlRR","Jawab deng","NurpJ","</span>.\n ","Act5(docum","ckXPI","button>\n  ","zyxPC","/h3>\n     ","acer trans","nt-black t","rounded-2x","(((.+)+)+)","$]*)"," = ?","2|3|0|1|4","lang","-700 min-h","atematik:<","rounded-xl","t-blue-800","2 rounded-","nsGyt","length","Bpjbw","ded-xl p-4","ById","hite px-6 ","pink-600 f","nama","     \n    ","IEWEY"," papan.","text-xl te","n</h2><p c",'"text-lg f',"error","wak menang","md:grid-co",'nclick="ju',"AlYBe","y(this, ",'d="bot-car',"-purple-60","btn-race-s","d bg-blue-",'semibold">',"AKkQF","OWYBL",'ss="text-2',"    </div>","t-right le",">🏎️ Lumba K",".getElemen","   <div cl",'p class="t',"Jumlahnya ","table","DYJzs","Salah","n-3d bg-gr",'" class="r',"voice",'e">\n      ',"nNFqW","ent'))\" cl","gtKCP","bg-green-1","crICn","y-1 px-2 r","YqGdT","-2 border-","OBlkw","2631KtAzxN","eBTis","xl text-ce","awZTT","href","an>\n      ","621leplEJ","bHaCq",' gap-2">\n ',"DlBzi","        <h","TCfMO","enter just","scrollInto","-xl border","an pantas ","unTqE","order-oran","wHGqt"];return(_0x57b7=function(){return t})()}function updateEq(){var t=_0x507d59,n={yqMds:t(1131),SIYzi:function(t,n){return t===n},iCkDo:t(792)},e=document[t(787)+t(960)](n[t(923)]);n[t(596)](startNum,null)?e[t(1315)]=n[t(628)]:e[t(1315)]=startNum+t(552)+totalAdded+t(541)+currentNum}function _0x5e9ca5(t){let e=_0x507d59,r={EwgZq:function(t,n){return t===n},FFhOM:e(1233),XtMcr:e(1477)+e(1155),QygPB:e(656),EwCTV:function(t,n){return t!==n},crICn:function(t,n){return t+n},GadbA:function(t,n){return t/n},zyxPC:e(957),SwxyZ:function(t,n){return t===n},SnFGE:function(t,n){return t%n},ggGIG:function(t,n){return t+n},KXOxo:e(724),qTedQ:e(1282),OBlkw:e(843),unTqE:e(522)+"t",OXQEN:function(t,n){return t(n)},YwWqc:function(t,n){return t(n)}};function a(t){var n=e;if(r[n(1170)](typeof t,r[n(1283)]))return function(t){}[n(758)+"r"](r[n(1216)])[n(1225)](r[n(1036)]);r[n(1329)](r[n(1002)]("",r[n(629)](t,t))[r[n(941)]],1)||r[n(1034)](r[n(662)](t,20),0)?function(){return!0}[n(758)+"r"](r[n(1288)](r[n(863)],r[n(1306)]))[n(833)](r[n(1006)]):function(){return!1}[n(758)+"r"](r[n(1288)](r[n(863)],r[n(1306)]))[n(1225)](r[n(1023)]),r[n(1448)](a,++t)}try{if(t)return a;r[e(594)](a,0)}catch(t){}}window[_0x507d59(1377)]=function(n){let e=_0x507d59,r={awZTT:function(t,n){return t===n},iQfLm:e(713)+e(1104),daQTM:function(t,n){return t(n)},gNSco:function(t,n){return t(n)},eVPzH:e(693),LkuZD:function(t){return t()},XHgOq:e(607)};if(r[e(1010)](startNum,null)){var a=r[e(1420)][e(525)]("|");let t=0;for(;;){switch(a[t++]){case"0":r[e(544)](setInfo,e(1130)+n+(e(1080)+e(1346)+e(841)+"t."));continue;case"1":currentNum=n;continue;case"2":r[e(643)](speak,e(1297)+"r "+n);continue;case"3":document[e(787)+e(960)]("c-"+n)[e(532)][e(1438)](r[e(857)]);continue;case"4":r[e(812)](updateEq);continue;case"5":startNum=n;continue;case"6":document[e(826)+e(1313)](r[e(1384)])[e(1468)](t=>t[e(532)][e(491)](e(693),e(1100)));continue;case"7":totalAdded=0;continue}break}}},window[_0x507d59(1100)]=function(n){let e=_0x507d59,r={GCwQa:e(1308)+e(693),dBfjT:e(693),aXVZs:function(t,n){return t===n},HtTNH:function(t,n){return t(n)},PnoHt:e(492)+e(1229)+e(893)+e(1275),xmgZZ:function(t,n){return t+n},FtPTW:function(t,n){return n<t},ELNtm:e(803)+e(1211)+e(838)+e(675),xVyct:e(1100),XfveB:e(613),KjDVe:e(746),Vkbqf:function(t,n,e){return t(n,e)},TphnR:function(t){return t()}};if(r[e(861)](currentNum,null))r[e(499)](setInfo,r[e(1078)]);else{var a=r[e(1182)](currentNum,n);if(r[e(1397)](a,100))r[e(499)](setInfo,r[e(919)]);else{let t=document[e(787)+e(960)]("c-"+a);t[e(532)][e(1438)](r[e(1061)]),currentNum=a,totalAdded+=n,t[e(1020)+e(1054)]({behavior:r[e(864)],block:r[e(1165)]}),r[e(1392)](setTimeout,()=>{let n=e;document[n(826)+n(1313)](r[n(1314)])[n(1468)](t=>t[n(532)][n(491)](n(693))),t[n(532)][n(1438)](r[n(1324)])},100),r[e(556)](updateEq),r[e(499)](speak,e(750)+n+e(560)+a)}}}</script>
+<!doctypehtml><html lang="ms-MY"class="overflow-hidden overscroll-none"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>Matematik Ceria: Penambahan (Aktiviti)</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><style>body{font-family:Fredoka,sans-serif;background-color:#f0fdf4;background-image:radial-gradient(#86efac 2px,transparent 2px);background-size:30px 30px}.game-card{background:#fff;border:4px solid #475569;box-shadow:8px 8px 0 #00000020;border-radius:1.5rem;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}.btn-3d{transition:all .1s;border-bottom-width:6px;border-color:rgba(0,0,0,.2);transform:translateY(0);cursor:pointer;display:inline-block}.btn-3d:active:not(:disabled){transform:translateY(4px);border-bottom-width:2px;box-shadow:none}.btn-3d:disabled{opacity:.6;cursor:not-allowed;border-bottom-width:6px;filter:grayscale(100%)}.grid-100{display:grid;grid-template-columns:repeat(10,1fr);gap:1px;width:100%;height:100%}.cell-100{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #cbd5e1;border-radius:3px;font-weight:700;font-size:.75rem;cursor:pointer;transition:all .1s;background:#fff;padding:0;line-height:1}.cell-100:hover{background:#f1f5f9;z-index:5;transform:scale(1.1)}.cell-100.active{background:#3b82f6;color:#fff;border-color:#1d4ed8;transform:scale(1.1);box-shadow:0 4px 6px -1px rgba(59,130,246,.5);z-index:10}.cell-100.jump{background:#22c55e;color:#fff;animation:popIn .3s}.grid-scroll-container{width:100%;padding:0}.pupil-cell{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:3px solid #cbd5e1;border-radius:50%;background:#fff;font-size:1.2rem;transition:all .2s}.pupil-cell.active{border-color:#ef4444;background:#fee2e2;transform:scale(1.2);box-shadow:0 0 15px #ef4444}.race-track{position:relative;width:100%;height:60px;background:#e2e8f0;border-radius:30px;margin-bottom:10px;border:2px solid #94a3b8;overflow:hidden}.race-line{position:absolute;top:50%;left:0;right:0;height:2px;background:repeating-linear-gradient(to right,#94a3b8 0,#94a3b8 10px,transparent 10px,transparent 20px)}.racer{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;transition:left .5s ease-in-out;z-index:10}.finish-line{position:absolute;right:20px;top:0;bottom:0;width:10px;background:repeating-linear-gradient(45deg,#000,#000 10px,#fff 10px,#fff 20px);z-index:5}@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}@media (max-height:650px){.fixed.top-4{top:.25rem!important;padding:0 .5rem!important}.max-w-4xl.rounded-full{padding:.25rem 1rem!important;border-width:2px!important}.text-3xl{font-size:1.5rem!important}#info-text{font-size:1.1rem!important;margin-top:0!important}#speak-btn{padding:.25rem!important;font-size:.9rem!important}.max-w-6xl{padding:.25rem!important}.game-card{padding:.5rem!important;margin-bottom:.25rem!important;border-width:2px!important;min-height:auto!important}.game-card .py-10{padding:1rem 0!important}.game-card .text-8xl{font-size:3rem!important;margin-bottom:.25rem!important}.game-card h2{font-size:1.5rem!important;margin-bottom:0!important}.game-card p{font-size:.9rem!important;margin-bottom:.5rem!important}.game-card .text-4xl{font-size:1.25rem!important;margin-top:0!important}.bg-white\/80{padding:.5rem!important;border-width:1px!important}.bg-white\/80 h3{font-size:1rem!important;margin-bottom:.25rem!important}.grid{gap:.25rem!important;margin-bottom:.25rem!important}.btn-3d{padding:.5rem .25rem!important;font-size:.75rem!important;border-bottom-width:3px!important;border-radius:.5rem!important}.btn-3d:active:not(:disabled){transform:translateY(2px)!important;border-bottom-width:1px!important}.border-t-2{padding-top:.25rem!important;border-width:1px!important}.border-t-2 .btn-3d{padding:.25rem 1rem!important;font-size:.8rem!important}.p-4.flex.flex-col{padding:.5rem!important}.text-3xl.font-black{font-size:2rem!important;margin-bottom:.25rem!important}.pupil-cell{width:30px!important;height:30px!important;font-size:1rem!important;border-width:2px!important}.bg-green-50.rounded-3xl{padding:.5rem!important;margin-bottom:.5rem!important}#kbResult .text-3xl{font-size:1.5rem!important;padding:.5rem!important}.space-y-4>*+*{margin-top:.5rem!important}.text-3xl.tracking-widest{font-size:1.5rem!important}.p-4{padding:.5rem!important}.text-2xl.font-mono{font-size:1.5rem!important;padding:.5rem!important}.grid-scroll-container{max-height:none!important;overflow:visible!important;padding:0!important}.cell-100{font-size:.8rem!important}.bg-pink-50.sticky{position:relative!important;top:auto!important;margin-top:.5rem!important}}</style><body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col overscroll-none"><div class="flex-none p-4 z-50 pointer-events-none w-full"><div class="max-w-4xl mx-auto bg-green-400 border-4 border-green-600 rounded-full px-6 py-3 shadow-xl flex items-center justify-between pointer-events-auto transform hover:scale-[1.01] transition-transform"><div class="flex items-center gap-3"><span class="text-3xl animate-bounce">🧮</span> <span id="info-text"class="text-xl font-bold text-green-900 leading-none mt-1">Matematik Asas</span></div><button id="speak-btn"onclick="speakInfo()"class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-200 rounded-full p-2 transition-colors shadow-sm">🔊</button></div></div><div class="flex-1 w-full max-w-6xl mx-auto p-2 flex flex-col min-h-0"><div class="game-card p-2 mb-2 flex-1 w-full"><div id="activity-content"class="w-full relative z-10 flex flex-col items-center justify-center h-full transition-opacity duration-200"><div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">➕</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Aktiviti Penambahan</h2><p class="text-xl text-slate-500 mb-8 font-semibold">Kotak Beracun, Masalah Harian & Papan 100.<div class="text-4xl animate-bounce">👇</div></div></div></div><div class="flex-none bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-2 border-2 border-white"><h3 class="text-lg font-bold text-slate-700 mb-1 text-center">🎮 Pilih Aktiviti</h3><div class="grid grid-cols-5 gap-2 mb-2"><button onclick="loadActivity(1)"class="btn-3d bg-blue-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🃏 Kad</button> <button onclick="loadActivity(2)"class="btn-3d bg-red-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🏎️ Lumba</button> <button onclick="loadActivity(3)"class="btn-3d bg-purple-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🦋 Rama</button> <button onclick="loadActivity(4)"class="btn-3d bg-orange-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">🟡 Guli</button> <button onclick="loadActivity(5)"class="btn-3d bg-pink-500 text-white font-bold py-2 px-1 rounded-xl text-sm md:text-base">💯 Grid</button></div><div class="flex justify-center gap-4 border-t-2 border-slate-100 pt-2"><button onclick="clearActivity()"class="btn-3d bg-slate-400 text-white font-bold py-1 px-4 rounded-full text-base">🏠 Menu</button> <button onclick="nextActivity()"class="btn-3d bg-indigo-500 text-white font-bold py-1 px-6 rounded-full text-lg">Seterusnya ➡️</button></div></div></div><script>/* ... existing script start ... */
+        /* Note: I am replacing a chunk including the buttons to fix the Lumba emoji and then I will jump to setupAct5. 
+           Wait, ReplaceFileContent performs a single contiguous replacement. I should do two separate replacements or one if contiguous.
+           Points 1 and 2 are far apart (line 398 vs 750). I should use `multi_replace_file_content` or two `replace_file_content` calls. 
+           This call will focus on the Lumba button fix.
+        */
+        /* --- STANDARD HELPERS --- */
+        let currentActivity = 0;
+        let ttsEnabled = false;
+        let currentInfo = "Pilih aktiviti untuk bermula!";
+
+        function speak(text) {
+            if (!ttsEnabled || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text); u.lang = 'ms-MY'; u.rate = 0.95; u.pitch = 1.05;
+            const ms = window.speechSynthesis.getVoices().find(v => v.lang === 'ms-MY' || v.lang?.startsWith('ms'));
+            if (ms) u.voice = ms;
+            window.speechSynthesis.speak(u);
+        }
+
+        function setInfo(text) {
+            currentInfo = text; const infoEl = document.getElementById('info-text');
+            infoEl.style.opacity = 0; setTimeout(() => { infoEl.textContent = text; infoEl.style.opacity = 1; }, 200);
+        }
+
+        function speakInfo() {
+            if (!ttsEnabled) { ttsEnabled = true; document.getElementById('speak-btn').classList.add('bg-green-100', 'text-green-600'); }
+            speak(currentInfo);
+        }
+
+        function cryptoRandomId() { return Math.random().toString(36).slice(2, 9); }
+
+
+
+        /* --- ROUTER --- */
+        function loadActivity(n) {
+            // kbPauseMusic(); // Removed
+            currentActivity = n;
+            const content = document.getElementById('activity-content');
+            content.style.opacity = 0;
+            setTimeout(() => {
+                if (n === 1) setupAct1(content);
+                else if (n === 2) setupAct2(content);
+                else if (n === 3) setupAct3(content);
+                else if (n === 4) setupAct4(content);
+                else if (n === 5) setupAct5(content);
+                content.style.opacity = 1;
+            }, 200);
+        }
+
+        function clearActivity() {
+            // kbPauseMusic(); // Removed
+            currentActivity = 0;
+            document.getElementById('activity-content').innerHTML = `<div class="py-10 text-center"><div class="text-8xl mb-6 animate-pulse">➕</div><h2 class="text-5xl font-bold text-emerald-600 mb-4">Aktiviti Penambahan</h2><p class="text-2xl text-slate-500 mb-8 font-semibold">Pilih butang di bawah.</p></div>`;
+            setInfo("Pilih aktiviti di bawah.");
+        }
+        function nextActivity() { let next = currentActivity + 1; if (next > 5) next = 1; loadActivity(next); }
+
+
+        /* =========================================
+           LOGIK AKTIVITI
+           ========================================= */
+
+        /* --- 1. Kad Soalan --- */
+        function setupAct1(content) {
+            setInfo("Ambil kad, sebut jumlah, kemudian semak.");
+            const makeCard = () => {
+                const a = Math.floor(2 + Math.random() * 8), b = Math.floor(2 + Math.random() * 8), sum = a + b;
+                return { a, b, sum, id: cryptoRandomId() };
+            };
+            const cards = Array.from({ length: 3 }, makeCard);
+
+            content.innerHTML = `
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-blue-600 mb-2">🃏 Kad Spontan</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                    ${cards.map(c => `
+                        <div class="bg-blue-50 border-4 border-blue-200 rounded-2xl p-4 flex flex-col items-center relative">
+                            <div class="text-3xl font-black text-blue-800 mb-2">${c.a} + ${c.b}</div>
+                            
+                            <button onclick="revealA1(this, ${c.a}, ${c.b}, ${c.sum})" class="btn-3d bg-blue-500 text-white px-2 py-1 rounded-xl font-bold text-sm w-full">
+                                👀 Jawapan
+                            </button>
+                            
+                            <div class="answer-box hidden mt-2 bg-white p-2 rounded-xl border-2 border-blue-100 w-full animate-popIn">
+                                <div class="text-2xl font-bold text-blue-600">${c.sum}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        }
+        window.revealA1 = function (btn, a, b, sum) {
+            const box = btn.nextElementSibling;
+            box.classList.remove('hidden');
+            btn.style.display = 'none';
+            const msg = `${a} tambah ${b} ialah ${sum}.`;
+            setInfo(msg); speak(msg);
+        }
+
+        /* --- 2. Lumba Kereta (Math Race) --- */
+        let racePos = 0, raceBotPos = 0, raceTarget = 8, raceTimer = null;
+        let raceQ = null;
+
+        function setupAct2(content) {
+            setInfo("Jawab dengan pantas untuk menang!");
+            racePos = 0; raceBotPos = 0;
+            clearInterval(raceTimer);
+
+            content.innerHTML = `
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-red-600 mb-4">🏎️ Lumba Kereta Pintar</h3>
+                
+                <div class="race-track relative shadow-inner bg-slate-200">
+                    <div class="finish-line"></div>
+                    <div class="race-line"></div>
+                    
+                    <!-- Player Car -->
+                    <div id="player-car" class="racer transition-all duration-500 text-blue-600" style="left: 2%">🏎️</div>
+                    
+                    <!-- Bot Car -->
+                    <div id="bot-car" class="racer transition-all duration-500 text-red-600 grayscale opacity-80" style="left: 2%; top: 65% !important;">🏎️</div>
+                </div>
+
+                <div id="race-game-area" class="mt-8">
+                     <div class="mb-6">
+                        <div id="race-question" class="text-5xl font-black text-slate-700 h-20 flex items-center justify-center animate-bounce">
+                           Siedia...
+                        </div>
+                     </div>
+                     
+                     <div id="race-options" class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+                        <!-- Options generated here -->
+                     </div>
+                </div>
+                
+                <button onclick="raceStart()" id="btn-race-start" class="btn-3d bg-green-500 text-white px-8 py-3 rounded-2xl font-bold text-xl shadow-lg mt-4 animate-pulse">
+                    MULA LUMBA!
+                </button>
+            </div>
+            `;
+        }
+
+        window.raceStart = function () {
+            document.getElementById('btn-race-start').style.display = 'none';
+            racePos = 0; raceBotPos = 0;
+            updateCars();
+
+            // Bot Logic
+            raceTimer = setInterval(() => {
+                if (raceBotPos < 100) {
+                    raceBotPos += 4; // Bot moves steadily
+                    updateCars();
+                    checkWin();
+                }
+            }, 1000); // reduced speed slightly for fair play
+
+            nextRaceQ();
+        }
+
+        function updateCars() {
+            // Map steps 0-8 to percentage 2% - 90%
+            const pPct = 2 + (racePos / raceTarget) * 88;
+            const bPct = 2 + (raceBotPos / 100) * 88;
+
+            const pCar = document.getElementById('player-car');
+            const bCar = document.getElementById('bot-car');
+            if (pCar) pCar.style.left = Math.min(pPct, 90) + '%';
+            if (bCar) bCar.style.left = Math.min(bPct, 90) + '%';
+        }
+
+        function nextRaceQ() {
+            const a = Math.floor(2 + Math.random() * 9);
+            const b = Math.floor(2 + Math.random() * 9);
+            const sum = a + b;
+            raceQ = { a, b, sum };
+
+            const qEl = document.getElementById('race-question');
+            qEl.innerText = `${a} + ${b} = ?`;
+            speak(`${a} tambah ${b}`);
+
+            // Generate options
+            let opts = [sum];
+            while (opts.length < 3) {
+                let r = Math.max(2, sum - 2 + Math.floor(Math.random() * 5));
+                if (!opts.includes(r)) opts.push(r);
+            }
+            opts.sort(() => Math.random() - 0.5);
+
+            document.getElementById('race-options').innerHTML = opts.map(o => `
+                <button onclick="answerRace(${o})" class="btn-3d bg-white border-4 border-slate-200 text-slate-700 hover:border-blue-400 hover:bg-blue-50 text-3xl font-bold py-4 rounded-2xl transition-all">
+                    ${o}
+                </button>
+            `).join('');
+        }
+
+        window.answerRace = function (val) {
+            if (racePos >= raceTarget || raceBotPos >= 100) return;
+
+            if (val === raceQ.sum) {
+                // Correct
+                racePos++;
+                updateCars();
+                speak("Betul");
+                checkWin();
+                if (racePos < raceTarget) nextRaceQ();
+            } else {
+                // Wrong
+                document.getElementById('race-question').classList.add('text-red-500');
+                speak("Salah");
+                setTimeout(() => document.getElementById('race-question').classList.remove('text-red-500'), 500);
+            }
+        }
+
+        function checkWin() {
+            if (racePos >= raceTarget) {
+                clearInterval(raceTimer);
+                document.getElementById('race-game-area').innerHTML = `
+                    <div class="p-8 bg-green-100 rounded-3xl border-4 border-green-500 animate-popIn">
+                        <h2 class="text-4xl font-black text-green-600 mb-4">🏆 MENANG!</h2>
+                        <p class="text-xl text-green-800">Awak sangat laju!</p>
+                        <button onclick="setupAct2(document.getElementById('activity-content'))" class="btn-3d bg-green-500 text-white px-6 py-2 rounded-xl font-bold mt-4">Main Lagi</button>
+                    </div>
+                `;
+                speak("Tahniah! Awak menang.");
+                confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+            } else if (raceBotPos >= 100) {
+                clearInterval(raceTimer);
+                document.getElementById('race-game-area').innerHTML = `
+                    <div class="p-8 bg-slate-100 rounded-3xl border-4 border-slate-400 animate-popIn">
+                        <h2 class="text-4xl font-black text-slate-600 mb-4">🚗 KALAH...</h2>
+                        <p class="text-xl text-slate-800">Robot menang kali ini.</p>
+                        <button onclick="setupAct2(document.getElementById('activity-content'))" class="btn-3d bg-blue-500 text-white px-6 py-2 rounded-xl font-bold mt-4">Cuba Lagi</button>
+                    </div>
+                `;
+                speak("Cuba lagi.");
+            }
+        }
+
+        /* --- 3. Masalah Rama-rama --- */
+        function setupAct3(content) {
+            setInfo("Baca cerita rama-rama.");
+            const items = [
+                { left: 3, right: 4, emoji: '🦋', teks: '3 rama-rama hinggap. 4 lagi datang.' },
+                { left: 2, right: 5, emoji: '🐞', teks: '2 kumbang di daun. 5 lagi sampai.' }
+            ];
+
+            content.innerHTML = `
+            <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-purple-600 mb-4">🦋 Masalah: Haiwan</h3>
+                <div class="space-y-4">
+                    ${items.map((it, idx) => `
+                        <div class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-4">
+                            <div class="text-3xl mb-2 tracking-widest">${it.emoji.repeat(it.left)} + ${it.emoji.repeat(it.right)}</div>
+                            <p class="text-lg font-bold text-purple-900 mb-2">"${it.teks}"</p>
+                            
+                            <button onclick="revealStory(this, ${it.left}, ${it.right})" class="btn-3d bg-purple-500 text-white px-4 py-2 rounded-xl font-bold text-sm">
+                                Kira Jumlah
+                            </button>
+                            
+                            <div class="hidden mt-2 bg-white p-2 rounded-xl border-2 border-purple-100 animate-popIn">
+                                <div class="text-2xl font-bold text-purple-600">${it.left} + ${it.right} = ${it.left + it.right}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        }
+        window.revealStory = function (btn, a, b) {
+            btn.nextElementSibling.classList.remove('hidden');
+            btn.style.display = 'none';
+            speak(`Jumlahnya ${a + b} ekor.`);
+        }
+
+
+        /* --- 4. Masalah Guli --- */
+        function setupAct4(content) {
+            setInfo("Lihat bentuk lazim.");
+            const problems = [{ nama: 'Ali', a: 9, b: 5 }, { nama: 'Siti', a: 7, b: 6 }];
+
+            content.innerHTML = `
+             <div class="w-full max-w-4xl text-center">
+                <h3 class="text-2xl font-bold text-orange-600 mb-4">🟡 Masalah Guli</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    ${problems.map((p, i) => `
+                        <div class="bg-orange-50 border-2 border-orange-200 rounded-2xl p-4">
+                            <p class="text-base font-bold text-orange-900 mb-2 text-left">
+                                ${p.nama} ada <span class="text-red-600">${p.a}</span>. 
+                                Kawan beri <span class="text-blue-600">${p.b}</span>.
+                            </p>
+                            
+                            <div class="bg-white border-2 border-slate-200 rounded-xl p-4 w-fit mx-auto shadow-inner text-2xl font-mono text-right leading-loose">
+                                <div class="text-red-500">${p.a < 10 ? '&nbsp;' + p.a : p.a}</div>
+                                <div class="border-b-4 border-slate-800 text-blue-500 relative">
+                                    <span class="absolute left-[-20px] text-slate-400 text-lg top-3">+</span>
+                                    ${p.b < 10 ? '&nbsp;' + p.b : p.b}
+                                </div>
+                                <div class="font-black text-orange-600 pt-1 hidden result-${i}">
+                                    ${p.a + p.b}
+                                </div>
+                            </div>
+                            
+                            <button onclick="revealGuli(${i}, ${p.a}, ${p.b})" class="btn-3d bg-orange-500 text-white px-4 py-2 rounded-xl font-bold mt-4 w-full">
+                                Kira
+                            </button>
+                        </div>
+                    `).join('')}
+                 </div>
+            </div>
+        `;
+        }
+        window.revealGuli = function (idx, a, b) {
+            document.querySelector(`.result-${idx}`).classList.remove('hidden');
+            speak(`${a} tambah ${b} ialah ${a + b}.`);
+        }
+
+
+        /* --- 5. Papan 100 --- */
+        let startNum = null, currentNum = null, totalAdded = 0;
+
+        function setupAct5(content) {
+            setInfo("Pilih nombor mula di papan.");
+            startNum = null; currentNum = null; totalAdded = 0;
+
+            let gridHTML = '';
+            for (let i = 1; i <= 100; i++) {
+                gridHTML += `<div class="cell-100" id="c-${i}" onclick="click100(${i})">${i}</div>`;
+            }
+
+            content.innerHTML = `
+            content.innerHTML = `
+                < div class="w-full max-w-6xl text-center h-full flex flex-col" >
+                <h3 class="text-xl font-bold text-pink-600 mb-1 shrink-0">💯 Papan 100</h3>
+                
+                <div class="flex flex-row gap-2 h-full items-start overflow-hidden pb-1">
+                    <div class="flex-1 h-full overflow-hidden border-2 border-slate-200 rounded-xl p-1 bg-white">
+                        <div class="grid-scroll-container h-full">
+                            <div class="grid-100">${gridHTML}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-pink-50 border-2 border-pink-200 rounded-xl p-2 flex flex-col gap-2 w-32 shrink-0 h-full overflow-y-auto">
+                        <div class="text-sm font-bold text-pink-800 mb-1">Kawalan</div>
+                        <div class="flex flex-col gap-1 w-full">
+                            <button onclick="jump(1)" class="btn-3d bg-white border-pink-200 text-pink-600 font-bold py-1 px-2 rounded-lg text-xs">+1</button>
+                            <button onclick="jump(2)" class="btn-3d bg-white border-pink-200 text-pink-600 font-bold py-1 px-2 rounded-lg text-xs">+2</button>
+                            <button onclick="jump(5)" class="btn-3d bg-white border-pink-200 text-pink-600 font-bold py-1 px-2 rounded-lg text-xs">+5</button>
+                            <button onclick="jump(10)" class="btn-3d bg-white border-pink-200 text-pink-600 font-bold py-1 px-2 rounded-lg text-xs">+10</button>
+                        </div>
+                        
+                        <div class="mt-auto p-1 bg-white rounded-lg border-2 border-pink-100">
+                            <div class="text-[10px] text-slate-400 font-bold">Ayat Matematik</div>
+                            <div id="eq-display" class="text-sm font-bold text-slate-700 min-h-[20px] flex items-center justify-center">---</div>
+                        </div>
+
+                        <button onclick="setupAct5(document.getElementById('activity-content'))" class="btn-3d bg-slate-400 text-white font-bold py-1 rounded-lg mt-1 text-xs">Reset</button>
+                    </div>
+                </div>
+            </div >
+                `;
+        }
+
+        window.click100 = function (n) {
+            if (startNum === null) {
+                startNum = n; currentNum = n; totalAdded = 0;
+                document.querySelectorAll('.cell-100').forEach(c => c.classList.remove('active', 'jump'));
+                document.getElementById(`c - ${ n } `).classList.add('active');
+                updateEq();
+                setInfo(`Mula pada ${ n }. Pilih butang + untuk melompat.`);
+                speak(`Mula nombor ${ n } `);
+            }
+        }
+
+        window.jump = function (k) {
+            if (currentNum === null) { setInfo('Sila pilih nombor mula di papan dahulu.'); return; }
+
+            const next = currentNum + k;
+            if (next > 100) { setInfo('Nombor melebihi 100. Cuba nombor lain.'); return; }
+
+            // Visual updates
+            const cell = document.getElementById(`c - ${ next } `);
+            cell.classList.add('jump');
+
+            // Update logic
+            currentNum = next;
+            totalAdded += k;
+
+            // Scroll to view if needed
+            cell.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            // Keep start active, highlight current path logic could be complex, simple highlight new pos
+            setTimeout(() => {
+                document.querySelectorAll('.cell-100.active').forEach(c => c.classList.remove('active'));
+                cell.classList.add('active');
+            }, 100);
+
+            updateEq();
+            speak(`Tambah ${ k }, jadi ${ next } `);
+        }
+
+        function updateEq() {
+            const eq = document.getElementById('eq-display');
+            if (startNum === null) { eq.innerText = '---'; return; }
+            eq.innerText = `${ startNum } + ${ totalAdded } = ${ currentNum }`;
+        }</script>
